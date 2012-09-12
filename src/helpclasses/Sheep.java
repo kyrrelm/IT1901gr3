@@ -4,9 +4,9 @@ public class Sheep {
 	//Vector2 Position;
 	int pulse;
 	int temperature;
-	String ID;
+	int ID;
 	
-	public Sheep(int pulse, int temperature, String ID)
+	public Sheep(int pulse, int temperature, int ID)
 	{
 		this.pulse = pulse;
 		this.temperature = temperature;
@@ -29,11 +29,11 @@ public class Sheep {
 		this.temperature = temperature;
 	}
 
-	public String getID() {
+	public int getID() {
 		return ID;
 	}
 
-	public void setID(String iD) {
+	public void setID(int iD) {
 		ID = iD;
 	}
 
