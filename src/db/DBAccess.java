@@ -2,7 +2,10 @@ package db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 
 import helpclasses.*;
 
@@ -29,35 +32,104 @@ public class DBAccess {
 		{
 			System.out.println("Feilet under driverlasting: "+ex.getMessage());
 		} 
-		finally 
+	}
+	
+	public static void close()
+	{
+		try 
 		{
-			try 
-			{
-				if (con !=  null) con.close();
-			} 
-			catch (SQLException ex)
-			{
-				System.out.println("Epic fail: "+ex.getMessage());
-			}
+			if (con !=  null) con.close();
+		} 
+		catch (SQLException ex)
+		{
+			System.out.println("Epic fail: "+ex.getMessage());
+		}
+	}
+
+	public static void registerOwner(String pw, String name, String tlf, String email, String secondaryTlf, String secondaryEmail)
+	{
+		
+		try {
+			Statement st = con.createStatement();
+			/*    FOR TESTING:
+			String s = "INSERT INTO Owner(Password, Name, PrimaryTLF, PrimaryMail, SecondaryTLF, SecondaryMail) VALUES " + String.format("(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",  pw, name, tlf, email, secondaryTlf, secondaryEmail); 
+			System.out.println(s);
+			*/
+			st.executeUpdate("INSERT INTO Owner(Password, Name, PrimaryTLF, PrimaryMail, SecondaryTLF, SecondaryMail) VALUES " + String.format("(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",  pw, name, tlf, email, secondaryTlf, secondaryEmail));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
 		}
 	}
 	
-	void registerOwner(String pw, String tlf, String email, String secondaryTlf, String secondaryEmail)
+	public static void addFarm(String Name, int ownerID)
 	{
-		// INSERT INTO OWNER PWPWPWPWPPWPWPWPPW
-		// Lag ny verdi i table Owner, med autoID
+		try {
+			Statement st = con.createStatement();
+			/*    FOR TESTING:
+			String s = 
+			System.out.println(s);
+			*/
+			st.executeUpdate("INSERT INTO Farm(Name, OwnerID) VALUES " + String.format("(\"%s\", \"%s\")",  "1830", String.valueOf(ownerID)));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
+	}
+	
+	public static void addSheep(int farmID, int ownerID)
+	{
+		try {
+			Statement st = con.createStatement();
+			/*    FOR TESTING:
+			String s = 
+			System.out.println(s);
+			*/
+			st.executeUpdate("INSERT INTO Sheep(BirthYear, FarmID, OwnerID) VALUES " + String.format("(\"%s\", \"%s\", \"%s\")",  "1941", String.valueOf(farmID), String.valueOf(ownerID)));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
+	}
+	
+	public static void addMessage()
+	{
+		// TODO: samme måte som over!
 		return;
 	}
 	
-	Sheep getSheepByID(int id)
+	public static Sheep getSheepByID(int id)
 	{
-		// SELECT * FROM <sheep>y
-		//Sheep shp = new Sheep(...)
-		//return Sheep();
-		return null;
+		try {
+			Statement st = con.createStatement();
+			/*    FOR TESTING:
+			String s = 
+			System.out.println(s);
+			*/
+							// merk: query
+			ResultSet rs = st.executeQuery(String.format("SELECT * FROM Sheep WHERE SheepID = %d", id));
+
+			
+			// Som eksempel: itererer over alle resultatene, dette er bare et eksempel i getSheepByID fordi sheepID er unik for hver sau!
+			// hvis en skulle finne alle sauene som tilhører en spesiell bonde (eller bare alle sauene totalt) er det som under en burde bruke
+			
+			Sheep shp = null;
+			while (rs.next()) // sheepID, birthYear, farmID, ownerID
+			{												        // year har fucked format, burde bytte til INT i databasen...
+				shp = new Sheep( Integer.parseInt(rs.getString(1)), Integer.parseInt(rs.getString(2).substring(0, 4)), Integer.parseInt(rs.getString(3)), Integer.parseInt(rs.getString(4)));
+				
+			}
+			return shp;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
-	
-	
 
 
 }

@@ -1,40 +1,41 @@
 package helpclasses;
 
-public class Sheep {
-	//Vector2 Position;
-	int pulse;
-	int temperature;
-	int ID;
+
+// det her burde være en subclass for en saueupdate
+// å kun ha sheep uten en message virker rimelig ubrukelig
+public class Sheep 
+{
+	private int sheepID;
+	private int birthYear;
+	private int farmID;
+	private int ownerID;
 	
-	public Sheep(int pulse, int temperature, int ID)
+	public Sheep(int sID, int bY, int fID, int oID)
 	{
-		this.pulse = pulse;
-		this.temperature = temperature;
-		this.ID = ID;
+		this.sheepID = sID;
+		this.birthYear = bY;
+		this.farmID = fID;
+		this.ownerID = oID;
+		
 	}
 
-	public int getPulse() {
-		return pulse;
+	public int getSheepID() {
+		return sheepID;
 	}
 
-	public void setPulse(int pulse) {
-		this.pulse = pulse;
+	public int getBirthYear() {
+		return birthYear;
 	}
 
-	public int getTemperature() {
-		return temperature;
+	public int getFarmID() {
+		return farmID;
 	}
 
-	public void setTemperature(int temperature) {
-		this.temperature = temperature;
+	public int getOwnerID() {
+		return ownerID;
 	}
-
-	public int getID() {
-		return ID;
-	}
-
-	public void setID(int iD) {
-		ID = iD;
-	}
+	
+	
+	
 
 }
