@@ -46,7 +46,7 @@ public class DBAccess {
 		}
 	}
 
-	public static void registerOwner(String pw, String name, String tlf, String email, String secondaryTlf, String secondaryEmail)
+	public static void addOwner(String pw, String name, String tlf, String email, String secondaryTlf, String secondaryEmail)
 	{
 		
 		try {

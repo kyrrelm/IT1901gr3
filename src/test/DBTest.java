@@ -9,7 +9,7 @@ public class DBTest
 
 		db.DBAccess.open();
 		
-		db.DBAccess.registerOwner("Sau", "TestBruker55555", "81549300", "supportyahoo.com", "911", "supportpoliti.no");
+		db.DBAccess.addOwner("Sau", "TestBruker55555", "81549300", "supportyahoo.com", "911", "supportpoliti.no");
 		db.DBAccess.addFarm("BestFarm", 1);
 		db.DBAccess.addSheep(1,1);
 		
