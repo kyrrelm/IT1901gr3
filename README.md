@@ -7,3 +7,4 @@ Kyrre: Ja
 Kathrine: Ja
 Kenneth: Ja
 Halvor: Ja
+Jama: Ja
