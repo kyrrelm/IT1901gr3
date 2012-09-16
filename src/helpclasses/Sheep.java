@@ -1,8 +1,5 @@
 package helpclasses;
 
-
-// det her burde være en subclass for en saueupdate
-// å kun ha sheep uten en message virker rimelig ubrukelig
 public class Sheep 
 {
 	private int sheepID;
