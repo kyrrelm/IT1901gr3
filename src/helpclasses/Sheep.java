@@ -3,21 +3,27 @@ package helpclasses;
 public class Sheep 
 {
 	private int sheepID;
+	private String name;
 	private int birthYear;
 	private int farmID;
 	private int ownerID;
 	
-	public Sheep(int sID, int bY, int fID, int oID)
+	public Sheep(int sheepID, String name, int birthYear, int farmID, int ownerID)
 	{
-		this.sheepID = sID;
-		this.birthYear = bY;
-		this.farmID = fID;
-		this.ownerID = oID;
+		this.sheepID = sheepID;
+		this.name = name;
+		this.birthYear = birthYear;
+		this.farmID = farmID;
+		this.ownerID = ownerID;
 		
 	}
 
 	public int getSheepID() {
 		return sheepID;
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 	public int getBirthYear() {

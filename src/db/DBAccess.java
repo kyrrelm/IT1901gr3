@@ -46,16 +46,16 @@ public class DBAccess {
 		}
 	}
 
-	public static void addOwner(String pw, String name, String tlf, String email, String secondaryTlf, String secondaryEmail)
+	public static void addOwner(String pw, String firstName, String lastName, String tlf, String email, String secondaryTlf, String secondaryEmail)
 	{
 		
 		try {
 			Statement st = con.createStatement();
 			/*    FOR TESTING:
-			String s = "INSERT INTO Owner(Password, Name, PrimaryTLF, PrimaryMail, SecondaryTLF, SecondaryMail) VALUES " + String.format("(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",  pw, name, tlf, email, secondaryTlf, secondaryEmail); 
+			String s = "INSERT INTO Owner(Password, FirstName, LastName, PrimaryTLF, PrimaryMail, SecondaryTLF, SecondaryMail) VALUES " + String.format("(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",  pw, name, tlf, email, secondaryTlf, secondaryEmail); 
 			System.out.println(s);
 			*/
-			st.executeUpdate("INSERT INTO Owner(Password, Name, PrimaryTLF, PrimaryMail, SecondaryTLF, SecondaryMail) VALUES " + String.format("(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",  pw, name, tlf, email, secondaryTlf, secondaryEmail));
+			st.executeUpdate("INSERT INTO Owner(Password, FirstName, LastName, PrimaryTLF, PrimaryMail, SecondaryTLF, SecondaryMail) VALUES " + String.format("(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",  pw, name, tlf, email, secondaryTlf, secondaryEmail));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,7 +87,7 @@ public class DBAccess {
 			String s = 
 			System.out.println(s);
 			*/
-			st.executeUpdate("INSERT INTO Sheep(BirthYear, FarmID, OwnerID) VALUES " + String.format("(\"%s\", \"%s\", \"%s\")",  "1941", String.valueOf(farmID), String.valueOf(ownerID)));
+			st.executeUpdate("INSERT INTO Sheep(BirthYear, Name, FarmID, OwnerID) VALUES " + String.format("(\"%s\", \"%s\", \"%s\", \"%s\")",  "1941", String.valueOf(farmID), String.valueOf(ownerID)));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
