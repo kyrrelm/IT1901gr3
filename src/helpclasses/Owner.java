@@ -4,19 +4,21 @@ public class Owner {
 
 	private int ownerID;
 	private String password;
-	private String name;
+	private String firstName;
+	private String lastName;
 	private int primaryTLF;
 	private String primaryMail;
 	private int secondaryTLF;
 	private String secondaryMail;
 	
-	public Owner(int ownerID, String password, String name, int primaryTLF,
+	public Owner(int ownerID, String password, String firstName, String lastName, int primaryTLF,
 			String primaryMail, int secondaryTLF, String secondaryMail) {
 		
 		super();
 		this.ownerID = ownerID;
 		this.password = password;
-		this.name = name;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.primaryTLF = primaryTLF;
 		this.primaryMail = primaryMail;
 		this.secondaryTLF = secondaryTLF;
@@ -33,20 +35,28 @@ public class Owner {
 
 	public String getPassword() {
 		return password;
-	}
+	} 
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
 	}
 
+	public void setLastName() {
+		this.lastName = lastName;
+	}
+	
 	public int getPrimaryTLF() {
 		return primaryTLF;
 	}
