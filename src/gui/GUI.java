@@ -1,5 +1,7 @@
 package gui;
 
+import javax.swing.SwingUtilities;
+
 // @author Kyrre
 
 public class GUI {
@@ -8,6 +10,13 @@ public class GUI {
      static Hub hub = new Hub();
 
     public static void main(String[] args) {
-        login.setVisible(true);
+    	SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				login.setVisible(true);
+				
+			}
+		});
     }
 }
