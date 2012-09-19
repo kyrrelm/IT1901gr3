@@ -55,7 +55,9 @@ public class DBAccess {
 			String s = "INSERT INTO Owner(Password, FirstName, LastName, PrimaryTLF, PrimaryMail, SecondaryTLF, SecondaryMail) VALUES " + String.format("(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",  pw, name, tlf, email, secondaryTlf, secondaryEmail); 
 			System.out.println(s);
 			*/
-			st.executeUpdate("INSERT INTO Owner(Password, FirstName, LastName, PrimaryTLF, PrimaryMail, SecondaryTLF, SecondaryMail) VALUES " + String.format("(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",  pw, name, tlf, email, secondaryTlf, secondaryEmail));
+			st.executeUpdate("INSERT INTO Owner(Password, FirstName, LastName, PrimaryTLF, PrimaryMail, SecondaryTLF, SecondaryMail) VALUES "
+			+ String.format("(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",
+			pw, firstName, lastName, tlf, email, secondaryTlf, secondaryEmail));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -119,7 +121,7 @@ public class DBAccess {
 			Sheep shp = null;
 			while (rs.next()) // sheepID, birthYear, farmID, ownerID
 			{												        // year har fucked format, burde bytte til INT i databasen...
-				shp = new Sheep( Integer.parseInt(rs.getString(1)), Integer.parseInt(rs.getString(2).substring(0, 4)), Integer.parseInt(rs.getString(3)), Integer.parseInt(rs.getString(4)));
+				shp = new Sheep( Integer.parseInt(rs.getString(1)), rs.getString(2), Integer.parseInt(rs.getString(3).substring(0, 4)), Integer.parseInt(rs.getString(3)), Integer.parseInt(rs.getString(4)));
 				
 			}
 			return shp;
