@@ -2,24 +2,24 @@ package helpclasses;
 
 public class Sheep 
 {
-	private int sheepID;
+	private int sheepId;
 	private String name;
 	private int birthYear;
-	private int farmID;
-	private int ownerID;
+	private int farmId;
+	private int ownerId;
 	
-	public Sheep(int sheepID, String name, int birthYear, int farmID, int ownerID)
+	public Sheep(int sheepId, String name, int birthYear, int farmId, int ownerId)
 	{
-		this.sheepID = sheepID;
+		this.sheepId = sheepId;
 		this.name = name;
 		this.birthYear = birthYear;
-		this.farmID = farmID;
-		this.ownerID = ownerID;
+		this.farmId = farmId;
+		this.ownerId = ownerId;
 		
 	}
 
-	public int getSheepID() {
-		return sheepID;
+	public int getSheepId() {
+		return sheepId;
 	}
 	
 	public String getName() {
@@ -30,12 +30,17 @@ public class Sheep
 		return birthYear;
 	}
 
-	public int getFarmID() {
-		return farmID;
+	public int getFarmId() {
+		return farmId;
 	}
 
-	public int getOwnerID() {
-		return ownerID;
+	public int getOwnerId() {
+		return ownerId;
+	}
+	
+	public String toString() {
+		return "| Sheep ID: " + sheepId + "\t | Name: " + name + "\t | Birthyear: " +
+				birthYear + "\t | Farm Id: " + farmId + "\t | Owner ID: " + ownerId + " |";
 	}
 	
 	

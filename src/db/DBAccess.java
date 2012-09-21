@@ -1,3 +1,9 @@
+/**
+ * @author 
+ * @author Kenneth Pettersen Lund
+ */
+
+
 package db;
 
 import java.sql.Connection;
@@ -13,7 +19,9 @@ public class DBAccess {
 
 	static Connection con;
 	
-	public static void open() throws InstantiationException, IllegalAccessException //Parameter url
+	//Parameter url
+	public static void open() throws InstantiationException, 
+									 IllegalAccessException 
 	{
 		try 
 		{
@@ -42,11 +50,13 @@ public class DBAccess {
 		} 
 		catch (SQLException ex)
 		{
-			System.out.println("Epic fail: "+ex.getMessage());
+			System.out.println("Epic fail: "+ ex.getMessage());
 		}
 	}
 
-	public static void addOwner(String pw, String firstName, String lastName, String tlf, String email, String secondaryTlf, String secondaryEmail)
+	public static void addOwner(String pw, String firstName, String lastName,
+								String tlf, String email, String secondaryTlf,
+								String secondaryEmail)
 	{
 		
 		try {
@@ -56,7 +66,7 @@ public class DBAccess {
 			System.out.println(s);
 			*/
 			st.executeUpdate("INSERT INTO Owner(Password, FirstName, LastName, PrimaryTLF, PrimaryMail, SecondaryTLF, SecondaryMail) VALUES "
-			+ String.format("(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",
+			+ String.format("(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",
 			pw, firstName, lastName, tlf, email, secondaryTlf, secondaryEmail));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -73,7 +83,9 @@ public class DBAccess {
 			String s = 
 			System.out.println(s);
 			*/
-			st.executeUpdate("INSERT INTO Farm(Name, OwnerID) VALUES " + String.format("(\"%s\", \"%s\")",  "1830", String.valueOf(ownerID)));
+			st.executeUpdate("INSERT INTO Farm(Name, OwnerID) VALUES " 
+					+ String.format("(\"%s\", \"%s\")",  "1830", 
+							String.valueOf(ownerID)));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -81,7 +93,7 @@ public class DBAccess {
 		}
 	}
 	
-	public static void addSheep(int farmID, int ownerID)
+	public static void addSheep(String name, int birthYear, int farmID, int ownerID)
 	{
 		try {
 			Statement st = con.createStatement();
@@ -89,7 +101,10 @@ public class DBAccess {
 			String s = 
 			System.out.println(s);
 			*/
-			st.executeUpdate("INSERT INTO Sheep(BirthYear, Name, FarmID, OwnerID) VALUES " + String.format("(\"%s\", \"%s\", \"%s\", \"%s\")",  "1941", String.valueOf(farmID), String.valueOf(ownerID)));
+			st.executeUpdate("INSERT INTO Sheep(Name, BirthYear, FarmID, OwnerID) VALUES "
+				+ String.format("(\"%s\", \"%s\", \"%s\", \"%s\")",
+					/*"1941",*/ name, String.valueOf(birthYear),
+					String.valueOf(farmID), String.valueOf(ownerID)));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,13 +112,28 @@ public class DBAccess {
 		}
 	}
 	
-	public static void addMessage()
-	{
-		// TODO: samme måte som over!
-		return;
+	public static void addMessage(int dateTime, int pulse, int temperature,
+			String status, int positionX, int positionY, int sheepId) {
+		
+		try {
+			Statement st = con.createStatement();
+			
+			st.executeUpdate("INSERT INTO Message(DateTime, Pulse," +
+					" Temperature, Status, PositionX, PositionY, SheepID) " +
+					"VALUES" + String.format("(\"%s\", \"%s\", \"%s\"," +
+							" \"s%\", \"s%\", \"s%\", \"s%\")",
+					String.valueOf(dateTime), String.valueOf(pulse), 
+					String.valueOf(temperature), status, 
+					String.valueOf(positionX), String.valueOf(positionY),
+					String.valueOf(sheepId)));
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return;
+		}
 	}
 	
-	public static Sheep getSheepByID(int id)
+	public static Sheep getSheepById(int id)
 	{
 		try {
 			Statement st = con.createStatement();
@@ -119,11 +149,23 @@ public class DBAccess {
 			// hvis en skulle finne alle sauene som tilhører en spesiell bonde (eller bare alle sauene totalt) er det som under en burde bruke
 			
 			Sheep shp = null;
+			
 			while (rs.next()) // sheepID, birthYear, farmID, ownerID
 			{												        // year har fucked format, burde bytte til INT i databasen...
-				shp = new Sheep( Integer.parseInt(rs.getString(1)), rs.getString(2), Integer.parseInt(rs.getString(3).substring(0, 4)), Integer.parseInt(rs.getString(3)), Integer.parseInt(rs.getString(4)));
+			/*	shp = new Sheep(Integer.parseInt(rs.getString(1)),
+						rs.getString(2),
+						Integer.parseInt(rs.getString(3).substring(0, 4)),
+						Integer.parseInt(rs.getString(3)),
+						Integer.parseInt(rs.getString(4)));
+			*/
+				shp = new Sheep(Integer.parseInt(rs.getString(1)),
+						rs.getString(2),
+						Integer.parseInt(rs.getString(3).substring(0, 4)),
+						Integer.parseInt(rs.getString(4)),
+						Integer.parseInt(rs.getString(5)));
 				
 			}
+			
 			return shp;
 			
 		} catch (SQLException e) {
