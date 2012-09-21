@@ -5,6 +5,6 @@ Nytt opprop?
 
 Kyrre: Ja
 Kathrine: Ja
-Kenneth: Ja, Ja
+Kenneth: Ja,
 Halvor: Ja
 Jama: Ja
