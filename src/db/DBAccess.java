@@ -97,6 +97,7 @@ public class DBAccess {
 	{
 		try {
 			Statement st = con.createStatement();
+		
 			/*    FOR TESTING:
 			String s = 
 			System.out.println(s);
@@ -174,6 +175,81 @@ public class DBAccess {
 			return null;
 		}
 	}
+	
+	/***
+	 * Deletes all records in table 'Farm'
+	 */
+	public static void deleteAllFromFarm() {
+		try {
+			Statement statement = con.createStatement();
+			
+			statement.executeUpdate("DELETE FROM Farm");
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+			
+			return;
+		}
+		
+		System.out.println("All records deleted from table Farm.");
+	}	
+	
+	/***
+	 * Deletes all records in table 'Message'
+	 */
+	public static void deleteAllFromMessage() {
+		try {
+			Statement statement = con.createStatement();
+			
+			statement.executeUpdate("DELETE FROM Message");
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+			
+			return;
+		}
+		
+		System.out.println("All records deleted from table Message.");
+	}
+	
+	/***
+	 * Deletes all records in table 'Owner'
+	 */
+	public static void deleteAllFromOwner() {
+		try {
+			Statement statement = con.createStatement();
+			
+			statement.executeUpdate("DELETE FROM Owner");
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+			
+			return;
+		}
+		
+		System.out.println("All records deleted from table Owner.");
+	}
+	
+	/***
+	 * Deletes all records in table 'Sheep'
+	 */
+	public static void deleteAllFromSheep() {
+		try {
+			Statement statement = con.createStatement();
+			
+			statement.executeUpdate("DELETE FROM Sheep");
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+			
+			return;
+		}
+		
+		System.out.println("All records deleted from table Sheep.");
+	}
+	
+	
+	
 
 
 }

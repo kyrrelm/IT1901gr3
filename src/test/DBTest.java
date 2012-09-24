@@ -1,3 +1,10 @@
+/***
+ * This class is used for testing
+ * 
+ * @author Kenneth Pettersen Lund
+ */
+
+
 package test;
 
 import helpclasses.Sheep;
@@ -10,7 +17,16 @@ public class DBTest
 
 		db.DBAccess.open();
 		
-		db.DBAccess.addOwner("Sau", "Hans", "Hansen", "81549300", 
+		//Delete all records in all tables before generating data
+		db.DBAccess.deleteAllFromFarm();
+		db.DBAccess.deleteAllFromMessage();
+		db.DBAccess.deleteAllFromOwner();
+		db.DBAccess.deleteAllFromSheep();
+		
+		//Generate data for the database
+		
+		
+		/*db.DBAccess.addOwner("Sau", "Hans", "Hansen", "81549300", 
 							 "supportyahoo.com", "911", "supportpoliti.no");
 		db.DBAccess.addFarm("BestFarm", 1);
 		db.DBAccess.addSheep("Beverly", 2010, 1, 1);
@@ -18,7 +34,7 @@ public class DBTest
 		Sheep sheep = db.DBAccess.getSheepById(1);
 		
 		if (sheep != null)
-			System.out.println(sheep);
+			System.out.println(sheep);*/
 		
 		
 		db.DBAccess.close();
