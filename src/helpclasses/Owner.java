@@ -2,7 +2,7 @@ package helpclasses;
 
 public class Owner {
 
-	private int ownerID;
+	private int username;
 	private String password;
 	private String firstName;
 	private String lastName;
@@ -11,11 +11,11 @@ public class Owner {
 	private int secondaryTLF;
 	private String secondaryMail;
 	
-	public Owner(int ownerID, String password, String firstName, String lastName, int primaryTLF,
+	public Owner(int username, String password, String firstName, String lastName, int primaryTLF,
 			String primaryMail, int secondaryTLF, String secondaryMail) {
 		
 		super();
-		this.ownerID = ownerID;
+		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
