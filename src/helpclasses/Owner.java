@@ -26,11 +26,11 @@ public class Owner {
 	}
 
 	public int getOwnerID() {
-		return ownerID;
+		return username;
 	}
 
 	public void setOwnerID(int ownerID) {
-		this.ownerID = ownerID;
+		this.username = username;
 	}
 
 	public String getPassword() {
