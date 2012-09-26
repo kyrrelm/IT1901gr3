@@ -1,3 +1,7 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package gui;
 
 /**
@@ -11,6 +15,7 @@ public class Hub extends javax.swing.JFrame {
      */
     public Hub() {
         initComponents();
+        initJPanels();
     }
 
     /**
@@ -22,32 +27,168 @@ public class Hub extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
+        addSheep = new javax.swing.JPanel();
+        jLabelAddSheep = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        farm = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        birthYear = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        topMenu = new javax.swing.JMenuBar();
+        topMenuSheep = new javax.swing.JMenu();
+        topMenuAddSheep = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Hub");
+        jLabelAddSheep.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelAddSheep.setText("Add Sheep:");
+
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Name:");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Birth year:");
+
+        farm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                farmActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Farm:");
+
+        birthYear.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040", "2041", "2042", "2043", "2044", "2045", "2046", "2047", "2048", "2049", "2050" }));
+        
+        farm.setModel(new javax.swing.DefaultComboBoxModel(getFarms()));
+        
+        jLabel4.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
+        jLabel4.setText("(Optional)");
+
+        javax.swing.GroupLayout addSheepLayout = new javax.swing.GroupLayout(addSheep);
+        addSheep.setLayout(addSheepLayout);
+        addSheepLayout.setHorizontalGroup(
+            addSheepLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addSheepLayout.createSequentialGroup()
+                .addGroup(addSheepLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addSheepLayout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addGroup(addSheepLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(addSheepLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3)
+                                .addGroup(addSheepLayout.createSequentialGroup()
+                                    .addGap(10, 10, 10)
+                                    .addGroup(addSheepLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(birthYear, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(farm, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(addSheepLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(addSheepLayout.createSequentialGroup()
+                                    .addGap(10, 10, 10)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addSheepLayout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(addSheepLayout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jLabelAddSheep)))
+                .addContainerGap(489, Short.MAX_VALUE))
+        );
+        addSheepLayout.setVerticalGroup(
+            addSheepLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addSheepLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabelAddSheep)
+                .addGap(51, 51, 51)
+                .addGroup(addSheepLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(birthYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(farm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(296, Short.MAX_VALUE))
+        );
+
+        topMenuSheep.setText("Sheep");
+
+        topMenuAddSheep.setText("Add Sheep");
+        topMenuAddSheep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                topMenuAddSheepActionPerformed(evt);
+            }
+        });
+        topMenuSheep.add(topMenuAddSheep);
+
+        topMenu.add(topMenuSheep);
+
+        setJMenuBar(topMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addComponent(jLabel1)
-                .addContainerGap(649, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(addSheep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel1)
-                .addContainerGap(545, Short.MAX_VALUE))
+            .addComponent(addSheep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>
+
+    private void topMenuAddSheepActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        addSheep.setVisible(true);
+    }                                               
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
+
+    private void farmActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
     // Variables declaration - do not modify
+    private javax.swing.JPanel addSheep;
+    private javax.swing.JComboBox birthYear;
+    private javax.swing.JComboBox farm;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelAddSheep;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JMenuBar topMenu;
+    private javax.swing.JMenuItem topMenuAddSheep;
+    private javax.swing.JMenu topMenuSheep;
     // End of variables declaration
+
+    //fucka løsning på at JPanels blir init. med visible = true i NetBeans sin initComponents();
+    private void initJPanels() {
+        addSheep.setVisible(false);
+    }
+    private String[] getFarms(){
+        return new String[]{"test","test"};
+    }
 }
