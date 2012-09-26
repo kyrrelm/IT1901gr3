@@ -89,6 +89,14 @@ public class Owner {
 		this.secondaryMail = secondaryMail;
 	}
 	
-	
+	public String toString() {
+		return "Owner ID: " + ownerID + "\t | Password: " + password +
+				"\t | First name: " + firstName +
+				"\t | Last name: " + lastName +
+				"\t | Telephone: " + primaryTLF +
+				"\t | Mail: " + primaryMail +
+				"\t | Telephone (friend): " + secondaryTLF +
+				"\t | Mail (friend): " + secondaryMail;
+	}
 	
 }

@@ -34,11 +34,11 @@ public class DBAccess {
 		} 
 		catch (SQLException ex) 
 		{
-			System.out.println("Tilkobling feilet: "+ex.getMessage());
+			System.out.println("Tilkobling feilet: "+ ex.getMessage());
 		}
 		catch (ClassNotFoundException ex) 
 		{
-			System.out.println("Feilet under driverlasting: "+ex.getMessage());
+			System.out.println("Feilet under driverlasting: "+ ex.getMessage());
 		} 
 	}
 	
@@ -75,17 +75,20 @@ public class DBAccess {
 		}
 	}
 	
-	public static void addFarm(String Name, int ownerID)
+	public static void addFarm(String name, int ownerId)
 	{
 		try {
-			Statement st = con.createStatement();
+			Statement statement = con.createStatement();
 			/*    FOR TESTING:
 			String s = 
 			System.out.println(s);
 			*/
-			st.executeUpdate("INSERT INTO Farm(Name, OwnerID) VALUES " 
+			statement.executeUpdate("INSERT INTO Farm(Name, OwnerID) VALUES " +
+					String.format("(\"%s\", \"%d\")", name, ownerId));
+			
+			/*st.executeUpdate("INSERT INTO Farm(Name, OwnerID) VALUES " 
 					+ String.format("(\"%s\", \"%s\")",  "1830", 
-							String.valueOf(ownerID)));
+							String.valueOf(ownerID)));*/
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -133,6 +136,39 @@ public class DBAccess {
 			return;
 		}
 	}
+	
+	
+	public static Owner getOwner(String lastName, String phoneNumber) {
+		try {
+			Statement statement = con.createStatement();
+			
+			ResultSet resultSet = statement.executeQuery(
+					"SELECT * FROM Owner WHERE LastName = '" + lastName +
+					"' AND PrimaryTLF = '" + phoneNumber + "'"
+					);
+			
+			Owner owner = null;
+			
+			
+			while(resultSet.next())	{
+				owner = new Owner(Integer.parseInt(resultSet.getString(1)),
+						resultSet.getString(2), resultSet.getString(3),
+						resultSet.getString(4), 
+						Integer.parseInt(resultSet.getString(5)),
+						resultSet.getString(6),
+						Integer.parseInt(resultSet.getString(7)),
+						resultSet.getString(8));						
+			}
+			
+			return owner;
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+			
+			return null;
+		}
+	}
+	
 	
 	public static Sheep getSheepById(int id)
 	{
