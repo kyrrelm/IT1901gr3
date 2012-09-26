@@ -90,7 +90,7 @@ public class Owner {
 	}
 	
 	public String toString() {
-		return "Owner ID: " + ownerID + "\t | Password: " + password +
+		return "Owner ID: " + username + "\t | Password: " + password +
 				"\t | First name: " + firstName +
 				"\t | Last name: " + lastName +
 				"\t | Telephone: " + primaryTLF +
