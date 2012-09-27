@@ -1,5 +1,10 @@
 package test;
 
+import helpclasses.CommMessage;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import client.*;
 
 public class CommTestClient {
@@ -12,7 +17,7 @@ public class CommTestClient {
 		
 		sockCli.run();
 		
-		sockCli.sendMessage("Test123");
+		sockCli.sendMessage(new CommMessage<String>("message", Arrays.asList("param1", "param2", "param3")));
 		
 		sockCli.close();
 

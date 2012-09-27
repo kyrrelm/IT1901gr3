@@ -1,6 +1,9 @@
 package server;
 
+import helpclasses.CommMessage;
+
 import java.io.IOException;
+import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
@@ -27,7 +30,8 @@ public class SocketServer {
 	ObjectInputStream in;
 	int port;
 	int backlog = 10; //The number of clients we can place in the connection queue, set to 10 for now TODO
-	String message;
+	//String message;
+	CommMessage message;
 
 	public SocketServer(int port) 
 	{
@@ -53,12 +57,24 @@ public class SocketServer {
 			//Testing echo TODO
 			try
 			{
-				message = (String)in.readObject();
+				message = (CommMessage)in.readObject();
+				if (message == null)
+				{
+					System.err.println("null error");
+					return;					
+				}
+					
 				sendMessage(message);
 			}
 			catch(ClassNotFoundException e)
 			{
-				System.err.println("Class of this object is not recognized!");
+				System.err.println("Class of a serialized object cannot be found.");
+			}catch (InvalidClassException e)
+			{
+				System.err.println("Something is wrong with a class used by serialization.");
+			}catch (IOException e)
+			{
+				System.err.println("Any of the usual Input/Output related exceptions.");
 			}
 			//end test
 		}
@@ -69,6 +85,21 @@ public class SocketServer {
 	}
 
 	public void sendMessage(String msg)
+	{
+		try
+		{
+			out.writeObject(msg);
+			out.flush();
+			System.out.println("client>" + msg);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
+	}
+	
+	public void sendMessage(CommMessage msg)
 	{
 		try
 		{
