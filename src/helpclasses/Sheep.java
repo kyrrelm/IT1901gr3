@@ -7,6 +7,7 @@ public class Sheep
 	private int birthYear;
 	private int farmId;
 	private int ownerId;
+	public boolean attacked;
 	
 	public Sheep(int sheepId, String name, int birthYear, int farmId, int ownerId)
 	{
@@ -15,7 +16,7 @@ public class Sheep
 		this.birthYear = birthYear;
 		this.farmId = farmId;
 		this.ownerId = ownerId;
-		
+		attacked = false;
 	}
 
 	public int getSheepId() {
