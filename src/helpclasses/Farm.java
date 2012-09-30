@@ -8,19 +8,19 @@ public class Farm {
 	
 	public Farm(int farmId, String name, int ownerId) {
 		this.farmId = farmId;
-		this.ownerId = ownerId;
 		this.name = name;
+		this.ownerId = ownerId;
 	}
 	
 	public int getFarmId() {
 		return farmId;
 	}
 	
-	public int getOwnerId() {
-		return ownerId;
-	}
-	
 	public String getName() {
 		return name;
+	}
+	
+	public int getOwnerId() {
+		return ownerId;
 	}
 }
