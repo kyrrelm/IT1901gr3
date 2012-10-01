@@ -16,10 +16,18 @@ public class CommTestClient {
 		SocketClient sockCli = new SocketClient("localhost", 6667);
 		
 		sockCli.run();
+		ArrayList<String> loginInfo = new ArrayList<String>();
+		loginInfo.add("farmerboi98");
+		loginInfo.add("sau4lyf");
 		
-		sockCli.sendMessage(new CommMessage<String>("message", Arrays.asList("param1", "param2", "param3")));
 		
-		sockCli.close();
+		sockCli.sendMessage(new CommMessage<String>("Login", loginInfo));
+		
+		while(true)
+		{
+			continue;
+		}
+		//sockCli.close();
 
 		
 	}

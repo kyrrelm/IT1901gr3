@@ -1,15 +1,15 @@
 package helpclasses;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 
 public class CommMessage<T> implements Serializable
 {
 
 	String messageName;
-	List<T> paramList;
+	ArrayList<T> paramList;
 	
-	public CommMessage(String messageName, List<T> paramList)
+	public CommMessage(String messageName, ArrayList<T> paramList)
 	{
 		this.messageName = messageName;
 		this.paramList =  paramList;
@@ -19,7 +19,7 @@ public class CommMessage<T> implements Serializable
 		return messageName;
 	}
 
-	public List<T> getParamList() {
+	public ArrayList<T> getParamList() {
 		return paramList;
 	}
 

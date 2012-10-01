@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * SocketServer listens to any connections made on its port. A SocketServer object must be constructed with a
@@ -25,13 +26,9 @@ import java.net.Socket;
 public class SocketServer {
 
 	ServerSocket servSocket;
-	Socket connection = null;
-	ObjectOutputStream out;
-	ObjectInputStream in;
 	int port;
 	int backlog = 10; //The number of clients we can place in the connection queue, set to 10 for now TODO
-	//String message;
-	CommMessage message;
+	ArrayList<ServerThread> threads = new ArrayList<ServerThread>();
 
 	public SocketServer(int port) 
 	{
@@ -44,82 +41,49 @@ public class SocketServer {
 		{
 			servSocket = new ServerSocket(port, backlog);
 			System.out.println("Waiting for connection");
-			connection = servSocket.accept();
-			System.out.println("Connection received from " + connection.getInetAddress().getHostName());
-
-			out = new ObjectOutputStream(connection.getOutputStream());
-			out.flush();
-			in = new ObjectInputStream(connection.getInputStream());
-			sendMessage("Connection successful");
+			
+			ServerThread tempThread;
+			int threadNumber = 0;
+			while (true)
+			{
+				tempThread = new ServerThread(servSocket.accept(), threadNumber);
+				tempThread.start();
+				threads.add(tempThread);
+				threadNumber ++;
+			}
 
 			//this is where a thread fork would happen
-
+			
 			//Testing echo TODO
-			try
-			{
-				message = (CommMessage)in.readObject();
-				if (message == null)
-				{
-					System.err.println("null error");
-					return;					
-				}
-					
+			/*
+			try {
+				message = (CommMessage<?>) in.readObject();
+				System.out.println(message.getMessageName());
 				sendMessage(message);
+
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.err.println("Class not recognized");
 			}
-			catch(ClassNotFoundException e)
-			{
-				System.err.println("Class of a serialized object cannot be found.");
-			}catch (InvalidClassException e)
-			{
-				System.err.println("Something is wrong with a class used by serialization.");
-			}catch (IOException e)
-			{
-				System.err.println("Any of the usual Input/Output related exceptions.");
-			}
-			//end test
+			*/
 		}
 		catch(IOException e)
 		{
 			e.printStackTrace();
 		}
 	}
-
-	public void sendMessage(String msg)
-	{
-		try
-		{
-			out.writeObject(msg);
-			out.flush();
-			System.out.println("client>" + msg);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
-	}
 	
-	public void sendMessage(CommMessage msg)
-	{
-		try
-		{
-			out.writeObject(msg);
-			out.flush();
-			System.out.println("client>" + msg);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
-	}
+	
 
 	public void close()
 	{
 		try
 		{
-			in.close();
-			out.close();
+			for (ServerThread thread: threads)
+			{
+				thread.close();
+			}
 			servSocket.close();
 		}
 		catch(IOException e)

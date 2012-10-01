@@ -1,5 +1,7 @@
 package client;
 
+import helpclasses.CommMessage;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -20,7 +22,7 @@ public class SocketClient {
 	ObjectInputStream in; // --//-- in
 	String servName;
 	int port;
-	String message;
+	
 
 	public SocketClient(String server, int port) 
 	{
@@ -41,9 +43,7 @@ public class SocketClient {
 			out.flush();
 			in = new ObjectInputStream(clientSocket.getInputStream());
 			
-			//test TODO
 			
-			//endtest
 		}
 		catch(UnknownHostException e)
 		{
@@ -60,18 +60,22 @@ public class SocketClient {
 	 * Probably class Message, could even be a simple String.
 	 * @param o The object to be sent
 	 */
-	public void sendMessage(Object o)
+	public void sendMessage(CommMessage<?> o)
 	{
 		try
 		{
 			out.writeObject(o);
 			out.flush();
-			System.out.println("client>" + o);
+			System.out.println("client>" + o.getMessageName());
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
+		
+		
+
+		// TODO: wait for reply!
 
 	}
 

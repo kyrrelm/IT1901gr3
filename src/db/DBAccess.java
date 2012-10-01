@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 
 import helpclasses.*;
@@ -248,6 +249,37 @@ public class DBAccess {
 		}
 	}
 	
+	public static ArrayList<Message> getMessagesByOwner(int OwnerID) {
+		try {
+			Statement statement = con.createStatement();
+			ArrayList<Message> messages = new ArrayList<Message>();
+			
+			ResultSet resultSet = statement.executeQuery(
+					"SELECT * FROM Message WHERE OwnerID= '" + OwnerID +
+					"'");	
+			
+			
+			if(resultSet.last()) {
+				messages.add( new Message(Integer.parseInt(resultSet.getString(1)),
+						resultSet.getDate(2), 
+						Integer.parseInt(resultSet.getString(3)),
+						Float.parseFloat(resultSet.getString(4)),
+						Integer.parseInt(resultSet.getString(5)),
+						Integer.parseInt(resultSet.getString(6)),
+						Integer.parseInt(resultSet.getString(7)),
+						Integer.parseInt(resultSet.getString(8))) 
+				);
+			}
+			
+			return messages;
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+			
+			return null;
+		}
+	}
+	
 	public static Owner getOwner(String username, String password) {
 		try {
 			Statement statement = con.createStatement();
@@ -422,9 +454,5 @@ public class DBAccess {
 		
 		System.out.println("All records deleted from table Sheep.");
 	}
-	
-	
-	
-
 
 }
