@@ -1,33 +1,37 @@
 package helpclasses;
 
+import java.util.Date;
+
 public class Message {
-	int messageID;
-	//datetime dateTime;
+	private int messageId;
 	private int pulse;
-	private float temperature;
 	private int positionX;
 	private int positionY;
-	private int sheepID;
+	private int sheepId;
 	private int status;
+	private float temperature;
+	private Date dateTime;
 	
-	public Message(int messageID, int pulse, float temperature, int positionX,
-			int positionY, int sheepID, int status) {
+	
+	public Message(int messageId, Date dateTime, int pulse, float temperature,
+			int status, int positionX, int positionY, int sheepId) {
 		super();
-		this.messageID = messageID;
-		this.pulse = pulse;
+		this.messageId   = messageId;
+		this.dateTime    = dateTime;
+		this.pulse 		 = pulse;
 		this.temperature = temperature;
-		this.positionX = positionX;
-		this.positionY = positionY;
-		this.sheepID = sheepID;
-		this.status = status;
+		this.status 	 = status;
+		this.positionX   = positionX;
+		this.positionY   = positionY;
+		this.sheepId 	 = sheepId;
 	}
 	
-	public int getMessageID() {
-		return messageID;
+	public int getMessageId() {
+		return messageId;
 	}
 	
 	public void setMessageID(int messageID) {
-		this.messageID = messageID;
+		this.messageId = messageID;
 	}
 	
 	public int getPulse() {
@@ -62,12 +66,12 @@ public class Message {
 		this.positionY = positionY;
 	}
 	
-	public int getSheepID() {
-		return sheepID;
+	public int getSheepId() {
+		return sheepId;
 	}
 	
-	public void setSheepID(int sheepID) {
-		this.sheepID = sheepID;
+	public void setSheepID(int sheepId) {
+		this.sheepId = sheepId;
 	}
 	
 	public int getStatus() {
@@ -78,5 +82,10 @@ public class Message {
 		this.status = status;
 	}
 	
-
+	public String toString() {
+		return "Id: " + messageId + "; Date: " + dateTime + "; Pulse: " +
+				pulse + "; Temperature: " + temperature + "; Status: " +
+				status + "X: " + positionX + "; Y:" + positionY +
+				"; SheepId: " + sheepId;
+	}
 }

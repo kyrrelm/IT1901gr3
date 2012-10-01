@@ -1,5 +1,5 @@
 /***
- * This class is used for testing, generating data
+ * This class is used for testing, generating data, deleting contents in database
  * 
  * @author Kenneth Pettersen Lund
  */
@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class DBTest {
 	public static void main(String args[]) throws InstantiationException,
-												  IllegalAccessException {
+			IllegalAccessException {
 /*		String[] firstNames = { "Lars", "Hege", "Petter", "Frida", "Morten",
 				"Kristine", "Ole", "Kari", "Espen", "Hanne", "Harry", "Ingrid",
 				"Arne", "Amalie", "Thomas", "Heidi", "Roger", "Marte",
@@ -32,6 +32,12 @@ public class DBTest {
 				"Digre", "Karlsen", "Hallem", "Strand", "Mattingsdal" 
 				};
 		
+		String[] userNames = { "TheJoker", "Ghost", "Dog", "Sheep", "Face",
+				"Ship", "Techno", "Spiderman", "Warrior", "Car",  "Batman",
+				"Porsche", "Alien", "MrMister", "Fish", "Tank", "Porsche",
+				"Grasshopper", "Superman", "Ferrari"
+				};
+		
 		String[] sheepNames = { "Mador", "Tedrick", "Mojo Jojo", "Andreo",
 				"Elia", "Engelbertine", "Lynna", "Wilmer", "Kay", "Edmund",
 				"Spark", "Joker", "Nikita", "Torn", "Kasandra", "Severin",
@@ -42,20 +48,21 @@ public class DBTest {
 		Random generator = new Random();
 		db.DBAccess.open();
 		
-		
+			
 		//Generate data for the database
-		for(int i = 0; i < 1; i++) {	//Generate 75 owners
+		for(int i = 0; i <= 6; i++) {	//Generate 7 owners
 			//Generate data for owner
 			boolean hasMiddleName    = generator.nextBoolean();
-			int 	nFarms		     = generator.nextInt(2) + 1;
-			String  password	     = "Sheep";
-			String 	firstName        = firstNames[generator.nextInt(20)];
+			int 	nFarms		     = generator.nextInt(2);
+			String  username		 = userNames[generator.nextInt(20)];
+			String 	password	     = "Sheep";
+			String  firstName        = firstNames[generator.nextInt(20)];
 			String  middleName       = "";
 			String 	lastName         = lastNames[generator.nextInt(20)];
-			String friendFirstName   = firstNames[generator.nextInt(20)];
-			String friendLastName    = lastNames[generator.nextInt(20)];
-			String phoneNumber	     = "";
-			String friendPhoneNumber = "";
+			String  friendFirstName   = firstNames[generator.nextInt(20)];
+			String  friendLastName    = lastNames[generator.nextInt(20)];
+			String  phoneNumber	     = "";
+			String  friendPhoneNumber = "";
 			
 			
 			if(hasMiddleName == true) {
@@ -77,54 +84,91 @@ public class DBTest {
 			}
 			
 			
-			db.DBAccess.addOwner(password, firstName + middleName, lastName,
+			//We add userName with the first 4 number from the phoneNumber
+			username = username + phoneNumber.substring(0, 4);
+			
+			//We allow no duplicate copy of userName in database
+			boolean isUsernameTaken = db.DBAccess.isUsernameTaken(username);	
+			
+			
+			while(isUsernameTaken == true) {
+				username = userNames[generator.nextInt(20)];
+				username = username + phoneNumber.substring(0, 4);
+				isUsernameTaken = db.DBAccess.isUsernameTaken(username);
+			}
+			
+			
+			
+			//We add owner to database
+			db.DBAccess.addOwner(username, password, firstName + middleName, lastName,
 					phoneNumber, email, friendPhoneNumber, friendEmail);
 			//Get ownerId
-			Owner owner = db.DBAccess.getOwner(lastName, phoneNumber);
+			Owner owner = db.DBAccess.getOwner(username, password);
 			
-			System.out.println(owner.toString());
+			
+			//We add find position x and position y
+			int positionX = 0;
+			int positionY = 0;
+			Sheep sheep   = null;
 		
+			
 			//Generate data for farm
-			for(int k = 0; k < nFarms; k++) {
-				db.DBAccess.addFarm(owner.getLastName() + " gaard", owner.getOwnerID());
-				
+			for(int k = 0; k <= nFarms; k++) {
+				db.DBAccess.addFarm(owner.getLastName() + " gaard", owner.getOwnerId());
+				positionX = generator.nextInt(5000);
+				positionY = generator.nextInt(5000);
 				
 				//Genererate sheep for farm
-				boolean hasName = false;
-				int nSheep      = generator.nextInt(50) + 1;
-				Farm farm       = getFarm();
+				boolean hasName  = false;
+				int nSheep       = generator.nextInt(15);
+				int indexNo		 = 0;
+				int birthYear    = 2010;
+				String sheepName = "";
+				Farm farm        = db.DBAccess.getFarm(owner.getOwnerId());
 				
 				
-				for(int l = 0; l < nSheep; l++) {
-					hasName = generator.nextBoolean();
+				for(int l = 0; l <= nSheep; l++) {
+					hasName    = generator.nextBoolean();
+					birthYear  = 2005 + generator.nextInt(8);
+					indexNo    = generator.nextInt(20);
+					sheepName = "";
 					
 					
+					if(hasName == true) {				
+						if(db.DBAccess.isSheepNameTaken(
+								sheepNames[indexNo], farm.getFarmId()) == false) {				
+							sheepName = sheepNames[indexNo];
+						}
+					}
+					
+					
+					db.DBAccess.addSheep(sheepName, birthYear,
+							farm.getFarmId(), owner.getOwnerId());
+					sheep = db.DBAccess.getLastAddedSheep();
+					
+					java.util.Date date = new java.util.Date();
+					java.text.SimpleDateFormat simpleDateFormat = 
+							new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String currentTime = simpleDateFormat.format(date);
+					db.DBAccess.addMessage(currentTime, 75, 35, 0,
+							positionX, positionY, sheep.getSheepId());		
 				}
 			}
 		}
 			
-		
-*/		
-		
+		System.out.println("Data has been generated.");
+
+
+/*		
 		
 		//Delete all records in all tables before generating data
-/*		db.DBAccess.deleteAllFromFarm();
+		db.DBAccess.deleteAllFromFarm();
 		db.DBAccess.deleteAllFromMessage();
 		db.DBAccess.deleteAllFromOwner();
 		db.DBAccess.deleteAllFromSheep();
-*/				
+			
 		
-/*		db.DBAccess.addOwner("Sau", "Hans", "Hansen", "81549300", 
-							 "supportyahoo.com", "911", "supportpoliti.no");
-		db.DBAccess.addFarm("BestFarm", 1);
-		db.DBAccess.addSheep("Beverly", 2010, 1, 1);
-		
-		Sheep sheep = db.DBAccess.getSheepById(1);
-		
-		if (sheep != null)
-			System.out.println(sheep);
-*/		
 		
 		db.DBAccess.close();	
-	}
+*/	}
 }

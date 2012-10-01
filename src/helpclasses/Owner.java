@@ -2,7 +2,8 @@ package helpclasses;
 
 public class Owner {
 
-	private int username;
+	private int ownerId;
+	private String username;
 	private String password;
 	private String firstName;
 	private String lastName;
@@ -11,28 +12,33 @@ public class Owner {
 	private int secondaryTLF;
 	private String secondaryMail;
 	
-	public Owner(int username, String password, String firstName, String lastName, int primaryTLF,
+	public Owner(int ownerId, String username, String password, String firstName, String lastName, int primaryTLF,
 			String primaryMail, int secondaryTLF, String secondaryMail) {
 		
 		super();
-		this.username = username;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.primaryTLF = primaryTLF;
-		this.primaryMail = primaryMail;
-		this.secondaryTLF = secondaryTLF;
+		this.ownerId  	   = ownerId;
+		this.username 	   = username;
+		this.password 	   = password;
+		this.firstName     = firstName;
+		this.lastName 	   = lastName;
+		this.primaryTLF    = primaryTLF;
+		this.primaryMail   = primaryMail;
+		this.secondaryTLF  = secondaryTLF;
 		this.secondaryMail = secondaryMail;
 	}
 
-	public int getOwnerID() {
+	public int getOwnerId() {
+		return ownerId;
+	}
+
+	public void setOwnerId(int ownerId) {
+		this.ownerId = ownerId;
+	}
+
+	public String getUsername() {
 		return username;
 	}
-
-	public void setOwnerID(int ownerID) {
-		this.username = username;
-	}
-
+	
 	public String getPassword() {
 		return password;
 	} 
@@ -90,7 +96,9 @@ public class Owner {
 	}
 	
 	public String toString() {
-		return "Owner ID: " + username + "\t | Password: " + password +
+		return //"Owner ID: " + username + 
+				"Username: " + username +
+				"\t | Password: " + password +
 				"\t | First name: " + firstName +
 				"\t | Last name: " + lastName +
 				"\t | Telephone: " + primaryTLF +

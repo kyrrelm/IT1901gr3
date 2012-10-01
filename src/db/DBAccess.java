@@ -54,20 +54,18 @@ public class DBAccess {
 		}
 	}
 
-	public static void addOwner(String pw, String firstName, String lastName,
-								String tlf, String email, String secondaryTlf,
-								String secondaryEmail)
-	{
-		
+	public static void addOwner(String username, String pw, String firstName,
+			String lastName, String tlf, String email, String secondaryTlf,
+			String secondaryEmail) {
 		try {
 			Statement st = con.createStatement();
 			/*    FOR TESTING:
 			String s = "INSERT INTO Owner(Password, FirstName, LastName, PrimaryTLF, PrimaryMail, SecondaryTLF, SecondaryMail) VALUES " + String.format("(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",  pw, name, tlf, email, secondaryTlf, secondaryEmail); 
 			System.out.println(s);
 			*/
-			st.executeUpdate("INSERT INTO Owner(Password, FirstName, LastName, PrimaryTLF, PrimaryMail, SecondaryTLF, SecondaryMail) VALUES "
-			+ String.format("(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",
-			pw, firstName, lastName, tlf, email, secondaryTlf, secondaryEmail));
+			st.executeUpdate("INSERT INTO Owner(Username, Password, FirstName, LastName, PrimaryTLF, PrimaryMail, SecondaryTLF, SecondaryMail) VALUES "
+			+ String.format("(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",
+			username, pw, firstName, lastName, tlf, email, secondaryTlf, secondaryEmail));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,16 +73,20 @@ public class DBAccess {
 		}
 	}
 	
+	
 	public static void addFarm(String name, int ownerId)
 	{
 		try {
 			Statement statement = con.createStatement();
+			
 			/*    FOR TESTING:
 			String s = 
 			System.out.println(s);
 			*/
 			statement.executeUpdate("INSERT INTO Farm(Name, OwnerID) VALUES " +
 					String.format("(\"%s\", \"%d\")", name, ownerId));
+			
+			
 			
 			/*st.executeUpdate("INSERT INTO Farm(Name, OwnerID) VALUES " 
 					+ String.format("(\"%s\", \"%s\")",  "1830", 
@@ -116,18 +118,21 @@ public class DBAccess {
 		}
 	}
 	
-	public static void addMessage(int dateTime, int pulse, int temperature,
-			String status, int positionX, int positionY, int sheepId) {
+	public static void addMessage(String dateTime, int pulse, int temperature,
+			int status, int positionX, int positionY, int sheepId) {
 		
 		try {
 			Statement st = con.createStatement();
 			
+			
+			
+			
 			st.executeUpdate("INSERT INTO Message(DateTime, Pulse," +
 					" Temperature, Status, PositionX, PositionY, SheepID) " +
 					"VALUES" + String.format("(\"%s\", \"%s\", \"%s\"," +
-							" \"s%\", \"s%\", \"s%\", \"s%\")",
-					String.valueOf(dateTime), String.valueOf(pulse), 
-					String.valueOf(temperature), status, 
+							" \"%s\", \"%s\", \"%s\", \"%s\")",
+					dateTime, String.valueOf(pulse), 
+					String.valueOf(temperature), String.valueOf(status), 
 					String.valueOf(positionX), String.valueOf(positionY),
 					String.valueOf(sheepId)));
 		}
@@ -137,14 +142,119 @@ public class DBAccess {
 		}
 	}
 	
-	
-	public static Owner getOwner(String lastName, String phoneNumber) {
+	public static boolean isUsernameTaken(String userName) {
 		try {
 			Statement statement = con.createStatement();
 			
 			ResultSet resultSet = statement.executeQuery(
-					"SELECT * FROM Owner WHERE LastName = '" + lastName +
-					"' AND PrimaryTLF = '" + phoneNumber + "'"
+					"SELECT * From Owner WHERE UserName = '" + userName + "'");
+			int counter = 0;
+			
+			
+			while(resultSet.next()) {
+				counter = counter + 1;
+			}
+			
+			
+			if(counter > 0) {
+				return true;
+			}
+			
+			
+			return false;
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+			
+			return true;
+		}
+	}
+	
+	public static boolean isSheepNameTaken(String sheepName, int farmId) {
+		try {
+			Statement statement = con.createStatement();
+			
+			ResultSet resultSet = statement.executeQuery(
+					"Select Name FROM Sheep WHERE FarmID = '" + farmId + "'");
+			
+			while(resultSet.next()) {
+				if(resultSet.getString(1) == sheepName) {
+					return true;
+				}
+			}
+			
+		return false;	
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+						
+			return false;
+		}
+	}
+	
+	public static Farm getFarm(int ownerId) {
+		try {
+			Statement statement = con.createStatement();
+			Farm farm			= null;
+			//We want to get the FarmID and return it
+			ResultSet resultSet = statement.executeQuery(
+					"SELECT * FROM Farm WHERE OwnerID = '" + ownerId + "'");
+								
+			
+			//The FarmID we are interested in will be the last added in database
+			while(resultSet.next()) {
+				farm = new Farm(Integer.parseInt(resultSet.getString(1)),
+						resultSet.getString(2),
+						Integer.parseInt(resultSet.getString(3)));
+			}
+			
+			
+		return farm;
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+		
+			return null;
+		}
+	}
+	
+	public static Message getMessage(int messageId) {
+		try {
+			Statement statement = con.createStatement();
+			Message message	  	  = null;
+			
+			ResultSet resultSet = statement.executeQuery(
+					"SELECT * FROM Message WHERE MessageID= '" + messageId +
+					"'");	
+			
+			
+			if(resultSet.last()) {
+				message = new Message(Integer.parseInt(resultSet.getString(1)),
+						resultSet.getDate(2), 
+						Integer.parseInt(resultSet.getString(3)),
+						Float.parseFloat(resultSet.getString(4)),
+						Integer.parseInt(resultSet.getString(5)),
+						Integer.parseInt(resultSet.getString(6)),
+						Integer.parseInt(resultSet.getString(7)),
+						Integer.parseInt(resultSet.getString(8)));
+			}
+			
+			return message;
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+			
+			return null;
+		}
+	}
+	
+	public static Owner getOwner(String username, String password) {
+		try {
+			Statement statement = con.createStatement();
+			
+			ResultSet resultSet = statement.executeQuery(
+					"SELECT * FROM Owner WHERE Username = '" + username +
+					"' AND Password = '" + password + "'"
 					);
 			
 			Owner owner = null;
@@ -152,15 +262,44 @@ public class DBAccess {
 			
 			while(resultSet.next())	{
 				owner = new Owner(Integer.parseInt(resultSet.getString(1)),
-						resultSet.getString(2), resultSet.getString(3),
-						resultSet.getString(4), 
-						Integer.parseInt(resultSet.getString(5)),
-						resultSet.getString(6),
-						Integer.parseInt(resultSet.getString(7)),
-						resultSet.getString(8));						
+						resultSet.getString(2),
+						resultSet.getString(3), resultSet.getString(4),
+						resultSet.getString(5), 
+						Integer.parseInt(resultSet.getString(6)),
+						resultSet.getString(7),
+						Integer.parseInt(resultSet.getString(8)),
+						resultSet.getString(9));						
 			}
 			
 			return owner;
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+			
+			return null;
+		}
+	}
+	
+	
+	public static Sheep getLastAddedSheep() {
+		try {
+			Statement statement = con.createStatement();
+			
+			ResultSet resultSet = statement.executeQuery("SELECT * FROM Sheep");
+			
+			Sheep sheep = null;
+			
+			
+			if(resultSet.last()) {
+				sheep = new Sheep(Integer.parseInt(resultSet.getString(1)),
+						resultSet.getString(2),
+						Integer.parseInt(resultSet.getString(3)),
+						Integer.parseInt(resultSet.getString(4)),
+						Integer.parseInt(resultSet.getString(5)));
+			}
+				
+			
+			return sheep;
 		}
 		catch(SQLException exception) {
 			exception.printStackTrace();
