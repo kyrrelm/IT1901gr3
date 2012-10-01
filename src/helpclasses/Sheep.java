@@ -9,6 +9,8 @@ public class Sheep
 	private int ownerId;
 	private boolean attacked;
 	//TODO insert coordinate property (I don't know which one is best - Jama)
+	private double longitude;
+	private double latitude; //set 
 	private int pulse;
 	private int temp;
 	

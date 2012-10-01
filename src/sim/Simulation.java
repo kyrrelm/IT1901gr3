@@ -32,6 +32,12 @@ public class Simulation {
 
 	private int minTemp;
 	private int maxTemp;
+	
+	private double minLongitude;
+	private double maxLongitude;
+	private double minLatitude;
+	private double maxLatitude;
+	
 	/* End simulation variable ranges */
 	
 	
