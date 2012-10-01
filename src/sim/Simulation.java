@@ -21,8 +21,8 @@ public class Simulation {
 	ArrayList<Sheep> sheep;
 	
 	/* Simulation variable ranges */
-	private int minFlock; //the minimum movement for the flock
-	private int maxFlock; //the maximum movement for the flock
+	private int minHerd; //the minimum movement for the flock
+	private int maxHerd; //the maximum movement for the flock
 
 	private int minLocal; //the mininum movement for the sheep
 	private int maxLocal; //the maximum movement for the sheep
@@ -44,8 +44,8 @@ public class Simulation {
 	public Simulation(int minFlock, int maxFlock)
 	{
 		sheep = new ArrayList<Sheep>();
-		this.minFlock = minFlock;
-		this.maxFlock = maxFlock;
+		this.minHerd = minFlock;
+		this.maxHerd = maxFlock;
 		getData();
 	}
 	
@@ -57,12 +57,12 @@ public class Simulation {
 	
 	public void pos()
 	{
-		int flockRandom = minFlock + (int)(Math.random()*maxFlock); //in order to keep movement in a consistent flock
+		int herdRandom = minHerd + (int)(Math.random()*maxHerd); //in order to keep movement in a consistent herd
 		
 		for(Sheep s: sheep)
 		{
 			int localRandom = minLocal +(int)(Math.random()*maxLocal);
-			s.incrementPos(flockRandom+localRandom); //
+			s.incrementPos(herdRandom+localRandom); //
 		}
 	}
 	
