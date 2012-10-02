@@ -8,6 +8,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import server.ServerUnpacker;
+
 /**
  * SocketClient creates a connection for the client to the server
  * The SocketClient object must be constructed with a valid server name
@@ -59,6 +61,7 @@ public class SocketClient {
 	 * Sends a message to the server, this message is an object of a class.
 	 * Probably class Message, could even be a simple String.
 	 * @param o The object to be sent
+	 * @return 
 	 */
 	public void sendMessage(CommMessage<?> o)
 	{
@@ -76,6 +79,24 @@ public class SocketClient {
 		
 
 		// TODO: wait for reply!
+		// If reply != null? alltid?
+		 try {
+				CommMessage<?> message = (CommMessage<?>) in.readObject();
+				
+				//System.out.println(message.getMessageName());
+				
+				ClientUnpacker.unpackClientMessage(message);
+				
+
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.err.println("Class not recognized");
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.err.println("Socket closed!");
+				close();
+			}
 
 	}
 

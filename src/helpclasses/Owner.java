@@ -1,6 +1,9 @@
 package helpclasses;
 
-public class Owner {
+import java.io.Serializable;
+
+public class Owner implements Serializable {
+
 
 	private int ownerId;
 	private String username;

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class ServerThread extends Thread
 {
@@ -28,7 +29,11 @@ public class ServerThread extends Thread
 			out = new ObjectOutputStream(socket.getOutputStream());
 			out.flush();
 			in = new ObjectInputStream(socket.getInputStream());
-			sendMessage("Connection successful");
+			
+			
+			// har fjernet muligheten for å sende rene strenger.
+			//sendMessage("Connection successful");
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,6 +70,8 @@ public class ServerThread extends Thread
 				System.err.println("Class not recognized");
 			} catch (IOException e) {
 				e.printStackTrace();
+				System.err.println("Socket closed!");
+				stopThread();
 			}
 	        
 	        
@@ -79,21 +86,7 @@ public class ServerThread extends Thread
 		close();
 
 	}
-	
-	public void sendMessage(String msg)
-	{
-		try
-		{
-			out.writeObject(msg);
-			out.flush();
-			System.out.println("client>" + msg);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
 
-	}
 
 	public void sendMessage(CommMessage<?> msg)
 	{

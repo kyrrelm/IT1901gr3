@@ -1,6 +1,8 @@
 package helpclasses;
 
-public class Farm {
+import java.io.Serializable;
+
+public class Farm implements Serializable {
 	
 	private int farmId;
 	private int ownerId;

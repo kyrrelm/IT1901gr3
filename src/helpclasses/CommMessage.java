@@ -6,16 +6,16 @@ import java.util.ArrayList;
 public class CommMessage<T> implements Serializable
 {
 
-	String messageName;
+	CommEnum messageName;
 	ArrayList<T> paramList;
 	
-	public CommMessage(String messageName, ArrayList<T> paramList)
+	public CommMessage(CommEnum c, ArrayList<T> paramList)
 	{
-		this.messageName = messageName;
+		this.messageName = c;
 		this.paramList =  paramList;
 	}
 
-	public String getMessageName() {
+	public CommEnum getMessageName() {
 		return messageName;
 	}
 

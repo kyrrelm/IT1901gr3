@@ -1,6 +1,8 @@
 package helpclasses;
 
-public class Sheep 
+import java.io.Serializable;
+
+public class Sheep implements Serializable
 {
 	private int sheepId;
 	private String name;

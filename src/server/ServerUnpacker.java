@@ -1,5 +1,6 @@
 package server;
 
+import helpclasses.CommEnum;
 import helpclasses.CommMessage;
 import helpclasses.Message;
 import helpclasses.Owner;
@@ -20,7 +21,7 @@ public class ServerUnpacker {
 		 * @author HalvorGB
 		 * @params String username, String password
 		 */
-		if (msg.getMessageName().equals("Login"))
+		if (msg.getMessageName() == CommEnum.LOGIN)
 		{
 			
 			String usr = (String) params.get(0);
@@ -34,38 +35,39 @@ public class ServerUnpacker {
 				
 				ArrayList<Owner> tempArr = new ArrayList<Owner>();
 				tempArr.add(own);
-				return new CommMessage<Owner>("LoginSuccessfull", tempArr);
+				return new CommMessage<Owner>(CommEnum.LOGINSUCCESSFUL, tempArr);
 			}
 			else // ikke fungerte
-				return new CommMessage<String>("LoginFailed", null);
+				return new CommMessage<String>(CommEnum.LOGINFAILED, null);
 			
 		}
 		
-		// resten av metodene krever at det er en bruker som er innlogget
+		// resten av metodene krever at brukeren er logget inn i gitt tråd.
 		if (!st.getLoggedIn())
-			return new CommMessage<String>("NotLoggedIn", null);
+			return new CommMessage<String>(CommEnum.NOTLOGGEDIN, null);
 		
 		/***
 		 * @author HalvorGB
 		 * @params A Sheep
 		 */
-		if (msg.getMessageName().equals("addSheep"))
+		if (msg.getMessageName() == CommEnum.ADDSHEEP)
 		{
 			Sheep shp = (Sheep) params.get(0);
 			DBAccess.addSheep(shp.getName(), shp.getBirthYear(), shp.getFarmId(), shp.getOwnerId());
 			
-			// no reply
+			// no reply?
 			return null;
+			//return new CommMessage<String>(CommEnum.SUCCESS, null);
 		}
 		
 		/***
 		 * @author HalvorGB
 		 * @params An Owner
 		 */
-		if (msg.getMessageName().equals("getMessages"))
+		if (msg.getMessageName() == CommEnum.GETMESSAGES)
 		{
 			ArrayList<Message> Msgs = DBAccess.getMessagesByOwner(((Owner) params.get(0)).getOwnerId());
-			return new CommMessage<Message>("Messages", Msgs);
+			return new CommMessage<Message>(CommEnum.MESSAGESREPLY, Msgs);
 		}
 		return null;
 		

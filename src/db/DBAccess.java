@@ -254,12 +254,13 @@ public class DBAccess {
 			Statement statement = con.createStatement();
 			ArrayList<Message> messages = new ArrayList<Message>();
 			
-			ResultSet resultSet = statement.executeQuery(
-					"SELECT * FROM Message WHERE OwnerID= '" + OwnerID +
-					"'");	
+		
 			
+			ResultSet resultSet = statement.executeQuery("SELECT m.* FROM Message m, Sheep s " +
+															"WHERE m.SheepID = s.SheepID " +
+															"AND s.OwnerID = " + OwnerID);
 			
-			if(resultSet.last()) {
+			while(resultSet.next()) {
 				messages.add( new Message(Integer.parseInt(resultSet.getString(1)),
 						resultSet.getDate(2), 
 						Integer.parseInt(resultSet.getString(3)),
