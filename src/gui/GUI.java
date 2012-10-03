@@ -1,9 +1,15 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package gui;
 
 import javax.swing.SwingUtilities;
 
-// @author Kyrre
-
+/**
+ *
+ * @author Kyrre
+ */
 public class GUI {
     
      static Login login = new Login();
@@ -15,8 +21,10 @@ public class GUI {
 			@Override
 			public void run() {
 				login.setVisible(true);
+                                hub.clearPanels();
 				
 			}
 		});
     }
 }
+
