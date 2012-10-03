@@ -101,6 +101,9 @@ public class DBAccess {
 	
 	public static void addSheep(String name, int birthYear, int farmID, int ownerID)
 	{
+		
+		System.out.println(name);
+		
 		try {
 			Statement st = con.createStatement();
 		

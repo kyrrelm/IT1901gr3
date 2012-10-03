@@ -47,6 +47,7 @@ public class ClientUnpacker {
 		if (msg.getMessageName() == CommEnum.SUCCESS)
 		{
 			// Trengs denne? Kanskje en liten grafik i et hjørne som viser at kommandoen ble ekskevert riktig, ikke et popup selvsagt.
+			System.out.println("Transfer was a success!");
 			
 		}
 		

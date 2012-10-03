@@ -21,6 +21,7 @@ public class ServerThread extends Thread
 	public ServerThread(Socket socket, int threadNumber)  
 	{
 		super("ServerThread");
+		this.number = threadNumber;
 		this.connection = socket;
 		System.out.println("DEBUG #1: Serverthread made -- threadNumber: " + threadNumber);
 		System.out.println("Connection received from " + connection.getInetAddress().getHostName());
@@ -69,7 +70,7 @@ public class ServerThread extends Thread
 				e.printStackTrace();
 				System.err.println("Class not recognized");
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 				System.err.println("Socket closed!");
 				stopThread();
 			}

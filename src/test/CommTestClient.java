@@ -3,6 +3,7 @@ package test;
 import helpclasses.CommEnum;
 import helpclasses.CommMessage;
 import helpclasses.Owner;
+import helpclasses.Sheep;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +35,12 @@ public class CommTestClient {
 		ArrayList<Owner> ownerList = new ArrayList<Owner>();
 		ownerList.add(new Owner(149, "Ferrari3049", "Sheep", "Kari Musum", "Krokstad", 30499581, "karimusumkorkstad@ntnu.no", 79686355, "martenordfjord@ntnu.no"));
 		sockCli.sendMessage(new CommMessage<Owner>(CommEnum.GETMESSAGES, ownerList));
+		
+		
+		ArrayList<Sheep> sheepList = new ArrayList<Sheep>();
+		sheepList.add(new Sheep(0, "Gunnar", 1950, 1, 1));
+		
+		sockCli.sendMessage(new CommMessage<Sheep>(CommEnum.ADDSHEEP, sheepList));
 		while(true)
 		{
 			continue;

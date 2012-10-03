@@ -55,9 +55,9 @@ public class ServerUnpacker {
 			Sheep shp = (Sheep) params.get(0);
 			DBAccess.addSheep(shp.getName(), shp.getBirthYear(), shp.getFarmId(), shp.getOwnerId());
 			
-			// no reply?
-			return null;
-			//return new CommMessage<String>(CommEnum.SUCCESS, null);
+
+			// return generic success message (the client waits for an answer, one must be sent)
+			return new CommMessage<String>(CommEnum.SUCCESS, null);
 		}
 		
 		/***
