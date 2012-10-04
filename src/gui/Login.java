@@ -148,6 +148,10 @@ public class Login extends javax.swing.JFrame {
 
 //Enndre denne metoden når brukernavn og passord spørring implementeres
     private boolean isUsernameAndPassword(String username, String password) {
+    	
+    	if (username.length() == 0 || password.length() == 0)
+    		return false;
+    	
     	ArrayList<String> al = new ArrayList<String>();
     	al.add(username);
 		al.add(password);
