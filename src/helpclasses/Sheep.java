@@ -10,9 +10,8 @@ public class Sheep implements Serializable
 	private int farmId;
 	private int ownerId;
 	private boolean attacked;
-	//TODO insert coordinate property (I don't know which one is best - Jama)
-	private double longitude;
-	private double latitude; //set 
+	private double x;
+	private double y;
 	private int pulse;
 	private int temp;
 	
@@ -53,23 +52,40 @@ public class Sheep implements Serializable
 
 	/**
 	 * Increments sheep's movement vector with increment
-	 * TODO type of parameter is subject to change as coordinate property for sheep is
-	 * finalized
-	 * @param i
+	 * @param x2 The x value to be added
+	 * @param y2 The y value to be added
 	 */
-	public void incrementPos(int increment) {
-		// TODO Auto-generated method stub
-		
+	public void setPos(double x2, double y2) { //TODO maybe you're not supposed to increment but rather set? (unlikely)
+		x += x2;
+		y += y2;
 	}
 
 	public void setPulse(int pulseRandom) {
-		// TODO Auto-generated method stub
-		
+		this.pulse = pulseRandom;
 	}
 
 	public void setTemp(int tempRandom) {
-		// TODO Auto-generated method stub
-		
+		this.temp = tempRandom;
+	}
+
+	public int getPulse() {
+		return pulse;
+	}
+
+	public int getTemp() {
+		return temp;
+	}
+
+	public boolean getAttacked() {
+		return attacked;
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
 	}
 
 }

@@ -18,7 +18,7 @@ import helpclasses.*;
 
 public class DBAccess {
 
-	static Connection con;
+	public static Connection con;
 	
 	//Parameter url
 	public static void open() throws InstantiationException, 

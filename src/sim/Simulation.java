@@ -1,6 +1,9 @@
 package sim;
 
+import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Random;
+
 import helpclasses.Sheep;
 
 /**
@@ -20,52 +23,101 @@ public class Simulation {
 
 	ArrayList<Sheep> sheep;
 	
+	public boolean stop = false;
+	public int refreshRate; 
+
 	/* Simulation variable ranges */
-	private int minHerd; //the minimum movement for the flock
-	private int maxHerd; //the maximum movement for the flock
+	private double maxHerdX; 
+	private double maxHerdY;
 
-	private int minLocal; //the mininum movement for the sheep
-	private int maxLocal; //the maximum movement for the sheep
+	private int minPulse = 40;
+	private int maxPulse = 100;
 
-	private int minPulse;
-	private int maxPulse;
-
-	private int minTemp;
-	private int maxTemp;
-	
-	private double minLongitude;
-	private double maxLongitude;
-	private double minLatitude;
-	private double maxLatitude;
-	
+	private int minTemp = 35;
+	private int maxTemp = 42;
 	/* End simulation variable ranges */
 	
-	
-	public Simulation(int minFlock, int maxFlock)
+	/**
+	 * The simulation constructor, any values you'd want to variable between different simulations should
+	 * be supplied as a constructor parameter.
+	 * @param maxHerdX The maximum movement for the herd
+	 * @param maxHerdY
+	 * @param refreshRate Amount of milliseconds between each value refresh in sheep ArrayList and DB dump
+	 */
+	public Simulation(int maxHerdX, int maxHerdY, int refreshRate)
 	{
 		sheep = new ArrayList<Sheep>();
-		this.minHerd = minFlock;
-		this.maxHerd = maxFlock;
+		this.maxHerdX = maxHerdX;
+		this.maxHerdY = maxHerdY;
+		this.refreshRate = refreshRate;
+		
 		getData();
 	}
-	
-	public void getData()
+
+	/**
+	 * The simulation loop. This will rerun the randomize methods at given refreshRate and then deploy changes
+	 * to database.
+	 */
+	public void simLoop()
 	{
-		// ask server for database data (sheep)
-		// store data in datastructure (list)
-	}
-	
-	public void pos()
-	{
-		int herdRandom = minHerd + (int)(Math.random()*maxHerd); //in order to keep movement in a consistent herd
-		
-		for(Sheep s: sheep)
+		while(!stop)
 		{
-			int localRandom = minLocal +(int)(Math.random()*maxLocal);
-			s.incrementPos(herdRandom+localRandom); //
+			randomPos();
+			randomTemp();
+			randomPulse();
+			setData();
+			
+			try { Thread.sleep(refreshRate); } catch (InterruptedException e) { e.printStackTrace(); } //tråden sover
 		}
 	}
-	
+
+	/**
+	 * Gets all the data from the database. Need only run it once per simulation.
+	 */
+	public void getData()
+	{
+		// TODO ask server for database data (sheep)
+		// TODO store data in datastructure (list)
+	}
+
+	/**
+	 * Takes all the data and stores it in the database with given refreshRate
+	 */
+	public void setData()
+	{
+		java.util.Date date = new java.util.Date();
+		java.text.SimpleDateFormat simpleDateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateTime = simpleDateFormat.format(date);
+
+		for(Sheep s: sheep)
+		{
+			//TODO Jeg er ikke sikker hvordan jeg sender dette til databasen
+			addMessage(dateTime, s.getPulse(), s.getTemp(), s.getAttacked(), s.getX(), s.getY(), s.getSheepId());
+		}
+
+	}
+
+	/**
+	 * Random movement of all sheeps, this needs some minor polishing but works well enough for a rudimentary simulation
+	 * sets movement within range maxHerdX and maxHerdY
+	 * Bugs: Sheep can move beyond the "wall"
+	 * Bugs: Sheep aren't sticking together in a herd (use gravity)
+	 */
+	public void randomPos() 
+	{
+		for(Sheep s: sheep)
+		{
+			Random r = new Random();
+			double x, y;
+			x = r.nextDouble()*maxHerdX;
+			y = r.nextInt()*maxHerdY;
+			s.setPos(x, y);
+		}
+	}
+
+	/**
+	 * Sets random temperature between minTemp and maxTemp
+	 */
 	public void randomTemp()
 	{
 		for(Sheep s: sheep)
@@ -74,7 +126,10 @@ public class Simulation {
 			s.setTemp(tempRandom);
 		}
 	}
-	
+
+	/**
+	 * Sets a random pulse between minPulse and maxPulse
+	 */
 	public void randomPulse()
 	{
 		for(Sheep s: sheep)
