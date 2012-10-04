@@ -387,6 +387,31 @@ public class DBAccess {
 		}
 	}
 	
+	public static ArrayList<Sheep> getAllSheep()
+	{
+		//Her vil jeg at DB skal bli queried for alle sau-elementer
+		//Tipper på at det ligner litt på:
+		
+		/*
+		 * SELECT * FROM sheep
+		 */
+		
+		//lagre de inn i en arrayList også
+		//returnere den lista
+		return null;
+	}
+	
+	public static void updateAllSheep(ArrayList<Sheep> sheep)
+	{
+		//og her vil jeg at DB skal oppdatere alle sau-elementene
+		//dette brukes hovedsakelig med simulation
+		//dette vil se slik ut antar jeg
+		
+		/*
+		 * UPDATE table_name SET column_name1 osv. 
+		 */
+	}
+	
 	/***
 	 * Deletes all records in table 'Farm'
 	 */
