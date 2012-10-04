@@ -15,7 +15,7 @@ public class ClientUnpacker {
 		if (msg.getMessageName() == CommEnum.LOGINSUCCESSFUL)
 		{
 			// logged in
-			// -- GUI.setLoggedIn(true);
+			ServerData.isLoggedIn = true;
 			System.out.println(((Owner) params.get(0)).getFirstName());
 		}
 		

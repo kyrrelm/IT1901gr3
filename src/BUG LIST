@@ -1,0 +1,3 @@
+BUG LIST
+
+- Login av owners med tomme felter i DB tvinger frem kræsj.

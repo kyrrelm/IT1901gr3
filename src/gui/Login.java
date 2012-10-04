@@ -4,9 +4,14 @@
  */
 package gui;
 
+import helpclasses.CommEnum;
+import helpclasses.CommMessage;
+
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -143,9 +148,11 @@ public class Login extends javax.swing.JFrame {
 
 //Enndre denne metoden når brukernavn og passord spørring implementeres
     private boolean isUsernameAndPassword(String username, String password) {
-        if(username.equals(client.Constants.SUPER_USERNAME) && password.equals(client.Constants.SUPER_PASSWORD))
-            return true;
-        else
-            return false;
+    	ArrayList<String> al = new ArrayList<String>();
+    	al.add(username);
+		al.add(password);
+        GUI.sockCli.sendMessage(new CommMessage<String>(CommEnum.LOGIN, al));
+        System.out.println("Test Kyrre");
+        return client.ServerData.isLoggedIn;
     }
 }

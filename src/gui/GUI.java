@@ -5,6 +5,7 @@
 package gui;
 
 import javax.swing.SwingUtilities;
+import client.SocketClient;
 
 /**
  *
@@ -14,8 +15,12 @@ public class GUI {
     
      static Login login = new Login();
      static Hub hub = new Hub();
+     static SocketClient sockCli;
 
     public static void main(String[] args) {
+    	
+    	sockCli = new SocketClient("localhost", 6667);
+		sockCli.run();
     	SwingUtilities.invokeLater(new Runnable() {
 			
 			@Override
@@ -25,6 +30,8 @@ public class GUI {
 				
 			}
 		});
+    	
+    	//sockCli.close();
     }
 }
 

@@ -31,6 +31,7 @@ public class ServerUnpacker {
 			
 			if (own != null) // inloggingen fungerte
 			{
+				//Hva gjør denne? Hilsen Kyrre :)
 				st.setLoggedIn(true);
 				
 				ArrayList<Owner> tempArr = new ArrayList<Owner>();
