@@ -126,7 +126,7 @@ public class Login extends javax.swing.JFrame {
        
     }                                     
     
-    //Legger inn støte for bruk av Enter ved Login
+    //Legger inn stï¿½te for bruk av Enter ved Login
     private void passwordKeyPressed(java.awt.event.KeyEvent evt) {                                    
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
@@ -146,7 +146,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField username;
     // End of variables declaration                   
 
-//Enndre denne metoden når brukernavn og passord spørring implementeres
+//Enndre denne metoden nï¿½r brukernavn og passord spï¿½rring implementeres
     private boolean isUsernameAndPassword(String username, String password) {
     	
     	if (username.length() == 0 || password.length() == 0)
@@ -154,7 +154,7 @@ public class Login extends javax.swing.JFrame {
     	
     	ArrayList<String> al = new ArrayList<String>();
     	al.add(username);
-		al.add(password);
+        al.add(password);
         GUI.sockCli.sendMessage(new CommMessage<String>(CommEnum.LOGIN, al));
         System.out.println("Test Kyrre");
         return client.ServerData.isLoggedIn;

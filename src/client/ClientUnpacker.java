@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import helpclasses.CommEnum;
 import helpclasses.CommMessage;
+import helpclasses.Message;
 import helpclasses.Owner;
 
 public class ClientUnpacker {
@@ -42,6 +43,7 @@ public class ClientUnpacker {
 			// GUI.setMessageListModel(params) ??
 			
 			System.out.println(params.size());
+			ServerData.messages = (ArrayList<Message>) params;
 		}
 		
 		if (msg.getMessageName() == CommEnum.SUCCESS)
