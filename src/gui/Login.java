@@ -121,7 +121,9 @@ public class Login extends javax.swing.JFrame {
         String password = this.password.getText();
        if(isUsernameAndPassword(username, password)){
             this.setVisible(false);
+            loadDbInfo();
             GUI.hub.setVisible(true);
+            System.out.println(ServerData.owner);
        }else
             JOptionPane.showMessageDialog(this, "Wrong Username or Password", "Error", JOptionPane.ERROR_MESSAGE);
         
@@ -164,8 +166,7 @@ public class Login extends javax.swing.JFrame {
     //laster ned nødvendig data til ServerData
     private void loadDbInfo(){
     	ArrayList<Owner> metadata = new ArrayList<Owner>();
-    	metadata.add(ServerData.owner);
-        
+    	metadata.add(ServerData.owner); 
     	GUI.sockCli.sendMessage(new CommMessage<Owner>(CommEnum.GETFARMS, metadata));
     }
 }
