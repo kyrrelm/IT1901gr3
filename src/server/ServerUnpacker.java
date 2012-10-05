@@ -2,6 +2,7 @@ package server;
 
 import helpclasses.CommEnum;
 import helpclasses.CommMessage;
+import helpclasses.Farm;
 import helpclasses.Message;
 import helpclasses.Owner;
 import helpclasses.Sheep;
@@ -69,6 +70,12 @@ public class ServerUnpacker {
 		{
 			ArrayList<Message> Msgs = DBAccess.getMessagesByOwner(((Owner) params.get(0)).getOwnerId());
 			return new CommMessage<Message>(CommEnum.MESSAGESREPLY, Msgs);
+		}
+		
+		if (msg.getMessageName() == CommEnum.GETFARMS)
+		{
+			ArrayList<Farm> Msgs = DBAccess.getFarmsByOwner(((Owner) params.get(0)).getOwnerId());
+			return new CommMessage<Farm>(CommEnum.MESSAGESREPLY, Msgs);
 		}
 		return null;
 		
