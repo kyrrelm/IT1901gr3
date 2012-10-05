@@ -196,6 +196,10 @@ public class DBAccess {
 		}
 	}
 	
+	/*Kan hende jeg misforstår, men vil ikke denne metoden kunn returnere siste farm,
+	 * selv hvis bonden har flere?
+	 */
+	
 	public static Farm getFarm(int ownerId) {
 		try {
 			Statement statement = con.createStatement();
@@ -222,6 +226,31 @@ public class DBAccess {
 		}
 	}
 	
+	//returnerer alle bondens gårder
+	public static ArrayList<Farm> getFarmsByOwner(int ownerId) {
+		try {
+			Statement statement = con.createStatement();
+			ArrayList<Farm> farms = new ArrayList<Farm>();
+			
+		
+			
+			ResultSet resultSet = statement.executeQuery(
+					"SELECT * FROM Farm WHERE OwnerID = '" + ownerId + "'");
+			
+			while(resultSet.next()) {
+				farms.add(new Farm(Integer.parseInt(resultSet.getString(1)),
+						resultSet.getString(2),
+						Integer.parseInt(resultSet.getString(3))));
+			}
+			
+			return farms;
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+		
+			return null;
+		}
+	}
 	public static Message getMessage(int messageId) {
 		try {
 			Statement statement = con.createStatement();
