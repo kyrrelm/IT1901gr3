@@ -6,6 +6,7 @@ package gui;
 
 import helpclasses.CommEnum;
 import helpclasses.CommMessage;
+import helpclasses.Owner;
 
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
@@ -162,8 +163,9 @@ public class Login extends javax.swing.JFrame {
     }
     //laster ned nødvendig data til ServerData
     private void loadDbInfo(){
-    	ArrayList<Integer> metadata = new ArrayList<Integer>();
-    	metadata.add(ServerData.ownerId);
-        GUI.sockCli.sendMessage(new CommMessage<Integer>(CommEnum.GETFARMS, metadata));
+    	ArrayList<Owner> metadata = new ArrayList<Owner>();
+    	metadata.add(ServerData.owner);
+        
+    	GUI.sockCli.sendMessage(new CommMessage<Owner>(CommEnum.GETFARMS, metadata));
     }
 }
