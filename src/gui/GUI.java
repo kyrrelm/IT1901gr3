@@ -32,6 +32,7 @@ public class GUI {
 		});
     	
     	//sockCli.close();
+       
     }
 }
 

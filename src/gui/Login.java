@@ -156,7 +156,6 @@ public class Login extends javax.swing.JFrame {
     	al.add(username);
         al.add(password);
         GUI.sockCli.sendMessage(new CommMessage<String>(CommEnum.LOGIN, al));
-        System.out.println("Test Kyrre");
         return client.ServerData.isLoggedIn;
     }
 }
