@@ -4,6 +4,10 @@
  */
 package gui;
 
+import client.ServerData;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author Kyrre
@@ -89,6 +93,11 @@ public class Hub extends javax.swing.JFrame {
         addSheepFarmLabel.setText("Farm:");
 
         addSheepBirthYear.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040", "2041", "2042", "2043", "2044", "2045", "2046", "2047", "2048", "2049", "2050" }));
+        addSheepBirthYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addSheepBirthYearActionPerformed(evt);
+            }
+        });
 
         addSheepNameOptionalLabel.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
         addSheepNameOptionalLabel.setText("(Optional)");
@@ -395,6 +404,7 @@ public class Hub extends javax.swing.JFrame {
 
     private void topMenuAddSheepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topMenuAddSheepActionPerformed
         clearPanels();
+        initAddSheep();
         addSheep.setVisible(true);
     }//GEN-LAST:event_topMenuAddSheepActionPerformed
 
@@ -441,6 +451,10 @@ public class Hub extends javax.swing.JFrame {
         removeFarm.setVisible(true);
     }//GEN-LAST:event_topMenuRemoveFarmActionPerformed
 
+    private void addSheepBirthYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSheepBirthYearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addSheepBirthYearActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addFarm;
     private javax.swing.JButton addFarmAdd;
@@ -476,7 +490,10 @@ public class Hub extends javax.swing.JFrame {
     private javax.swing.JMenuItem topMenuRemoveSheep;
     private javax.swing.JMenu topMenuSheep;
     // End of variables declaration//GEN-END:variables
-
+    
+	private void initAddSheep(){
+    	addSheepFarm.setModel(new DefaultComboBoxModel(getFarmNames()));
+    }
     //fucka løsning på at JPanels blir init. med visible = true i NetBeans sin initComponents();
     void clearPanels(){
         addSheep.setVisible(false);
@@ -485,7 +502,16 @@ public class Hub extends javax.swing.JFrame {
         removeFarm.setVisible(false);
     }
     
-    private String getFarms(){
-        return "TestFarm";
+    private String[] getFarmNames(){
+    	System.out.println(ServerData.farms.isEmpty());
+    	System.out.println("Derp!!!!!!!!!!");
+    	if(ServerData.farms.isEmpty())
+    		return new String[] {"You have no farm's"};
+    	
+        String[] tmp = new String[ServerData.farms.size()];
+        for (int i = 0; i < tmp.length-1; i++) {
+			tmp[i] = ServerData.farms.get(i).getName();
+		}
+        return tmp;
     }
 }
