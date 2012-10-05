@@ -416,18 +416,35 @@ public class DBAccess {
 		}
 	}
 	
+	/**
+	 * Henter ut alle sauene
+	 * @return ArrayList<Sheep> som rommer alle sauene
+	 */
 	public static ArrayList<Sheep> getAllSheep()
 	{
-		//Her vil jeg at DB skal bli queried for alle sau-elementer
-		//Tipper på at det ligner litt på:
-		
-		/*
-		 * SELECT * FROM sheep
-		 */
-		
-		//lagre de inn i en arrayList også
-		//returnere den lista
-		return null;
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM Sheep");
+			Sheep shp = null;
+			ArrayList<Sheep> sheep = new ArrayList<Sheep>();
+			
+			while (rs.next()) // sheepID, birthYear, farmID, ownerID
+			{												        // year har fucked format, burde bytte til INT i databasen...
+				shp = new Sheep(Integer.parseInt(rs.getString(1)),
+						rs.getString(2),
+						Integer.parseInt(rs.getString(3).substring(0, 4)),
+						Integer.parseInt(rs.getString(4)),
+						Integer.parseInt(rs.getString(5)));
+				sheep.add(shp);
+			}
+			
+			return sheep;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public static void updateAllSheep(ArrayList<Sheep> sheep)
@@ -437,8 +454,15 @@ public class DBAccess {
 		//dette vil se slik ut antar jeg
 		
 		/*
+		for(Sheep s: sheep)
+		{
+			/*
 		 * UPDATE table_name SET column_name1 osv. 
-		 */
+		 
+			addMessage(dateTime, s.getPulse(), s.getTemp(), s.getAttacked(), s.getX(), s.getY(), s.getSheepId());
+		}*/
+		
+		//Hvis dette ikke blir gjort riktig kan det hende at alle sauene blir erstattet med feil verdier
 	}
 	
 	/***

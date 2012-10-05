@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Random;
 
+import db.DBAccess;
+
 import helpclasses.Sheep;
 
 /**
@@ -22,6 +24,7 @@ import helpclasses.Sheep;
 public class Simulation {
 
 	ArrayList<Sheep> sheep;
+	DBAccess db;
 	
 	public boolean stop = false;
 	public int refreshRate; 
@@ -40,16 +43,18 @@ public class Simulation {
 	/**
 	 * The simulation constructor, any values you'd want to variable between different simulations should
 	 * be supplied as a constructor parameter.
+	 * @param db The database reference //TODO maybe this is wrong
 	 * @param maxHerdX The maximum movement for the herd
 	 * @param maxHerdY
 	 * @param refreshRate Amount of milliseconds between each value refresh in sheep ArrayList and DB dump
 	 */
-	public Simulation(int maxHerdX, int maxHerdY, int refreshRate)
+	public Simulation(DBAccess db, int maxHerdX, int maxHerdY, int refreshRate)
 	{
 		sheep = new ArrayList<Sheep>();
 		this.maxHerdX = maxHerdX;
 		this.maxHerdY = maxHerdY;
 		this.refreshRate = refreshRate;
+		this.db = db;
 		
 		getData();
 	}
@@ -76,8 +81,7 @@ public class Simulation {
 	 */
 	public void getData()
 	{
-		// TODO ask server for database data (sheep)
-		// TODO store data in datastructure (list)
+		sheep = db.getAllSheep();
 	}
 
 	/**
@@ -85,16 +89,7 @@ public class Simulation {
 	 */
 	public void setData()
 	{
-		java.util.Date date = new java.util.Date();
-		java.text.SimpleDateFormat simpleDateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String dateTime = simpleDateFormat.format(date);
-
-		for(Sheep s: sheep)
-		{
-			//TODO Jeg er ikke sikker hvordan jeg sender dette til databasen
-			addMessage(dateTime, s.getPulse(), s.getTemp(), s.getAttacked(), s.getX(), s.getY(), s.getSheepId());
-		}
-
+		db.updateAllSheep(sheep);
 	}
 
 	/**
