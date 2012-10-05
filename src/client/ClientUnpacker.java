@@ -18,6 +18,8 @@ public class ClientUnpacker {
 		{
 			// logged in
 			ServerData.isLoggedIn = true;
+			//Setter ownerId i ServerData ved Login
+			ServerData.ownerId = ((Owner) params.get(0)).getOwnerId();
 			System.out.println(((Owner) params.get(0)).getFirstName());
 		}
 		

@@ -14,6 +14,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import client.ServerData;
+
 /**
  *
  * @author Kyrre
@@ -157,5 +159,11 @@ public class Login extends javax.swing.JFrame {
         al.add(password);
         GUI.sockCli.sendMessage(new CommMessage<String>(CommEnum.LOGIN, al));
         return client.ServerData.isLoggedIn;
+    }
+    //laster ned nødvendig data til ServerData
+    private void loadDbInfo(){
+    	ArrayList<Integer> metadata = new ArrayList<Integer>();
+    	metadata.add(ServerData.ownerId);
+        GUI.sockCli.sendMessage(new CommMessage<Integer>(CommEnum.GETFARMS, metadata));
     }
 }
