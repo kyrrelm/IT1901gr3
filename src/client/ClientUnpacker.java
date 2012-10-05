@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import helpclasses.CommEnum;
 import helpclasses.CommMessage;
+import helpclasses.Farm;
 import helpclasses.Message;
 import helpclasses.Owner;
 
@@ -44,6 +45,12 @@ public class ClientUnpacker {
 			
 			System.out.println(params.size());
 			ServerData.messages = (ArrayList<Message>) params;
+		}
+		if (msg.getMessageName() == CommEnum.FARMSREPLY)
+		{
+			
+			System.out.println(params.size());
+			ServerData.farms = (ArrayList<Farm>) params;
 		}
 		
 		if (msg.getMessageName() == CommEnum.SUCCESS)

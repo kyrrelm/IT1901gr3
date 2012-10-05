@@ -75,7 +75,7 @@ public class ServerUnpacker {
 		if (msg.getMessageName() == CommEnum.GETFARMS)
 		{
 			ArrayList<Farm> Msgs = DBAccess.getFarmsByOwner(((Owner) params.get(0)).getOwnerId());
-			return new CommMessage<Farm>(CommEnum.MESSAGESREPLY, Msgs);
+			return new CommMessage<Farm>(CommEnum.FARMSREPLY, Msgs);
 		}
 		return null;
 		

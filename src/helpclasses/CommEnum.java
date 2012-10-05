@@ -20,6 +20,8 @@ public enum CommEnum {
 	
 	//CLIENT->SERVER GET FARMS
 	GETFARMS,
+	//SERVER->CLIENT RETURN ALL FARMS
+	FARMSREPLY,
 	
 	
 	
