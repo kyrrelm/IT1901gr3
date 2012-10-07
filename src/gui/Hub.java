@@ -438,8 +438,9 @@ public class Hub extends javax.swing.JFrame {
         String farmToRemove = (String) this.removeFarmComboFarm.getSelectedItem();
         System.out.print(farmToRemove);
         ArrayList<Farm> metadata = new ArrayList<Farm>();
-        metadata.add(ServerData.getFarmByName(farmToRemove));
+        metadata.add(ServerData.getFarmByNameAndRemove(farmToRemove));
         GUI.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.REMOVEFARM, metadata));
+        initRemoveFarm();
     }//GEN-LAST:event_removeFarmAddActionPerformed
 
     private void topMenuAddFarmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topMenuAddFarmActionPerformed

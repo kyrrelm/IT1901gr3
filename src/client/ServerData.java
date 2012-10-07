@@ -17,10 +17,13 @@ public class ServerData {
 	public static ArrayList<Message> messages = new ArrayList<Message>();
 	public static ArrayList<Farm> farms = new ArrayList<Farm>();
 	
-	public static Farm getFarmByName(String name){
+	public static Farm getFarmByNameAndRemove(String name){
 		for (Farm farm : farms) {
-			if(farm.getName().equals(name))
-				return farm;
+			if(farm.getName().equals(name)){
+				Farm tmp = farm;
+				farms.remove(farm);
+				return tmp;
+			}
 		}
 		return null;
 	}
