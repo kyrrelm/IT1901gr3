@@ -57,7 +57,14 @@ public class DBAccess {
 
 	//kan noen skrive denne metoden? plizzz
 	public static void removeFarm(int FarmId){
-		
+		try {
+			Statement st = con.createStatement();	
+			st.executeUpdate("DELETE FROM Farm WHERE FarmID = '" + FarmId + "'");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
 		
 	}
 				
