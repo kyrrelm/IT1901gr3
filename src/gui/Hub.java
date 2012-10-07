@@ -53,9 +53,9 @@ public class Hub extends javax.swing.JFrame {
         removeSheepRemove = new javax.swing.JButton();
         removeFarm = new javax.swing.JPanel();
         removeFarmTitleLabel = new javax.swing.JLabel();
-        removeIDName = new javax.swing.JTextField();
-        removeFarmIDLabel = new javax.swing.JLabel();
+        removeFarmNameLabel = new javax.swing.JLabel();
         removeFarmAdd = new javax.swing.JButton();
+        removeFarmComboFarm = new javax.swing.JComboBox();
         topMenu = new javax.swing.JMenuBar();
         topMenuHome = new javax.swing.JMenu();
         topMenuOption = new javax.swing.JMenu();
@@ -263,15 +263,8 @@ public class Hub extends javax.swing.JFrame {
         removeFarmTitleLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         removeFarmTitleLabel.setText("Remove Farm:");
 
-        removeIDName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        removeIDName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeIDNameActionPerformed(evt);
-            }
-        });
-
-        removeFarmIDLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        removeFarmIDLabel.setText("Farm ID:");
+        removeFarmNameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        removeFarmNameLabel.setText("Farm ID:");
 
         removeFarmAdd.setText("Remove Farm");
         removeFarmAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -288,16 +281,16 @@ public class Hub extends javax.swing.JFrame {
                 .addGap(200, 200, 200)
                 .addGroup(removeFarmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, removeFarmLayout.createSequentialGroup()
-                        .addComponent(removeFarmIDLabel)
+                        .addComponent(removeFarmNameLabel)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(removeFarmLayout.createSequentialGroup()
                         .addGroup(removeFarmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(removeFarmTitleLabel)
                             .addGroup(removeFarmLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addGroup(removeFarmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(removeFarmAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(removeIDName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(removeFarmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(removeFarmAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(removeFarmComboFarm, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 340, Short.MAX_VALUE))))
         );
         removeFarmLayout.setVerticalGroup(
@@ -306,9 +299,9 @@ public class Hub extends javax.swing.JFrame {
                 .addGap(80, 80, 80)
                 .addComponent(removeFarmTitleLabel)
                 .addGap(50, 50, 50)
-                .addComponent(removeFarmIDLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(removeIDName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(removeFarmNameLabel)
+                .addGap(14, 14, 14)
+                .addComponent(removeFarmComboFarm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(removeFarmAdd)
                 .addContainerGap(294, Short.MAX_VALUE))
@@ -408,9 +401,7 @@ public class Hub extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void topMenuAddSheepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topMenuAddSheepActionPerformed
-        clearPanels();
         initAddSheep();
-        addSheep.setVisible(true);
     }//GEN-LAST:event_topMenuAddSheepActionPerformed
 
     private void addSheepNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSheepNameActionPerformed
@@ -426,8 +417,7 @@ public class Hub extends javax.swing.JFrame {
     }//GEN-LAST:event_addFarmNameActionPerformed
 
     private void topMenuRemoveSheepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topMenuRemoveSheepActionPerformed
-        clearPanels();
-        removeSheep.setVisible(true);
+        initRemoveSheep();
     }//GEN-LAST:event_topMenuRemoveSheepActionPerformed
 
     private void removeSheepIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSheepIDActionPerformed
@@ -438,22 +428,16 @@ public class Hub extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_addFarmAddActionPerformed
 
-    private void removeIDNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeIDNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_removeIDNameActionPerformed
-
     private void removeFarmAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeFarmAddActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_removeFarmAddActionPerformed
 
     private void topMenuAddFarmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topMenuAddFarmActionPerformed
-        clearPanels();
-        addFarm.setVisible(true);
+        initAddFarm();
     }//GEN-LAST:event_topMenuAddFarmActionPerformed
 
     private void topMenuRemoveFarmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topMenuRemoveFarmActionPerformed
-        clearPanels();
-        removeFarm.setVisible(true);
+        initRemoveFarm();
     }//GEN-LAST:event_topMenuRemoveFarmActionPerformed
 
     private void addSheepBirthYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSheepBirthYearActionPerformed
@@ -478,9 +462,9 @@ public class Hub extends javax.swing.JFrame {
     private javax.swing.JLabel addSheepTitleLabel;
     private javax.swing.JPanel removeFarm;
     private javax.swing.JButton removeFarmAdd;
-    private javax.swing.JLabel removeFarmIDLabel;
+    private javax.swing.JComboBox removeFarmComboFarm;
+    private javax.swing.JLabel removeFarmNameLabel;
     private javax.swing.JLabel removeFarmTitleLabel;
-    private javax.swing.JTextField removeIDName;
     private javax.swing.JPanel removeSheep;
     private javax.swing.JTextField removeSheepID;
     private javax.swing.JLabel removeSheepIDLabel;
@@ -497,9 +481,7 @@ public class Hub extends javax.swing.JFrame {
     private javax.swing.JMenu topMenuSheep;
     // End of variables declaration//GEN-END:variables
     
-	private void initAddSheep(){
-    	addSheepFarm.setModel(new DefaultComboBoxModel(getFarmNames()));
-    }
+    
     //fucka løsning på at JPanels blir init. med visible = true i NetBeans sin initComponents();
     void clearPanels(){
         addSheep.setVisible(false);
@@ -519,5 +501,27 @@ public class Hub extends javax.swing.JFrame {
 			tmp[i] = ServerData.farms.get(i).getName();
 		}
         return tmp;
+    }
+
+    private void initAddSheep(){
+        clearPanels();
+    	addSheepFarm.setModel(new DefaultComboBoxModel(getFarmNames()));
+        addSheep.setVisible(true);
+    }
+    
+    private void initRemoveSheep() {
+        clearPanels();
+        removeSheep.setVisible(true);
+    }
+
+    private void initAddFarm() {
+        clearPanels();
+        addFarm.setVisible(true);
+    }
+
+    private void initRemoveFarm() {
+        clearPanels();
+        removeFarmComboFarm.setModel(new DefaultComboBoxModel(getFarmNames()));
+        removeFarm.setVisible(true);
     }
 }
