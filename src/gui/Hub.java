@@ -58,12 +58,13 @@ public class Hub extends javax.swing.JFrame {
         removeFarmAdd = new javax.swing.JButton();
         topMenu = new javax.swing.JMenuBar();
         topMenuHome = new javax.swing.JMenu();
-        topMenuFarm = new javax.swing.JMenu();
-        topMenuAddFarm = new javax.swing.JMenuItem();
-        topMenuRemoveFarm = new javax.swing.JMenuItem();
+        topMenuOption = new javax.swing.JMenu();
         topMenuSheep = new javax.swing.JMenu();
         topMenuAddSheep = new javax.swing.JMenuItem();
         topMenuRemoveSheep = new javax.swing.JMenuItem();
+        topMenuFarm = new javax.swing.JMenu();
+        topMenuAddFarm = new javax.swing.JMenuItem();
+        topMenuRemoveFarm = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -316,25 +317,7 @@ public class Hub extends javax.swing.JFrame {
         topMenuHome.setText("Home");
         topMenu.add(topMenuHome);
 
-        topMenuFarm.setText("Farm");
-
-        topMenuAddFarm.setText("Add Farm");
-        topMenuAddFarm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                topMenuAddFarmActionPerformed(evt);
-            }
-        });
-        topMenuFarm.add(topMenuAddFarm);
-
-        topMenuRemoveFarm.setText("Remove Farm");
-        topMenuRemoveFarm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                topMenuRemoveFarmActionPerformed(evt);
-            }
-        });
-        topMenuFarm.add(topMenuRemoveFarm);
-
-        topMenu.add(topMenuFarm);
+        topMenuOption.setText("Option");
 
         topMenuSheep.setText("Sheep");
 
@@ -354,7 +337,29 @@ public class Hub extends javax.swing.JFrame {
         });
         topMenuSheep.add(topMenuRemoveSheep);
 
-        topMenu.add(topMenuSheep);
+        topMenuOption.add(topMenuSheep);
+
+        topMenuFarm.setText("Farm");
+
+        topMenuAddFarm.setText("Add Farm");
+        topMenuAddFarm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                topMenuAddFarmActionPerformed(evt);
+            }
+        });
+        topMenuFarm.add(topMenuAddFarm);
+
+        topMenuRemoveFarm.setText("Remove Farm");
+        topMenuRemoveFarm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                topMenuRemoveFarmActionPerformed(evt);
+            }
+        });
+        topMenuFarm.add(topMenuRemoveFarm);
+
+        topMenuOption.add(topMenuFarm);
+
+        topMenu.add(topMenuOption);
 
         setJMenuBar(topMenu);
 
@@ -486,6 +491,7 @@ public class Hub extends javax.swing.JFrame {
     private javax.swing.JMenuItem topMenuAddSheep;
     private javax.swing.JMenu topMenuFarm;
     private javax.swing.JMenu topMenuHome;
+    private javax.swing.JMenu topMenuOption;
     private javax.swing.JMenuItem topMenuRemoveFarm;
     private javax.swing.JMenuItem topMenuRemoveSheep;
     private javax.swing.JMenu topMenuSheep;

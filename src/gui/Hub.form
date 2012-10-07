@@ -9,50 +9,57 @@
             <Property name="text" type="java.lang.String" value="Home"/>
           </Properties>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="topMenuFarm">
+        <Menu class="javax.swing.JMenu" name="topMenuOption">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Farm"/>
+            <Property name="text" type="java.lang.String" value="Option"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="topMenuAddFarm">
+            <Menu class="javax.swing.JMenu" name="topMenuSheep">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Add Farm"/>
+                <Property name="text" type="java.lang.String" value="Sheep"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="topMenuAddFarmActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="topMenuRemoveFarm">
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="topMenuAddSheep">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Add Sheep"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="topMenuAddSheepActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="topMenuRemoveSheep">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Remove Sheep"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="topMenuRemoveSheepActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="topMenuFarm">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Remove Farm"/>
+                <Property name="text" type="java.lang.String" value="Farm"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="topMenuRemoveFarmActionPerformed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="topMenuSheep">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Sheep"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="topMenuAddSheep">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Add Sheep"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="topMenuAddSheepActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="topMenuRemoveSheep">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Remove Sheep"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="topMenuRemoveSheepActionPerformed"/>
-              </Events>
-            </MenuItem>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="topMenuAddFarm">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Add Farm"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="topMenuAddFarmActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="topMenuRemoveFarm">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Remove Farm"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="topMenuRemoveFarmActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
           </SubComponents>
         </Menu>
       </SubComponents>
