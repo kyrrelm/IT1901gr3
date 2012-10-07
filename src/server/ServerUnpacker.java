@@ -83,6 +83,12 @@ public class ServerUnpacker {
 			DBAccess.removeFarm(farm.getFarmId());
 			return new CommMessage<Farm>(CommEnum.SUCCESS, null);
 		}
+		if (msg.getMessageName() == CommEnum.ADDFARM)
+		{
+			Farm farm = (Farm) params.get(0);
+			DBAccess.addFarm(farm.getName(), farm.getOwnerId());
+			return new CommMessage<Farm>(CommEnum.SUCCESS, null);
+		}
 		return null;
 		
 	}

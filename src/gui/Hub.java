@@ -6,6 +6,7 @@ package gui;
 
 import java.util.ArrayList;
 
+import client.DbDownload;
 import client.ServerData;
 import helpclasses.CommEnum;
 import helpclasses.CommMessage;
@@ -167,11 +168,6 @@ public class Hub extends javax.swing.JFrame {
         addFarmTitleLabel.setText("Add Farm:");
 
         addFarmName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        addFarmName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addFarmNameActionPerformed(evt);
-            }
-        });
 
         addFarmNameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         addFarmNameLabel.setText("Farm Name:");
@@ -418,10 +414,6 @@ public class Hub extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_addSheepFarmActionPerformed
 
-    private void addFarmNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFarmNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addFarmNameActionPerformed
-
     private void topMenuRemoveSheepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topMenuRemoveSheepActionPerformed
         initRemoveSheep();
     }//GEN-LAST:event_topMenuRemoveSheepActionPerformed
@@ -431,7 +423,12 @@ public class Hub extends javax.swing.JFrame {
     }//GEN-LAST:event_removeSheepIDActionPerformed
 
     private void addFarmAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFarmAddActionPerformed
-        // TODO add your handling code here:
+       String farmName = addFarmName.getText();
+       ArrayList<Farm> metadata = new ArrayList<Farm>();
+       metadata.add(new Farm(-1, farmName, ServerData.owner.getOwnerId()));
+       GUI.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.ADDFARM, metadata));
+       DbDownload.loadFarms();
+       
     }//GEN-LAST:event_addFarmAddActionPerformed
 
     private void removeFarmAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeFarmAddActionPerformed

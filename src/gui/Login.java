@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import client.DbDownload;
 import client.ServerData;
 
 /**
@@ -121,7 +122,7 @@ public class Login extends javax.swing.JFrame {
         String password = this.password.getText();
        if(isUsernameAndPassword(username, password)){
             this.setVisible(false);
-            loadDbInfo();
+            DbDownload.loadFarms();
             GUI.hub.setVisible(true);
             System.out.println(ServerData.owner);
             System.out.println(ServerData.farms.get(0).getName());
@@ -165,11 +166,5 @@ public class Login extends javax.swing.JFrame {
         al.add(password);
         GUI.sockCli.sendMessage(new CommMessage<String>(CommEnum.LOGIN, al));
         return client.ServerData.isLoggedIn;
-    }
-    //laster ned nødvendig data til ServerData
-    private void loadDbInfo(){
-    	ArrayList<Owner> metadata = new ArrayList<Owner>();
-    	metadata.add(ServerData.owner); 
-    	GUI.sockCli.sendMessage(new CommMessage<Owner>(CommEnum.GETFARMS, metadata));
     }
 }
