@@ -12,6 +12,8 @@ import helpclasses.CommEnum;
 import helpclasses.CommMessage;
 import helpclasses.Farm;
 import helpclasses.Owner;
+import helpclasses.Sheep;
+
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -112,6 +114,11 @@ public class Hub extends javax.swing.JFrame {
         addSheepNameOptionalLabel.setText("(Optional)");
 
         addSheepAdd.setText("Add Sheep");
+        addSheepAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addSheepAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout addSheepLayout = new javax.swing.GroupLayout(addSheep);
         addSheep.setLayout(addSheepLayout);
@@ -457,6 +464,16 @@ public class Hub extends javax.swing.JFrame {
     private void addSheepBirthYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSheepBirthYearActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addSheepBirthYearActionPerformed
+
+    private void addSheepAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSheepAddActionPerformed
+        String name = addSheepName.getText();
+        int birthYear = Integer.parseInt((String) addSheepBirthYear.getSelectedItem());
+        String farmName = (String) addSheepFarm.getSelectedItem();
+        addSheepName.setText(null);
+        ArrayList<Sheep> sheep = new ArrayList<Sheep>();
+        sheep.add(new Sheep(-1, farmName, birthYear, ServerData.getFarmByName(farmName).getFarmId(), ServerData.owner.getOwnerId()));
+        GUI.sockCli.sendMessage(new CommMessage<Sheep>(CommEnum.ADDSHEEP, sheep));
+    }//GEN-LAST:event_addSheepAddActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addFarm;

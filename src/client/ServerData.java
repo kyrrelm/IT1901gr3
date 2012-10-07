@@ -27,4 +27,12 @@ public class ServerData {
 		}
 		return null;
 	}
+	public static Farm getFarmByName(String name){
+		for (Farm farm : farms) {
+			if(farm.getName().equals(name)){
+				return farm;
+			}
+		}
+		return null;
+	}
 }
