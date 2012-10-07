@@ -14,6 +14,7 @@ import helpclasses.Farm;
 import helpclasses.Owner;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -424,10 +425,15 @@ public class Hub extends javax.swing.JFrame {
 
     private void addFarmAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFarmAddActionPerformed
        String farmName = addFarmName.getText();
-       ArrayList<Farm> metadata = new ArrayList<Farm>();
-       metadata.add(new Farm(-1, farmName, ServerData.owner.getOwnerId()));
-       GUI.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.ADDFARM, metadata));
-       DbDownload.loadFarms();
+       if (farmName.length() >= 3) {
+    	   addFarmName.setText(null);
+    	   ArrayList<Farm> metadata = new ArrayList<Farm>();
+    	   metadata.add(new Farm(-1, farmName, ServerData.owner.getOwnerId()));
+    	   GUI.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.ADDFARM,metadata));
+    	   DbDownload.loadFarms();
+       }else{
+    	   JOptionPane.showMessageDialog(this, "Farm name must be at least 3 characters", "Invalid name", JOptionPane.ERROR_MESSAGE);
+       }
        
     }//GEN-LAST:event_addFarmAddActionPerformed
 
