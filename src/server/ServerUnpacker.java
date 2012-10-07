@@ -61,6 +61,12 @@ public class ServerUnpacker {
 			// return generic success message (the client waits for an answer, one must be sent)
 			return new CommMessage<String>(CommEnum.SUCCESS, null);
 		}
+		if (msg.getMessageName() == CommEnum.REMOVESHEEP)
+		{
+			Sheep sheep = (Sheep) params.get(0);
+			DBAccess.removeSheep(sheep.getSheepId());
+			return new CommMessage<Sheep>(CommEnum.SUCCESS, null);
+		}
 		
 		/***
 		 * @author HalvorGB

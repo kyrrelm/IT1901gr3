@@ -550,4 +550,18 @@ public class DBAccess {
 		System.out.println("All records deleted from table Sheep.");
 	}
 
+	public static void removeSheep(int sheepId) {
+		try {
+			Statement statement = con.createStatement();
+			
+			statement.executeUpdate("DELETE FROM Sheep WHERE SheepID = '" + sheepId + "'");
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+			
+			return;
+		}
+		
+	}
+
 }

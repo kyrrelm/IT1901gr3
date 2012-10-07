@@ -235,6 +235,11 @@ public class Hub extends javax.swing.JFrame {
         removeSheepIDLabel.setText("Sheep ID:");
 
         removeSheepRemove.setText("Remove Sheep");
+        removeSheepRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeSheepRemoveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout removeSheepLayout = new javax.swing.GroupLayout(removeSheep);
         removeSheep.setLayout(removeSheepLayout);
@@ -471,9 +476,18 @@ public class Hub extends javax.swing.JFrame {
         String farmName = (String) addSheepFarm.getSelectedItem();
         addSheepName.setText(null);
         ArrayList<Sheep> sheep = new ArrayList<Sheep>();
-        sheep.add(new Sheep(-1, farmName, birthYear, ServerData.getFarmByName(farmName).getFarmId(), ServerData.owner.getOwnerId()));
+        sheep.add(new Sheep(-1, name, birthYear, ServerData.getFarmByName(farmName).getFarmId(), ServerData.owner.getOwnerId()));
         GUI.sockCli.sendMessage(new CommMessage<Sheep>(CommEnum.ADDSHEEP, sheep));
     }//GEN-LAST:event_addSheepAddActionPerformed
+
+    private void removeSheepRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSheepRemoveActionPerformed
+       int id = Integer.parseInt(removeSheepID.getText());
+       removeSheepID.setText(null);
+       ArrayList<Sheep> sheep = new ArrayList<Sheep>();
+       sheep.add(new Sheep(id, "", -1, -1, -1));
+       GUI.sockCli.sendMessage(new CommMessage<Sheep>(CommEnum.REMOVESHEEP, sheep));
+       
+    }//GEN-LAST:event_removeSheepRemoveActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addFarm;
