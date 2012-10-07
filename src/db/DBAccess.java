@@ -55,6 +55,12 @@ public class DBAccess {
 		}
 	}
 
+	//kan noen skrive denne metoden? plizzz
+	public static void removeFarm(int FarmId){
+		
+		
+	}
+				
 	public static void addOwner(String username, String pw, String firstName,
 			String lastName, String tlf, String email, String secondaryTlf,
 			String secondaryEmail) {

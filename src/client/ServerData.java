@@ -5,6 +5,7 @@ import helpclasses.Message;
 import helpclasses.Owner;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
@@ -15,4 +16,12 @@ public class ServerData {
 	public static Owner owner;
 	public static ArrayList<Message> messages = new ArrayList<Message>();
 	public static ArrayList<Farm> farms = new ArrayList<Farm>();
+	
+	public static Farm getFarmByName(String name){
+		for (Farm farm : farms) {
+			if(farm.getName().equals(name))
+				return farm;
+		}
+		return null;
+	}
 }

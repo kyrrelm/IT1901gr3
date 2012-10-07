@@ -4,7 +4,13 @@
  */
 package gui;
 
+import java.util.ArrayList;
+
 import client.ServerData;
+import helpclasses.CommEnum;
+import helpclasses.CommMessage;
+import helpclasses.Farm;
+import helpclasses.Owner;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 
@@ -429,7 +435,11 @@ public class Hub extends javax.swing.JFrame {
     }//GEN-LAST:event_addFarmAddActionPerformed
 
     private void removeFarmAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeFarmAddActionPerformed
-        // TODO add your handling code here:
+        String farmToRemove = (String) this.removeFarmComboFarm.getSelectedItem();
+        System.out.print(farmToRemove);
+        ArrayList<Farm> metadata = new ArrayList<Farm>();
+        metadata.add(ServerData.getFarmByName(farmToRemove));
+        GUI.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.REMOVEFARM, metadata));
     }//GEN-LAST:event_removeFarmAddActionPerformed
 
     private void topMenuAddFarmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topMenuAddFarmActionPerformed
@@ -491,11 +501,8 @@ public class Hub extends javax.swing.JFrame {
     }
     
     private String[] getFarmNames(){
-    	System.out.println(ServerData.farms.isEmpty());
-    	System.out.println("Derp!!!!!!!!!!");
     	if(ServerData.farms.isEmpty())
     		return new String[] {"You have no farm's"};
-    	
         String[] tmp = new String[ServerData.farms.size()];
         for (int i = 0; i < tmp.length; i++) {
 			tmp[i] = ServerData.farms.get(i).getName();
