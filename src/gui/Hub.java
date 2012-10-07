@@ -509,7 +509,7 @@ public class Hub extends javax.swing.JFrame {
     		return new String[] {"You have no farm's"};
     	
         String[] tmp = new String[ServerData.farms.size()];
-        for (int i = 0; i < tmp.length-1; i++) {
+        for (int i = 0; i < tmp.length; i++) {
 			tmp[i] = ServerData.farms.get(i).getName();
 		}
         return tmp;
