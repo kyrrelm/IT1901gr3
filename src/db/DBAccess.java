@@ -359,6 +359,43 @@ public class DBAccess {
 	}
 	
 	
+	/**
+	 * Function updates the owners private telephonenumber in the database.
+	 * 
+	 * @param username - Username of the owner
+	 * @param password - Password for the owner
+	 * @param telephone - The new telephonenumber
+	 * @return Updated Owner-objekt if update was successful, null otherwise
+	 */
+	public static Owner updateOwnerTelephone(String username,
+			String password, String telephone) {
+		try {
+			Statement statement = con.createStatement();
+			//Owner owner = null;
+			
+			
+			//If telephone contains an empty string
+			if(telephone == "") {
+				return null;
+			}
+			
+			
+			//We update the telephonenumber
+			ResultSet resultSet = statement.executeQuery(
+					"UPDATE Owner SET PrimaryTLF='" +
+					telephone + "' WHERE Username = '" + username +
+					"' AND Password='" + password + "'");
+			
+			//We want to return the owner
+			return getOwner(username, password);
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+			
+			return null;
+		}
+	}
+	
 	public static Sheep getLastAddedSheep() {
 		try {
 			Statement statement = con.createStatement();
