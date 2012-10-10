@@ -78,6 +78,8 @@ public class Hub extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        addSheep.setPreferredSize(new java.awt.Dimension(800, 600));
+
         addSheepTitleLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         addSheepTitleLabel.setText("Add Sheep:");
 
@@ -169,8 +171,10 @@ public class Hub extends javax.swing.JFrame {
                 .addComponent(addSheepFarm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(addSheepAdd)
-                .addContainerGap(209, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
+
+        addFarm.setPreferredSize(new java.awt.Dimension(800, 600));
 
         addFarmTitleLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         addFarmTitleLabel.setText("Add Farm:");
@@ -218,8 +222,10 @@ public class Hub extends javax.swing.JFrame {
                 .addComponent(addFarmName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(addFarmAdd)
-                .addContainerGap(314, Short.MAX_VALUE))
+                .addContainerGap(311, Short.MAX_VALUE))
         );
+
+        removeSheep.setPreferredSize(new java.awt.Dimension(800, 600));
 
         removeSheepTitleLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         removeSheepTitleLabel.setText("Remove Sheep:");
@@ -272,8 +278,10 @@ public class Hub extends javax.swing.JFrame {
                 .addComponent(removeSheepID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(removeSheepRemove)
-                .addContainerGap(294, Short.MAX_VALUE))
+                .addContainerGap(291, Short.MAX_VALUE))
         );
+
+        removeFarm.setPreferredSize(new java.awt.Dimension(800, 600));
 
         removeFarmTitleLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         removeFarmTitleLabel.setText("Remove Farm:");
@@ -319,7 +327,7 @@ public class Hub extends javax.swing.JFrame {
                 .addComponent(removeFarmComboFarm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(removeFarmAdd)
-                .addContainerGap(294, Short.MAX_VALUE))
+                .addContainerGap(291, Short.MAX_VALUE))
         );
 
         topMenuHome.setText("Home");
@@ -379,36 +387,36 @@ public class Hub extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(15, 15, 15)
-                    .addComponent(addFarm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addFarm, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
                     .addGap(15, 15, 15)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(25, 25, 25)
-                    .addComponent(removeSheep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(removeSheep, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
                     .addGap(25, 25, 25)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(25, 25, 25)
-                    .addComponent(removeFarm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(removeFarm, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
                     .addGap(25, 25, 25)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(addSheep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(addSheep, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(addFarm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addFarm, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
                     .addContainerGap()))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(22, 22, 22)
-                    .addComponent(removeSheep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(removeSheep, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
                     .addGap(22, 22, 22)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(22, 22, 22)
-                    .addComponent(removeFarm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(removeFarm, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
                     .addGap(22, 22, 22)))
         );
 
