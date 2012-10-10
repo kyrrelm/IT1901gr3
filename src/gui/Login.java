@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import client.Client;
 import client.DbDownload;
 import client.ServerData;
 
@@ -123,8 +124,8 @@ public class Login extends javax.swing.JFrame {
        if(isUsernameAndPassword(username, password)){
             this.setVisible(false);
             DbDownload.loadFarms();
-            GUI.hub.setVisible(true);
-            GUI.hub.initComp();
+            Client.hub.setVisible(true);
+            Client.hub.initComp();
             System.out.println(ServerData.owner);
             System.out.println(ServerData.farms.get(0).getName());
             System.out.println(ServerData.farms.get(1).getName());
@@ -165,7 +166,7 @@ public class Login extends javax.swing.JFrame {
     	ArrayList<String> al = new ArrayList<String>();
     	al.add(username);
         al.add(password);
-        GUI.sockCli.sendMessage(new CommMessage<String>(CommEnum.LOGIN, al));
+        Client.sockCli.sendMessage(new CommMessage<String>(CommEnum.LOGIN, al));
         return client.ServerData.isLoggedIn;
     }
 }

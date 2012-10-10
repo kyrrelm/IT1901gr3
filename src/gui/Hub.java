@@ -6,6 +6,7 @@ package gui;
 
 import java.util.ArrayList;
 
+import client.Client;
 import client.DbDownload;
 import client.ServerData;
 import helpclasses.CommEnum;
@@ -393,7 +394,7 @@ public class Hub extends javax.swing.JFrame {
     	   addFarmName.setText(null);
     	   ArrayList<Farm> metadata = new ArrayList<Farm>();
     	   metadata.add(new Farm(-1, farmName, ServerData.owner.getOwnerId()));
-    	   GUI.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.ADDFARM,metadata));
+    	   Client.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.ADDFARM,metadata));
     	   DbDownload.loadFarms();
            initRemoveFarm();
        }else{
@@ -407,7 +408,7 @@ public class Hub extends javax.swing.JFrame {
         System.out.print(farmToRemove);
         ArrayList<Farm> metadata = new ArrayList<Farm>();
         metadata.add(ServerData.getFarmByNameAndRemove(farmToRemove));
-        GUI.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.REMOVEFARM, metadata));
+        Client.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.REMOVEFARM, metadata));
         initRemoveFarm();
     }//GEN-LAST:event_removeFarmAddActionPerformed
 
@@ -418,7 +419,7 @@ public class Hub extends javax.swing.JFrame {
         addSheepName.setText(null);
         ArrayList<Sheep> sheep = new ArrayList<Sheep>();
         sheep.add(new Sheep(-1, name, birthYear, ServerData.getFarmByName(farmName).getFarmId(), ServerData.owner.getOwnerId()));
-        GUI.sockCli.sendMessage(new CommMessage<Sheep>(CommEnum.ADDSHEEP, sheep));
+        Client.sockCli.sendMessage(new CommMessage<Sheep>(CommEnum.ADDSHEEP, sheep));
     }//GEN-LAST:event_addSheepAddActionPerformed
 
     private void removeSheepRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSheepRemoveActionPerformed
@@ -426,7 +427,7 @@ public class Hub extends javax.swing.JFrame {
        removeSheepID.setText(null);
        ArrayList<Sheep> sheep = new ArrayList<Sheep>();
        sheep.add(new Sheep(id, "", -1, -1, -1));
-       GUI.sockCli.sendMessage(new CommMessage<Sheep>(CommEnum.REMOVESHEEP, sheep));
+       Client.sockCli.sendMessage(new CommMessage<Sheep>(CommEnum.REMOVESHEEP, sheep));
        
     }//GEN-LAST:event_removeSheepRemoveActionPerformed
 
