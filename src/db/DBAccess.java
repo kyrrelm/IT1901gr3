@@ -358,9 +358,82 @@ public class DBAccess {
 		}
 	}
 	
+	/**
+	 * Function updates all contactinformation for the owner
+	 * 
+	 * @param username - Username of the owner
+	 * @param password - Password for the owner
+	 * @param telephone - The owner's new telephonenumber
+	 * @param email - The owner's new emailadress
+	 * @param friendTelephone - The new telephonenumber for the owner's friend
+	 * @param friendEmail - The new emailadress for the owner's friend
+	 * @return - Updated Owner-object if update was successful, null otherwise
+	 */
+	public static Owner updateOwnerContactInformation(String username,
+			String password, String telephone, String email,
+			String friendTelephone, String friendEmail) {
+		try {
+			Statement statement = con.createStatement();
+			
+			
+			//We expect all fields to be non-empyy
+			if(telephone == "" || email == "" || friendTelephone == "" ||
+					friendEmail == "") {
+				return null;
+			}
+			
+			ResultSet resultSet = statement.executeQuery(
+					"UPDATE Owner SET PrimaryTLF='" + telephone + 
+					"' AND PrimaryMail='" + email + "' AND SecondaryTLF='" +
+					friendTelephone + "' AND SecondaryMail='" + friendEmail +
+					"'"	);
+			
+			return getOwner(username, password);
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+			
+			return null;
+		}
+	}
 	
 	/**
-	 * Function updates the owners private telephonenumber in the database.
+	 * Function updates the owner's emailadress in the database
+	 * @param username - Username of the owner
+	 * @param password - Password for the owner
+	 * @param email - The new emailadress
+	 * @return Updated Owner-object if update was successful, null otherwise
+	 */
+	public static Owner updateOwnerEmail(String username, String password,
+			String email) {
+		try {
+			Statement statement = con.createStatement();
+			
+			
+			//If email is an empty string
+			if(email == "") {
+				return null;
+			}
+			
+			
+			//We update the emailadress
+			ResultSet resultSet = statement.executeQuery(
+					"UPDATE Owner SET PrimaryMail ='" + email + 
+					"' WHERE Username='" + username + "' AND Password='" +
+					password + "'");
+			
+			//We now want to return the owner
+			return getOwner(username, password);
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+			
+			return null;
+		}
+	}
+	
+	/**
+	 * Function updates the owner's private telephonenumber in the database.
 	 * 
 	 * @param username - Username of the owner
 	 * @param password - Password for the owner
@@ -395,6 +468,84 @@ public class DBAccess {
 			return null;
 		}
 	}
+	
+	/**
+	 * Function updates the emailadress in the database of the owner's
+	 *  friend.
+	 * 
+	 * @param username - Username of the owner
+	 * @param password - Password for the owner
+	 * @param friendEmail - The new emailadress for the friend
+	 * @return Updated Owner-object if update was successful, null otherwise
+	 */
+	public static Owner updateOwnerFriendEmail(String username,
+			String password, String friendEmail) {
+		try {
+			Statement statement = con.createStatement();
+			//Owner owner = null;
+			
+			
+			//If telephone contains an empty string
+			if(friendEmail == "") {
+				return null;
+			}
+			
+			
+			//We update the telephonenumber
+			ResultSet resultSet = statement.executeQuery(
+					"UPDATE Owner SET SecondaryMail='" + friendEmail +
+					"' WHERE Username = '" + username + "' AND Password='" +
+					password + "'");
+			
+			//We want to return the owner
+			return getOwner(username, password);
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+			
+			return null;
+		}
+	}
+	
+	/**
+	 * Function updates the telephonenumber in the database of the owner's
+	 *  friend.
+	 * 
+	 * @param username - Username of the owner
+	 * @param password - Password for the owner
+	 * @param friendTelephone - The new telephonenumber for the friend
+	 * @return Updated Owner-objekt if update was successful, null otherwise
+	 */
+	public static Owner updateOwnerFriendTelephone(String username,
+			String password, String friendTelephone) {
+		try {
+			Statement statement = con.createStatement();
+			//Owner owner = null;
+			
+			
+			//If telephone contains an empty string
+			if(friendTelephone == "") {
+				return null;
+			}
+			
+			
+			//We update the telephonenumber
+			ResultSet resultSet = statement.executeQuery(
+					"UPDATE Owner SET SecondaryTLF='" + friendTelephone +
+					"' WHERE Username = '" + username + 
+					"' AND Password='" + password + "'");
+			
+			//We want to return the owner
+			return getOwner(username, password);
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+			
+			return null;
+		}
+	}
+	
+	
 	
 	public static Sheep getLastAddedSheep() {
 		try {
