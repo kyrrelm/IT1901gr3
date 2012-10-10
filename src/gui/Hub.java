@@ -12,6 +12,7 @@ import client.ServerData;
 import helpclasses.CommEnum;
 import helpclasses.CommMessage;
 import helpclasses.Farm;
+import helpclasses.Message;
 import helpclasses.Owner;
 import helpclasses.Sheep;
 
@@ -45,6 +46,8 @@ public class Hub extends javax.swing.JFrame {
         tabMain = new javax.swing.JTabbedPane();
         tabHome = new javax.swing.JTabbedPane();
         messages = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        messageList = new javax.swing.JList();
         map = new javax.swing.JPanel();
         tabOptions = new javax.swing.JTabbedPane();
         addSheep = new javax.swing.JPanel();
@@ -74,20 +77,32 @@ public class Hub extends javax.swing.JFrame {
         removeFarmComboFarm = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         tabHome.setPreferredSize(new java.awt.Dimension(800, 600));
+
+        messageList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(messageList);
 
         javax.swing.GroupLayout messagesLayout = new javax.swing.GroupLayout(messages);
         messages.setLayout(messagesLayout);
         messagesLayout.setHorizontalGroup(
             messagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 790, Short.MAX_VALUE)
+            .addGroup(messagesLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(173, Short.MAX_VALUE))
         );
         messagesLayout.setVerticalGroup(
             messagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 544, Short.MAX_VALUE)
+            .addGroup(messagesLayout.createSequentialGroup()
+                .addContainerGap(75, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         tabHome.addTab("Messages", messages);
@@ -100,7 +115,7 @@ public class Hub extends javax.swing.JFrame {
         );
         mapLayout.setVerticalGroup(
             mapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 544, Short.MAX_VALUE)
+            .addGap(0, 587, Short.MAX_VALUE)
         );
 
         tabHome.addTab("Map", map);
@@ -199,7 +214,7 @@ public class Hub extends javax.swing.JFrame {
                 .addComponent(addSheepFarm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(addSheepAdd)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(214, Short.MAX_VALUE))
         );
 
         tabOptions.addTab("Add Sheep", addSheep);
@@ -255,7 +270,7 @@ public class Hub extends javax.swing.JFrame {
                 .addComponent(removeSheepID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(removeSheepRemove)
-                .addContainerGap(300, Short.MAX_VALUE))
+                .addContainerGap(343, Short.MAX_VALUE))
         );
 
         tabOptions.addTab("Remove Sheep", removeSheep);
@@ -282,18 +297,14 @@ public class Hub extends javax.swing.JFrame {
             .addGroup(addFarmLayout.createSequentialGroup()
                 .addGap(200, 200, 200)
                 .addGroup(addFarmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addFarmLayout.createSequentialGroup()
-                        .addComponent(addFarmNameLabel)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(addFarmNameLabel)
+                    .addComponent(addFarmTitleLabel)
                     .addGroup(addFarmLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addGroup(addFarmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addFarmTitleLabel)
-                            .addGroup(addFarmLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(addFarmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(addFarmAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(addFarmName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(390, 390, 390))))
+                            .addComponent(addFarmAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addFarmName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(380, Short.MAX_VALUE))
         );
         addFarmLayout.setVerticalGroup(
             addFarmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,7 +317,7 @@ public class Hub extends javax.swing.JFrame {
                 .addComponent(addFarmName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(addFarmAdd)
-                .addContainerGap(298, Short.MAX_VALUE))
+                .addContainerGap(341, Short.MAX_VALUE))
         );
 
         tabOptions.addTab("Add Farm", addFarm);
@@ -355,7 +366,7 @@ public class Hub extends javax.swing.JFrame {
                 .addComponent(removeFarmComboFarm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(removeFarmAdd)
-                .addContainerGap(300, Short.MAX_VALUE))
+                .addContainerGap(343, Short.MAX_VALUE))
         );
 
         tabOptions.addTab("Remove Farm", removeFarm);
@@ -370,7 +381,7 @@ public class Hub extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabMain, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addComponent(tabMain)
         );
 
         pack();
@@ -451,7 +462,9 @@ public class Hub extends javax.swing.JFrame {
     private javax.swing.JLabel addSheepNameLabel;
     private javax.swing.JLabel addSheepNameOptionalLabel;
     private javax.swing.JLabel addSheepTitleLabel;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel map;
+    private javax.swing.JList messageList;
     private javax.swing.JPanel messages;
     private javax.swing.JPanel removeFarm;
     private javax.swing.JButton removeFarmAdd;
@@ -471,6 +484,7 @@ public class Hub extends javax.swing.JFrame {
     public void initComp(){
         initAddSheep();
         initRemoveFarm();
+        refreshMessages();
     }
     private String[] getFarmNames(){
     	if(ServerData.farms.isEmpty())
@@ -487,5 +501,25 @@ public class Hub extends javax.swing.JFrame {
     }
     private void initRemoveFarm() {
         removeFarmComboFarm.setModel(new DefaultComboBoxModel(getFarmNames()));
+    }
+     private void refreshMessages()
+    {
+        // send request
+        
+        ArrayList<Owner> ownerList = new ArrayList<Owner>();
+        ownerList.add(new Owner(149, "Ferrari3049", "Sheep", "Kari Musum", "Krokstad", 30499581, "karimusumkorkstad@ntnu.no", 79686355, "martenordfjord@ntnu.no"));
+        Client.sockCli.sendMessage(new CommMessage<Owner>(CommEnum.GETMESSAGES, ownerList));
+        
+        // les svar fra ServerData.java
+        String s = "";
+        for(Message m: ServerData.messages)
+        {            
+            s += m.toString() + "\n";
+            System.out.println("h");
+        }
+        //messageList.setText(s);
+        
+        messageList.setListData(ServerData.messages.toArray());
+        messageList.setVisible(true);
     }
 }
