@@ -19,6 +19,7 @@ import helpclasses.Sheep;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.event.ChangeEvent;
 
 /**
  *
@@ -80,6 +81,11 @@ public class Hub extends javax.swing.JFrame {
         setResizable(false);
 
         tabHome.setPreferredSize(new java.awt.Dimension(800, 600));
+        tabHome.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tabHomeStateChanged(evt);
+            }
+        });
 
         messageList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -121,6 +127,12 @@ public class Hub extends javax.swing.JFrame {
         tabHome.addTab("Map", map);
 
         tabMain.addTab("Home", tabHome);
+
+        tabOptions.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tabOptionsStateChanged(evt);
+            }
+        });
 
         addSheep.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -407,7 +419,6 @@ public class Hub extends javax.swing.JFrame {
     	   metadata.add(new Farm(-1, farmName, ServerData.owner.getOwnerId()));
     	   Client.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.ADDFARM,metadata));
     	   DbDownload.loadFarms();
-           initRemoveFarm();
        }else{
     	   JOptionPane.showMessageDialog(this, "Farm name must be at least 3 characters", "Invalid name", JOptionPane.ERROR_MESSAGE);
        }
@@ -443,8 +454,21 @@ public class Hub extends javax.swing.JFrame {
     }//GEN-LAST:event_removeSheepRemoveActionPerformed
 
     private void addSheepMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSheepMousePressed
-        System.out.println("hurra");
+        //System.out.println("hurra");
     }//GEN-LAST:event_addSheepMousePressed
+
+    private void tabHomeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabHomeStateChanged
+        // TODO add your handling code here:
+        refreshMessages();
+    }//GEN-LAST:event_tabHomeStateChanged
+
+    private void tabOptionsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabOptionsStateChanged
+        // TODO add your handling code here:
+        initAddSheep();
+        initRemoveFarm();
+    }//GEN-LAST:event_tabOptionsStateChanged
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addFarm;
@@ -481,6 +505,7 @@ public class Hub extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabOptions;
     // End of variables declaration//GEN-END:variables
     
+
     public void initComp(){
         initAddSheep();
         initRemoveFarm();
@@ -506,20 +531,12 @@ public class Hub extends javax.swing.JFrame {
     {
         // send request
         
-        ArrayList<Owner> ownerList = new ArrayList<Owner>();
-        ownerList.add(new Owner(149, "Ferrari3049", "Sheep", "Kari Musum", "Krokstad", 30499581, "karimusumkorkstad@ntnu.no", 79686355, "martenordfjord@ntnu.no"));
-        Client.sockCli.sendMessage(new CommMessage<Owner>(CommEnum.GETMESSAGES, ownerList));
+        if (ServerData.isLoggedIn)
+        {
+            Client.sockCli.sendMessage(new CommMessage<String>(CommEnum.GETMESSAGES, null));
         
-        // les svar fra ServerData.java
-        String s = "";
-        for(Message m: ServerData.messages)
-        {            
-            s += m.toString() + "\n";
-            System.out.println("h");
+            messageList.setListData(ServerData.messages.toArray());
+            messageList.setVisible(true);
         }
-        //messageList.setText(s);
-        
-        messageList.setListData(ServerData.messages.toArray());
-        messageList.setVisible(true);
     }
 }

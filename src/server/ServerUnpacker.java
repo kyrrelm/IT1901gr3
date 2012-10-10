@@ -30,10 +30,12 @@ public class ServerUnpacker {
 			
 			Owner own = DBAccess.getOwner(usr, pwd);
 			
-			if (own != null) // inloggingen fungerte
+			if (!(own != null && (Server.loggedInClients.contains(own)))) // inloggingen fungerte
 			{
-				//Hva gjør denne? Hilsen Kyrre :)
+				//Hva gjï¿½r denne? Hilsen Kyrre :)
 				st.setLoggedIn(true);
+				Server.loggedInClients.add(own);
+				st.setOwner(own);
 				
 				ArrayList<Owner> tempArr = new ArrayList<Owner>();
 				tempArr.add(own);
@@ -44,7 +46,7 @@ public class ServerUnpacker {
 			
 		}
 		
-		// resten av metodene krever at brukeren er logget inn i gitt tråd.
+		// resten av metodene krever at brukeren er logget inn i gitt trï¿½d.
 		if (!st.getLoggedIn())
 			return new CommMessage<String>(CommEnum.NOTLOGGEDIN, null);
 		
@@ -74,13 +76,15 @@ public class ServerUnpacker {
 		 */
 		if (msg.getMessageName() == CommEnum.GETMESSAGES)
 		{
-			ArrayList<Message> Msgs = DBAccess.getMessagesByOwner(((Owner) params.get(0)).getOwnerId());
+			ArrayList<Message> Msgs = DBAccess.getMessagesByOwner(st.getOwner().getOwnerId());
+                        System.out.println(st.getOwner().getOwnerId());
+                        System.out.println(Msgs.size());
 			return new CommMessage<Message>(CommEnum.MESSAGESREPLY, Msgs);
 		}
 		
 		if (msg.getMessageName() == CommEnum.GETFARMS)
 		{
-			ArrayList<Farm> Msgs = DBAccess.getFarmsByOwner(((Owner) params.get(0)).getOwnerId());
+			ArrayList<Farm> Msgs = DBAccess.getFarmsByOwner(st.getOwner().getOwnerId());
 			return new CommMessage<Farm>(CommEnum.FARMSREPLY, Msgs);
 		}
 		if (msg.getMessageName() == CommEnum.REMOVEFARM)
@@ -93,7 +97,9 @@ public class ServerUnpacker {
 		{
 			Farm farm = (Farm) params.get(0);
 			DBAccess.addFarm(farm.getName(), farm.getOwnerId());
-			return new CommMessage<Farm>(CommEnum.SUCCESS, null);
+			
+			ArrayList<Farm> Msgs = DBAccess.getFarmsByOwner(st.getOwner().getOwnerId());
+			return new CommMessage<Farm>(CommEnum.FARMSREPLY, Msgs);
 		}
 		return null;
 		

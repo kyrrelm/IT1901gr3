@@ -1,6 +1,7 @@
 package server;
 
 import helpclasses.CommMessage;
+import helpclasses.Owner;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -17,6 +18,7 @@ public class ServerThread extends Thread
 	private int number;
 	private boolean stop = false;
 	private boolean loggedIn = false;
+	private Owner owner = null;
 	
 	public ServerThread(Socket socket, int threadNumber)  
 	{
@@ -126,6 +128,15 @@ public class ServerThread extends Thread
 	public boolean getLoggedIn()
 	{
 		return this.loggedIn;
+	}
+	
+	public void setOwner(Owner o)
+	{
+		owner = o;
+	}
+	public Owner getOwner()
+	{
+		return owner;
 	}
 
 }

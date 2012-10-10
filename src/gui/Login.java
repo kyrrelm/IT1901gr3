@@ -126,10 +126,13 @@ public class Login extends javax.swing.JFrame {
             DbDownload.loadFarms();
             Client.hub.setVisible(true);
             Client.hub.initComp();
+
+            /*
             System.out.println(ServerData.owner);
             System.out.println(ServerData.farms.get(0).getName());
             System.out.println(ServerData.farms.get(1).getName());
             System.out.println(ServerData.farms.get(2).getName());
+            */
        }else
             JOptionPane.showMessageDialog(this, "Wrong Username or Password", "Error", JOptionPane.ERROR_MESSAGE);
         
