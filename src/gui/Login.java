@@ -124,6 +124,7 @@ public class Login extends javax.swing.JFrame {
             this.setVisible(false);
             DbDownload.loadFarms();
             GUI.hub.setVisible(true);
+            GUI.hub.initComp();
             System.out.println(ServerData.owner);
             System.out.println(ServerData.farms.get(0).getName());
             System.out.println(ServerData.farms.get(1).getName());

@@ -26,7 +26,6 @@ public class GUI {
 			@Override
 			public void run() {
 				login.setVisible(true);
-                                hub.clearPanels();
 				
 			}
 		});
