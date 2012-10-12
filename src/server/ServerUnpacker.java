@@ -76,9 +76,9 @@ public class ServerUnpacker {
 		 */
 		if (msg.getMessageName() == CommEnum.GETMESSAGES)
 		{
-			ArrayList<Message> Msgs = DBAccess.getMessagesByOwner(st.getOwner().getOwnerId());
-                        System.out.println(st.getOwner().getOwnerId());
-                        System.out.println(Msgs.size());
+			ArrayList<Message> Msgs = DBAccess.getLastFiveMessagesByOwner(st.getOwner().getOwnerId());
+            System.out.println(st.getOwner().getOwnerId());
+            System.out.println(Msgs.size());
 			return new CommMessage<Message>(CommEnum.MESSAGESREPLY, Msgs);
 		}
 		

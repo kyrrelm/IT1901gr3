@@ -132,7 +132,7 @@ public class Simulation extends Thread{
 			Random r = new Random();
 			double x, y;
 			x = r.nextDouble()*maxHerdX;
-			y = r.nextInt()*maxHerdY;
+			y = r.nextDouble()*maxHerdY;
 			m.setPos(x, y);
 		}
 		

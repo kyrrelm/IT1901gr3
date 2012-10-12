@@ -140,8 +140,6 @@ public class DBAccess {
 			rs.next();
 			int sheepID = rs.getInt(1);
 			
-			System.out.println(sheepID);
-			
 			// legg til en melding for denne sauen.
 			java.util.Date date = new java.util.Date();
 			java.text.SimpleDateFormat simpleDateFormat = 
@@ -363,6 +361,57 @@ public class DBAccess {
 							getSheepById(Integer.parseInt(sheepID))));
 				}
 				
+				return messages;
+			}
+			catch(SQLException exception) {
+				exception.printStackTrace();
+				
+				return null;
+			}
+		}
+	}
+	
+	public static ArrayList<Message> getLastFiveMessagesByOwner(int OwnerID) 
+	{
+		
+		/**
+		 * Ensures that it is not possible to simultanously update and receive data
+		 * -- See method addMessage for reference.
+		 * @author halvor
+		 */		
+		synchronized (DBAccess.class)
+		{
+		
+			try {
+				Statement statement = con.createStatement();
+				ArrayList<Message> messages = new ArrayList<Message>();
+				
+				// finn alle sauene til duden:
+				ArrayList<Sheep> sheeple = getSheepByOwnerID(OwnerID);
+				
+				// iterer over alle sauene
+				
+				for (Sheep s: sheeple)
+				{
+					int SheepID = s.getSheepId();
+					
+					ResultSet resultSet = statement.executeQuery("SELECT * FROM Message WHERE SheepID = " + SheepID + " ORDER BY MessageID DESC LIMIT 0,5");
+					
+					while(resultSet.next())
+					{
+						messages.add( new Message(Integer.parseInt(resultSet.getString(1)),
+								resultSet.getDate(2), 
+								Integer.parseInt(resultSet.getString(3)),
+								Float.parseFloat(resultSet.getString(4)),
+								Integer.parseInt(resultSet.getString(5)),
+								Integer.parseInt(resultSet.getString(6)),
+								Integer.parseInt(resultSet.getString(7)),
+								Integer.parseInt(resultSet.getString(8)),
+								s));
+					}
+					
+				}				
+								
 				return messages;
 			}
 			catch(SQLException exception) {
@@ -622,6 +671,34 @@ public class DBAccess {
 		}
 	}
 	
+	public static ArrayList<Sheep> getSheepByOwnerID(int ownerID)
+	{
+		try {
+			Statement st = con.createStatement();
+
+			ResultSet rs = st.executeQuery(String.format("SELECT * FROM Sheep WHERE OwnerID = %d", ownerID));
+			
+			ArrayList<Sheep> shp = new ArrayList<Sheep>();
+			
+			while (rs.next()) 
+			{
+				shp.add(new Sheep(Integer.parseInt(rs.getString(1)),
+						rs.getString(2),
+						Integer.parseInt(rs.getString(3).substring(0, 4)),
+						Integer.parseInt(rs.getString(4)),
+						Integer.parseInt(rs.getString(5)))
+						);
+				
+			}
+			
+			return shp;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 	public static Sheep getSheepById(int id)
 	{
@@ -707,42 +784,33 @@ public class DBAccess {
 			Statement statement = con.createStatement();
 			ArrayList<Message> messages = new ArrayList<Message>();
 			
-		
+			// finn alle sauene til duden:
+			ArrayList<Sheep> sheeple = getAllSheep();
 			
-			ResultSet resultSet = statement.executeQuery("SELECT * From Message");
+			// iterer over alle sauene
 			
-			while(resultSet.next()) {
-				String sheepID = resultSet.getString(8);
-				messages.add( new Message(Integer.parseInt(resultSet.getString(1)),
-						resultSet.getDate(2), 
-						Integer.parseInt(resultSet.getString(3)),
-						Float.parseFloat(resultSet.getString(4)),
-						Integer.parseInt(resultSet.getString(5)),
-						Integer.parseInt(resultSet.getString(6)),
-						Integer.parseInt(resultSet.getString(7)),
-						Integer.parseInt(resultSet.getString(8)),
-						getSheepById(Integer.parseInt(sheepID))));
-			}
-			// har hentet ut ALLE beskjedene!
-			
-			// filtrer!
-			ArrayList<Integer> flt = new ArrayList<Integer>();
-			
-			ArrayList<Message>tempMessages = new ArrayList<Message>();
-			
-			while(!(messages.isEmpty()))
-			{	
-				int l = messages.size() - 1;
-				if (!(flt.contains(messages.get(l).getSheepId())))
+			for (Sheep s: sheeple)
+			{
+				int SheepID = s.getSheepId();
+				
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM Message WHERE SheepID = " + SheepID + " ORDER BY MessageID DESC LIMIT 0,1");
+				
+				while(resultSet.next())
 				{
-					flt.add(messages.get(l).getSheepId());
-					tempMessages.add(messages.get(l));
-					
+					messages.add( new Message(Integer.parseInt(resultSet.getString(1)),
+							resultSet.getDate(2), 
+							Integer.parseInt(resultSet.getString(3)),
+							Float.parseFloat(resultSet.getString(4)),
+							Integer.parseInt(resultSet.getString(5)),
+							Integer.parseInt(resultSet.getString(6)),
+							Integer.parseInt(resultSet.getString(7)),
+							Integer.parseInt(resultSet.getString(8)),
+							s));
 				}
-				messages.remove(l);
-			}
-			
-			return tempMessages;
+				
+			}				
+							
+			return messages;
 		}
 		catch(SQLException exception) {
 			exception.printStackTrace();

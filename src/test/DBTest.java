@@ -16,7 +16,16 @@ import db.DBAccess;
 public class DBTest {
 	public static void main(String args[]) throws InstantiationException,
 			IllegalAccessException {
-		/*
+		
+		DBAccess.open();
+		
+		//Delete all records in all tables before generating data
+		DBAccess.deleteAllFromFarm();
+		DBAccess.deleteAllFromMessage();
+		DBAccess.deleteAllFromOwner();
+		DBAccess.deleteAllFromSheep();
+		
+		
 		String[] firstNames = { "Lars", "Hege", "Petter", "Frida", "Morten",
 				"Kristine", "Ole", "Kari", "Espen", "Hanne", "Harry", "Ingrid",
 				"Arne", "Amalie", "Thomas", "Heidi", "Roger", "Marte",
@@ -49,7 +58,6 @@ public class DBTest {
 		
 		
 		Random generator = new Random();
-		DBAccess.open();
 		
 			
 		//Generate data for the database
@@ -160,20 +168,7 @@ public class DBTest {
 		}
 			
 		System.out.println("Data has been generated.");
-		*/
 
-		/*
-		DBAccess.open();
-		
-		
-		//Delete all records in all tables before generating data
-		DBAccess.deleteAllFromFarm();
-		DBAccess.deleteAllFromMessage();
-		DBAccess.deleteAllFromOwner();
-		DBAccess.deleteAllFromSheep();
-			
-		
-		*/
 		DBAccess.close();	
 	}
 }

@@ -1,5 +1,6 @@
 package server;
 
+import helpclasses.Message;
 import helpclasses.Owner;
 
 import java.util.ArrayList;
@@ -25,8 +26,8 @@ public class Server
 		db.DBAccess.open();
 		
 		// start simulation thread!
-		Simulation sim = new Simulation(1000, 1000, 1000000);
-		sim.start();
+		//Simulation sim = new Simulation(1000, 1000, 1000000);
+		//sim.start();
 		
 		SocketServer sockServ = new SocketServer(6667);
 		
