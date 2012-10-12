@@ -273,8 +273,8 @@ public class DBAccess {
 					"SELECT * FROM Message WHERE MessageID= '" + messageId +
 					"'");	
 			
-			
 			if(resultSet.last()) {
+				String sheepID = resultSet.getString(8);
 				message = new Message(Integer.parseInt(resultSet.getString(1)),
 						resultSet.getDate(2), 
 						Integer.parseInt(resultSet.getString(3)),
@@ -282,7 +282,8 @@ public class DBAccess {
 						Integer.parseInt(resultSet.getString(5)),
 						Integer.parseInt(resultSet.getString(6)),
 						Integer.parseInt(resultSet.getString(7)),
-						Integer.parseInt(resultSet.getString(8)));
+						Integer.parseInt(resultSet.getString(8)),
+						getSheepById(Integer.parseInt(sheepID)));
 			}
 			
 			return message;
@@ -306,6 +307,7 @@ public class DBAccess {
 															"AND s.OwnerID = " + OwnerID);
 			
 			while(resultSet.next()) {
+				String sheepID = resultSet.getString(8);
 				messages.add( new Message(Integer.parseInt(resultSet.getString(1)),
 						resultSet.getDate(2), 
 						Integer.parseInt(resultSet.getString(3)),
@@ -313,8 +315,8 @@ public class DBAccess {
 						Integer.parseInt(resultSet.getString(5)),
 						Integer.parseInt(resultSet.getString(6)),
 						Integer.parseInt(resultSet.getString(7)),
-						Integer.parseInt(resultSet.getString(8))) 
-				);
+						Integer.parseInt(resultSet.getString(8)),
+						getSheepById(Integer.parseInt(sheepID))));
 			}
 			
 			return messages;

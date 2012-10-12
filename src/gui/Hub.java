@@ -45,11 +45,20 @@ public class Hub extends javax.swing.JFrame {
     private void initComponents() {
 
         tabMain = new javax.swing.JTabbedPane();
+        panelHome = new javax.swing.JPanel();
         tabHome = new javax.swing.JTabbedPane();
         messages = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
         messageList = new javax.swing.JList();
         map = new javax.swing.JPanel();
+        panelFilters = new javax.swing.JPanel();
+        filtersLabel = new javax.swing.JLabel();
+        filtersFarmComboBox = new javax.swing.JComboBox();
+        filtersFarmLabel = new javax.swing.JLabel();
+        filtersSheepLabel = new javax.swing.JLabel();
+        filtersSheepComboBox = new javax.swing.JComboBox();
+        filtersAlarmCheckBox = new javax.swing.JCheckBox();
+        filtersAlarmLabel = new javax.swing.JLabel();
+        filtersFilterButton = new javax.swing.JButton();
         tabOptions = new javax.swing.JTabbedPane();
         addSheep = new javax.swing.JPanel();
         addSheepTitleLabel = new javax.swing.JLabel();
@@ -80,6 +89,8 @@ public class Hub extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
+        panelHome.setName("panelHome"); // NOI18N
+
         tabHome.setPreferredSize(new java.awt.Dimension(800, 600));
         tabHome.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -92,23 +103,22 @@ public class Hub extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(messageList);
 
         javax.swing.GroupLayout messagesLayout = new javax.swing.GroupLayout(messages);
         messages.setLayout(messagesLayout);
         messagesLayout.setHorizontalGroup(
             messagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(messagesLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(messageList, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         messagesLayout.setVerticalGroup(
             messagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(messagesLayout.createSequentialGroup()
-                .addContainerGap(75, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(messageList, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         tabHome.addTab("Messages", messages);
@@ -117,16 +127,109 @@ public class Hub extends javax.swing.JFrame {
         map.setLayout(mapLayout);
         mapLayout.setHorizontalGroup(
             mapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 790, Short.MAX_VALUE)
+            .addGap(0, 568, Short.MAX_VALUE)
         );
         mapLayout.setVerticalGroup(
             mapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
+            .addGap(0, 589, Short.MAX_VALUE)
         );
 
         tabHome.addTab("Map", map);
 
-        tabMain.addTab("Home", tabHome);
+        filtersLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        filtersLabel.setText("Filters:");
+
+        filtersFarmComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All Farms" }));
+
+        filtersFarmLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        filtersFarmLabel.setText("Farm:");
+
+        filtersSheepLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        filtersSheepLabel.setText("Sheep:");
+
+        filtersSheepComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All Sheep" }));
+
+        filtersAlarmCheckBox.setText("Only alarm messages.");
+        filtersAlarmCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filtersAlarmCheckBoxActionPerformed(evt);
+            }
+        });
+
+        filtersAlarmLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        filtersAlarmLabel.setText("Alarm:");
+
+        filtersFilterButton.setText("Filter");
+        filtersFilterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filtersFilterButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelFiltersLayout = new javax.swing.GroupLayout(panelFilters);
+        panelFilters.setLayout(panelFiltersLayout);
+        panelFiltersLayout.setHorizontalGroup(
+            panelFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFiltersLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(filtersFarmComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(filtersSheepComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelFiltersLayout.createSequentialGroup()
+                        .addGroup(panelFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(filtersLabel)
+                            .addComponent(filtersFarmLabel)
+                            .addComponent(filtersSheepLabel)
+                            .addComponent(filtersAlarmLabel)
+                            .addComponent(filtersAlarmCheckBox)
+                            .addComponent(filtersFilterButton))
+                        .addGap(0, 33, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panelFiltersLayout.setVerticalGroup(
+            panelFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFiltersLayout.createSequentialGroup()
+                .addComponent(filtersLabel)
+                .addGap(46, 46, 46)
+                .addComponent(filtersFarmLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(filtersFarmComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(filtersSheepLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(filtersSheepComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(filtersAlarmLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(filtersAlarmCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(filtersFilterButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panelHomeLayout = new javax.swing.GroupLayout(panelHome);
+        panelHome.setLayout(panelHomeLayout);
+        panelHomeLayout.setHorizontalGroup(
+            panelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHomeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tabHome, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(panelFilters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        panelHomeLayout.setVerticalGroup(
+            panelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelHomeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tabHome, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)
+                    .addComponent(panelFilters, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        tabMain.addTab("Home", panelHome);
+        panelHome.getAccessibleContext().setAccessibleName("");
 
         tabOptions.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -226,7 +329,7 @@ public class Hub extends javax.swing.JFrame {
                 .addComponent(addSheepFarm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(addSheepAdd)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(238, Short.MAX_VALUE))
         );
 
         tabOptions.addTab("Add Sheep", addSheep);
@@ -282,7 +385,7 @@ public class Hub extends javax.swing.JFrame {
                 .addComponent(removeSheepID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(removeSheepRemove)
-                .addContainerGap(343, Short.MAX_VALUE))
+                .addContainerGap(367, Short.MAX_VALUE))
         );
 
         tabOptions.addTab("Remove Sheep", removeSheep);
@@ -329,7 +432,7 @@ public class Hub extends javax.swing.JFrame {
                 .addComponent(addFarmName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(addFarmAdd)
-                .addContainerGap(341, Short.MAX_VALUE))
+                .addContainerGap(365, Short.MAX_VALUE))
         );
 
         tabOptions.addTab("Add Farm", addFarm);
@@ -378,7 +481,7 @@ public class Hub extends javax.swing.JFrame {
                 .addComponent(removeFarmComboFarm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(removeFarmAdd)
-                .addContainerGap(343, Short.MAX_VALUE))
+                .addContainerGap(367, Short.MAX_VALUE))
         );
 
         tabOptions.addTab("Remove Farm", removeFarm);
@@ -389,7 +492,7 @@ public class Hub extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabMain, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(tabMain)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,16 +560,25 @@ public class Hub extends javax.swing.JFrame {
         //System.out.println("hurra");
     }//GEN-LAST:event_addSheepMousePressed
 
+    private void tabOptionsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabOptionsStateChanged
+        // TODO add your handling code here:
+        initAddSheep();
+        initRemoveFarm();
+    	// Uteldet...
+    }//GEN-LAST:event_tabOptionsStateChanged
+
     private void tabHomeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabHomeStateChanged
         // TODO add your handling code here:
         refreshMessages();
     }//GEN-LAST:event_tabHomeStateChanged
 
-    private void tabOptionsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabOptionsStateChanged
+    private void filtersAlarmCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtersAlarmCheckBoxActionPerformed
         // TODO add your handling code here:
-        initAddSheep();
-        initRemoveFarm();
-    }//GEN-LAST:event_tabOptionsStateChanged
+    }//GEN-LAST:event_filtersAlarmCheckBoxActionPerformed
+
+    private void filtersFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtersFilterButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_filtersFilterButtonActionPerformed
 
 
 
@@ -486,10 +598,19 @@ public class Hub extends javax.swing.JFrame {
     private javax.swing.JLabel addSheepNameLabel;
     private javax.swing.JLabel addSheepNameOptionalLabel;
     private javax.swing.JLabel addSheepTitleLabel;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JCheckBox filtersAlarmCheckBox;
+    private javax.swing.JLabel filtersAlarmLabel;
+    private javax.swing.JComboBox filtersFarmComboBox;
+    private javax.swing.JLabel filtersFarmLabel;
+    private javax.swing.JButton filtersFilterButton;
+    private javax.swing.JLabel filtersLabel;
+    private javax.swing.JComboBox filtersSheepComboBox;
+    private javax.swing.JLabel filtersSheepLabel;
     private javax.swing.JPanel map;
     private javax.swing.JList messageList;
     private javax.swing.JPanel messages;
+    private javax.swing.JPanel panelFilters;
+    private javax.swing.JPanel panelHome;
     private javax.swing.JPanel removeFarm;
     private javax.swing.JButton removeFarmAdd;
     private javax.swing.JComboBox removeFarmComboFarm;

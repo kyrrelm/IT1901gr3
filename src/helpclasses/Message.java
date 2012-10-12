@@ -12,10 +12,11 @@ public class Message implements Serializable {
 	private int status;
 	private float temperature;
 	private Date dateTime;
+	private Sheep sheep;
 	
 	
 	public Message(int messageId, Date dateTime, int pulse, float temperature,
-			int status, int positionX, int positionY, int sheepId) {
+			int status, int positionX, int positionY, int sheepId, Sheep sheep) {
 		super();
 		this.messageId   = messageId;
 		this.dateTime    = dateTime;
@@ -81,6 +82,11 @@ public class Message implements Serializable {
 	
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	
+	public Sheep getSheep()
+	{
+		return sheep;
 	}
 	
 	public String toString() {
