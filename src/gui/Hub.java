@@ -50,6 +50,7 @@ public class Hub extends javax.swing.JFrame {
         messages = new javax.swing.JPanel();
         messageList = new javax.swing.JList();
         map = new javax.swing.JPanel();
+        mapPanel = new javax.swing.JPanel();
         panelFilters = new javax.swing.JPanel();
         filtersLabel = new javax.swing.JLabel();
         filtersFarmComboBox = new javax.swing.JComboBox();
@@ -116,8 +117,8 @@ public class Hub extends javax.swing.JFrame {
             messagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(messagesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(messageList, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addComponent(messageList, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
+                .addContainerGap())
         );
         messagesLayout.setVerticalGroup(
             messagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,15 +130,32 @@ public class Hub extends javax.swing.JFrame {
 
         tabHome.addTab("Messages", messages);
 
+        javax.swing.GroupLayout mapPanelLayout = new javax.swing.GroupLayout(mapPanel);
+        mapPanel.setLayout(mapPanelLayout);
+        mapPanelLayout.setHorizontalGroup(
+            mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 548, Short.MAX_VALUE)
+        );
+        mapPanelLayout.setVerticalGroup(
+            mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 567, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout mapLayout = new javax.swing.GroupLayout(map);
         map.setLayout(mapLayout);
         mapLayout.setHorizontalGroup(
             mapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 568, Short.MAX_VALUE)
+            .addGroup(mapLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(mapPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         mapLayout.setVerticalGroup(
             mapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 589, Short.MAX_VALUE)
+            .addGroup(mapLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(mapPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         tabHome.addTab("Map", map);
@@ -618,6 +636,7 @@ public class Hub extends javax.swing.JFrame {
     private javax.swing.JComboBox filtersSheepComboBox;
     private javax.swing.JLabel filtersSheepLabel;
     private javax.swing.JPanel map;
+    private javax.swing.JPanel mapPanel;
     private javax.swing.JList messageList;
     private javax.swing.JPanel messages;
     private javax.swing.JPanel panelFilters;
