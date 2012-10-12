@@ -4,6 +4,10 @@ import helpclasses.Owner;
 
 import java.util.ArrayList;
 
+import db.DBAccess;
+
+import sim.Simulation;
+
 
 public class Server 
 {
@@ -20,6 +24,10 @@ public class Server
 		// open DB connection!
 		db.DBAccess.open();
 		
+		// start simulation thread!
+		//Simulation sim = new Simulation(100, 100, 1000000);
+		//sim.run();
+		DBAccess.getLastMessages();
 		SocketServer sockServ = new SocketServer(6667);
 		
 		sockServ.run();

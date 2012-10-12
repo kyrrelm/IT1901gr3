@@ -295,38 +295,80 @@ public class DBAccess {
 		}
 	}
 	
-	public static ArrayList<Message> getMessagesByOwner(int OwnerID) {
-		try {
-			Statement statement = con.createStatement();
-			ArrayList<Message> messages = new ArrayList<Message>();
-			
+	
+	
+	public static ArrayList<Message> getMessagesByOwner(int OwnerID) 
+	{
 		
+		/**
+		 * Ensures that it is not possible to simultanously update and receive data
+		 * -- See method updateAllSheep for reference.
+		 * @author halvor
+		 */		
+		synchronized (DBAccess.class)
+		{
+		
+			try {
+				Statement statement = con.createStatement();
+				ArrayList<Message> messages = new ArrayList<Message>();
+				
 			
-			ResultSet resultSet = statement.executeQuery("SELECT m.* FROM Message m, Sheep s " +
-															"WHERE m.SheepID = s.SheepID " +
-															"AND s.OwnerID = " + OwnerID);
-			
-			while(resultSet.next()) {
-				String sheepID = resultSet.getString(8);
-				messages.add( new Message(Integer.parseInt(resultSet.getString(1)),
-						resultSet.getDate(2), 
-						Integer.parseInt(resultSet.getString(3)),
-						Float.parseFloat(resultSet.getString(4)),
-						Integer.parseInt(resultSet.getString(5)),
-						Integer.parseInt(resultSet.getString(6)),
-						Integer.parseInt(resultSet.getString(7)),
-						Integer.parseInt(resultSet.getString(8)),
-						getSheepById(Integer.parseInt(sheepID))));
+				
+				ResultSet resultSet = statement.executeQuery("SELECT m.* FROM Message m, Sheep s " +
+																"WHERE m.SheepID = s.SheepID " +
+																"AND s.OwnerID = " + OwnerID);
+				
+				while(resultSet.next()) {
+					String sheepID = resultSet.getString(8);
+					messages.add( new Message(Integer.parseInt(resultSet.getString(1)),
+							resultSet.getDate(2), 
+							Integer.parseInt(resultSet.getString(3)),
+							Float.parseFloat(resultSet.getString(4)),
+							Integer.parseInt(resultSet.getString(5)),
+							Integer.parseInt(resultSet.getString(6)),
+							Integer.parseInt(resultSet.getString(7)),
+							Integer.parseInt(resultSet.getString(8)),
+							getSheepById(Integer.parseInt(sheepID))));
+				}
+				
+				return messages;
 			}
-			
-			return messages;
-		}
-		catch(SQLException exception) {
-			exception.printStackTrace();
-			
-			return null;
+			catch(SQLException exception) {
+				exception.printStackTrace();
+				
+				return null;
+			}
 		}
 	}
+	
+	
+	public static void updateAllSheep(ArrayList<Sheep> sheep)
+	{
+		/**
+		 * Ensures that it is not possible to simultanously update and receive data
+		 * @author halvor
+		 */
+		synchronized (DBAccess.class)
+		{
+		//og her vil jeg at DB skal oppdatere alle sau-elementene
+		//dette brukes hovedsakelig med simulation
+		//dette vil se slik ut antar jeg
+		
+		/*
+		for(Sheep s: sheep)
+		{
+			/*
+		 * UPDATE table_name SET column_name1 osv. 
+		 
+			addMessage(dateTime, s.getPulse(), s.getTemp(), s.getAttacked(), s.getX(), s.getY(), s.getSheepId());
+		}*/
+		
+		//Hvis dette ikke blir gjort riktig kan det hende at alle sauene blir erstattet med feil verdier
+		}
+	}
+	
+	
+	
 	
 	public static Owner getOwner(String username, String password) {
 		try {
@@ -650,23 +692,64 @@ public class DBAccess {
 		}
 	}
 	
-	public static void updateAllSheep(ArrayList<Sheep> sheep)
+	/**
+	 * Henter ut den siste messagen per sheepID
+	 * TODO: Finne ut en måte å gjøre dette i et SQL kall istedetfor å hente ALLE beskjedene og så filtrere dem her.
+	 * @author halvor
+	 */
+	public static ArrayList<Message> getLastMessages()
 	{
-		//og her vil jeg at DB skal oppdatere alle sau-elementene
-		//dette brukes hovedsakelig med simulation
-		//dette vil se slik ut antar jeg
+		try {
+			Statement statement = con.createStatement();
+			ArrayList<Message> messages = new ArrayList<Message>();
+			
 		
-		/*
-		for(Sheep s: sheep)
-		{
-			/*
-		 * UPDATE table_name SET column_name1 osv. 
-		 
-			addMessage(dateTime, s.getPulse(), s.getTemp(), s.getAttacked(), s.getX(), s.getY(), s.getSheepId());
-		}*/
-		
-		//Hvis dette ikke blir gjort riktig kan det hende at alle sauene blir erstattet med feil verdier
+			
+			ResultSet resultSet = statement.executeQuery("SELECT * From Message");
+			
+			while(resultSet.next()) {
+				String sheepID = resultSet.getString(8);
+				messages.add( new Message(Integer.parseInt(resultSet.getString(1)),
+						resultSet.getDate(2), 
+						Integer.parseInt(resultSet.getString(3)),
+						Float.parseFloat(resultSet.getString(4)),
+						Integer.parseInt(resultSet.getString(5)),
+						Integer.parseInt(resultSet.getString(6)),
+						Integer.parseInt(resultSet.getString(7)),
+						Integer.parseInt(resultSet.getString(8)),
+						getSheepById(Integer.parseInt(sheepID))));
+			}
+			// har hentet ut ALLE beskjedene!
+			
+			// filtrer!
+			ArrayList<Integer> flt = new ArrayList<Integer>();
+			
+			ArrayList<Message>tempMessages = new ArrayList<Message>();
+			
+			while(!(messages.isEmpty()))
+			{	
+				int l = messages.size() - 1;
+				if (!(flt.contains(messages.get(l).getSheepId())))
+				{
+					flt.add(messages.get(l).getSheepId());
+					tempMessages.add(messages.get(l));
+					
+				}
+				messages.remove(l);
+			}
+			
+			for (Message m: tempMessages)
+				System.out.println(m);
+			
+			return tempMessages;
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+			
+			return null;
+		}
 	}
+	
 	
 	/***
 	 * Deletes all records in table 'Farm'

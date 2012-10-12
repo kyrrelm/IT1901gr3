@@ -6,6 +6,7 @@ import java.util.Random;
 
 import db.DBAccess;
 
+import helpclasses.Message;
 import helpclasses.Sheep;
 
 /**
@@ -21,10 +22,9 @@ import helpclasses.Sheep;
  * x seconds to the server. There is no need for permanent storage of sim data, 
  * we're just simulating the collars sending data en masse.
  */
-public class Simulation {
+public class Simulation extends Thread{
 
-	ArrayList<Sheep> sheep;
-	DBAccess db;
+	ArrayList<Message> messages;
 	
 	public boolean stop = false;
 	public int refreshRate; 
@@ -43,21 +43,33 @@ public class Simulation {
 	/**
 	 * The simulation constructor, any values you'd want to variable between different simulations should
 	 * be supplied as a constructor parameter.
-	 * @param db The database reference //TODO maybe this is wrong
 	 * @param maxHerdX The maximum movement for the herd
 	 * @param maxHerdY
 	 * @param refreshRate Amount of milliseconds between each value refresh in sheep ArrayList and DB dump
 	 */
-	public Simulation(DBAccess db, int maxHerdX, int maxHerdY, int refreshRate)
+	public Simulation(int maxHerdX, int maxHerdY, int refreshRate)
 	{
-		sheep = new ArrayList<Sheep>();
+		// kaller Thread
+		super("SimulationThread");
+		
+		
+		messages = new ArrayList<Message>();
 		this.maxHerdX = maxHerdX;
 		this.maxHerdY = maxHerdY;
 		this.refreshRate = refreshRate;
-		this.db = db;
 		
 		getData();
 	}
+	
+	/**
+	 * Method called by server to start the thread.
+	 * @author halvor
+	 */
+	public void run()
+	{
+		simLoop();
+	}
+	
 
 	/**
 	 * The simulation loop. This will rerun the randomize methods at given refreshRate and then deploy changes
@@ -81,7 +93,10 @@ public class Simulation {
 	 */
 	public void getData()
 	{
-		sheep = db.getAllSheep();
+		// en liste med sauene er ikke særlig brukbar da den ikke inneholder posisjoner. (I DB)
+		// IMO burde vi endre DBACCESS.addsheep slik at den lager en message i databasen når en sau er addet til DB (for å forhindre at sauer som ikke har noen meldinger blir usynlige for Simulation)
+		// og operere med meldinger her.
+		messages = DBAccess.getLastMessages();
 	}
 
 	/**
@@ -89,7 +104,7 @@ public class Simulation {
 	 */
 	public void setData()
 	{
-		db.updateAllSheep(sheep);
+		DBAccess.updateAllSheep(null);
 	}
 
 	/**
@@ -100,6 +115,7 @@ public class Simulation {
 	 */
 	public void randomPos() 
 	{
+		/*
 		for(Sheep s: sheep)
 		{
 			Random r = new Random();
@@ -108,6 +124,7 @@ public class Simulation {
 			y = r.nextInt()*maxHerdY;
 			s.setPos(x, y);
 		}
+		*/
 	}
 
 	/**
@@ -115,11 +132,13 @@ public class Simulation {
 	 */
 	public void randomTemp()
 	{
+		/*
 		for(Sheep s: sheep)
 		{
 			int tempRandom = minTemp +(int)(Math.random()*maxTemp);
 			s.setTemp(tempRandom);
 		}
+		*/
 	}
 
 	/**
@@ -127,10 +146,17 @@ public class Simulation {
 	 */
 	public void randomPulse()
 	{
+		/*
 		for(Sheep s: sheep)
 		{
 			int pulseRandom = minPulse +(int)(Math.random()*maxPulse);
 			s.setPulse(pulseRandom);
 		}
+		*/
+	}
+	
+	public void stopThread()
+	{
+		stop = true;
 	}
 }
