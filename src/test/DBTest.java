@@ -10,11 +10,14 @@ package test;
 import helpclasses.*;
 import java.util.Random;
 
+import db.DBAccess;
+
 
 public class DBTest {
 	public static void main(String args[]) throws InstantiationException,
 			IllegalAccessException {
-/*		String[] firstNames = { "Lars", "Hege", "Petter", "Frida", "Morten",
+		/*
+		String[] firstNames = { "Lars", "Hege", "Petter", "Frida", "Morten",
 				"Kristine", "Ole", "Kari", "Espen", "Hanne", "Harry", "Ingrid",
 				"Arne", "Amalie", "Thomas", "Heidi", "Roger", "Marte",
 				"Erlend", "Trine"
@@ -46,7 +49,7 @@ public class DBTest {
 		
 		
 		Random generator = new Random();
-		db.DBAccess.open();
+		DBAccess.open();
 		
 			
 		//Generate data for the database
@@ -88,22 +91,22 @@ public class DBTest {
 			username = username + phoneNumber.substring(0, 4);
 			
 			//We allow no duplicate copy of userName in database
-			boolean isUsernameTaken = db.DBAccess.isUsernameTaken(username);	
+			boolean isUsernameTaken = DBAccess.isUsernameTaken(username);	
 			
 			
 			while(isUsernameTaken == true) {
 				username = userNames[generator.nextInt(20)];
 				username = username + phoneNumber.substring(0, 4);
-				isUsernameTaken = db.DBAccess.isUsernameTaken(username);
+				isUsernameTaken = DBAccess.isUsernameTaken(username);
 			}
 			
 			
 			
 			//We add owner to database
-			db.DBAccess.addOwner(username, password, firstName + middleName, lastName,
+			DBAccess.addOwner(username, password, firstName + middleName, lastName,
 					phoneNumber, email, friendPhoneNumber, friendEmail);
 			//Get ownerId
-			Owner owner = db.DBAccess.getOwner(username, password);
+			Owner owner = DBAccess.getOwner(username, password);
 			
 			
 			//We add find position x and position y
@@ -114,7 +117,7 @@ public class DBTest {
 			
 			//Generate data for farm
 			for(int k = 0; k <= nFarms; k++) {
-				db.DBAccess.addFarm(owner.getLastName() + " gaard", owner.getOwnerId());
+				DBAccess.addFarm(owner.getLastName() + " gaard", owner.getOwnerId());
 				positionX = generator.nextInt(5000);
 				positionY = generator.nextInt(5000);
 				
@@ -124,7 +127,7 @@ public class DBTest {
 				int indexNo		 = 0;
 				int birthYear    = 2010;
 				String sheepName = "";
-				Farm farm        = db.DBAccess.getFarm(owner.getOwnerId());
+				Farm farm        = DBAccess.getFarm(owner.getOwnerId());
 				
 				
 				for(int l = 0; l <= nSheep; l++) {
@@ -135,40 +138,42 @@ public class DBTest {
 					
 					
 					if(hasName == true) {				
-						if(db.DBAccess.isSheepNameTaken(
+						if(DBAccess.isSheepNameTaken(
 								sheepNames[indexNo], farm.getFarmId()) == false) {				
 							sheepName = sheepNames[indexNo];
 						}
 					}
 					
 					
-					db.DBAccess.addSheep(sheepName, birthYear,
+					DBAccess.addSheep(sheepName, birthYear,
 							farm.getFarmId(), owner.getOwnerId());
-					sheep = db.DBAccess.getLastAddedSheep();
+					sheep = DBAccess.getLastAddedSheep();
 					
 					java.util.Date date = new java.util.Date();
 					java.text.SimpleDateFormat simpleDateFormat = 
 							new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					String currentTime = simpleDateFormat.format(date);
-					db.DBAccess.addMessage(currentTime, 75, 35, 0,
+					DBAccess.addMessage(currentTime, 75, 35, 0,
 							positionX, positionY, sheep.getSheepId());		
 				}
 			}
 		}
 			
 		System.out.println("Data has been generated.");
+		*/
 
-
-/*		
+		/*
+		DBAccess.open();
+		
 		
 		//Delete all records in all tables before generating data
-		db.DBAccess.deleteAllFromFarm();
-		db.DBAccess.deleteAllFromMessage();
-		db.DBAccess.deleteAllFromOwner();
-		db.DBAccess.deleteAllFromSheep();
+		DBAccess.deleteAllFromFarm();
+		DBAccess.deleteAllFromMessage();
+		DBAccess.deleteAllFromOwner();
+		DBAccess.deleteAllFromSheep();
 			
 		
-		
-		db.DBAccess.close();	
-*/	}
+		*/
+		DBAccess.close();	
+	}
 }

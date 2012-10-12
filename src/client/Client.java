@@ -21,6 +21,10 @@ public class Client {
 
     public static void main(String[] args) {
     	
+    	
+    	
+    	// brukernavn så jeg å logge meg på mysqladmin hele tida: Superman3440/Sheep
+    	
     	sockCli = new SocketClient("localhost", 6667);
 	sockCli.run();
         login = new Login();

@@ -25,9 +25,9 @@ public class Server
 		db.DBAccess.open();
 		
 		// start simulation thread!
-		//Simulation sim = new Simulation(100, 100, 1000000);
-		//sim.run();
-		DBAccess.getLastMessages();
+		Simulation sim = new Simulation(1000, 1000, 1000000);
+		sim.start();
+		
 		SocketServer sockServ = new SocketServer(6667);
 		
 		sockServ.run();

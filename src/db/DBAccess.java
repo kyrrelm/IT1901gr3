@@ -60,6 +60,14 @@ public class DBAccess {
 		try {
 			Statement st = con.createStatement();	
 			st.executeUpdate("DELETE FROM Farm WHERE FarmID = '" + FarmId + "'");
+			
+			
+			// Slett alle sauene som tilhørte den gården ELLER sett FarmID til noe rart og unikt, eks: -1
+			// -1 nu.
+			st.executeUpdate("UPDATE Sheep SET FarmID=-1 WHERE FarmID=" + FarmId);
+			
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -112,10 +120,8 @@ public class DBAccess {
 		}
 	}
 	
-	public static void addSheep(String name, int birthYear, int farmID, int ownerID)
+	public static synchronized void addSheep(String name, int birthYear, int farmID, int ownerID)
 	{
-		
-		System.out.println(name);
 		
 		try {
 			Statement st = con.createStatement();
@@ -128,6 +134,22 @@ public class DBAccess {
 				+ String.format("(\"%s\", \"%s\", \"%s\", \"%s\")",
 					/*"1941",*/ name, String.valueOf(birthYear),
 					String.valueOf(farmID), String.valueOf(ownerID)));
+			
+			// finn ut hva sauIDen ble for sauen man akuratt la til!
+			ResultSet rs = st.executeQuery("SELECT SheepID FROM Sheep ORDER BY SheepID desc limit 1");
+			rs.next();
+			int sheepID = rs.getInt(1);
+			
+			System.out.println(sheepID);
+			
+			// legg til en melding for denne sauen.
+			java.util.Date date = new java.util.Date();
+			java.text.SimpleDateFormat simpleDateFormat = 
+					new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String currentTime = simpleDateFormat.format(date);
+			addMessage(currentTime, 75, 35, 0,
+					0, 0, sheepID);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -220,6 +242,8 @@ public class DBAccess {
 	
 	/*Kan hende jeg misforstår, men vil ikke denne metoden kunn returnere siste farm,
 	 * selv hvis bonden har flere?
+	 * Korrekt, bør fikses - Halvor
+	 	* - Tror ikke denne metoden brukes til noe uansett.	 
 	 */
 	
 	public static Farm getFarm(int ownerId) {
@@ -303,7 +327,6 @@ public class DBAccess {
 			return null;
 		}
 	}
-	
 	
 	
 	public static ArrayList<Message> getMessagesByOwner(int OwnerID) 
@@ -719,9 +742,6 @@ public class DBAccess {
 				messages.remove(l);
 			}
 			
-			for (Message m: tempMessages)
-				System.out.println(m);
-			
 			return tempMessages;
 		}
 		catch(SQLException exception) {
@@ -809,6 +829,10 @@ public class DBAccess {
 			Statement statement = con.createStatement();
 			
 			statement.executeUpdate("DELETE FROM Sheep WHERE SheepID = '" + sheepId + "'");
+			
+			// også fjern beskjeder ang. den sauen
+			
+			statement.executeUpdate("DELETE FROM Message WHERE SheepID = '" + sheepId + "'");
 		}
 		catch(SQLException exception) {
 			exception.printStackTrace();

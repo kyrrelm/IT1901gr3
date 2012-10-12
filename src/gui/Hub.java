@@ -89,6 +89,12 @@ public class Hub extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
+        tabMain.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tabMainStateChanged(evt);
+            }
+        });
+
         panelHome.setName("panelHome"); // NOI18N
 
         tabHome.setPreferredSize(new java.awt.Dimension(800, 600));
@@ -567,11 +573,6 @@ public class Hub extends javax.swing.JFrame {
     	// Uteldet...
     }//GEN-LAST:event_tabOptionsStateChanged
 
-    private void tabHomeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabHomeStateChanged
-        // TODO add your handling code here:
-        refreshMessages();
-    }//GEN-LAST:event_tabHomeStateChanged
-
     private void filtersAlarmCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtersAlarmCheckBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_filtersAlarmCheckBoxActionPerformed
@@ -579,6 +580,16 @@ public class Hub extends javax.swing.JFrame {
     private void filtersFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtersFilterButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_filtersFilterButtonActionPerformed
+
+    private void tabMainStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabMainStateChanged
+        // TODO add your handling code here:
+        refreshMessages();
+    }//GEN-LAST:event_tabMainStateChanged
+
+    private void tabHomeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabHomeStateChanged
+        // TODO add your handling code here:
+        refreshMessages();
+    }//GEN-LAST:event_tabHomeStateChanged
 
 
 
