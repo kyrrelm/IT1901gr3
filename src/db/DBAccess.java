@@ -138,24 +138,32 @@ public class DBAccess {
 	public static void addMessage(String dateTime, int pulse, int temperature,
 			int status, int positionX, int positionY, int sheepId) {
 		
-		try {
-			Statement st = con.createStatement();
+		/**
+		 * Ensures that it is not possible to simultanously update and receive data
+		 * -- See method getLastMessages for reference.
+		 * @author halvor
+		 */
+		synchronized (DBAccess.class)
+		{
+			try {
+				Statement st = con.createStatement();
 			
 			
 			
-			
-			st.executeUpdate("INSERT INTO Message(DateTime, Pulse," +
-					" Temperature, Status, PositionX, PositionY, SheepID) " +
-					"VALUES" + String.format("(\"%s\", \"%s\", \"%s\"," +
-							" \"%s\", \"%s\", \"%s\", \"%s\")",
-					dateTime, String.valueOf(pulse), 
-					String.valueOf(temperature), String.valueOf(status), 
-					String.valueOf(positionX), String.valueOf(positionY),
-					String.valueOf(sheepId)));
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-			return;
+				
+				st.executeUpdate("INSERT INTO Message(DateTime, Pulse," +
+						" Temperature, Status, PositionX, PositionY, SheepID) " +
+						"VALUES" + String.format("(\"%s\", \"%s\", \"%s\"," +
+								" \"%s\", \"%s\", \"%s\", \"%s\")",
+						dateTime, String.valueOf(pulse), 
+						String.valueOf(temperature), String.valueOf(status), 
+						String.valueOf(positionX), String.valueOf(positionY),
+						String.valueOf(sheepId)));
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+				return;
+			}
 		}
 	}
 	
@@ -186,6 +194,7 @@ public class DBAccess {
 			return true;
 		}
 	}
+	
 	
 	public static boolean isSheepNameTaken(String sheepName, int farmId) {
 		try {
@@ -302,7 +311,7 @@ public class DBAccess {
 		
 		/**
 		 * Ensures that it is not possible to simultanously update and receive data
-		 * -- See method updateAllSheep for reference.
+		 * -- See method addMessage for reference.
 		 * @author halvor
 		 */		
 		synchronized (DBAccess.class)
@@ -340,34 +349,6 @@ public class DBAccess {
 			}
 		}
 	}
-	
-	
-	public static void updateAllSheep(ArrayList<Sheep> sheep)
-	{
-		/**
-		 * Ensures that it is not possible to simultanously update and receive data
-		 * @author halvor
-		 */
-		synchronized (DBAccess.class)
-		{
-		//og her vil jeg at DB skal oppdatere alle sau-elementene
-		//dette brukes hovedsakelig med simulation
-		//dette vil se slik ut antar jeg
-		
-		/*
-		for(Sheep s: sheep)
-		{
-			/*
-		 * UPDATE table_name SET column_name1 osv. 
-		 
-			addMessage(dateTime, s.getPulse(), s.getTemp(), s.getAttacked(), s.getX(), s.getY(), s.getSheepId());
-		}*/
-		
-		//Hvis dette ikke blir gjort riktig kan det hende at alle sauene blir erstattet med feil verdier
-		}
-	}
-	
-	
 	
 	
 	public static Owner getOwner(String username, String password) {

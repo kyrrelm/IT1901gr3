@@ -104,7 +104,18 @@ public class Simulation extends Thread{
 	 */
 	public void setData()
 	{
-		DBAccess.updateAllSheep(null);
+		//DEBUG:
+		System.out.println("Just updated all sheep");
+		java.util.Date date = new java.util.Date();
+		java.text.SimpleDateFormat simpleDateFormat = 
+				new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String currentTime = simpleDateFormat.format(date);
+		
+		// TODO: Fix int in DB method, float in messages and simulation (Temperature)
+		for (Message m: messages)
+			DBAccess.addMessage(currentTime, m.getPulse(), (int)m.getTemperature(), m.getStatus(), m.getPositionX(), m.getPositionY(), m.getSheepId());
+		
+		//DBAccess.updateAllSheep(null);
 	}
 
 	/**
@@ -115,16 +126,16 @@ public class Simulation extends Thread{
 	 */
 	public void randomPos() 
 	{
-		/*
-		for(Sheep s: sheep)
+		
+		for(Message m: messages)
 		{
 			Random r = new Random();
 			double x, y;
 			x = r.nextDouble()*maxHerdX;
 			y = r.nextInt()*maxHerdY;
-			s.setPos(x, y);
+			m.setPos(x, y);
 		}
-		*/
+		
 	}
 
 	/**
@@ -132,13 +143,13 @@ public class Simulation extends Thread{
 	 */
 	public void randomTemp()
 	{
-		/*
-		for(Sheep s: sheep)
+		
+		for(Message m: messages)
 		{
 			int tempRandom = minTemp +(int)(Math.random()*maxTemp);
-			s.setTemp(tempRandom);
+			m.setTemperature(tempRandom);
 		}
-		*/
+		
 	}
 
 	/**
@@ -146,13 +157,13 @@ public class Simulation extends Thread{
 	 */
 	public void randomPulse()
 	{
-		/*
-		for(Sheep s: sheep)
+		
+		for(Message m: messages)
 		{
 			int pulseRandom = minPulse +(int)(Math.random()*maxPulse);
-			s.setPulse(pulseRandom);
+			m.setPulse(pulseRandom);
 		}
-		*/
+		
 	}
 	
 	public void stopThread()

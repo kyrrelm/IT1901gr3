@@ -95,4 +95,16 @@ public class Message implements Serializable {
 				status + "X: " + positionX + "; Y:" + positionY +
 				"; SheepId: " + sheepId;
 	}
+	
+	
+	
+	/**
+	 * Increments sheep's movement vector with increment
+	 * @param x2 The x value to be added
+	 * @param y2 The y value to be added
+	 */
+	public void setPos(double x2, double y2) { //TODO maybe you're not supposed to increment but rather set? (unlikely)
+		positionX += x2;
+		positionY += y2;
+	}
 }

@@ -50,42 +50,6 @@ public class Sheep implements Serializable
 				birthYear + "\t | Farm Id: " + farmId + "\t | Owner ID: " + ownerId + " |";
 	}
 
-	/**
-	 * Increments sheep's movement vector with increment
-	 * @param x2 The x value to be added
-	 * @param y2 The y value to be added
-	 */
-	public void setPos(double x2, double y2) { //TODO maybe you're not supposed to increment but rather set? (unlikely)
-		x += x2;
-		y += y2;
-	}
-
-	public void setPulse(int pulseRandom) {
-		this.pulse = pulseRandom;
-	}
-
-	public void setTemp(int tempRandom) {
-		this.temp = tempRandom;
-	}
-
-	public int getPulse() {
-		return pulse;
-	}
-
-	public int getTemp() {
-		return temp;
-	}
-
-	public boolean getAttacked() {
-		return attacked;
-	}
-
-	public double getX() {
-		return x;
-	}
-
-	public double getY() {
-		return y;
-	}
+	
 
 }
