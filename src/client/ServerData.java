@@ -19,13 +19,12 @@ public class ServerData {
 	
 	public static ArrayList<Message> filterMessages(boolean onlyAlarm,
 			String farmName, int sheepId, boolean allFarms, boolean allSheeps){
-		int farmId = getFarmByName(farmName).getFarmId();
 		ArrayList<Message> tmp = messages;
 		for (Message message : tmp) {
 			if (onlyAlarm != message.isAlarm())			
 				tmp.remove(message);
 			else if(!allFarms){
-				if (farmId != message.getSheep().getFarmId())
+				if (getFarmByName(farmName).getFarmId() != message.getSheep().getFarmId())
 					tmp.remove(message);
 			}
 			else if(!allSheeps){

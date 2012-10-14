@@ -574,6 +574,7 @@ public class Hub extends javax.swing.JFrame {
 
     private void filtersAlarmCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtersAlarmCheckBoxActionPerformed
        onlyAlarm = !onlyAlarm;
+       System.out.println(onlyAlarm);
     }//GEN-LAST:event_filtersAlarmCheckBoxActionPerformed
 
     private void filtersFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtersFilterButtonActionPerformed
