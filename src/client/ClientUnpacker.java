@@ -51,7 +51,6 @@ public class ClientUnpacker {
 		if (msg.getMessageName() == CommEnum.FARMSREPLY)
 		{
 			
-			System.out.println(params.size());
 			ServerData.farms = (ArrayList<Farm>) params;
 		}
 				

@@ -7,7 +7,6 @@ package gui;
 import java.util.ArrayList;
 
 import client.Client;
-import client.DbDownload;
 import client.ServerData;
 import helpclasses.CommEnum;
 import helpclasses.CommMessage;
@@ -527,7 +526,7 @@ public class Hub extends javax.swing.JFrame {
     	   ArrayList<Farm> metadata = new ArrayList<Farm>();
     	   metadata.add(new Farm(-1, farmName, ServerData.owner.getOwnerId()));
     	   Client.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.ADDFARM,metadata));
-    	   DbDownload.loadFarms();
+    	   Client.sockCli.sendMessage(new CommMessage<String>(CommEnum.GETFARMS, null));
        }else{
     	   JOptionPane.showMessageDialog(this, "Farm name must be at least 3 characters", "Invalid name", JOptionPane.ERROR_MESSAGE);
        }
@@ -639,6 +638,7 @@ public class Hub extends javax.swing.JFrame {
     
 
     public void initComp(){
+    	Client.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.GETFARMS, null));
         initAddSheep();
         initRemoveFarm();
         refreshMessages();
