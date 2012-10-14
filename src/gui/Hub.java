@@ -84,6 +84,17 @@ public class Hub extends javax.swing.JFrame {
         removeFarmNameLabel = new javax.swing.JLabel();
         removeFarmAdd = new javax.swing.JButton();
         removeFarmComboFarm = new javax.swing.JComboBox();
+        editContactInformation = new javax.swing.JPanel();
+        editContactInformationTitleLabel = new javax.swing.JLabel();
+        editEmailAddressLabel = new javax.swing.JLabel();
+        editTelephoneNumberLabel = new javax.swing.JLabel();
+        editFriendTelephoneNumberLabel = new javax.swing.JLabel();
+        editFriendEmailAddressLabel = new javax.swing.JLabel();
+        editTelephoneNumber = new javax.swing.JTextField();
+        editEmailAddress = new javax.swing.JTextField();
+        editFriendTelephoneNumber = new javax.swing.JTextField();
+        editFriendEmailAddress = new javax.swing.JTextField();
+        updateInformation = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -491,6 +502,86 @@ public class Hub extends javax.swing.JFrame {
 
         tabOptions.addTab("Remove Farm", removeFarm);
 
+        editContactInformationTitleLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        editContactInformationTitleLabel.setText("Edit Contact Information:");
+
+        editEmailAddressLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        editEmailAddressLabel.setText("Email address:");
+
+        editTelephoneNumberLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        editTelephoneNumberLabel.setText("Telephone number:");
+
+        editFriendTelephoneNumberLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        editFriendTelephoneNumberLabel.setText("Friend's telephone number:");
+
+        editFriendEmailAddressLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        editFriendEmailAddressLabel.setText("Friend's email address:");
+
+        editTelephoneNumber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        editEmailAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        editFriendTelephoneNumber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        editFriendEmailAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        updateInformation.setText("Update Information");
+
+        javax.swing.GroupLayout editContactInformationLayout = new javax.swing.GroupLayout(editContactInformation);
+        editContactInformation.setLayout(editContactInformationLayout);
+        editContactInformationLayout.setHorizontalGroup(
+            editContactInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editContactInformationLayout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addGroup(editContactInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(editEmailAddressLabel)
+                    .addComponent(editTelephoneNumberLabel)
+                    .addComponent(editFriendEmailAddressLabel)
+                    .addComponent(editFriendTelephoneNumberLabel)
+                    .addComponent(editContactInformationTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(editContactInformationLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(editContactInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editFriendEmailAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(editFriendTelephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(editEmailAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(editTelephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(updateInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(374, Short.MAX_VALUE))
+        );
+        editContactInformationLayout.setVerticalGroup(
+            editContactInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editContactInformationLayout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(editContactInformationTitleLabel)
+                .addGap(50, 50, 50)
+                .addComponent(editTelephoneNumberLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(editTelephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(editEmailAddressLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(editEmailAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(editFriendTelephoneNumberLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(editFriendTelephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(editFriendEmailAddressLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(editFriendEmailAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(updateInformation)
+                .addContainerGap(160, Short.MAX_VALUE))
+        );
+
+        editEmailAddressLabel.getAccessibleContext().setAccessibleName("Email address:");
+        editTelephoneNumberLabel.getAccessibleContext().setAccessibleName("Telephone number:");
+        editFriendTelephoneNumberLabel.getAccessibleContext().setAccessibleName("Friend's telephone number:");
+        editFriendEmailAddressLabel.getAccessibleContext().setAccessibleName("Friend's email address:");
+
+        tabOptions.addTab("Edit Contact Information", editContactInformation);
+
         tabMain.addTab("Options", tabOptions);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -608,6 +699,16 @@ public class Hub extends javax.swing.JFrame {
     private javax.swing.JLabel addSheepNameLabel;
     private javax.swing.JLabel addSheepNameOptionalLabel;
     private javax.swing.JLabel addSheepTitleLabel;
+    private javax.swing.JPanel editContactInformation;
+    private javax.swing.JLabel editContactInformationTitleLabel;
+    private javax.swing.JTextField editEmailAddress;
+    private javax.swing.JLabel editEmailAddressLabel;
+    private javax.swing.JTextField editFriendEmailAddress;
+    private javax.swing.JLabel editFriendEmailAddressLabel;
+    private javax.swing.JTextField editFriendTelephoneNumber;
+    private javax.swing.JLabel editFriendTelephoneNumberLabel;
+    private javax.swing.JTextField editTelephoneNumber;
+    private javax.swing.JLabel editTelephoneNumberLabel;
     private javax.swing.JCheckBox filtersAlarmCheckBox;
     private javax.swing.JLabel filtersAlarmLabel;
     private javax.swing.JComboBox filtersFarmComboBox;
@@ -634,6 +735,7 @@ public class Hub extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabHome;
     private javax.swing.JTabbedPane tabMain;
     private javax.swing.JTabbedPane tabOptions;
+    private javax.swing.JButton updateInformation;
     // End of variables declaration//GEN-END:variables
     
 
