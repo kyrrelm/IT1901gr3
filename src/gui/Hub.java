@@ -573,11 +573,13 @@ public class Hub extends javax.swing.JFrame {
     }//GEN-LAST:event_tabOptionsStateChanged
 
     private void filtersAlarmCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtersAlarmCheckBoxActionPerformed
-        // TODO add your handling code here:
+       onlyAlarm = !onlyAlarm;
     }//GEN-LAST:event_filtersAlarmCheckBoxActionPerformed
 
     private void filtersFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtersFilterButtonActionPerformed
-        // TODO add your handling code here:
+    	String farm = (String) filtersFarmComboBox.getSelectedItem();
+    	 messageList.setListData(ServerData.filterMessages(onlyAlarm, farm, -1, farm.equals("All farms"), true).toArray());
+    	
     }//GEN-LAST:event_filtersFilterButtonActionPerformed
 
     private void tabMainStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabMainStateChanged
@@ -636,6 +638,7 @@ public class Hub extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabOptions;
     // End of variables declaration//GEN-END:variables
     
+    private boolean onlyAlarm = false;
 
     public void initComp(){
     	Client.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.GETFARMS, null));
@@ -643,21 +646,12 @@ public class Hub extends javax.swing.JFrame {
         initRemoveFarm();
         refreshMessages();
     }
-    private String[] getFarmNames(){
-    	if(ServerData.farms.isEmpty())
-    		return new String[] {"You have no farm's"};
-        String[] tmp = new String[ServerData.farms.size()];
-        for (int i = 0; i < tmp.length; i++) {
-			tmp[i] = ServerData.farms.get(i).getName();
-		}
-        return tmp;
-    }
 
     private void initAddSheep(){
-    	addSheepFarm.setModel(new DefaultComboBoxModel(getFarmNames()));
+    	addSheepFarm.setModel(new DefaultComboBoxModel(ServerData.getFarmNames()));
     }
     private void initRemoveFarm() {
-        removeFarmComboFarm.setModel(new DefaultComboBoxModel(getFarmNames()));
+        removeFarmComboFarm.setModel(new DefaultComboBoxModel(ServerData.getFarmNames()));
     }
      private void refreshMessages()
     {
@@ -666,9 +660,11 @@ public class Hub extends javax.swing.JFrame {
         if (ServerData.isLoggedIn)
         {
             Client.sockCli.sendMessage(new CommMessage<String>(CommEnum.GETMESSAGES, null));
-        
+            
             messageList.setListData(ServerData.messages.toArray());
             messageList.setVisible(true);
+            
+            filtersFarmComboBox.setModel(new DefaultComboBoxModel(ServerData.getFarmNamesPlusAllFarms()));
         }
     }
 }

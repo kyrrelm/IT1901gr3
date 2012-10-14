@@ -13,6 +13,7 @@ public class Message implements Serializable {
 	private float temperature;
 	private Date dateTime;
 	private Sheep sheep;
+	private boolean alarm;
 	
 	
 	public Message(int messageId, Date dateTime, int pulse, float temperature,
@@ -25,8 +26,18 @@ public class Message implements Serializable {
 		this.positionX   = positionX;
 		this.positionY   = positionY;
 		this.sheepId 	 = sheepId;
+		//midlertidig
+		this.alarm = false;
 	}
 	
+	public boolean isAlarm() {
+		return alarm;
+	}
+
+	public void setAlarm(boolean alarm) {
+		this.alarm = alarm;
+	}
+
 	public int getMessageId() {
 		return messageId;
 	}
