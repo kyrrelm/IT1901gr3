@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import client.Client;
-import client.DbDownload;
 import client.ServerData;
 
 /**
@@ -123,7 +122,6 @@ public class Login extends javax.swing.JFrame {
         String password = this.password.getText();
        if(isUsernameAndPassword(username, password)){
             this.setVisible(false);
-            DbDownload.loadFarms();
             Client.hub.setVisible(true);
             Client.hub.initComp();
 
