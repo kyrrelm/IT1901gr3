@@ -19,19 +19,25 @@ public class ServerData {
 	
 	public static ArrayList<Message> filterMessages(boolean onlyAlarm,
 			String farmName, int sheepId, boolean allFarms, boolean allSheeps){
-		ArrayList<Message> tmp = messages;
-		for (Message message : tmp) {
-			if (onlyAlarm != message.isAlarm())			
-				tmp.remove(message);
+		ArrayList<Message> tmp = (ArrayList<Message>) messages.clone();
+		int size = tmp.size();
+		for (int i = 0; i < size; i++) {
+			if (onlyAlarm != tmp.get(i).isAlarm()){
+				tmp.remove(i);
+				size--;
+			}
 			else if(!allFarms){
-				if (getFarmByName(farmName).getFarmId() != message.getSheep().getFarmId())
-					tmp.remove(message);
+				if (getFarmByName(farmName).getFarmId() != tmp.get(i).getSheep().getFarmId()){
+					tmp.remove(i);
+					size--;
+				}
 			}
 			else if(!allSheeps){
-				if (sheepId != message.getSheepId())
-					tmp.remove(message);
+				if (sheepId != tmp.get(i).getSheepId()){
+					tmp.remove(i);
+					size--;
+				}
 			}
-				
 		}
 		return tmp;
 	}

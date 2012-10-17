@@ -26,6 +26,7 @@ public class Message implements Serializable {
 		this.positionX   = positionX;
 		this.positionY   = positionY;
 		this.sheepId 	 = sheepId;
+		this.sheep		 = sheep;
 		//midlertidig
 		this.alarm = false;
 	}

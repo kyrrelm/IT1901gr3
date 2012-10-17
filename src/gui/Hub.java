@@ -4,6 +4,10 @@
  */
 package gui;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 import java.util.ArrayList;
 
 import client.Client;
@@ -17,8 +21,12 @@ import helpclasses.Sheep;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.IOException;
 
 /**
  *
@@ -787,6 +795,7 @@ public class Hub extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
     private boolean onlyAlarm = false;
+	private String version = "alpha 0.1";
 
     public void initComp(){
     	Client.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.GETFARMS, null));
@@ -794,6 +803,19 @@ public class Hub extends javax.swing.JFrame {
         initContactInformation();
         initRemoveFarm();
         refreshMessages();
+        setIcon();
+        this.setTitle("SheepStalker " + version );
+        }
+    
+    private void setIcon(){
+    	 BufferedImage image = null;
+         try {
+             image = ImageIO.read(
+                 this.getClass().getResource("/res/win.jpg"));
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+         this.setIconImage(image);
     }
     
     private void initAddSheep(){
