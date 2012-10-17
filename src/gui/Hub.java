@@ -691,12 +691,12 @@ public class Hub extends javax.swing.JFrame {
 
 	private void filtersAlarmCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtersAlarmCheckBoxActionPerformed
 		onlyAlarm = !onlyAlarm;
-		System.out.println(onlyAlarm);
 	}//GEN-LAST:event_filtersAlarmCheckBoxActionPerformed
 
 	private void filtersFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtersFilterButtonActionPerformed
 		String farm = (String) filtersFarmComboBox.getSelectedItem();
-		messageList.setListData(ServerData.filterMessages(onlyAlarm, farm, -1, farm.equals("All farms"), true).toArray());
+                String sheep = (String) filtersSheepComboBox.getSelectedItem();
+		messageList.setListData(ServerData.filterMessages(onlyAlarm, farm, sheep, farm.equals("All farms"), sheep.equals("All sheep")).toArray());
 
 	}//GEN-LAST:event_filtersFilterButtonActionPerformed
 

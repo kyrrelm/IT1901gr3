@@ -20,11 +20,10 @@ public class ServerData {
 	public static ArrayList<Sheep> sheep = new ArrayList<Sheep>();
 
 	public static ArrayList<Message> filterMessages(boolean onlyAlarm,
-			String farmName, int sheepId, boolean allFarms, boolean allSheeps){
+			String farmName, String sheep, boolean allFarms, boolean allSheeps){
 		ArrayList<Message> tmp = (ArrayList<Message>) messages.clone();
+		System.out.println(allSheeps);
 		for (int i = 0; i < tmp.size(); i++) {
-			System.out.print("onlyAlarm " + onlyAlarm);
-			System.out.println("isAlarm " + tmp.get(i).isAlarm());
 			if (onlyAlarm != tmp.get(i).isAlarm()){
 				tmp.remove(i--);
 			}
@@ -34,7 +33,7 @@ public class ServerData {
 				}
 			}
 			else if(!allSheeps){
-				if (sheepId != tmp.get(i).getSheepId()){
+				if (Integer.parseInt(sheep) != tmp.get(i).getSheepId()){
 					tmp.remove(i--);
 				}
 			}
@@ -81,14 +80,11 @@ public class ServerData {
 	public static String[] getSheepNamesPlusAllSheeps() {
 		if(sheep.isEmpty())
 			return new String[] {"You have no sheep"};
-		for (Sheep s : sheep) {
-			System.out.println(s); 
-		}
 
 		String[] tmp = new String[sheep.size()+1];
 		tmp[0] = "All sheep";
 		for (int i = 1; i < tmp.length; i++) {
-			tmp[i] = sheep.get(i-1).getName();
+			tmp[i] = "" + sheep.get(i-1).getSheepId();
 		}
 		return tmp;
 	}
