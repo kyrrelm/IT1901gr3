@@ -825,7 +825,7 @@
                                       <Component id="editFriendTelephoneNumber" min="-2" pref="200" max="-2" attributes="0"/>
                                       <Component id="editEmailAddress" min="-2" pref="200" max="-2" attributes="0"/>
                                       <Component id="editTelephoneNumber" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                      <Component id="updateInformation" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                      <Component id="updateContactInformation" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -855,7 +855,7 @@
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                           <Component id="editFriendEmailAddress" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                          <Component id="updateInformation" min="-2" max="-2" attributes="0"/>
+                          <Component id="updateContactInformation" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="160" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -877,9 +877,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Email address:"/>
                   </Properties>
-                  <AccessibilityProperties>
-                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Email address:"/>
-                  </AccessibilityProperties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="editTelephoneNumberLabel">
                   <Properties>
@@ -888,9 +885,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Telephone number:"/>
                   </Properties>
-                  <AccessibilityProperties>
-                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Telephone number:"/>
-                  </AccessibilityProperties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="editFriendTelephoneNumberLabel">
                   <Properties>
@@ -899,9 +893,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Friend&apos;s telephone number:"/>
                   </Properties>
-                  <AccessibilityProperties>
-                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Friend&apos;s telephone number:"/>
-                  </AccessibilityProperties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="editFriendEmailAddressLabel">
                   <Properties>
@@ -910,9 +901,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Friend&apos;s email address:"/>
                   </Properties>
-                  <AccessibilityProperties>
-                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Friend&apos;s email address:"/>
-                  </AccessibilityProperties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="editTelephoneNumber">
                   <Properties>
@@ -942,10 +930,13 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="updateInformation">
+                <Component class="javax.swing.JButton" name="updateContactInformation">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Update Information"/>
+                    <Property name="text" type="java.lang.String" value="Update Contact Information"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateContactInformationActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

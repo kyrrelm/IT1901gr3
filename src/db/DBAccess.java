@@ -480,10 +480,10 @@ public class DBAccess {
 			}
 			
 			ResultSet resultSet = statement.executeQuery(
-					"UPDATE Owner SET PrimaryTLF='" + telephone + 
-					"' AND PrimaryMail='" + email + "' AND SecondaryTLF='" +
-					friendTelephone + "' AND SecondaryMail='" + friendEmail +
-					"'"	);
+					"UPDATE Owner SET PrimaryTLF='" + telephone +
+					"' AND PrimaryMail='" + email +
+					"' AND SecondaryTLF='" + friendTelephone +
+					"' AND SecondaryMail='" + friendEmail + "'"	);
 			
 			return getOwner(username, password);
 		}

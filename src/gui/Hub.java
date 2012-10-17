@@ -95,7 +95,7 @@ public class Hub extends javax.swing.JFrame {
         editEmailAddress = new javax.swing.JTextField();
         editFriendTelephoneNumber = new javax.swing.JTextField();
         editFriendEmailAddress = new javax.swing.JTextField();
-        updateInformation = new javax.swing.JButton();
+        updateContactInformation = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -543,7 +543,12 @@ public class Hub extends javax.swing.JFrame {
 
         editFriendEmailAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        updateInformation.setText("Update Information");
+        updateContactInformation.setText("Update Contact Information");
+        updateContactInformation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateContactInformationActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout editContactInformationLayout = new javax.swing.GroupLayout(editContactInformation);
         editContactInformation.setLayout(editContactInformationLayout);
@@ -564,7 +569,7 @@ public class Hub extends javax.swing.JFrame {
                             .addComponent(editFriendTelephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(editEmailAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(editTelephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(updateInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(updateContactInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(374, Short.MAX_VALUE))
         );
         editContactInformationLayout.setVerticalGroup(
@@ -589,14 +594,9 @@ public class Hub extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(editFriendEmailAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(updateInformation)
+                .addComponent(updateContactInformation)
                 .addContainerGap(160, Short.MAX_VALUE))
         );
-
-        editEmailAddressLabel.getAccessibleContext().setAccessibleName("Email address:");
-        editTelephoneNumberLabel.getAccessibleContext().setAccessibleName("Telephone number:");
-        editFriendTelephoneNumberLabel.getAccessibleContext().setAccessibleName("Friend's telephone number:");
-        editFriendEmailAddressLabel.getAccessibleContext().setAccessibleName("Friend's email address:");
 
         tabOptions.addTab("Edit Contact Information", editContactInformation);
 
@@ -702,6 +702,32 @@ public class Hub extends javax.swing.JFrame {
         refreshMessages();
     }//GEN-LAST:event_tabHomeStateChanged
 
+    private void updateContactInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateContactInformationActionPerformed
+        /*String telephoneNumber 		 = editTelephoneNumber.getText();
+        String emailAddress	   		 = editEmailAddress.getText();
+        String friendTelephoneNumber = editFriendTelephoneNumber.getText();
+        String friendEmailAddress	 = editFriendEmailAddress.getText();
+        
+        //Should perhaps checked for valid number and email address. Can
+        // implement this later.
+        
+        //We create a temporary owner which we can use to send the data. It has
+        // to have the username and password for the current user. With it we
+        // the updated contact information.
+        Owner owner = new Owner(-1,
+        		ServerData.owner.getUsername(),
+        		ServerData.owner.getPassword(),
+        		"", "",
+        		Integer.parseInt(telephoneNumber), emailAddress,
+        		Integer.parseInt(friendTelephoneNumber), friendEmailAddress);
+        
+        Client.sockCli.sendMessage(new CommMessage<Owner>(
+        		CommEnum.UPDATECONTACTINFORMATION, owner));
+        
+        */
+    	// TODO add your handling code here:
+    }//GEN-LAST:event_updateContactInformationActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -757,7 +783,7 @@ public class Hub extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabHome;
     private javax.swing.JTabbedPane tabMain;
     private javax.swing.JTabbedPane tabOptions;
-    private javax.swing.JButton updateInformation;
+    private javax.swing.JButton updateContactInformation;
     // End of variables declaration//GEN-END:variables
     
     private boolean onlyAlarm = false;
@@ -765,13 +791,27 @@ public class Hub extends javax.swing.JFrame {
     public void initComp(){
     	Client.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.GETFARMS, null));
         initAddSheep();
+        initContactInformation();
         initRemoveFarm();
         refreshMessages();
     }
-
+    
     private void initAddSheep(){
     	addSheepFarm.setModel(new DefaultComboBoxModel(ServerData.getFarmNames()));
     }
+    
+    /**
+     * Function initializes contact information for the user. The contact
+     * information can be seen in the tab Options->Edit Contact Information
+     */
+    private void initContactInformation() {
+    	editTelephoneNumber.setText(String.valueOf(ServerData.owner.getPrimaryTLF()));
+    	editEmailAddress.setText(ServerData.owner.getPrimaryMail());
+    	editFriendTelephoneNumber.setText(String.valueOf(ServerData.owner.getSecondaryTLF()));
+    	editFriendEmailAddress.setText(ServerData.owner.getSecondaryMail());
+    	
+    }
+    
     private void initRemoveFarm() {
         removeFarmComboFarm.setModel(new DefaultComboBoxModel(ServerData.getFarmNames()));
     }
