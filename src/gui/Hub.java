@@ -710,8 +710,9 @@ public class Hub extends javax.swing.JFrame {
         refreshMessages();
     }//GEN-LAST:event_tabHomeStateChanged
 
-    private void updateContactInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateContactInformationActionPerformed
-        /*String telephoneNumber 		 = editTelephoneNumber.getText();
+    private void updateContactInformationActionPerformed(
+    		java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateContactInformationActionPerformed
+        String telephoneNumber 		 = editTelephoneNumber.getText();
         String emailAddress	   		 = editEmailAddress.getText();
         String friendTelephoneNumber = editFriendTelephoneNumber.getText();
         String friendEmailAddress	 = editFriendEmailAddress.getText();
@@ -719,20 +720,29 @@ public class Hub extends javax.swing.JFrame {
         //Should perhaps checked for valid number and email address. Can
         // implement this later.
         
+        //Uncertain about using an ArrayList when i'm only send 1 owner
+        ArrayList<Owner> owner = new ArrayList<Owner>();
+        owner.add(new Owner(-1,
+        		ServerData.owner.getUsername(),
+        		ServerData.owner.getPassword(),
+        		"", "",
+        		Integer.parseInt(telephoneNumber), emailAddress,
+        		Integer.parseInt(friendTelephoneNumber), friendEmailAddress));
+        
         //We create a temporary owner which we can use to send the data. It has
         // to have the username and password for the current user. With it we
         // the updated contact information.
-        Owner owner = new Owner(-1,
+        /*Owner owner = new Owner(-1,
         		ServerData.owner.getUsername(),
         		ServerData.owner.getPassword(),
         		"", "",
         		Integer.parseInt(telephoneNumber), emailAddress,
         		Integer.parseInt(friendTelephoneNumber), friendEmailAddress);
-        
+        */
         Client.sockCli.sendMessage(new CommMessage<Owner>(
         		CommEnum.UPDATECONTACTINFORMATION, owner));
         
-        */
+        
     	// TODO add your handling code here:
     }//GEN-LAST:event_updateContactInformationActionPerformed
 

@@ -478,12 +478,17 @@ public class DBAccess {
 					friendEmail == "") {
 				return null;
 			}
+			System.out.println("About to execute update!");
 			
-			ResultSet resultSet = statement.executeQuery(
+			statement.executeUpdate(
 					"UPDATE Owner SET PrimaryTLF='" + telephone +
-					"' AND PrimaryMail='" + email +
-					"' AND SecondaryTLF='" + friendTelephone +
-					"' AND SecondaryMail='" + friendEmail + "'"	);
+					"', PrimaryMail='" + email +
+					"', SecondaryTLF='" + friendTelephone +
+					"', SecondaryMail='" + friendEmail +
+					"' WHERE Username='" + username + "' AND Password='" +
+					password + "'");
+			
+			System.out.println("Database was updated!");
 			
 			return getOwner(username, password);
 		}
