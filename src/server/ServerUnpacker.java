@@ -87,6 +87,11 @@ public class ServerUnpacker {
 			ArrayList<Farm> Msgs = DBAccess.getFarmsByOwner(st.getOwner().getOwnerId());
 			return new CommMessage<Farm>(CommEnum.FARMSREPLY, Msgs);
 		}
+		if (msg.getMessageName() == CommEnum.GETSHEEP)
+		{
+			ArrayList<Sheep> Msgs = DBAccess.getAllSheepByOwner(st.getOwner().getOwnerId());
+			return new CommMessage<Sheep>(CommEnum.SHEEPREPLY, Msgs);
+		}
 		if (msg.getMessageName() == CommEnum.REMOVEFARM)
 		{
 			Farm farm = (Farm) params.get(0);
