@@ -1,0 +1,8 @@
+BUG LIST
+
+- Login av owners med tomme felter i DB tvinger frem kræsj.
+	Fixed tror jeg, -halvorGB (skjekker om input lengde er >0 før det sendes noe til server)
+- Login med server nede throws ConnectException, her bør det det komme en feilmelding.
+
+- Scott/Tiger har ingen beskjeder liggende lenger, trodde jeg hadde bug dritlenge. T_T
+- Passord og brukernavn er ikke case sensitive WTF

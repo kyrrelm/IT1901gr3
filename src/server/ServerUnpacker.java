@@ -87,6 +87,11 @@ public class ServerUnpacker {
 			ArrayList<Farm> Msgs = DBAccess.getFarmsByOwner(st.getOwner().getOwnerId());
 			return new CommMessage<Farm>(CommEnum.FARMSREPLY, Msgs);
 		}
+		if (msg.getMessageName() == CommEnum.GETSHEEP)
+		{
+			ArrayList<Sheep> Msgs = DBAccess.getAllSheepByOwner(st.getOwner().getOwnerId());
+			return new CommMessage<Sheep>(CommEnum.SHEEPREPLY, Msgs);
+		}
 		if (msg.getMessageName() == CommEnum.REMOVEFARM)
 		{
 			Farm farm = (Farm) params.get(0);
@@ -101,6 +106,25 @@ public class ServerUnpacker {
 			ArrayList<Farm> Msgs = DBAccess.getFarmsByOwner(st.getOwner().getOwnerId());
 			return new CommMessage<Farm>(CommEnum.FARMSREPLY, Msgs);
 		}
+		
+		/**
+		 * Here we call the relevant function in DBAccess.java. This handle the
+		 *  updating of the contact information in the database for the owner.
+		 *  It updates PrimaryTLF, PrimaryMail, SecondaryTLF and SecondaryMail 
+		 */
+/*		if(msg.getMessageName() == CommEnum.UPDATECONTACTINFORMATION) {
+			Owner owner = (Owner) params.get(0);
+			
+			DBAccess.updateOwnerContactInformation(
+					owner.getUsername(), owner.getPassword(),
+					String.valueOf(owner.getPrimaryTLF()),
+					owner.getPrimaryMail(),
+					String.valueOf(owner.getSecondaryTLF()),
+					owner.getSecondaryMail());
+			
+			return new CommMessage<Owner>(CommEnum.SUCCESS, null);
+	}
+*/		
 		return null;
 		
 	}

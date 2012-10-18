@@ -24,7 +24,7 @@ public class SocketClient {
 	ObjectInputStream in; // --//-- in
 	String servName;
 	int port;
-	
+
 
 	public SocketClient(String server, int port) 
 	{
@@ -44,8 +44,8 @@ public class SocketClient {
 			out = new ObjectOutputStream(clientSocket.getOutputStream());
 			out.flush();
 			in = new ObjectInputStream(clientSocket.getInputStream());
-			
-			
+
+
 		}
 		catch(UnknownHostException e)
 		{
@@ -75,28 +75,28 @@ public class SocketClient {
 		{
 			e.printStackTrace();
 		}
-		
-		
+
+
 
 		// TODO: wait for reply!
 		// If reply != null? alltid?
-		 try {
-				CommMessage<?> message = (CommMessage<?>) in.readObject();
-				
-				//System.out.println(message.getMessageName());
-				
-				ClientUnpacker.unpackClientMessage(message);
-				
+		try {
+			CommMessage<?> message = (CommMessage<?>) in.readObject();
 
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.err.println("Class not recognized");
-			} catch (IOException e) {
-				e.printStackTrace();
-				System.err.println("Socket closed!");
-				close();
-			}
+			//System.out.println(message.getMessageName());
+
+			ClientUnpacker.unpackClientMessage(message);
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.err.println("Class not recognized");
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.err.println("Socket closed!");
+			close();
+		}
 
 	}
 

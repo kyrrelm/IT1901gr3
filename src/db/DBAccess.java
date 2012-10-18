@@ -295,6 +295,30 @@ public class DBAccess {
 			return null;
 		}
 	}
+	public static ArrayList<Sheep> getAllSheepByOwner(int ownerId) {
+		try {
+			Statement statement = con.createStatement();
+			ArrayList<Sheep> sheep = new ArrayList<Sheep>();
+			
+		
+			
+			ResultSet resultSet = statement.executeQuery(
+					"SELECT * FROM Sheep WHERE OwnerID = '" + ownerId + "'");
+			
+			while(resultSet.next()) {
+				sheep.add(new Sheep(Integer.parseInt(resultSet.getString(1)), 
+						resultSet.getString(2), Integer.parseInt(resultSet.getString(3)),
+						Integer.parseInt(resultSet.getString(4)), Integer.parseInt(resultSet.getString(5))));
+			}
+			
+			return sheep;
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+		
+			return null;
+		}
+	}
 	public static Message getMessage(int messageId) {
 		try {
 			Statement statement = con.createStatement();
@@ -478,12 +502,17 @@ public class DBAccess {
 					friendEmail == "") {
 				return null;
 			}
+			System.out.println("About to execute update!");
 			
-			ResultSet resultSet = statement.executeQuery(
-					"UPDATE Owner SET PrimaryTLF='" + telephone + 
-					"' AND PrimaryMail='" + email + "' AND SecondaryTLF='" +
-					friendTelephone + "' AND SecondaryMail='" + friendEmail +
-					"'"	);
+			statement.executeUpdate(
+					"UPDATE Owner SET PrimaryTLF='" + telephone +
+					"', PrimaryMail='" + email +
+					"', SecondaryTLF='" + friendTelephone +
+					"', SecondaryMail='" + friendEmail +
+					"' WHERE Username='" + username + "' AND Password='" +
+					password + "'");
+			
+			System.out.println("Database was updated!");
 			
 			return getOwner(username, password);
 		}

@@ -3,6 +3,7 @@ package client;
 import helpclasses.Farm;
 import helpclasses.Message;
 import helpclasses.Owner;
+import helpclasses.Sheep;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,22 +17,26 @@ public class ServerData {
 	public static Owner owner;
 	public static ArrayList<Message> messages = new ArrayList<Message>();
 	public static ArrayList<Farm> farms = new ArrayList<Farm>();
-	
+	public static ArrayList<Sheep> sheep = new ArrayList<Sheep>();
+
 	public static ArrayList<Message> filterMessages(boolean onlyAlarm,
-			String farmName, int sheepId, boolean allFarms, boolean allSheeps){
-		ArrayList<Message> tmp = messages;
-		for (Message message : tmp) {
-			if (onlyAlarm != message.isAlarm())			
-				tmp.remove(message);
+			String farmName, String sheep, boolean allFarms, boolean allSheeps){
+		ArrayList<Message> tmp = (ArrayList<Message>) messages.clone();
+		System.out.println(allSheeps);
+		for (int i = 0; i < tmp.size(); i++) {
+			if (onlyAlarm != tmp.get(i).isAlarm()){
+				tmp.remove(i--);
+			}
 			else if(!allFarms){
-				if (getFarmByName(farmName).getFarmId() != message.getSheep().getFarmId())
-					tmp.remove(message);
+				if (getFarmByName(farmName).getFarmId() != tmp.get(i).getSheep().getFarmId()){
+					tmp.remove(i--);
+				}
 			}
 			else if(!allSheeps){
-				if (sheepId != message.getSheepId())
-					tmp.remove(message);
+				if (Integer.parseInt(sheep) != tmp.get(i).getSheepId()){
+					tmp.remove(i--);
+				}
 			}
-				
 		}
 		return tmp;
 	}
@@ -54,22 +59,33 @@ public class ServerData {
 		return null;
 	}
 	public static String[] getFarmNames(){
-	    if(ServerData.farms.isEmpty())
-	    	return new String[] {"You have no farm's"};
-	    String[] tmp = new String[ServerData.farms.size()];
-	    for (int i = 0; i < tmp.length; i++) {
-		tmp[i] = ServerData.farms.get(i).getName();
+		if(farms.isEmpty())
+			return new String[] {"You have no farms"};
+		String[] tmp = new String[farms.size()];
+		for (int i = 0; i < tmp.length; i++) {
+			tmp[i] = farms.get(i).getName();
 		}
-	    return tmp;
+		return tmp;
 	}
 	public static String[] getFarmNamesPlusAllFarms(){
-	    if(ServerData.farms.isEmpty())
-	    	return new String[] {"You have no farm's"};
-	    String[] tmp = new String[ServerData.farms.size()+1];
-	    tmp[0] = "All farms";
-	    for (int i = 1; i < tmp.length; i++) {
-		tmp[i] = ServerData.farms.get(i-1).getName();
+		if(farms.isEmpty())
+			return new String[] {"You have no farms"};
+		String[] tmp = new String[farms.size()+1];
+		tmp[0] = "All farms";
+		for (int i = 1; i < tmp.length; i++) {
+			tmp[i] = farms.get(i-1).getName();
 		}
-	    return tmp;
+		return tmp;
+	}
+	public static String[] getSheepNamesPlusAllSheeps() {
+		if(sheep.isEmpty())
+			return new String[] {"You have no sheep"};
+
+		String[] tmp = new String[sheep.size()+1];
+		tmp[0] = "All sheep";
+		for (int i = 1; i < tmp.length; i++) {
+			tmp[i] = "" + sheep.get(i-1).getSheepId();
+		}
+		return tmp;
 	}
 }
