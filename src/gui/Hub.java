@@ -57,7 +57,7 @@ public class Hub extends javax.swing.JFrame {
 		messages = new javax.swing.JPanel();
 		messageList = new javax.swing.JList();
 		map = new javax.swing.JPanel();
-		mapPanel = new javax.swing.JPanel();
+		mapPanel = new MapPanel();
 		panelFilters = new javax.swing.JPanel();
 		filtersLabel = new javax.swing.JLabel();
 		filtersFarmComboBox = new javax.swing.JComboBox();
@@ -783,7 +783,7 @@ public class Hub extends javax.swing.JFrame {
 	private javax.swing.JComboBox filtersSheepComboBox;
 	private javax.swing.JLabel filtersSheepLabel;
 	private javax.swing.JPanel map;
-	private javax.swing.JPanel mapPanel;
+	private MapPanel mapPanel;
 	private javax.swing.JList messageList;
 	private javax.swing.JPanel messages;
 	private javax.swing.JPanel panelFilters;
