@@ -112,7 +112,7 @@ public class ServerUnpacker {
 		 *  updating of the contact information in the database for the owner.
 		 *  It updates PrimaryTLF, PrimaryMail, SecondaryTLF and SecondaryMail 
 		 */
-/*		if(msg.getMessageName() == CommEnum.UPDATECONTACTINFORMATION) {
+		if(msg.getMessageName() == CommEnum.UPDATECONTACTINFORMATION) {
 			Owner owner = (Owner) params.get(0);
 			
 			DBAccess.updateOwnerContactInformation(
@@ -124,7 +124,7 @@ public class ServerUnpacker {
 			
 			return new CommMessage<Owner>(CommEnum.SUCCESS, null);
 	}
-*/		
+		
 		return null;
 		
 	}
