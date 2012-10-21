@@ -70,6 +70,6 @@ public class EmailSender
 	// testing
 	public static void main (String args[])
 	{
-		sendEmail("halvorgb@gmail.com", "ALERT", "Your sheep EINAR has been wounded, he is at position (x, y)");
+		sendEmail("_@_.com", "ALERT", "Your sheep EINAR has been wounded, he is at position (x, y)");
 	}
 }
