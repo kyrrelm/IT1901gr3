@@ -24,12 +24,13 @@ public class Client {
 
 		sockCli = new SocketClient("localhost", 6667);
 		sockCli.run();
-		login = new Login();
-		hub = new Hub();
+		
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override
 			public void run() {
+				login = new Login();
+				hub = new Hub();
 				login.setVisible(true);
 
 			}

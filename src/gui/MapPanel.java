@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.net.URL;
 
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
@@ -20,6 +21,9 @@ public class MapPanel extends JPanel{
 	private JFXPanel jfxPanel;
 	private WebView webView;
 	
+	
+	final String localURL = "/res/kart.html";
+	
 	public MapPanel()
 	{
 		initComponents();
@@ -33,12 +37,21 @@ public class MapPanel extends JPanel{
             public void run() {  
                 // Create a Swing Frame
                 final JFrame frame = new JFrame();  
-                frame.setMinimumSize(new Dimension(640, 480));  
+                frame.setMinimumSize(new Dimension(547, 563));  
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
                   
                 // Add the Swing JPanel and make visible
-                frame.getContentPane().add(new MapPanel());  
-                frame.setVisible(true);  
+                //frame.getContentPane().add(new MapPanel());  
+                
+                
+                JPanel lolPanel = new JPanel();
+                lolPanel.setPreferredSize(new Dimension(540, 560));
+                frame.getContentPane().add(lolPanel);
+                
+                lolPanel.add(new MapPanel());
+                
+                
+                frame.setVisible(true);
             }  
         }); 
 	}
@@ -58,6 +71,7 @@ public class MapPanel extends JPanel{
 	{
 		PlatformImpl.startup(
 	            new Runnable() {
+	            	@Override
 	                public void run() {  
 	                    Group root = new Group();  
 	                    Scene scene = new Scene(root, 540, 560);
@@ -67,16 +81,22 @@ public class MapPanel extends JPanel{
 	                    webView.setMinSize(540, 560);
 	                    webView.setMaxSize(540, 560);
 	                    
-	                    loadURL("http://www.google.com");
+	                    loadURL();
 	                }  
 	            });  
 	}
 	
-	public void loadURL(String url)
+	public void loadURL()
 	{
+		
+		URL url = getClass().getResource(localURL);
+		
+		
 		WebEngine webEngine = webView.getEngine();
-		webEngine.load(url);
-		System.out.println("This happened");
+		webEngine.load(url.toExternalForm());
+		System.out.println("This happened: " + url + " loaded.");
+		System.out.println("isOpaque: " + jfxPanel.isOpaque());
+		
 	}
 	
 }

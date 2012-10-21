@@ -147,7 +147,7 @@ public class Hub extends javax.swing.JFrame {
 				);
 
 		tabHome.addTab("Messages", messages);
-
+		/*
 		javax.swing.GroupLayout mapPanelLayout = new javax.swing.GroupLayout(mapPanel);
 		mapPanel.setLayout(mapPanelLayout);
 		mapPanelLayout.setHorizontalGroup(
@@ -158,7 +158,11 @@ public class Hub extends javax.swing.JFrame {
 				mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGap(0, 567, Short.MAX_VALUE)
 				);
-
+		*/
+		
+		map.add(mapPanel);
+		
+		/*
 		javax.swing.GroupLayout mapLayout = new javax.swing.GroupLayout(map);
 		map.setLayout(mapLayout);
 		mapLayout.setHorizontalGroup(
@@ -175,7 +179,7 @@ public class Hub extends javax.swing.JFrame {
 						.addComponent(mapPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addContainerGap())
 				);
-
+		*/
 		tabHome.addTab("Map", map);
 
 		filtersLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -816,6 +820,8 @@ public class Hub extends javax.swing.JFrame {
 		refreshMessages();
 		setIcon();
 		this.setTitle("SheepStalker " + version );
+		
+		restartMap();
 	}
 
 	private void setIcon(){
@@ -862,5 +868,10 @@ public class Hub extends javax.swing.JFrame {
 			filtersFarmComboBox.setModel(new DefaultComboBoxModel(ServerData.getFarmNamesPlusAllFarms()));
 			filtersSheepComboBox.setModel(new DefaultComboBoxModel(ServerData.getSheepNamesPlusAllSheeps()));
 		}
+	}
+	
+	private void restartMap()
+	{
+		this.mapPanel = new MapPanel();
 	}
 }
