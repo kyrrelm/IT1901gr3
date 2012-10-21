@@ -712,42 +712,114 @@ public class Hub extends javax.swing.JFrame {
 
 	private void updateContactInformationActionPerformed(
 			java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateContactInformationActionPerformed
+		boolean isValuesValid		 = false;
 		String telephoneNumber 		 = editTelephoneNumber.getText();
 		String emailAddress	   		 = editEmailAddress.getText();
 		String friendTelephoneNumber = editFriendTelephoneNumber.getText();
 		String friendEmailAddress	 = editFriendEmailAddress.getText();
+		
+		
+		isValuesValid = isContactInformationValid(telephoneNumber,
+				emailAddress, friendTelephoneNumber, friendEmailAddress);
+		
+		
+		if(isValuesValid) {
+			//Uncertain about using an ArrayList when i'm only send 1 owner
+			ArrayList<Owner> owner = new ArrayList<Owner>();
+			owner.add(new Owner(-1,
+					ServerData.owner.getUsername(),
+					ServerData.owner.getPassword(),
+					"", "",
+					Integer.parseInt(telephoneNumber), emailAddress,
+					Integer.parseInt(friendTelephoneNumber), friendEmailAddress));
 
-		//Should perhaps checked for valid number and email address. Can
-		// implement this later.
-
-		//Uncertain about using an ArrayList when i'm only send 1 owner
-		ArrayList<Owner> owner = new ArrayList<Owner>();
-		owner.add(new Owner(-1,
-				ServerData.owner.getUsername(),
-				ServerData.owner.getPassword(),
-				"", "",
-				Integer.parseInt(telephoneNumber), emailAddress,
-				Integer.parseInt(friendTelephoneNumber), friendEmailAddress));
-
-		//We create a temporary owner which we can use to send the data. It has
-		// to have the username and password for the current user. With it we
-		// the updated contact information.
-		/*Owner owner = new Owner(-1,
-        		ServerData.owner.getUsername(),
-        		ServerData.owner.getPassword(),
-        		"", "",
-        		Integer.parseInt(telephoneNumber), emailAddress,
-        		Integer.parseInt(friendTelephoneNumber), friendEmailAddress);
-		 */
-		Client.sockCli.sendMessage(new CommMessage<Owner>(
-				CommEnum.UPDATECONTACTINFORMATION, owner));
-
+		
+			Client.sockCli.sendMessage(new CommMessage<Owner>(
+					CommEnum.UPDATECONTACTINFORMATION, owner));
+		}
 
 		// TODO add your handling code here:
 	}//GEN-LAST:event_updateContactInformationActionPerformed
-
-
-
+	
+	/**
+	 * This function checks to see if the given telephone numbers and email
+	 * addresses is valid. Error message is given if a non-valid value is
+	 *  found.
+	 * @param telephoneNumber1
+	 * @param emailAddress1
+	 * @param telephoneNumber2
+	 * @param emailAddress2
+	 * @return true if all values are valid, false otherwise
+	 */
+	private boolean isContactInformationValid(String telephoneNumber1,
+			String emailAddress1, String telephoneNumber2,
+			String emailAddress2) {
+		
+		if(!isTelephoneNumber(telephoneNumber1)) {
+			JOptionPane.showMessageDialog(null, telephoneNumber1 +
+					" is not a valid telephoneNumber", 
+					"Not valid contact information",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(!isEmailAddress(emailAddress1)) {
+			JOptionPane.showMessageDialog(null, emailAddress1 +
+					" is not a valid email address", 
+					"Not valid contact information",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(!isTelephoneNumber(telephoneNumber2)) {
+			JOptionPane.showMessageDialog(null, telephoneNumber2 +
+					" is not a valid telephoneNumber", 
+					"Not valid contact information",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(!isEmailAddress(emailAddress2)) {
+			JOptionPane.showMessageDialog(null, emailAddress2 +
+					" is not a valid email address", 
+					"Not valid contact information",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * Function checks to see if paramter is a telephone number.
+	 *  (Could be improved)
+	 * @param value
+	 * @return true if value contains only integers, false otherwise
+	 */
+	private boolean isTelephoneNumber(String value) {
+		try {
+			Integer.parseInt(value);
+			return true;
+		}
+		catch(Exception exception) {
+			return false;
+		}
+	}
+	
+	/**
+	 * Function checks to sees if paramter is a valid email address.
+	 *  (Could be improved. Is very simple)
+	 * @param value
+	 * @return true if valid email address false otherwise
+	 */
+	private boolean isEmailAddress(String value) {
+		String values = "@.";
+		
+		if(value.contains(values)) {
+			return true;
+		}
+		
+		return false;	
+	}
+	
+	
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addFarm;
     private javax.swing.JButton addFarmAdd;
