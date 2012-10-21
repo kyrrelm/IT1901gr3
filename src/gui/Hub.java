@@ -159,10 +159,7 @@ public class Hub extends javax.swing.JFrame {
 				.addGap(0, 567, Short.MAX_VALUE)
 				);
 		*/
-		
-		map.add(mapPanel);
-		
-		/*
+				
 		javax.swing.GroupLayout mapLayout = new javax.swing.GroupLayout(map);
 		map.setLayout(mapLayout);
 		mapLayout.setHorizontalGroup(
@@ -179,7 +176,7 @@ public class Hub extends javax.swing.JFrame {
 						.addComponent(mapPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addContainerGap())
 				);
-		*/
+		
 		tabHome.addTab("Map", map);
 
 		filtersLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
