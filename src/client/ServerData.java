@@ -77,7 +77,7 @@ public class ServerData {
 		}
 		return tmp;
 	}
-	public static String[] getSheepNamesPlusAllSheeps() {
+	public static String[] getSheepNamesPlusAllSheep() {
 		if(sheep.isEmpty())
 			return new String[] {"You have no sheep"};
 
@@ -87,5 +87,28 @@ public class ServerData {
 			tmp[i] = "" + sheep.get(i-1).getSheepId();
 		}
 		return tmp;
+	}
+	public static String[] getSheepNamesByFarmName(String farm) {
+		if(sheep.isEmpty())
+			return new String[] {"You have no sheep"};
+		ArrayList<String> tmp = new ArrayList<String>();
+		tmp.add("All sheep");
+		if (farm.equals("All farms")){
+			for (Sheep s : sheep) {
+				tmp.add(""+s.getSheepId());
+			}
+			return tmp.toArray(new String[tmp.size()]);
+		}	
+		for (Farm f : farms) {
+			if(f.getName().equals(farm)){
+				for (Sheep s : sheep) {
+					if (s.getFarmId() == f.getFarmId()) {
+						tmp.add(""+s.getSheepId());
+					}
+				}
+				return tmp.toArray(new String[tmp.size()]);
+			}	
+		}
+		return new String[] {"Error: Something went wrong"};
 	}
 }

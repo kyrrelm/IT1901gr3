@@ -57,7 +57,7 @@ public class Hub extends javax.swing.JFrame {
         messages = new javax.swing.JPanel();
         messageList = new javax.swing.JList();
         map = new javax.swing.JPanel();
-        mapPanel = new MapPanel();
+        mapPanel = new javax.swing.JPanel();
         panelFilters = new javax.swing.JPanel();
         filtersLabel = new javax.swing.JLabel();
         filtersFarmComboBox = new javax.swing.JComboBox();
@@ -147,7 +147,7 @@ public class Hub extends javax.swing.JFrame {
         );
 
         tabHome.addTab("Messages", messages);
-/*
+
         javax.swing.GroupLayout mapPanelLayout = new javax.swing.GroupLayout(mapPanel);
         mapPanel.setLayout(mapPanelLayout);
         mapPanelLayout.setHorizontalGroup(
@@ -158,7 +158,7 @@ public class Hub extends javax.swing.JFrame {
             mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 567, Short.MAX_VALUE)
         );
-*/
+
         javax.swing.GroupLayout mapLayout = new javax.swing.GroupLayout(map);
         map.setLayout(mapLayout);
         mapLayout.setHorizontalGroup(
@@ -182,6 +182,11 @@ public class Hub extends javax.swing.JFrame {
         filtersLabel.setText("Filters:");
 
         filtersFarmComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All Farms" }));
+        filtersFarmComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filtersFarmComboBoxActionPerformed(evt);
+            }
+        });
 
         filtersFarmLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         filtersFarmLabel.setText("Farm:");
@@ -190,6 +195,11 @@ public class Hub extends javax.swing.JFrame {
         filtersSheepLabel.setText("Sheep:");
 
         filtersSheepComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All Sheep" }));
+        filtersSheepComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filtersSheepComboBoxActionPerformed(evt);
+            }
+        });
 
         filtersAlarmCheckBox.setText("Only alarm messages.");
         filtersAlarmCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -743,6 +753,15 @@ public class Hub extends javax.swing.JFrame {
 
 		// TODO add your handling code here:
 	}//GEN-LAST:event_updateContactInformationActionPerformed
+
+    private void filtersFarmComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtersFarmComboBoxActionPerformed
+        filtersSheepComboBox.setModel(new DefaultComboBoxModel
+                (ServerData.getSheepNamesByFarmName((String)filtersFarmComboBox.getSelectedItem())));
+    }//GEN-LAST:event_filtersFarmComboBoxActionPerformed
+
+    private void filtersSheepComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtersSheepComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_filtersSheepComboBoxActionPerformed
 	
 	/**
 	 * This function checks to see if the given telephone numbers and email
@@ -858,7 +877,7 @@ public class Hub extends javax.swing.JFrame {
     private javax.swing.JComboBox filtersSheepComboBox;
     private javax.swing.JLabel filtersSheepLabel;
     private javax.swing.JPanel map;
-    private MapPanel mapPanel;
+    private javax.swing.JPanel mapPanel;
     private javax.swing.JList messageList;
     private javax.swing.JPanel messages;
     private javax.swing.JPanel panelFilters;
@@ -936,7 +955,7 @@ public class Hub extends javax.swing.JFrame {
 			messageList.setVisible(true);
 
 			filtersFarmComboBox.setModel(new DefaultComboBoxModel(ServerData.getFarmNamesPlusAllFarms()));
-			filtersSheepComboBox.setModel(new DefaultComboBoxModel(ServerData.getSheepNamesPlusAllSheeps()));
+			filtersSheepComboBox.setModel(new DefaultComboBoxModel(ServerData.getSheepNamesPlusAllSheep()));
 		}
 	}
 	
