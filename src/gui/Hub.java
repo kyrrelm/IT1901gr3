@@ -898,7 +898,7 @@ public class Hub extends javax.swing.JFrame {
 		BufferedImage image = null;
 		try {
 			image = ImageIO.read(
-					this.getClass().getResource("/res/win.jpg"));
+					this.getClass().getResource("/res/hatt.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
