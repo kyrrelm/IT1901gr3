@@ -78,9 +78,9 @@ public class ServerThread extends Thread
 			}
 	        
 	        
-	        // sleep for a while!
+	        // sleep for a while! Hvorfor? Load? -Halvor
 	        try {
-				ServerThread.sleep(500);
+				ServerThread.sleep(50);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

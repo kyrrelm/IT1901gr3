@@ -24,6 +24,7 @@ public class SocketClient {
 	ObjectInputStream in; // --//-- in
 	String servName;
 	int port;
+	SocketClientListener socketClientListener;
 
 
 	public SocketClient(String server, int port) 
@@ -44,7 +45,9 @@ public class SocketClient {
 			out = new ObjectOutputStream(clientSocket.getOutputStream());
 			out.flush();
 			in = new ObjectInputStream(clientSocket.getInputStream());
-
+			
+			socketClientListener = new SocketClientListener(in);
+			socketClientListener.start();
 
 		}
 		catch(UnknownHostException e)
@@ -76,8 +79,12 @@ public class SocketClient {
 			e.printStackTrace();
 		}
 
+		// socketClientListener lytter til alle beskjeder sendt tilbake til client. Spør sCL om siste mottatte beskjed.
+		ClientUnpacker.unpackClientMessage(socketClientListener.getLatestMessage());
 
-
+		
+		// UTELDET UNDER, REPLIES BLIR HÅNDTERT I socketClientListener
+		/*
 		// TODO: wait for reply!
 		// If reply != null? alltid?
 		try {
@@ -97,6 +104,8 @@ public class SocketClient {
 			System.err.println("Socket closed!");
 			close();
 		}
+		
+		*/
 
 	}
 

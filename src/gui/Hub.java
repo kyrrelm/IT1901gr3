@@ -57,7 +57,7 @@ public class Hub extends javax.swing.JFrame {
         messages = new javax.swing.JPanel();
         messageList = new javax.swing.JList();
         map = new javax.swing.JPanel();
-        mapPanel = new javax.swing.JPanel();
+        mapPanel = new MapPanel();
         panelFilters = new javax.swing.JPanel();
         filtersLabel = new javax.swing.JLabel();
         filtersFarmComboBox = new javax.swing.JComboBox();
@@ -147,7 +147,7 @@ public class Hub extends javax.swing.JFrame {
         );
 
         tabHome.addTab("Messages", messages);
-
+/*
         javax.swing.GroupLayout mapPanelLayout = new javax.swing.GroupLayout(mapPanel);
         mapPanel.setLayout(mapPanelLayout);
         mapPanelLayout.setHorizontalGroup(
@@ -158,7 +158,7 @@ public class Hub extends javax.swing.JFrame {
             mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 567, Short.MAX_VALUE)
         );
-
+*/
         javax.swing.GroupLayout mapLayout = new javax.swing.GroupLayout(map);
         map.setLayout(mapLayout);
         mapLayout.setHorizontalGroup(
@@ -657,6 +657,7 @@ public class Hub extends javax.swing.JFrame {
 		metadata.add(ServerData.getFarmByNameAndRemove(farmToRemove));
 		Client.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.REMOVEFARM, metadata));
 		initRemoveFarm();
+		refreshMessages();
 	}//GEN-LAST:event_removeFarmAddActionPerformed
 
 	private void addSheepAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSheepAddActionPerformed
@@ -667,6 +668,7 @@ public class Hub extends javax.swing.JFrame {
 		ArrayList<Sheep> sheep = new ArrayList<Sheep>();
 		sheep.add(new Sheep(-1, name, birthYear, ServerData.getFarmByName(farmName).getFarmId(), ServerData.owner.getOwnerId()));
 		Client.sockCli.sendMessage(new CommMessage<Sheep>(CommEnum.ADDSHEEP, sheep));
+		refreshMessages();
 	}//GEN-LAST:event_addSheepAddActionPerformed
 
 	private void removeSheepRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSheepRemoveActionPerformed
@@ -675,6 +677,7 @@ public class Hub extends javax.swing.JFrame {
 		ArrayList<Sheep> sheep = new ArrayList<Sheep>();
 		sheep.add(new Sheep(id, "", -1, -1, -1));
 		Client.sockCli.sendMessage(new CommMessage<Sheep>(CommEnum.REMOVESHEEP, sheep));
+		refreshMessages();
 
 	}//GEN-LAST:event_removeSheepRemoveActionPerformed
 
@@ -684,8 +687,8 @@ public class Hub extends javax.swing.JFrame {
 
 	private void tabOptionsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabOptionsStateChanged
 		// TODO add your handling code here:
-		initAddSheep();
-		initRemoveFarm();
+		//initAddSheep();
+		//initRemoveFarm();
 		// Uteldet...
 	}//GEN-LAST:event_tabOptionsStateChanged
 
@@ -702,12 +705,12 @@ public class Hub extends javax.swing.JFrame {
 
 	private void tabMainStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabMainStateChanged
 		// TODO add your handling code here:
-		refreshMessages();
+		//refreshMessages();
 	}//GEN-LAST:event_tabMainStateChanged
 
 	private void tabHomeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabHomeStateChanged
 		// TODO add your handling code here:
-		refreshMessages();
+		//refreshMessages();
 	}//GEN-LAST:event_tabHomeStateChanged
 
 	private void updateContactInformationActionPerformed(
@@ -855,7 +858,7 @@ public class Hub extends javax.swing.JFrame {
     private javax.swing.JComboBox filtersSheepComboBox;
     private javax.swing.JLabel filtersSheepLabel;
     private javax.swing.JPanel map;
-    private javax.swing.JPanel mapPanel;
+    private MapPanel mapPanel;
     private javax.swing.JList messageList;
     private javax.swing.JPanel messages;
     private javax.swing.JPanel panelFilters;
@@ -888,8 +891,7 @@ public class Hub extends javax.swing.JFrame {
 		refreshMessages();
 		setIcon();
 		this.setTitle("SheepStalker " + version );
-		
-		restartMap();
+
 	}
 
 	private void setIcon(){
@@ -938,8 +940,5 @@ public class Hub extends javax.swing.JFrame {
 		}
 	}
 	
-	private void restartMap()
-	{
-		this.mapPanel = new MapPanel();
-	}
+
 }

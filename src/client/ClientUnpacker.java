@@ -24,14 +24,14 @@ public class ClientUnpacker {
 			System.out.println(((Owner) params.get(0)).getFirstName());
 		}
 
-		if (msg.getMessageName() == CommEnum.LOGINFAILED)//.equals("LoginFailed"))
+		if (msg.getMessageName() == CommEnum.LOGINFAILED)
 		{
 			// failed log in
 			// -- GUI.popErrorWindow("Login failed try again!")
 			// -- GUI.segLoggedIn(false);
 		}
 
-		if (msg.getMessageName() == CommEnum.NOTLOGGEDIN) //.equals("NotLoggedIn"))
+		if (msg.getMessageName() == CommEnum.NOTLOGGEDIN)
 		{
 			// attempted to do something that requires log in without being logged in
 			// -- GUI.popErrorWindow("You need to be logged in to execute this command LIKELY connection problem or a code bug");
@@ -48,6 +48,11 @@ public class ClientUnpacker {
 
 			System.out.println(params.size());
 			ServerData.messages = (ArrayList<Message>) params;
+		}
+		if (msg.getMessageName() == CommEnum.NEWMESSAGES)
+		{
+			ServerData.messages = (ArrayList<Message>) params;
+			System.out.println("New messages received from server!");
 		}
 		if (msg.getMessageName() == CommEnum.FARMSREPLY)
 		{
