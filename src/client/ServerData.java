@@ -27,13 +27,13 @@ public class ServerData {
 			if (onlyAlarm != tmp.get(i).isAlarm()){
 				tmp.remove(i--);
 			}
-			else if(!allFarms){
-				if (getFarmByName(farmName).getFarmId() != tmp.get(i).getSheep().getFarmId()){
+			else if(!allSheeps){
+				if (Integer.parseInt(sheep) != tmp.get(i).getSheepId()){
 					tmp.remove(i--);
 				}
 			}
-			else if(!allSheeps){
-				if (Integer.parseInt(sheep) != tmp.get(i).getSheepId()){
+			else if(!allFarms){
+				if (getFarmByName(farmName).getFarmId() != tmp.get(i).getSheep().getFarmId()){
 					tmp.remove(i--);
 				}
 			}
@@ -74,17 +74,6 @@ public class ServerData {
 		tmp[0] = "All farms";
 		for (int i = 1; i < tmp.length; i++) {
 			tmp[i] = farms.get(i-1).getName();
-		}
-		return tmp;
-	}
-	public static String[] getSheepNamesPlusAllSheep() {
-		if(sheep.isEmpty())
-			return new String[] {"You have no sheep"};
-
-		String[] tmp = new String[sheep.size()+1];
-		tmp[0] = "All sheep";
-		for (int i = 1; i < tmp.length; i++) {
-			tmp[i] = "" + sheep.get(i-1).getSheepId();
 		}
 		return tmp;
 	}

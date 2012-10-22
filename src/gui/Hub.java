@@ -955,7 +955,7 @@ public class Hub extends javax.swing.JFrame {
 			messageList.setVisible(true);
 
 			filtersFarmComboBox.setModel(new DefaultComboBoxModel(ServerData.getFarmNamesPlusAllFarms()));
-			filtersSheepComboBox.setModel(new DefaultComboBoxModel(ServerData.getSheepNamesPlusAllSheep()));
+			filtersSheepComboBox.setModel(new DefaultComboBoxModel(ServerData.getSheepNamesByFarmName((String) filtersFarmComboBox.getSelectedItem())));
 		}
 	}
 	
