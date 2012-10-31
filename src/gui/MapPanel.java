@@ -22,7 +22,7 @@ public class MapPanel extends JPanel{
 	private WebView webView;
 	
 	
-	final String localURL = "/res/kart.html";
+	public final static String localURL = "map/kart.html";
 	
 	public MapPanel()
 	{
@@ -89,14 +89,11 @@ public class MapPanel extends JPanel{
 	public void loadURL()
 	{
 		
-		URL url = getClass().getResource(localURL);
+		URL url = getClass().getResource("/" + localURL);
 		
 		
 		WebEngine webEngine = webView.getEngine();
 		webEngine.load(url.toExternalForm());
-		System.out.println("This happened: " + url + " loaded.");
-		System.out.println("isOpaque: " + jfxPanel.isOpaque());
-		
 	}
 	
 }

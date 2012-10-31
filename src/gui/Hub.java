@@ -57,7 +57,7 @@ public class Hub extends javax.swing.JFrame {
         messages = new javax.swing.JPanel();
         messageList = new javax.swing.JList();
         map = new javax.swing.JPanel();
-        mapPanel = new javax.swing.JPanel();
+        mapPanel = new MapPanel();
         panelFilters = new javax.swing.JPanel();
         filtersLabel = new javax.swing.JLabel();
         filtersFarmComboBox = new javax.swing.JComboBox();
@@ -147,7 +147,8 @@ public class Hub extends javax.swing.JFrame {
         );
 
         tabHome.addTab("Messages", messages);
-
+        
+        /*
         javax.swing.GroupLayout mapPanelLayout = new javax.swing.GroupLayout(mapPanel);
         mapPanel.setLayout(mapPanelLayout);
         mapPanelLayout.setHorizontalGroup(
@@ -158,6 +159,7 @@ public class Hub extends javax.swing.JFrame {
             mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 567, Short.MAX_VALUE)
         );
+        */
 
         javax.swing.GroupLayout mapLayout = new javax.swing.GroupLayout(map);
         map.setLayout(mapLayout);
@@ -886,7 +888,7 @@ public class Hub extends javax.swing.JFrame {
     private javax.swing.JComboBox filtersSheepComboBox;
     private javax.swing.JLabel filtersSheepLabel;
     private javax.swing.JPanel map;
-    private javax.swing.JPanel mapPanel;
+    private MapPanel mapPanel;
     private javax.swing.JList messageList;
     private javax.swing.JPanel messages;
     private javax.swing.JPanel panelFilters;
