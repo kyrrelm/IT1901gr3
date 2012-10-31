@@ -10,6 +10,8 @@ import gui.RegisterNewUser;
 
 import javax.swing.SwingUtilities;
 
+import map.GenerateMap;
+
 /**
  *
  * @author Kyrre
@@ -26,6 +28,7 @@ public class Client {
 
 		sockCli = new SocketClient("localhost", 6667);
 		sockCli.run();
+		GenerateMap.initGenerator();
 		
 		SwingUtilities.invokeLater(new Runnable() {
 
