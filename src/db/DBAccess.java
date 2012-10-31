@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Random;
 
 import map.Constants;
 
@@ -142,13 +143,17 @@ public class DBAccess {
 			rs.next();
 			int sheepID = rs.getInt(1);
 			
+			Random r = new Random();
+			double positionX = Constants.minLon + (Constants.maxLon - Constants.minLon) * r.nextDouble();
+			double positionY = Constants.minLat +  (Constants.maxLat - Constants.maxLat) * r.nextDouble();
+			
 			// legg til en melding for denne sauen.
 			java.util.Date date = new java.util.Date();
 			java.text.SimpleDateFormat simpleDateFormat = 
 					new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String currentTime = simpleDateFormat.format(date);
 			addMessage(currentTime, 75, 35, 0,
-					Constants.centerLat, Constants.centerLon, sheepID);
+					positionX, positionY, sheepID);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
