@@ -88,7 +88,7 @@ public class GenerateMap {
 			
 			fw.write(prefix);
 			for (Message m : msg) {
-				fw.write("map.addOverlay(createMarker(new GLatLng("+m.getPositionY()+","+ m.getPositionX()+"),\""+ m.toString()+"\"));\n");
+				fw.write("map.addOverlay(createMarker(new GLatLng("+m.getPositionY()+","+ m.getPositionX()+"),\""+ m.toStringMap()+"\"));\n");
 			}
 			fw.write(suffix);
 			

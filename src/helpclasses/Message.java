@@ -107,6 +107,12 @@ public class Message implements Serializable {
 				"; SheepId: " + sheepId;
 	}
 	
+	public String toStringMap() {
+		return "Id: " + sheepId + "<br>Date: " + dateTime + "<br>Pulse: " +
+				pulse + "<br>Temperature: " + temperature + "<br>Under attack: " +
+				alarm + "<br>Position: " +"("+ positionX +", "+ positionY +")";
+	}
+	
 	
 	
 	/**
