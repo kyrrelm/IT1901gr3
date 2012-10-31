@@ -6,6 +6,7 @@ package client;
 
 import gui.Hub;
 import gui.Login;
+import gui.RegisterNewUser;
 
 import javax.swing.SwingUtilities;
 
@@ -16,6 +17,7 @@ import javax.swing.SwingUtilities;
 public class Client {
 
 	public static Login login;
+    public static RegisterNewUser registerNewUser;
 	public static Hub hub;
 	public static SocketClient sockCli;
     
@@ -30,9 +32,9 @@ public class Client {
 			@Override
 			public void run() {
 				login = new Login();
+                registerNewUser = new RegisterNewUser();
 				hub = new Hub();
 				login.setVisible(true);
-
 			}
 		});
 

@@ -129,7 +129,7 @@ public class Login extends javax.swing.JFrame {
 
 	private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
 		// TODO add your handling code here:
-
+		
 		String username = this.username.getText();
 		String password = this.password.getText();
 		if(isUsernameAndPassword(username, password)){
@@ -158,7 +158,9 @@ public class Login extends javax.swing.JFrame {
 	}//GEN-LAST:event_passwordKeyPressed
 
     private void registerNewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerNewUserActionPerformed
-        // TODO add your handling code here:
+        
+    	this.setVisible(false);
+        Client.registerNewUser.setVisible(true);
     }//GEN-LAST:event_registerNewUserActionPerformed
 
 	/**
