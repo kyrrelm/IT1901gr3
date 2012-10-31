@@ -10,6 +10,8 @@ package test;
 import helpclasses.*;
 import java.util.Random;
 
+import map.Constants;
+
 import db.DBAccess;
 
 
@@ -117,17 +119,13 @@ public class DBTest {
 			Owner owner = DBAccess.getOwner(username, password);
 			
 			
-			//We add find position x and position y
-			int positionX = 0;
-			int positionY = 0;
+
 			Sheep sheep   = null;
 		
 			
 			//Generate data for farm
 			for(int k = 0; k <= nFarms; k++) {
 				DBAccess.addFarm(owner.getLastName() + " gaard", owner.getOwnerId());
-				positionX = generator.nextInt(5000);
-				positionY = generator.nextInt(5000);
 				
 				//Genererate sheep for farm
 				boolean hasName  = false;
@@ -157,12 +155,15 @@ public class DBTest {
 							farm.getFarmId(), owner.getOwnerId());
 					sheep = DBAccess.getLastAddedSheep();
 					
+					/* det her blir gjort i DBAccess.addsheep!
+					
 					java.util.Date date = new java.util.Date();
 					java.text.SimpleDateFormat simpleDateFormat = 
 							new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					String currentTime = simpleDateFormat.format(date);
 					DBAccess.addMessage(currentTime, 75, 35, 0,
-							positionX, positionY, sheep.getSheepId());		
+							positionX, positionY, sheep.getSheepId());
+							*/		
 				}
 			}
 		}

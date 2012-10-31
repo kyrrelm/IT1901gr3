@@ -3,7 +3,7 @@
       function createMarker(point, label) {
       var marker = new GMarker(point);
       GEvent.addListener(marker, "click", function() {
-      marker.openInfoWindowHtml(label + "</b>"); 
+      marker.openInfoWindowHtml("<font size=\"1\">"+label+"</font>"); 
 });
       return marker;
       }
