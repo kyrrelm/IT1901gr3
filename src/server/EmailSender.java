@@ -23,7 +23,7 @@ import javax.mail.internet.MimeMessage;
 public class EmailSender
 {
 	final static String username = "sheepstalker2013@gmail.com";
-	final static String password = "sheepsheep";	
+	final static String password = "sheepsheep";
 	
 	/**
 	 * @author halvor
