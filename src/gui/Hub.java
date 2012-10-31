@@ -26,6 +26,9 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+
+import map.GenerateMap;
+
 import java.io.IOException;
 
 /**
@@ -57,7 +60,7 @@ public class Hub extends javax.swing.JFrame {
         messages = new javax.swing.JPanel();
         messageList = new javax.swing.JList();
         map = new javax.swing.JPanel();
-        mapPanel = new javax.swing.JPanel();
+        mapPanel = new MapPanel();
         panelFilters = new javax.swing.JPanel();
         filtersLabel = new javax.swing.JLabel();
         filtersFarmComboBox = new javax.swing.JComboBox();
@@ -147,7 +150,8 @@ public class Hub extends javax.swing.JFrame {
         );
 
         tabHome.addTab("Messages", messages);
-
+        
+        /*
         javax.swing.GroupLayout mapPanelLayout = new javax.swing.GroupLayout(mapPanel);
         mapPanel.setLayout(mapPanelLayout);
         mapPanelLayout.setHorizontalGroup(
@@ -158,7 +162,7 @@ public class Hub extends javax.swing.JFrame {
             mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 567, Short.MAX_VALUE)
         );
-
+		*/
         javax.swing.GroupLayout mapLayout = new javax.swing.GroupLayout(map);
         map.setLayout(mapLayout);
         mapLayout.setHorizontalGroup(
@@ -714,7 +718,12 @@ public class Hub extends javax.swing.JFrame {
 	private void filtersFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtersFilterButtonActionPerformed
 		String farm = (String) filtersFarmComboBox.getSelectedItem();
                 String sheep = (String) filtersSheepComboBox.getSelectedItem();
-		messageList.setListData(ServerData.filterMessages(onlyAlarm, farm, sheep, farm.equals("All farms"), sheep.equals("All sheep")).toArray());
+		ArrayList<Message> tmpmgs = ServerData.filterMessages(onlyAlarm, farm, sheep, farm.equals("All farms"), sheep.equals("All sheep"));
+		messageList.setListData(tmpmgs.toArray());
+		GenerateMap.UpdateMap(tmpmgs);
+		mapPanel.loadURL();
+		
+		
 
 	}//GEN-LAST:event_filtersFilterButtonActionPerformed
 
@@ -886,7 +895,7 @@ public class Hub extends javax.swing.JFrame {
     private javax.swing.JComboBox filtersSheepComboBox;
     private javax.swing.JLabel filtersSheepLabel;
     private javax.swing.JPanel map;
-    private javax.swing.JPanel mapPanel;
+    private MapPanel mapPanel;
     private javax.swing.JList messageList;
     private javax.swing.JPanel messages;
     private javax.swing.JPanel panelFilters;
@@ -962,6 +971,9 @@ public class Hub extends javax.swing.JFrame {
 
 			messageList.setListData(ServerData.messages.toArray());
 			messageList.setVisible(true);
+			
+			GenerateMap.UpdateMap(ServerData.messages);
+			mapPanel = new MapPanel();
 
 			filtersFarmComboBox.setModel(new DefaultComboBoxModel(ServerData.getFarmNamesPlusAllFarms()));
 			filtersSheepComboBox.setModel(new DefaultComboBoxModel(ServerData.getSheepNamesByFarmName((String) filtersFarmComboBox.getSelectedItem())));
