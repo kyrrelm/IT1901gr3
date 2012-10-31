@@ -1,0 +1,17 @@
+      }
+      }
+      function createMarker(point, label) {
+      var marker = new GMarker(point);
+      GEvent.addListener(marker, "click", function() {
+      marker.openInfoWindowHtml(label + "</b>"); 
+});
+      return marker;
+      }
+</script>
+  </head>
+  <body onload="initialize()" onunload="GUnload()">
+    
+    <div id="map_canvas" style="width: 540px; height: 540px"></div>
+    <div style="width:400;text-align:right"><a href="http://www.statkart.no">Statens kartverk</a>, <a href="http://www.statkart.no/nor/Land/Fagomrader/Geovekst/">Geovekst</a> og <a href="http://www.statkart.no/?module=Articles;action=Article.publicShow;ID=14194">kommuner</a></div>
+    
+  </body>

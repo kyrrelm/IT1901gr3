@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <title>_</title>
+    <script src='http://maps.google.com/maps?file=api&amp;v=2&amp;key=AIzaSyBkLSuCE2LKa4T--_G4ucosxU_Fq6B-QSk'></script>
+    <script type="text/javascript"> 
+      function initialize() {
+      if (GBrowserIsCompatible()) {
+      var map = new GMap2(document.getElementById("map_canvas"));
+      map.addControl(new GSmallMapControl());
+      map.setCenter(new GLatLng(62.3, 9.0), 14); // Dovre!
+      var tilelayer =  new GTileLayer(null, null, null,
+      {tileUrlTemplate: 'http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo2&zoom={Z}&x={X}&y={Y}', isPng:true, opacity:1.0 } );
+      var myTileLayer = new GTileLayerOverlay(tilelayer);
+      map.addOverlay(myTileLayer);
