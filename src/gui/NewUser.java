@@ -27,21 +27,279 @@ public class NewUser extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        newUserLabel = new javax.swing.JLabel();
+        firstNameLabel = new javax.swing.JLabel();
+        firstName = new javax.swing.JTextField();
+        lastNameLabel = new javax.swing.JLabel();
+        lastName = new javax.swing.JTextField();
+        usernameLabel = new javax.swing.JLabel();
+        username = new javax.swing.JTextField();
+        primPhoneLabel = new javax.swing.JLabel();
+        primPhone = new javax.swing.JTextField();
+        secPhone = new javax.swing.JTextField();
+        secPhoneLabel = new javax.swing.JLabel();
+        primMail = new javax.swing.JTextField();
+        primMailLabel = new javax.swing.JLabel();
+        secMailLabel = new javax.swing.JLabel();
+        secMail = new javax.swing.JTextField();
+        passwordLabel1 = new javax.swing.JLabel();
+        password1 = new javax.swing.JTextField();
+        passwordLabel2 = new javax.swing.JLabel();
+        password2 = new javax.swing.JTextField();
+        submit = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        newUserLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        newUserLabel.setText("Creat new User:");
+
+        firstNameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        firstNameLabel.setText("First Name:");
+
+        firstName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        firstName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                firstNameActionPerformed(evt);
+            }
+        });
+
+        lastNameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lastNameLabel.setText("Last Name:");
+
+        lastName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lastName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lastNameActionPerformed(evt);
+            }
+        });
+
+        usernameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        usernameLabel.setText("Username:");
+
+        username.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameActionPerformed(evt);
+            }
+        });
+
+        primPhoneLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        primPhoneLabel.setText("Primary phone:");
+
+        primPhone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        primPhone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                primPhoneActionPerformed(evt);
+            }
+        });
+
+        secPhone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        secPhone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                secPhoneActionPerformed(evt);
+            }
+        });
+
+        secPhoneLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        secPhoneLabel.setText("Secondary phone:");
+
+        primMail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        primMail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                primMailActionPerformed(evt);
+            }
+        });
+
+        primMailLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        primMailLabel.setText("Primary mail:");
+
+        secMailLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        secMailLabel.setText("Secondary mail:");
+
+        secMail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        secMail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                secMailActionPerformed(evt);
+            }
+        });
+
+        passwordLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        passwordLabel1.setText("Password:");
+
+        password1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        password1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                password1ActionPerformed(evt);
+            }
+        });
+
+        passwordLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        passwordLabel2.setText("Retype Password:");
+
+        password2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        password2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                password2ActionPerformed(evt);
+            }
+        });
+
+        submit.setText("Submit");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lastNameLabel)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(120, 120, 120)
+                                        .addComponent(firstNameLabel))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(140, 140, 140)
+                                        .addComponent(firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(usernameLabel)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(primPhoneLabel)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(primPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(secPhoneLabel)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(20, 20, 20)
+                                    .addComponent(secPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(passwordLabel1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(password1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(passwordLabel2)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(password2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(primMailLabel)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(primMail, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(secMailLabel)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(20, 20, 20)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(submit)
+                                        .addComponent(secMail, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(newUserLabel)))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(newUserLabel)
+                .addGap(30, 30, 30)
+                .addComponent(firstNameLabel)
+                .addGap(18, 18, 18)
+                .addComponent(firstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lastNameLabel)
+                .addGap(18, 18, 18)
+                .addComponent(lastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(usernameLabel)
+                .addGap(18, 18, 18)
+                .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(primPhoneLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(primPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(secPhoneLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(secPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(secMailLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(secMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(primMailLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(primMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(passwordLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(password1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(passwordLabel2)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(password2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(submit))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void firstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_firstNameActionPerformed
+
+    private void lastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lastNameActionPerformed
+
+    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameActionPerformed
+
+    private void primPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_primPhoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_primPhoneActionPerformed
+
+    private void secPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secPhoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_secPhoneActionPerformed
+
+    private void primMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_primMailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_primMailActionPerformed
+
+    private void secMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secMailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_secMailActionPerformed
+
+    private void password2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_password2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_password2ActionPerformed
+
+    private void password1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_password1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_password1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +336,25 @@ public class NewUser extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField firstName;
+    private javax.swing.JLabel firstNameLabel;
+    private javax.swing.JTextField lastName;
+    private javax.swing.JLabel lastNameLabel;
+    private javax.swing.JLabel newUserLabel;
+    private javax.swing.JTextField password1;
+    private javax.swing.JTextField password2;
+    private javax.swing.JLabel passwordLabel1;
+    private javax.swing.JLabel passwordLabel2;
+    private javax.swing.JTextField primMail;
+    private javax.swing.JLabel primMailLabel;
+    private javax.swing.JTextField primPhone;
+    private javax.swing.JLabel primPhoneLabel;
+    private javax.swing.JTextField secMail;
+    private javax.swing.JLabel secMailLabel;
+    private javax.swing.JTextField secPhone;
+    private javax.swing.JLabel secPhoneLabel;
+    private javax.swing.JButton submit;
+    private javax.swing.JTextField username;
+    private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }
