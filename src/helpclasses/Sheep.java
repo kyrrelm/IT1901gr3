@@ -9,11 +9,6 @@ public class Sheep implements Serializable
 	private int birthYear;
 	private int farmId;
 	private int ownerId;
-	private boolean attacked;
-	private double x;
-	private double y;
-	private int pulse;
-	private int temp;
 	
 	public Sheep(int sheepId, String name, int birthYear, int farmId, int ownerId)
 	{
@@ -22,7 +17,6 @@ public class Sheep implements Serializable
 		this.birthYear = birthYear;
 		this.farmId = farmId;
 		this.ownerId = ownerId;
-		attacked = false;
 	}
 
 	public int getSheepId() {

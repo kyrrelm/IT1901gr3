@@ -6,8 +6,8 @@ import java.util.Date;
 public class Message implements Serializable {
 	private int messageId;
 	private int pulse;
-	private int positionX;
-	private int positionY;
+	private double positionX;
+	private double positionY;
 	private int sheepId;
 	private int status;
 	private float temperature;
@@ -17,7 +17,7 @@ public class Message implements Serializable {
 	
 	
 	public Message(int messageId, Date dateTime, int pulse, float temperature,
-			int status, int positionX, int positionY, int sheepId, Sheep sheep) {
+			int status, double positionX, double positionY, int sheepId, Sheep sheep) {
 		this.messageId   = messageId;
 		this.dateTime    = dateTime;
 		this.pulse 		 = pulse;
@@ -63,19 +63,19 @@ public class Message implements Serializable {
 		this.temperature = temperature;
 	}
 	
-	public int getPositionX() {
+	public double getPositionX() {
 		return positionX;
 	}
 	
-	public void setPositionX(int positionX) {
+	public void setPositionX(double positionX) {
 		this.positionX = positionX;
 	}
 	
-	public int getPositionY() {
+	public double getPositionY() {
 		return positionY;
 	}
 	
-	public void setPositionY(int positionY) {
+	public void setPositionY(double positionY) {
 		this.positionY = positionY;
 	}
 	

@@ -1,11 +1,15 @@
 package map;
 
+import helpclasses.Message;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class GenerateMap {
 	
@@ -22,8 +26,9 @@ public class GenerateMap {
 	public static void main(String[] args)
 	{
 		initGenerator();
-		
-		UpdateMap();
+		ArrayList<Message> test = new ArrayList<Message>();
+		test.add(new Message(12, new Date(0), 1, 1, 1, 9.0, 62.5, 1, null));
+		UpdateMap(test);
 	}
 	
 	
@@ -66,7 +71,7 @@ public class GenerateMap {
 	}
 	
 	
-	public static void UpdateMap()
+	public static void UpdateMap(ArrayList<Message> msg)
 	{
 		String path =  GenerateMap.class.getClassLoader().getResource(gui.MapPanel.localURL).getPath().replaceAll("%20",  " ");
 		
@@ -82,7 +87,9 @@ public class GenerateMap {
 			BufferedWriter fw = new BufferedWriter(new FileWriter(file));
 			
 			fw.write(prefix);
-			
+			for (Message m : msg) {
+				fw.write("map.addOverlay(createMarker(new GLatLng("+m.getPositionY()+","+ m.getPositionX()+"),\""+ m.toString()+"\"));\n");
+			}
 			fw.write(suffix);
 			
 			fw.close();
