@@ -307,6 +307,11 @@ public class Hub extends javax.swing.JFrame {
         editFriendEmailAddressLabel.setText("Friend's email address:");
 
         editTelephoneNumber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        editTelephoneNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editTelephoneNumberActionPerformed(evt);
+            }
+        });
 
         editEmailAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -764,6 +769,10 @@ public class Hub extends javax.swing.JFrame {
     private void filtersSheepComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtersSheepComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_filtersSheepComboBoxActionPerformed
+
+    private void editTelephoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTelephoneNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editTelephoneNumberActionPerformed
 	
 	/**
 	 * This function checks to see if the given telephone numbers and email
