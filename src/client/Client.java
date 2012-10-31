@@ -35,6 +35,7 @@ public class Client {
                 registerNewUser = new RegisterNewUser();
 				hub = new Hub();
 				login.setVisible(true);
+
 			}
 		});
 
