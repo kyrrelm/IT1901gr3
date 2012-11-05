@@ -1,6 +1,7 @@
 package helpclasses;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Message implements Serializable {
@@ -101,10 +102,9 @@ public class Message implements Serializable {
 	}
 	
 	public String toString() {
-		return "Id: " + messageId + "; Date: " + dateTime + "; Pulse: " +
-				pulse + "; Temperature: " + temperature + "; Status: " +
-				status + "X: " + positionX + "; Y:" + positionY +
-				"; SheepId: " + sheepId;
+		return "Message Id: " + messageId + ", SheepId: " + sheepId + "\n\tDate: " + dateTime + ", Pulse: " +
+				pulse + ", Temperature: " + temperature + ", Status: " +
+				status + ", Position: " +"("+ round(positionX, 2) +", "+ round(positionY, 2) +")";
 	}
 	
 	public String toStringMap() {
@@ -123,5 +123,19 @@ public class Message implements Serializable {
 	public void setPos(double x2, double y2) { //TODO maybe you're not supposed to increment but rather set? (unlikely)
 		positionX += x2;
 		positionY += y2;
+	}
+	
+	/**
+	 * @author Kyrre
+	 * @
+	 * @param unrounded Float value to be rounded up
+	 * @param precision Number of decimals
+	 * @return double
+	 */
+	public static double round(double unrounded, int precision)
+	{
+	    BigDecimal bd = new BigDecimal(unrounded);
+	    BigDecimal rounded = bd.setScale(precision, BigDecimal.ROUND_HALF_UP);
+	    return rounded.doubleValue();
 	}
 }
