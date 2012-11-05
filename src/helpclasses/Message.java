@@ -102,7 +102,12 @@ public class Message implements Serializable {
 	}
 	
 	public String toString() {
-		return "<html><span style=\"color:green\"><b>Message Id: " + messageId + ", Sheep Id: " + sheepId + "</b></span>" +
+		String color;
+		if(this.alarm == true)
+			color = "red";
+		else
+			color = "green";
+		return "<html><span style=\"color:"+ color +"\"><b>Message Id: " + messageId + ", Sheep Id: " + sheepId + "</b></span>" +
 				"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date: " + dateTime + ", Pulse: " +
 				pulse + ", Temperature: " + temperature + ", Status: " +
 				status + ", Position: " +"("+ round(positionX, 2) +", "+ round(positionY, 2) +")<br>&nbsp;</html>";
