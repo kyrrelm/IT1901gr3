@@ -78,6 +78,28 @@ public class DBAccess {
 		}
 		
 	}
+	/**
+	 * Adds an owner to the database
+	 * @author halvor
+	 * 
+	 * 
+	 * @param username
+	 * User Name
+	 * @param pw
+	 * Passsword
+	 * @param firstName
+	 * First name of owner
+	 * @param lastName
+	 * Last name of owner
+	 * @param tlf
+	 * Telephone number of the owner 
+	 * @param email
+	 * Email adress of the owner
+	 * @param secondaryTlf
+	 * Telephone number of the secondary contact person
+	 * @param secondaryEmail
+	 * Email adress of the secondary contact person
+	 */
 				
 	public static void addOwner(String username, String pw, String firstName,
 			String lastName, String tlf, String email, String secondaryTlf,
@@ -98,7 +120,15 @@ public class DBAccess {
 		}
 	}
 	
-	
+	/**
+	 * Adds a farm to the database, requires an owner.
+	 * @author halvor
+	 * 
+	 * @param name
+	 * The name of the farm
+	 * @param ownerId
+	 * The ID of the owner.
+	 */
 	public static void addFarm(String name, int ownerId)
 	{
 		try {
@@ -123,6 +153,20 @@ public class DBAccess {
 		}
 	}
 	
+	/**Adds a sheep to the database.
+	 * Note: This method is synchronized because it checks the last sheep added to get back the sheepID (to create a message)
+	 * @author halvor
+	 * 
+	 * 
+	 * @param name
+	 * The sheep's name or ID Tag
+	 * @param birthYear
+	 * The year the sheep was born
+	 * @param farmID
+	 * The farm that the sheep belongs to.
+	 * @param ownerID
+	 * The owner that the sheep belongs to.
+	 */
 	public static synchronized void addSheep(String name, int birthYear, int farmID, int ownerID)
 	{
 		
@@ -162,16 +206,36 @@ public class DBAccess {
 		}
 	}
 	
+	/**Adds a message to the database, requires a sheep.
+	 * Note: this method is called by addsheep
+	 * @author halvor
+	 * 
+	 * @param dateTime
+	 * Message timestamp.
+	 * @param pulse
+	 * The sheep's pulse.
+	 * @param temperature
+	 * the sheep's temperature.
+	 * @param status
+	 * Sheep status, 0 = healthy, 1 = under attack
+	 * @param positionX
+	 * The Longtitude.
+	 * @param positionY
+	 * The Latitude.
+	 * @param sheepId
+	 * The ID of the sheep.
+	 */
 	public static void addMessage(String dateTime, int pulse, int temperature,
 			int status, double positionX, double positionY, int sheepId) {
 		
 		/**
 		 * Ensures that it is not possible to simultanously update and receive data
 		 * -- See method getLastMessages for reference.
+		 * 
+		 * DEPRECATED
 		 * @author halvor
 		 */
-		synchronized (DBAccess.class)
-		{
+		//synchronized (DBAccess.class){
 			try {
 				Statement st = con.createStatement();
 			
@@ -191,7 +255,7 @@ public class DBAccess {
 				e.printStackTrace();
 				return;
 			}
-		}
+		//}
 	}
 	
 	public static boolean isUsernameTaken(String userName) {
@@ -357,17 +421,23 @@ public class DBAccess {
 		}
 	}
 	
-	
+	/** Returns every message, no longer in use.
+	 * 
+	 * 
+	 * @param OwnerID
+	 * The ID of the owner.
+	 * @return every message
+	 */
 	public static ArrayList<Message> getMessagesByOwner(int OwnerID) 
 	{
 		
 		/**
 		 * Ensures that it is not possible to simultanously update and receive data
 		 * -- See method addMessage for reference.
+		 * DEPRECATED
 		 * @author halvor
 		 */		
-		synchronized (DBAccess.class)
-		{
+		//synchronized (DBAccess.class){
 		
 			try {
 				Statement statement = con.createStatement();
@@ -399,9 +469,16 @@ public class DBAccess {
 				
 				return null;
 			}
-		}
+		//}
 	}
 	
+	/**Returns every message by first building an arraylist of all sheep belonging to the owner, then getting the last 5 messages of those sheep.
+	 * @author halvor
+	 * 
+	 * @param OwnerID
+	 * The owner's ID.
+	 * @return Last 5 messages of all sheep belonging to the owner.
+	 */
 	public static ArrayList<Message> getLastFiveMessagesByOwner(int OwnerID) 
 	{
 		
@@ -931,7 +1008,7 @@ public class DBAccess {
 			
 			statement.executeUpdate("DELETE FROM Sheep WHERE SheepID = '" + sheepId + "'");
 			
-			// også fjern beskjeder ang. den sauen
+			// også fjern beskjeder ang. den sauen -halvor
 			
 			statement.executeUpdate("DELETE FROM Message WHERE SheepID = '" + sheepId + "'");
 		}
