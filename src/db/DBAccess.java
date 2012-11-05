@@ -39,6 +39,7 @@ public class DBAccess {
 		catch (SQLException ex) 
 		{
 			System.out.println("Tilkobling feilet: "+ ex.getMessage());
+			ex.printStackTrace();
 		}
 		catch (ClassNotFoundException ex) 
 		{

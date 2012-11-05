@@ -33,10 +33,6 @@ public class ServerThread extends Thread
 			out.flush();
 			in = new ObjectInputStream(socket.getInputStream());
 			
-			
-			// har fjernet muligheten for å sende rene strenger.
-			//sendMessage("Connection successful");
-			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -48,11 +44,9 @@ public class ServerThread extends Thread
 	{
 		while (!stop)
 		{
-			// check if connection is to be stopped
-			
-			// check if there are unsent messages.
-			//   -- dunno if needed, if the thread always waits until a reply is sent before accepting new messages...
-			// check if there are unread messages.
+			/**
+			 * Read incoming messages, parse message by using ServerUnpacker, send reply as returner by ServerUnpacker.
+			 */
 	        try {
 				CommMessage<?> message = (CommMessage<?>) in.readObject();
 				
@@ -113,8 +107,7 @@ public class ServerThread extends Thread
 	
 	public void close()
 	{
-		
-		
+		Server.loggedInClients.remove(getOwner());
 		out = null;
 		in = null;
 		connection = null;

@@ -30,7 +30,8 @@ public class ServerUnpacker {
 			
 			Owner own = DBAccess.getOwner(usr, pwd);
 			
-			if (!(own != null && (Server.loggedInClients.contains(own)))) // inloggingen fungerte
+			// hvis eier med user/pw eksisterer OG ingen med det navnet er logget inn.
+			if ((own != null && !(Server.loggedInClients.contains(own)))) // inloggingen fungerte
 			{
 				//Hva gj�r denne? Hilsen Kyrre :)
 				st.setLoggedIn(true);

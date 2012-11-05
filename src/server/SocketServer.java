@@ -44,6 +44,10 @@ public class SocketServer {
 			
 			ServerThread tempThread;
 			int threadNumber = 0;
+			
+			/**
+			 * Listen to incoming connections, seperate them into different threads.			 * 
+			 */
 			while (true)
 			{
 				tempThread = new ServerThread(servSocket.accept(), threadNumber);
@@ -52,21 +56,6 @@ public class SocketServer {
 				threadNumber ++;
 			}
 
-			//this is where a thread fork would happen
-			
-			//Testing echo TODO
-			/*
-			try {
-				message = (CommMessage<?>) in.readObject();
-				System.out.println(message.getMessageName());
-				sendMessage(message);
-
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.err.println("Class not recognized");
-			}
-			*/
 		}
 		catch(IOException e)
 		{
