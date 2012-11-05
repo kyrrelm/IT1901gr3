@@ -19,10 +19,19 @@ public class ServerData {
 	public static ArrayList<Farm> farms = new ArrayList<Farm>();
 	public static ArrayList<Sheep> sheep = new ArrayList<Sheep>();
 
+	/**
+	 * @author Kyrre and Jamawadi
+	 * Filter messages after the given param
+	 * @param onlyAlarm only shows alarm messages
+	 * @param farmName Name of farm
+	 * @param sheep Object of type Sheep
+	 * @param allFarms Shows sheep from all farms
+	 * @param allSheeps Show all sheep from the given farm
+	 * @return ArrayList<Message>
+	 */
 	public static ArrayList<Message> filterMessages(boolean onlyAlarm,
 			String farmName, String sheep, boolean allFarms, boolean allSheeps){
 		ArrayList<Message> tmp = (ArrayList<Message>) messages.clone();
-		System.out.println(allSheeps);
 		for (int i = 0; i < tmp.size(); i++) {
 			if (onlyAlarm != tmp.get(i).isAlarm()){
 				tmp.remove(i--);
@@ -40,6 +49,13 @@ public class ServerData {
 		}
 		return tmp;
 	}
+	/**
+	 * @author Kyrre
+	 * @param name Name of farm
+	 * If a farm with this name exist in Arraylist Farm
+	 * remove it from the list, and then return it. 
+	 * @return Object of type Farm
+	 */
 	public static Farm getFarmByNameAndRemove(String name){
 		for (Farm farm : farms) {
 			if(farm.getName().equals(name)){
@@ -50,6 +66,11 @@ public class ServerData {
 		}
 		return null;
 	}
+	/**
+	 * @author Kyrre
+	 * @param name
+	 * @return Object Farm with param name as it's name
+	 */
 	public static Farm getFarmByName(String name){
 		for (Farm farm : farms) {
 			if(farm.getName().equals(name)){
@@ -58,6 +79,10 @@ public class ServerData {
 		}
 		return null;
 	}
+	/**
+	 * @author Kyrre
+	 * @return String[] of farm names from List farm
+	 */
 	public static String[] getFarmNames(){
 		if(farms.isEmpty())
 			return new String[] {"You have no farms"};
@@ -67,6 +92,13 @@ public class ServerData {
 		}
 		return tmp;
 	}
+	/**
+	 * @author Kyrre
+	 * returns String[] Name of all farms,
+	 * pluss the String "All farms" at index 0
+	 * If farms is empty index 0 will contain "You have no farms"
+	 * @return String[]
+	 */
 	public static String[] getFarmNamesPlusAllFarms(){
 		if(farms.isEmpty())
 			return new String[] {"You have no farms"};
@@ -77,6 +109,13 @@ public class ServerData {
 		}
 		return tmp;
 	}
+	/**
+	 * @author Kyrre
+	 * returns String[] Name of all sheep at the given farm,
+	 * pluss the String "All sheep" at index 0.
+	 * If sheep is empty index 0 will contain "You have no sheep"
+	 * @return String[]
+	 */
 	public static String[] getSheepNamesByFarmName(String farm) {
 		if(sheep.isEmpty())
 			return new String[] {"You have no sheep"};

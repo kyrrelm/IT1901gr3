@@ -100,7 +100,10 @@ public class Message implements Serializable {
 	{
 		return sheep;
 	}
-	
+	/**
+	 * @author Kyrre
+	 * Uses html to color code Messages, and formate it.
+	 */
 	public String toString() {
 		String color;
 		if(this.alarm == true)
@@ -112,7 +115,10 @@ public class Message implements Serializable {
 				pulse + ", Temperature: " + temperature + ", Status: " +
 				status + ", Position: " +"("+ round(positionX, 2) +", "+ round(positionY, 2) +")<br>&nbsp;</html>";
 	}
-	
+	/**
+	 * @author Kyrre
+	 * Uses html to format a String used by the Map pane (javascript)
+	 */
 	public String toStringMap() {
 		return "Id: " + sheepId + "<br>Date: " + dateTime + "<br>Pulse: " +
 				pulse + "<br>Temperature: " + temperature + "<br>Under attack: " +
