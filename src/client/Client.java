@@ -4,10 +4,14 @@
  */
 package client;
 
+import java.io.IOException;
+import java.net.ConnectException;
+
 import gui.Hub;
 import gui.Login;
 import gui.RegisterNewUser;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import map.GenerateMap;
@@ -22,12 +26,18 @@ public class Client {
     public static RegisterNewUser registerNewUser;
 	public static Hub hub;
 	public static SocketClient sockCli;
+	public static boolean ServerUp = true;
     
 	public static void main(String[] args) {
 		// brukernavn s� jeg � logge meg p� mysqladmin hele tida: Superman3440/Sheep
 
 		sockCli = new SocketClient("localhost", 6667);
-		sockCli.run();
+		
+		try {
+			sockCli.run();
+		} catch (IOException e) {
+			ServerUp = false;
+		}
 		GenerateMap.initGenerator();
 		
 		SwingUtilities.invokeLater(new Runnable() {

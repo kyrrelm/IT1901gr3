@@ -109,6 +109,7 @@ public class Hub extends javax.swing.JFrame {
         updateContactInformation = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 700));
         setResizable(false);
 
         tabMain.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -145,13 +146,12 @@ public class Hub extends javax.swing.JFrame {
             messagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(messagesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(messageList, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                .addComponent(messageList, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         tabHome.addTab("Messages", messages);
-        
-        /*
+
         javax.swing.GroupLayout mapPanelLayout = new javax.swing.GroupLayout(mapPanel);
         mapPanel.setLayout(mapPanelLayout);
         mapPanelLayout.setHorizontalGroup(
@@ -160,9 +160,9 @@ public class Hub extends javax.swing.JFrame {
         );
         mapPanelLayout.setVerticalGroup(
             mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 567, Short.MAX_VALUE)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
-		*/
+
         javax.swing.GroupLayout mapLayout = new javax.swing.GroupLayout(map);
         map.setLayout(mapLayout);
         mapLayout.setHorizontalGroup(
@@ -279,7 +279,7 @@ public class Hub extends javax.swing.JFrame {
             .addGroup(panelHomeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tabHome, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)
+                    .addComponent(tabHome, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
                     .addComponent(panelFilters, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -385,7 +385,7 @@ public class Hub extends javax.swing.JFrame {
                 .addComponent(addSheepFarm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(addSheepAdd)
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
 
         tabOptions.addTab("Add Sheep", addSheep);
@@ -441,7 +441,7 @@ public class Hub extends javax.swing.JFrame {
                 .addComponent(removeSheepID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(removeSheepRemove)
-                .addContainerGap(367, Short.MAX_VALUE))
+                .addContainerGap(400, Short.MAX_VALUE))
         );
 
         tabOptions.addTab("Remove Sheep", removeSheep);
@@ -488,7 +488,7 @@ public class Hub extends javax.swing.JFrame {
                 .addComponent(addFarmName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(addFarmAdd)
-                .addContainerGap(365, Short.MAX_VALUE))
+                .addContainerGap(398, Short.MAX_VALUE))
         );
 
         tabOptions.addTab("Add Farm", addFarm);
@@ -537,7 +537,7 @@ public class Hub extends javax.swing.JFrame {
                 .addComponent(removeFarmComboFarm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(removeFarmAdd)
-                .addContainerGap(367, Short.MAX_VALUE))
+                .addContainerGap(400, Short.MAX_VALUE))
         );
 
         tabOptions.addTab("Remove Farm", removeFarm);
@@ -622,7 +622,7 @@ public class Hub extends javax.swing.JFrame {
                 .addComponent(editFriendEmailAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(updateContactInformation)
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         tabOptions.addTab("Edit Contact Information", editContactInformation);
@@ -633,14 +633,15 @@ public class Hub extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabMain)
+            .addComponent(tabMain, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabMain)
+            .addComponent(tabMain, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-816)/2, (screenSize.height-738)/2, 816, 738);
     }// </editor-fold>//GEN-END:initComponents
 
 	private void addSheepNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSheepNameActionPerformed
@@ -971,6 +972,7 @@ public class Hub extends javax.swing.JFrame {
 
 			messageList.setListData(ServerData.messages.toArray());
 			messageList.setVisible(true);
+			System.out.println(ServerData.messages.get(0).toString());
 			
 			GenerateMap.UpdateMap(ServerData.messages);
 			mapPanel = new MapPanel();

@@ -29,6 +29,8 @@ public class Login extends javax.swing.JFrame {
 	 */
 	public Login() {
 		initComponents();
+		if(!Client.ServerUp)
+			JOptionPane.showMessageDialog(this, "Could not connect to server", "Connection Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	/**
@@ -49,6 +51,8 @@ public class Login extends javax.swing.JFrame {
         registerNewUser = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setResizable(false);
 
         labelUser.setText("Username:");
 
@@ -102,7 +106,7 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(labelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addGap(71, 71, 71))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,10 +125,13 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(login)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(registerNewUser)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
-        pack();
+        getAccessibleContext().setAccessibleDescription("");
+
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-309)/2, (screenSize.height-264)/2, 309, 264);
     }// </editor-fold>//GEN-END:initComponents
 
 	private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
@@ -132,19 +139,20 @@ public class Login extends javax.swing.JFrame {
 		
 		String username = this.username.getText();
 		String password = this.password.getText();
-		if(isUsernameAndPassword(username, password)){
-			this.setVisible(false);
-			Client.hub.setVisible(true);
-			Client.hub.initComp();
-
-			/*
-            System.out.println(ServerData.owner);
-            System.out.println(ServerData.farms.get(0).getName());
-            System.out.println(ServerData.farms.get(1).getName());
-            System.out.println(ServerData.farms.get(2).getName());
-			 */
-		}else
-			JOptionPane.showMessageDialog(this, "Wrong Username or Password", "Error", JOptionPane.ERROR_MESSAGE);
+		if (Client.ServerUp) {
+			if (isUsernameAndPassword(username, password)) {
+				this.setVisible(false);
+				Client.hub.setVisible(true);
+				Client.hub.initComp();
+			} else
+				JOptionPane.showMessageDialog(this,
+						"Wrong Username or Password", "Error",
+						JOptionPane.ERROR_MESSAGE);
+		}else{
+			JOptionPane.showMessageDialog(this,
+					"You are not connected to the server.\nRestart the client and try again,\nor contact your system administrator", " Connection Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
 
 
 

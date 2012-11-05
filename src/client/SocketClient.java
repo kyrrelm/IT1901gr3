@@ -5,6 +5,7 @@ import helpclasses.CommMessage;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -36,7 +37,7 @@ public class SocketClient {
 	/**
 	 * Must run this to establish connection
 	 */
-	public void run()
+	public void run() throws IOException
 	{
 		try
 		{
@@ -53,10 +54,6 @@ public class SocketClient {
 		catch(UnknownHostException e)
 		{
 			System.err.println("Couldn't find host: "+e.getMessage());
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
 		}
 	}
 
