@@ -102,9 +102,10 @@ public class Message implements Serializable {
 	}
 	
 	public String toString() {
-		return "Message Id: " + messageId + ", SheepId: " + sheepId + "\n\tDate: " + dateTime + ", Pulse: " +
+		return "<html><span style=\"color:green\"><b>Message Id: " + messageId + ", Sheep Id: " + sheepId + "</b></span>" +
+				"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date: " + dateTime + ", Pulse: " +
 				pulse + ", Temperature: " + temperature + ", Status: " +
-				status + ", Position: " +"("+ round(positionX, 2) +", "+ round(positionY, 2) +")";
+				status + ", Position: " +"("+ round(positionX, 2) +", "+ round(positionY, 2) +")<br>&nbsp;</html>";
 	}
 	
 	public String toStringMap() {
