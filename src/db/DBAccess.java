@@ -190,9 +190,9 @@ public class DBAccess {
 			
 			Random r = new Random();
 			double positionX = Constants.minLon + (Constants.maxLon - Constants.minLon) * r.nextDouble();
-			double positionY = Constants.minLat +  (Constants.maxLat - Constants.maxLat) * r.nextDouble();
-			
-			// legg til en melding for denne sauen.
+			double positionY = Constants.minLat +  (Constants.maxLat - Constants.minLat) * r.nextDouble();
+
+			// legg til en melding for denne sauenyyyyyyyyyyyyyyy
 			java.util.Date date = new java.util.Date();
 			java.text.SimpleDateFormat simpleDateFormat = 
 					new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
