@@ -77,12 +77,12 @@ public class MapPanel extends JPanel{
 	            	@Override
 	                public void run() {  
 	                    Group root = new Group();  
-	                    Scene scene = new Scene(root, 540, 560);
+	                    Scene scene = new Scene(root, 540, 540);
 	                    webView = new WebView();
 	                    root.getChildren().add(webView);
 	                    jfxPanel.setScene(scene);
-	                    webView.setMinSize(540, 560);
-	                    webView.setMaxSize(540, 560);
+	                    webView.setMinSize(540, 540);
+	                    webView.setMaxSize(540, 540);
 	                    
 	                    URL url = getClass().getResource("/" + localURL);
 	            		System.out.println(url.toExternalForm());
