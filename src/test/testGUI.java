@@ -10,6 +10,8 @@ import helpclasses.CommEnum;
 import helpclasses.CommMessage;
 import helpclasses.Message;
 import helpclasses.Owner;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -114,7 +116,12 @@ public class testGUI extends javax.swing.JFrame {
         
         
         sockCli = new SocketClient("localhost", 6667);
-	sockCli.run();
+	try {
+		sockCli.run();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	
 	// logg inn
         ArrayList<String> loginInfo = new ArrayList<String>();

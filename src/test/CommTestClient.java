@@ -5,6 +5,7 @@ import helpclasses.CommMessage;
 import helpclasses.Owner;
 import helpclasses.Sheep;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -18,7 +19,12 @@ public class CommTestClient {
 		
 		SocketClient sockCli = new SocketClient("localhost", 6667);
 		
-		sockCli.run();
+		try {
+			sockCli.run();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		
