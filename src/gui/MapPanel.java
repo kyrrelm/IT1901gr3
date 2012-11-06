@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.net.URL;
 
+import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ import com.sun.javafx.application.PlatformImpl;
 public class MapPanel extends JPanel{
 	private JFXPanel jfxPanel;
 	private WebView webView;
+	private WebEngine webEngine;
 	
 	
 	public final static String localURL = "map/kart.html";
@@ -71,6 +73,7 @@ public class MapPanel extends JPanel{
 	{
 		PlatformImpl.startup(
 	            new Runnable() {
+	            	
 	            	@Override
 	                public void run() {  
 	                    Group root = new Group();  
@@ -81,19 +84,32 @@ public class MapPanel extends JPanel{
 	                    webView.setMinSize(540, 560);
 	                    webView.setMaxSize(540, 560);
 	                    
-	                    loadURL();
-	                }  
+	                    URL url = getClass().getResource("/" + localURL);
+	            		System.out.println(url.toExternalForm());
+	            		
+	            		webEngine = webView.getEngine();
+	            		webEngine.load(url.toExternalForm());
+	                    
+	                    
+
+	                }
+
+	            	
+	            	
 	            });  
 	}
 	
-	public void loadURL()
+	public void reload()
 	{
-		
-		URL url = getClass().getResource("/" + localURL);
-		
-		
-		WebEngine webEngine = webView.getEngine();
-		webEngine.load(url.toExternalForm());
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				webEngine.reload();
+				
+			}
+			
+		});
 	}
 	
 }

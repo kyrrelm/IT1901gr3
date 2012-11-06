@@ -721,7 +721,7 @@ public class Hub extends javax.swing.JFrame {
 		ArrayList<Message> tmpmgs = ServerData.filterMessages(onlyAlarm, farm, sheep, farm.equals("All farms"), sheep.equals("All sheep"));
 		messageList.setListData(tmpmgs.toArray());
 		GenerateMap.UpdateMap(tmpmgs);
-		mapPanel.loadURL();
+		mapPanel.reload();
 		
 		
 
@@ -974,7 +974,7 @@ public class Hub extends javax.swing.JFrame {
 			System.out.println(ServerData.messages.get(0).toString());
 			
 			GenerateMap.UpdateMap(ServerData.messages);
-			mapPanel = new MapPanel();
+			mapPanel.reload();
 
 			filtersFarmComboBox.setModel(new DefaultComboBoxModel(ServerData.getFarmNamesPlusAllFarms()));
 			filtersSheepComboBox.setModel(new DefaultComboBoxModel(ServerData.getSheepNamesByFarmName((String) filtersFarmComboBox.getSelectedItem())));

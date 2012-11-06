@@ -22,6 +22,9 @@ public class Server
 	
 	public static void main(String asdasd[]) throws InstantiationException, IllegalAccessException
 	{
+		//force ipv4
+		System.setProperty("java.net.preferIPv4Stack" , "true");
+		
 		// open DB connection!
 		db.DBAccess.open();
 		

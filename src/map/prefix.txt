@@ -50,7 +50,7 @@ TextualZoomControl.prototype.setButtonStyle_ = function(button) {
       if (GBrowserIsCompatible()) {
       var map = new GMap2(document.getElementById("map_canvas"));
       map.addControl(new GSmallMapControl());
-      map.setCenter(new GLatLng(62.3, 9.0), 14); // Dovre!
+      map.setCenter(new GLatLng(62.7, 9.475), 8); // Dovre!
       var tilelayer =  new GTileLayer(null, null, null,
       {tileUrlTemplate: 'http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo2&zoom={Z}&x={X}&y={Y}', isPng:true, opacity:1.0 } );
       var myTileLayer = new GTileLayerOverlay(tilelayer);
