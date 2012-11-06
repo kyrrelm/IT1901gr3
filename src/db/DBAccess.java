@@ -197,7 +197,7 @@ public class DBAccess {
 			java.text.SimpleDateFormat simpleDateFormat = 
 					new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String currentTime = simpleDateFormat.format(date);
-			addMessage(currentTime, 75, 35, 0,
+			addMessage(75, 35, 0,
 					positionX, positionY, sheepID);
 			
 		} catch (SQLException e) {
@@ -207,12 +207,11 @@ public class DBAccess {
 		}
 	}
 	
-	/**Adds a message to the database, requires a sheep.
+	/**
+	 * Adds a message to the database, requires a sheep.
 	 * Note: this method is called by addsheep
 	 * @author halvor
 	 * 
-	 * @param dateTime
-	 * Message timestamp.
 	 * @param pulse
 	 * The sheep's pulse.
 	 * @param temperature
@@ -226,7 +225,7 @@ public class DBAccess {
 	 * @param sheepId
 	 * The ID of the sheep.
 	 */
-	public static void addMessage(String dateTime, int pulse, int temperature,
+	public static void addMessage(int pulse, int temperature,
 			int status, double positionX, double positionY, int sheepId) {
 		
 		/**
@@ -237,6 +236,15 @@ public class DBAccess {
 		 * @author halvor
 		 */
 		//synchronized (DBAccess.class){
+		
+		// timestamp moved here.
+		java.util.Date date = new java.util.Date();
+		java.text.SimpleDateFormat simpleDateFormat = 
+				new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateTime = simpleDateFormat.format(date);
+		
+		
+		
 			try {
 				Statement st = con.createStatement();
 			

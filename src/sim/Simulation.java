@@ -102,14 +102,9 @@ public class Simulation extends Thread{
 	{
 		//DEBUG:
 		System.out.println("Just updated all sheep");
-		java.util.Date date = new java.util.Date();
-		java.text.SimpleDateFormat simpleDateFormat = 
-				new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String currentTime = simpleDateFormat.format(date);
-		
 		// TODO: Fix int in DB method, float in messages and simulation (Temperature)
 		for (Message m: messages)
-			DBAccess.addMessage(currentTime, m.getPulse(), (int)m.getTemperature(), m.getStatus(), m.getPositionX(), m.getPositionY(), m.getSheepId());
+			DBAccess.addMessage(m.getPulse(), (int)m.getTemperature(), m.getStatus(), m.getPositionX(), m.getPositionY(), m.getSheepId());
 		
 		//DBAccess.updateAllSheep(null);
 	}
