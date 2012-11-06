@@ -94,7 +94,7 @@ public class MapPanel extends JPanel{
 
 	                }
 
-	            	
+	            	 
 	            	
 	            });  
 	}
