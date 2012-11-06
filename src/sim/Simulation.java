@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Random;
 
+import map.Constants;
+
 import db.DBAccess;
 
 import helpclasses.Message;
@@ -29,10 +31,6 @@ public class Simulation extends Thread{
 	public boolean stop = false;
 	public int refreshRate; 
 
-	/* Simulation variable ranges */
-	private double maxHerdX; 
-	private double maxHerdY;
-
 	private int minPulse = 40;
 	private int maxPulse = 100;
 
@@ -47,15 +45,13 @@ public class Simulation extends Thread{
 	 * @param maxHerdY
 	 * @param refreshRate Amount of milliseconds between each value refresh in sheep ArrayList and DB dump
 	 */
-	public Simulation(int maxHerdX, int maxHerdY, int refreshRate)
+	public Simulation(int refreshRate)
 	{
 		// kaller Thread
 		super("SimulationThread");
 		
 		
 		messages = new ArrayList<Message>();
-		this.maxHerdX = maxHerdX;
-		this.maxHerdY = maxHerdY;
 		this.refreshRate = refreshRate;
 		
 		getData();
@@ -121,8 +117,10 @@ public class Simulation extends Thread{
 	/**
 	 * Random movement of all sheeps, this needs some minor polishing but works well enough for a rudimentary simulation
 	 * sets movement within range maxHerdX and maxHerdY
-	 * Bugs: Sheep can move beyond the "wall"
-	 * Bugs: Sheep aren't sticking together in a herd (use gravity)
+	 * 
+	 * 
+	 * Bug: position is completely random, does not take into account any max movement per day.
+	 *  ^Halvor. 
 	 */
 	public void randomPos() 
 	{
@@ -130,9 +128,8 @@ public class Simulation extends Thread{
 		for(Message m: messages)
 		{
 			Random r = new Random();
-			double x, y;
-			x = r.nextDouble()*maxHerdX;
-			y = r.nextDouble()*maxHerdY;
+			double x = Constants.minLon + (Constants.maxLon - Constants.minLon) * r.nextDouble();
+			double y = Constants.minLat +  (Constants.maxLat - Constants.minLat) * r.nextDouble();
 			m.setPos(x, y);
 		}
 		

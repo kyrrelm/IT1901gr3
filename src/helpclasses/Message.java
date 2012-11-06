@@ -28,8 +28,13 @@ public class Message implements Serializable {
 		this.positionY   = positionY;
 		this.sheepId 	 = sheepId;
 		this.sheep       = sheep;
-		//midlertidig
-		this.alarm = false;
+		
+		// HAX
+		if (status == 0)
+			this.alarm = false;
+		else
+			this.alarm = true;
+		
 	}
 	
 	public boolean isAlarm() {
@@ -90,10 +95,6 @@ public class Message implements Serializable {
 	
 	public int getStatus() {
 		return status;
-	}
-	
-	public void setStatus(int status) {
-		this.status = status;
 	}
 	
 	public Sheep getSheep()
