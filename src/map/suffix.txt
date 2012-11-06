@@ -1,14 +1,80 @@
+ 		// end of generated code
+        showLastMessages(map, mainArray);
+        
+        
       }
-      }
-      function createMarker(point, label) {
-      var marker = new GMarker(point);
-      GEvent.addListener(marker, "click", function() {
-      marker.openInfoWindowHtml("<font size=\"1\">"+label+"</font>"); 
-});
-      return marker;
-      }
+    }
+    function createMarker(point, label) 
+    {
+        var marker = new GMarker(point);
+        GEvent.addListener(marker, "click", function() {
+            marker.openInfoWindowHtml("<font size=\"1\">"+label+"</font>"); 
+        });
+        return marker;
+    }
+    
+    function buttonListener(map,arr, lineArr)
+    {
+        //clear alle overlays
+        map.clearOverlays();
+        // legg på overlays igjen!
+        var tilelayer =  new GTileLayer(null, null, null,
+        {tileUrlTemplate: 'http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo2&zoom={Z}&x={X}&y={Y}', isPng:true, opacity:1.0 } );
+        var myTileLayer = new GTileLayerOverlay(tilelayer);
+        map.addOverlay(myTileLayer);
+        
+        if (isShowingHistory == true)
+        {
+            isShowingHistory = false;
+            
+            // vis kun siste messages
+            showLastMessages(map, arr);
+            
+        }
+        else
+        {
+            isShowingHistory = true;
+        
+            // vis  alle messages med polyLines mellom!
+            showAllMessagesWithHistory(map, arr, lineArr);
+        }
+    }
+        
+    function showLastMessages(map,arr)
+    {
+        // for hver sau
+        for (var i = 0; i < arr.length; i++)
+        {
+            // display siste message
+            map.addOverlay(arr[i][0]);
+        }
+            
+    }
+    function showAllMessagesWithHistory(map, arr, linearr)
+    {
+        // for hver sau
+        for (var i = 0; i < arr.length; i++)
+        {
+            // for hver message
+            for (var j = 0; j < arr[i].length; j++)
+                {
+                    map.addOverlay(arr[i][j]);
+                }            
+        }
+        
+        // for hver linje mellom sauene!
+         for (var i = 0; i < linearr.length; i++)
+        {
+            // for hver message
+            for (var j = 0; j < linearr[i].length; j++)
+                {
+                    map.addOverlay(linearr[i][j]);
+                }            
+        }
+    }
 </script>
   </head>
   <body onload="initialize()" onunload="GUnload()">
     <div id="map_canvas" style="width: 525px; height: 510px; position: absolute;  left: 0; top: 0"></div>    
   </body>
+</html>

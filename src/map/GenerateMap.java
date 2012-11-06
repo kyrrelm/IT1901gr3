@@ -28,6 +28,11 @@ public class GenerateMap {
 		initGenerator();
 		ArrayList<Message> test = new ArrayList<Message>();
 		test.add(new Message(12, new Date(0), 1, 1, 1, 9.0, 62.5, 1, null));
+		test.add(new Message(13, new Date(0), 1, 1, 1, 8.0, 61.5, 1, null));
+		test.add(new Message(14, new Date(0), 1, 1, 1, 7.0, 63.5, 2, null));
+		test.add(new Message(15, new Date(0), 1, 1, 1, 5.0, 62.5, 2, null));
+		test.add(new Message(16, new Date(0), 1, 1, 1, 5.0, 62, 3, null));
+		test.add(new Message(17, new Date(0), 1, 1, 1, 8.0, 62, 1, null));
 		UpdateMap(test);
 	}
 	
@@ -75,7 +80,29 @@ public class GenerateMap {
 	{
 		String path =  GenerateMap.class.getClassLoader().getResource(gui.MapPanel.localURL).getPath().replaceAll("%20",  " ");
 		
-		System.out.println(path);
+		ArrayList<ArrayList<Message>> sortedmsg = new ArrayList<ArrayList<Message>>();
+		ArrayList<Integer> sheepIDs  = new ArrayList<Integer>();
+		//sorter arraylist message inn i arraylist<Arraylist<msg>!
+		for (Message m: msg)
+		{
+			int sheepID = m.getSheepId();
+			
+			int sheepIndex = sheepIDs.indexOf(sheepID);
+
+			// denne sauen har ingen messages enda
+			if (sheepIndex == -1)
+			{
+				ArrayList<Message> tempArr = new ArrayList<Message>();
+				tempArr.add(m);
+				sheepIDs.add(sheepID);
+				
+				sortedmsg.add(tempArr);
+				
+			}
+			else
+				sortedmsg.get(sheepIndex).add(m);
+			
+		}
 		
 		try {
 			File file = new File(path);
@@ -87,9 +114,70 @@ public class GenerateMap {
 			BufferedWriter fw = new BufferedWriter(new FileWriter(file));
 			
 			fw.write(prefix);
+			int sheepCount = 0;
+			for (ArrayList<Message> l: sortedmsg)
+			{
+				String pointString = "\n\t\tmainArray[" + sheepCount + "] = [";
+				String lineString = "\n\t\tlineArray[" + sheepCount + "] = [";
+				for (int i = 0; i < l.size(); i++)
+				{
+					// pointString:
+					Message m = l.get(i);
+					pointString += "createMarker(new GLatLng(" + m.getPositionY() + ", " + m.getPositionX() + "),\"" + m.toStringMap() + "\")";
+					// hvis det ikke er det siste elementet: legg til et komma
+					if ((i + 1) < l.size())
+					{
+						pointString += ",";
+					}
+					
+					//lineString:
+					// kun legg til points hvis i er odd.
+					if (i % 2 == 1) // odd
+					{
+						boolean lower = (i - 1) >= 0;
+						boolean upper = (i + 1) < l.size();
+						
+						if (lower)
+						{
+							Message prev = l.get(i-1);
+							lineString += "new GPolyline([new GLatLng(" + prev.getPositionY() + ", " + prev.getPositionX() + "), new GLatLng(" + m.getPositionY() + ", " + m.getPositionX() + ")], \"ff0000\", 5)";
+							
+							// if there are more lines to be added, add a comma
+							if (upper)
+								lineString += ",";
+						}
+						
+						if (upper)
+						{
+							Message next = l.get(i+1);
+							lineString += "new GPolyline([new GLatLng(" + m.getPositionY() + ", " + m.getPositionX() + "), new GLatLng(" + next.getPositionY() + ", " + next.getPositionX() + ")], \"ff0000\", 5)";
+							
+							// if there are more lines to be added, add a comma
+							if ((i + 1 + 1) < l.size())
+								lineString += ",";
+						}
+						
+					}
+						
+					
+				}
+				// end the strings
+				pointString += "];";
+				lineString += "];";
+				
+				// write the strings
+				fw.write(pointString);
+				fw.write(lineString);				
+				sheepCount++;
+			}
+			
+			String test = "createMarker(new GLatLng( Y , X ),\" desc \")";
+			/*
 			for (Message m : msg) {
 				fw.write("map.addOverlay(createMarker(new GLatLng("+m.getPositionY()+","+ m.getPositionX()+"),\""+ m.toStringMap()+"\"));\n");
-			}
+				
+				
+			}*/
 			fw.write(suffix);
 			
 			fw.close();
