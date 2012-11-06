@@ -113,8 +113,8 @@ public class Message implements Serializable {
 			color = "green";
 		return "<html><span style=\"color:"+ color +"\"><b>Message Id: " + messageId + ", Sheep Id: " + sheepId + "</b></span>" +
 				"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date: " + dateTime + ", Pulse: " +
-				pulse + ", Temperature: " + temperature + ", Status: " +
-				status + ", Position: " +"("+ round(positionX, 2) +", "+ round(positionY, 2) +")<br>&nbsp;</html>";
+				pulse + ", Temperature: " + temperature +
+				", Position: " +"("+ round(positionX, 2) +", "+ round(positionY, 2) +")<br>&nbsp;</html>";
 	}
 	/**
 	 * @author Kyrre
@@ -123,7 +123,7 @@ public class Message implements Serializable {
 	public String toStringMap() {
 		return "Id: " + sheepId + "<br>Date: " + dateTime + "<br>Pulse: " +
 				pulse + "<br>Temperature: " + temperature + "<br>Under attack: " +
-				alarm + "<br>Position: " +"("+ positionX +", "+ positionY +")";
+				alarm + "<br>Position: " +"("+ round(positionX, 4) +", "+ round(positionY, 2) +")";
 	}
 	
 	
