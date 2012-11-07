@@ -31,6 +31,11 @@ public class Client {
 	public static void main(String[] args) {
 		// brukernavn s� jeg � logge meg p� mysqladmin hele tida: Superman3440/Sheep
 
+		
+		//force ipv4
+		System.setProperty("java.net.preferIPv4Stack" , "true");
+		
+		
 		sockCli = new SocketClient("localhost", 6667);
 		
 		try {

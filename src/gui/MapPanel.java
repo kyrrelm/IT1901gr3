@@ -28,6 +28,7 @@ public class MapPanel extends JPanel{
 	
 	public MapPanel()
 	{
+		
 		initComponents();
 	}
 	
@@ -35,6 +36,9 @@ public class MapPanel extends JPanel{
 	// kun for testing
 	public static void main(String ...args)
 	{
+		//force ipv4
+		System.setProperty("java.net.preferIPv4Stack" , "true");
+		
 		SwingUtilities.invokeLater(new Runnable() {  
             public void run() {  
                 // Create a Swing Frame
