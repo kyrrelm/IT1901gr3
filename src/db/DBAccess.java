@@ -105,6 +105,7 @@ public class DBAccess {
 	public static void addOwner(String username, String pw, String firstName,
 			String lastName, String tlf, String email, String secondaryTlf,
 			String secondaryEmail) {
+		
 		try {
 			Statement st = con.createStatement();
 			/*    FOR TESTING:
