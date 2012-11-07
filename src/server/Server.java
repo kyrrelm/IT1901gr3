@@ -32,6 +32,7 @@ public class Server
 		
 		// start simulation thread!
 		Simulation sim = new Simulation(28800000);
+		//Simulation sim = new Simulation(10000);
 		sim.start();
 		
 		sockServ = new SocketServer(6667);
@@ -56,13 +57,14 @@ public class Server
 		String body  = "The sheep with ID " + m.getSheepId() + " was attacked! \n";
 		body        += "Date: "+ m.getDateTime() + "\n";
 		body        += "Position: (" + m.getPositionY() +", "  +m.getPositionX() + ")\n";
-		
+		/*
 		EmailSender.sendEmail(o.getPrimaryMail(), title, body);
 		EmailSender.sendEmail(o.getSecondaryMail(), title2, body);
-		
+		*/
 		//SMSSender.SendSMS(body)
 		
 		
+		System.out.println("LOL");
 		
 		// check if that user is logged on!
 		
@@ -81,8 +83,11 @@ public class Server
 		ArrayList<ServerThread> sts =  sockServ.getThreads();
 		for (ServerThread st: sts)
 		{
-			CommMessage<Integer> cm = new CommMessage<Integer>(CommEnum.NEWMESSAGES, null);
-			st.sendMessage(cm);
+			if (st.getLoggedIn())
+			{
+				CommMessage<Integer> cm = new CommMessage<Integer>(CommEnum.NEWMESSAGES, null);
+				st.sendMessage(cm);
+			}
 
 		}
 			

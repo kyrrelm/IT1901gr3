@@ -914,7 +914,7 @@ public class DBAccess {
 			{
 				int SheepID = s.getSheepId();
 				
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM Message WHERE SheepID = " + SheepID + " ORDER BY MessageID DESC LIMIT 0,1");
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM Message WHERE SheepID = " + SheepID + " AND Status = 0 ORDER BY MessageID DESC LIMIT 0,1");
 				
 				while(resultSet.next())
 				{

@@ -126,6 +126,7 @@ public class Simulation extends Thread{
 			DBAccess.addMessage(m.getPulse(), (int)m.getTemperature(), m.getStatus(), m.getPositionX(), m.getPositionY(), m.getSheepId());
 		
 		//DBAccess.updateAllSheep(null);
+		Server.fireUpdateMessages();
 	}
 
 	/**
@@ -184,19 +185,26 @@ public class Simulation extends Thread{
 	
 	
 	
-	public void generateAlarm()
+	public boolean generateAlarm()
 	{
 		Random r = new Random();
 		
-		if (r.nextInt(12*24)  == 0)
+		if (true) //r.nextInt(12*24)  == 0)
 		{
 			int randomIndex = r.nextInt(messages.size());
-			while (!(messages.get(randomIndex).isAlarm()))
+			while (messages.get(randomIndex).isAlarm())
 				randomIndex = r.nextInt(messages.size());
 			
+			// make that shit!
+			double x = Constants.minLon + (Constants.maxLon - Constants.minLon) * r.nextDouble();
+			double y = Constants.minLat +  (Constants.maxLat - Constants.minLat) * r.nextDouble();
+			db.DBAccess.addMessage(0, 0, 1, x, y, messages.get(randomIndex).getSheepId());
+			
+			messages.remove(randomIndex);
 			// fire  alarm på randomIndex
 			Server.fireAlarm(messages.get(randomIndex));
+			return true;
 		}
-			
+		return false;
 	}
 }
