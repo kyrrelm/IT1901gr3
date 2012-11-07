@@ -35,9 +35,16 @@ public class Server
 		//Simulation sim = new Simulation(10000);
 		sim.start();
 		
-		sockServ = new SocketServer(6667);
+		InputScanner is = new InputScanner();
+		is.start();
 		
+		sockServ = new SocketServer(6667);
+				
 		sockServ.run();
+		
+		is.stopThread();
+		
+		sim.stopThread();
 		
 		sockServ.close();
 		
@@ -56,7 +63,7 @@ public class Server
 		
 		String body  = "The sheep with ID " + m.getSheepId() + " was attacked! \n";
 		body        += "Date: "+ m.getDateTime() + "\n";
-		body        += "Position: (" + m.getPositionY() +", "  +m.getPositionX() + ")\n";
+		body        += "Position: (" + m.getPositionX() +", "  +m.getPositionY() + ")\n";
 		/*
 		EmailSender.sendEmail(o.getPrimaryMail(), title, body);
 		EmailSender.sendEmail(o.getSecondaryMail(), title2, body);

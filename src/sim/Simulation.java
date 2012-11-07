@@ -189,7 +189,7 @@ public class Simulation extends Thread{
 	{
 		Random r = new Random();
 		
-		if (true) //r.nextInt(12*24)  == 0)
+		if (r.nextInt(12*24)  == 0)
 		{
 			int randomIndex = r.nextInt(messages.size());
 			while (messages.get(randomIndex).isAlarm())
