@@ -96,6 +96,9 @@ public class Simulation extends Thread{
 			generateAlarm();
 			
 			try { Thread.sleep(alarmRate); } catch (InterruptedException e) { e.printStackTrace(); } //tråden sover
+			
+			// for speedy generering
+			//try { Thread.sleep(refreshRate); } catch (InterruptedException e) { e.printStackTrace(); } //tråden sover
 			waitTime += alarmRate;
 		}
 	}
