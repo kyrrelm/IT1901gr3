@@ -135,9 +135,13 @@ public class ServerUnpacker {
          * @author Kenneth
          */
         if(msg.getMessageName() == CommEnum.REGISTERNEWUSER) {
-            Owner owner = (Owner) params.get(0);
             
-            //DBAccess.registerNewUser()
+        	boolean isValidUsername = false;
+        	Owner owner = (Owner) params.get(0);
+            
+        	isValidUsername = DBAccess.isUsernameTaken(owner.getUsername());
+            
+            
         }
 		
     return null;
