@@ -72,12 +72,12 @@ public class ClientUnpacker {
 		
 		if (msg.getMessageName() == CommEnum.NEWMESSAGES)
 		{
-			JOptionPane.showMessageDialog(client.Client.hub, "New messages", "Hit refresh to receive your new messages.", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(client.Client.hub, "Hit refresh to receive your new messages.", "New messages", JOptionPane.INFORMATION_MESSAGE);
 			
 		}
 		if (msg.getMessageName() == CommEnum.NEWALARM)
 		{
-			JOptionPane.showMessageDialog(client.Client.hub, "ALARM!", "Hit refresh to receive your new urgent message.", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(client.Client.hub, "Hit refresh to receive your new urgent message.", "ALARM!", JOptionPane.WARNING_MESSAGE);
 		}
 		
 		if (msg.getMessageName() == CommEnum.USERNAMEALREADYTAKEN)

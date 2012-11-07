@@ -120,7 +120,7 @@ public class GenerateMap {
 						if (lower)
 						{
 							Message prev = l.get(i-1);
-							lineString += "new GPolyline([new GLatLng(" + prev.getPositionX() + ", " + prev.getPositionY() + "), new GLatLng(" + m.getPositionX() + ", " + m.getPositionY() + ")], \"ff0000\", 5)";
+							lineString += "new GPolyline([new GLatLng(" + prev.getPositionX() + ", " + prev.getPositionY() + "), new GLatLng(" + m.getPositionX() + ", " + m.getPositionY() + ")], \"ff0000\", 2)";
 							
 							// if there are more lines to be added, add a comma
 							if (upper)
@@ -130,7 +130,7 @@ public class GenerateMap {
 						if (upper)
 						{
 							Message next = l.get(i+1);
-							lineString += "new GPolyline([new GLatLng(" + m.getPositionX() + ", " + m.getPositionY() + "), new GLatLng(" + next.getPositionX() + ", " + next.getPositionY() + ")], \"ff0000\", 5)";
+							lineString += "new GPolyline([new GLatLng(" + m.getPositionX() + ", " + m.getPositionY() + "), new GLatLng(" + next.getPositionX() + ", " + next.getPositionY() + ")], \"ff0000\", 2)";
 							
 							// if there are more lines to be added, add a comma
 							if ((i + 1 + 1) < l.size())
