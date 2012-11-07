@@ -18,7 +18,7 @@ public class Message implements Serializable {
 	
 	
 	public Message(int messageId, Date dateTime, int pulse, float temperature,
-			int status, double positionX, double positionY, int sheepId, Sheep sheep) {
+			int status, double positionY, double positionX, int sheepId, Sheep sheep) {
 		this.messageId   = messageId;
 		this.dateTime    = dateTime;
 		this.pulse 		 = pulse;

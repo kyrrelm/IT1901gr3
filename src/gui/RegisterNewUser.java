@@ -20,7 +20,10 @@ import helpclasses.Owner;
  * @author Kenneth
  */
 public class RegisterNewUser extends javax.swing.JFrame {
-
+	
+	//Needs this variable when we are sending data to server.
+	// This variable is global so that it can be reached from
+	// ClientUnpacker.java
 	public static boolean usernameTaken = false;
 	
 	
@@ -464,14 +467,18 @@ public class RegisterNewUser extends javax.swing.JFrame {
                     Integer.parseInt(friendTelephoneNumber),
                     friendEmailAddress));            
             
-		
+            //We now send a message that we want to register a new user
             Client.sockCli.sendMessage(new CommMessage<Owner>(
                     CommEnum.REGISTERNEWUSER, owner));
             
             
+            //If the function isUsernameTaken called from ServerUnpacker.java
+            // returns false, then it will eventuelly updata the global
+            // variable usernameTaken
             if (usernameTaken == true)
             {
             	usernameTaken = false;
+            	
             	JOptionPane.showMessageDialog(null,
             			"Username has already been taken!",
             			"Not valid contact information",
@@ -479,10 +486,12 @@ public class RegisterNewUser extends javax.swing.JFrame {
             }
             else
             {
+            	//Everything went fine so we set the visibility of this window
+            	// to false. Then make the hub window visible and initialize
+            	// its functions and data
             	this.setVisible(false);
             	Client.hub.setVisible(true);
             	Client.hub.initComp();
-            	// login visible
             }
         }
     }//GEN-LAST:event_registerNewUserActionPerformed
