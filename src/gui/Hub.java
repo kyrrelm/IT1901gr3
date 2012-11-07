@@ -671,12 +671,15 @@ public class Hub extends javax.swing.JFrame {
 
 	private void addFarmAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFarmAddActionPerformed
 		String farmName = addFarmName.getText();
-    		if (farmName.length() >= 3) {
+    		if (farmName.length() >= 3 && farmName != "You have no farms") {
 			addFarmName.setText(null);
 			ArrayList<Farm> metadata = new ArrayList<Farm>();
 			metadata.add(new Farm(-1, farmName, ServerData.owner.getOwnerId()));
 			Client.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.ADDFARM,metadata));
 			Client.sockCli.sendMessage(new CommMessage<String>(CommEnum.GETFARMS, null));
+			
+			initRemoveFarm();
+			initAddSheep();
 		}else{
 			JOptionPane.showMessageDialog(this, "Farm name must be at least 3 characters", "Invalid name", JOptionPane.ERROR_MESSAGE);
 		}
@@ -685,11 +688,15 @@ public class Hub extends javax.swing.JFrame {
 
 	private void removeFarmAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeFarmAddActionPerformed
 		String farmToRemove = (String) this.removeFarmComboFarm.getSelectedItem();
+		if (farmToRemove == "You have no farms")
+			return;
+		
 		System.out.print(farmToRemove);
 		ArrayList<Farm> metadata = new ArrayList<Farm>();
 		metadata.add(ServerData.getFarmByNameAndRemove(farmToRemove));
 		Client.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.REMOVEFARM, metadata));
 		initRemoveFarm();
+		initAddSheep();
 		refreshMessages();
 	}//GEN-LAST:event_removeFarmAddActionPerformed
 

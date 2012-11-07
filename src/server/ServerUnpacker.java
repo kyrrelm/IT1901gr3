@@ -49,6 +49,37 @@ public class ServerUnpacker
                 return new CommMessage<String>(CommEnum.LOGINFAILED, null);
 			
         }
+        
+        /**
+         * Here we call the relevant function in DBAccess.java. This will
+          * register a new user.
+             * 
+             * @author Kenneth
+             */
+            if(msg.getMessageName() == CommEnum.REGISTERNEWUSER) 
+            {
+            	Owner owner = (Owner) params.get(0);
+            	owner.toString();
+            	
+            	if(db.DBAccess.isUsernameTaken(owner.getUsername()))
+            	{
+            		return new CommMessage<Integer>(CommEnum.USERNAMEALREADYTAKEN, null);
+            	}
+            	
+            	System.out.println("1");
+            	
+            	
+            	db.DBAccess.addOwner(owner.getUsername(), owner.getPassword(),
+            			owner.getFirstName(), owner.getLastName(),
+            			Integer.toString(owner.getPrimaryTLF()),
+            			owner.getPrimaryMail(),
+            			Integer.toString(owner.getSecondaryTLF()),
+            			owner.getSecondaryMail());
+               
+            	System.out.println("2");
+            	return new CommMessage<Owner>(CommEnum.SUCCESS, null);
+            	//isValidUsername = DBAccess.isUsernameTaken(owner.getUsername());         
+            }
 		
 	// resten av metodene krever at brukeren er logget inn i gitt tr�d.
 	if (!st.getLoggedIn())
@@ -131,33 +162,7 @@ public class ServerUnpacker
             return new CommMessage<Owner>(CommEnum.SUCCESS, null);
 	}
         
-    /**
-     * Here we call the relevant function in DBAccess.java. This will
-      * register a new user.
-         * 
-         * @author Kenneth
-         */
-        if(msg.getMessageName() == CommEnum.REGISTERNEWUSER) 
-        {
-        	Owner owner = (Owner) params.get(0);
-        	owner.toString();
-        	
-        	if(db.DBAccess.isUsernameTaken(owner.getUsername()))
-        	{
-        		return new CommMessage<Integer>(CommEnum.USERNAMEALREADYTAKEN, null);
-        	}
-        	
-        	
-        	db.DBAccess.addOwner(owner.getUsername(), owner.getPassword(),
-        			owner.getFirstName(), owner.getLastName(),
-        			Integer.toString(owner.getPrimaryTLF()),
-        			owner.getPrimaryMail(),
-        			Integer.toString(owner.getSecondaryTLF()),
-        			owner.getSecondaryMail());
-           
-        	return new CommMessage<Owner>(CommEnum.SUCCESS, null);
-        	//isValidUsername = DBAccess.isUsernameTaken(owner.getUsername());         
-        }
+    
 		
     return null;
 		
