@@ -20,7 +20,8 @@ public class ServerUnpacker
     {
 		
         ArrayList<?> params = msg.getParamList();
-		
+        
+        
         /***
          * @author HalvorGB
          * @params String username, String password
@@ -46,16 +47,44 @@ public class ServerUnpacker
 				return new CommMessage<Owner>(CommEnum.LOGINSUCCESSFUL, tempArr);
             }
             else // ikke fungerte
-                return new CommMessage<String>(CommEnum.LOGINFAILED, null);
-			
+                return new CommMessage<String>(CommEnum.LOGINFAILED, null);			
         }
+        
+        
+        /**
+         * Here we call the relevant function in DBAccess.java. This will
+         * register a new user.
+         * 
+         * @author Kenneth
+         */
+         if(msg.getMessageName() == CommEnum.REGISTERNEWUSER) 
+         {
+        	 Owner owner = (Owner) params.get(0);
+        	 System.out.println(owner.toString());
+        	 
+        	 if(db.DBAccess.isUsernameTaken(owner.getUsername()))
+        	 {
+        		 return new CommMessage<Integer>(CommEnum.USERNAMEALREADYTAKEN, null);
+        	 }
+            	
+            	
+        	 db.DBAccess.addOwner(owner.getUsername(), owner.getPassword(),
+        			 owner.getFirstName(), owner.getLastName(),
+        			 Integer.toString(owner.getPrimaryTLF()),
+        			 owner.getPrimaryMail(),
+        			 Integer.toString(owner.getSecondaryTLF()),
+        			 owner.getSecondaryMail());
+               
+            return new CommMessage<Owner>(CommEnum.SUCCESS, null);         
+         }
 		
-	// resten av metodene krever at brukeren er logget inn i gitt tr�d.
-	if (!st.getLoggedIn())
+		
+        // resten av metodene krever at brukeren er logget inn i gitt tr�d.
+        if (!st.getLoggedIn())
             return new CommMessage<String>(CommEnum.NOTLOGGEDIN, null);
 		
-	/***
-	 * @author HalvorGB
+        /***
+         * @author HalvorGB
 	 * @params A Sheep
 	 */
 	if (msg.getMessageName() == CommEnum.ADDSHEEP)
@@ -131,33 +160,7 @@ public class ServerUnpacker
             return new CommMessage<Owner>(CommEnum.SUCCESS, null);
 	}
         
-    /**
-     * Here we call the relevant function in DBAccess.java. This will
-      * register a new user.
-         * 
-         * @author Kenneth
-         */
-        if(msg.getMessageName() == CommEnum.REGISTERNEWUSER) 
-        {
-        	Owner owner = (Owner) params.get(0);
-        	owner.toString();
-        	
-        	if(db.DBAccess.isUsernameTaken(owner.getUsername()))
-        	{
-        		return new CommMessage<Integer>(CommEnum.USERNAMEALREADYTAKEN, null);
-        	}
-        	
-        	
-        	db.DBAccess.addOwner(owner.getUsername(), owner.getPassword(),
-        			owner.getFirstName(), owner.getLastName(),
-        			Integer.toString(owner.getPrimaryTLF()),
-        			owner.getPrimaryMail(),
-        			Integer.toString(owner.getSecondaryTLF()),
-        			owner.getSecondaryMail());
-           
-        	return new CommMessage<Owner>(CommEnum.SUCCESS, null);
-        	//isValidUsername = DBAccess.isUsernameTaken(owner.getUsername());         
-        }
+    
 		
     return null;
 		
