@@ -23,6 +23,8 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.event.ChangeEvent;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
@@ -44,6 +46,14 @@ public class Hub extends javax.swing.JFrame {
 	public Hub() {
 		initComponents();
 		//initJPanels();
+		 try{
+			 System.out.println("What?");
+	          UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+
+	    }
+	    catch(Exception e){
+	        System.out.println("Nimbus isn't available");
+	    }
 	}
 
 	/**
