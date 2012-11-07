@@ -23,18 +23,18 @@ public class GenerateMap {
 	static String prefix = "";
 	static String suffix = "";
 	
-	public static void main(String[] args)
-	{
-		initGenerator();
-		ArrayList<Message> test = new ArrayList<Message>();
-		test.add(new Message(12, new Date(0), 1, 1, 1, 9.0, 62.5, 1, null));
-		test.add(new Message(13, new Date(0), 1, 1, 1, 8.0, 61.5, 1, null));
-		test.add(new Message(14, new Date(0), 1, 1, 1, 7.0, 63.5, 2, null));
-		test.add(new Message(15, new Date(0), 1, 1, 1, 5.0, 62.5, 2, null));
-		test.add(new Message(16, new Date(0), 1, 1, 1, 5.0, 62, 3, null));
-		test.add(new Message(17, new Date(0), 1, 1, 1, 8.0, 62, 1, null));
-		UpdateMap(test);
-	}
+//	public static void main(String[] args)
+//	{
+//		initGenerator();
+//		ArrayList<Message> test = new ArrayList<Message>();
+//		test.add(new Message(12, new Date(0), 1, 1, 1, 9.0, 62.5, 1, null));
+//		test.add(new Message(13, new Date(0), 1, 1, 1, 8.0, 61.5, 1, null));
+//		test.add(new Message(14, new Date(0), 1, 1, 1, 7.0, 63.5, 2, null));
+//		test.add(new Message(15, new Date(0), 1, 1, 1, 5.0, 62.5, 2, null));
+//		test.add(new Message(16, new Date(0), 1, 1, 1, 5.0, 62, 3, null));
+//		test.add(new Message(17, new Date(0), 1, 1, 1, 8.0, 62, 1, null));
+//		UpdateMap(test);
+//	}
 	
 	
 	public static void initGenerator()
@@ -76,33 +76,13 @@ public class GenerateMap {
 	}
 	
 	
-	public static void UpdateMap(ArrayList<Message> msg)
+	public static void UpdateMap(ArrayList<ArrayList<Message>> messages)
 	{
 		String path =  GenerateMap.class.getClassLoader().getResource(gui.MapPanel.localURL).getPath().replaceAll("%20",  " ");
 		
 		ArrayList<ArrayList<Message>> sortedmsg = new ArrayList<ArrayList<Message>>();
 		ArrayList<Integer> sheepIDs  = new ArrayList<Integer>();
 		//sorter arraylist message inn i arraylist<Arraylist<msg>!
-		for (Message m: msg)
-		{
-			int sheepID = m.getSheepId();
-			
-			int sheepIndex = sheepIDs.indexOf(sheepID);
-
-			// denne sauen har ingen messages enda
-			if (sheepIndex == -1)
-			{
-				ArrayList<Message> tempArr = new ArrayList<Message>();
-				tempArr.add(m);
-				sheepIDs.add(sheepID);
-				
-				sortedmsg.add(tempArr);
-				
-			}
-			else
-				sortedmsg.get(sheepIndex).add(m);
-			
-		}
 		
 		try {
 			File file = new File(path);

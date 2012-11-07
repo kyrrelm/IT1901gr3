@@ -15,7 +15,7 @@ public class ServerData {
 
 	public static boolean isLoggedIn = false;
 	public static Owner owner;
-	public static ArrayList<Message> messages = new ArrayList<Message>();
+	public static ArrayList<ArrayList<Message>> messages = new ArrayList<ArrayList<Message>>();
 	public static ArrayList<Farm> farms = new ArrayList<Farm>();
 	public static ArrayList<Sheep> sheep = new ArrayList<Sheep>();
 
@@ -33,7 +33,7 @@ public class ServerData {
 			String farmName, String sheep, boolean allFarms, boolean allSheeps){
 		ArrayList<ArrayList<Message>> tmp = (ArrayList<ArrayList<Message>>) messages.clone();
 		
-		for (ArrayList<Message> l: tmp)
+		for (ArrayList<Message> l: messages)
 		{
 			if (onlyAlarm)
 			{

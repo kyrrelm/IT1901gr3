@@ -489,7 +489,7 @@ public class DBAccess {
 	 * The owner's ID.
 	 * @return Last 5 messages of all sheep belonging to the owner.
 	 */
-	public static ArrayList<Message> getLastFiveMessagesByOwner(int OwnerID) 
+	public static ArrayList<ArrayList<Message>> getLastFiveMessagesByOwner(int OwnerID) 
 	{
 		
 		/**
@@ -500,22 +500,21 @@ public class DBAccess {
 		
 		try {
 			Statement statement = con.createStatement();
-			ArrayList<Message> messages = new ArrayList<Message>();
+			ArrayList<ArrayList<Message>> messages = new ArrayList<ArrayList<Message>>();
 			
 			// finn alle sauene til duden:
 			ArrayList<Sheep> sheeple = getSheepByOwnerID(OwnerID);
 			
 			// iterer over alle sauene
-			
 			for (Sheep s: sheeple)
 			{
 				int SheepID = s.getSheepId();
 				
 				ResultSet resultSet = statement.executeQuery("SELECT * FROM Message WHERE SheepID = " + SheepID + " ORDER BY MessageID DESC LIMIT 0,5");
-				
+				ArrayList<Message> tmp = new ArrayList<Message>();
 				while(resultSet.next())
 				{
-					messages.add( new Message(Integer.parseInt(resultSet.getString(1)),
+							tmp.add( new Message(Integer.parseInt(resultSet.getString(1)),
 							resultSet.getDate(2), 
 							Integer.parseInt(resultSet.getString(3)),
 							Float.parseFloat(resultSet.getString(4)),
@@ -525,7 +524,7 @@ public class DBAccess {
 							Integer.parseInt(resultSet.getString(8)),
 							s));
 				}
-				
+				messages.add(tmp);
 			}				
 							
 			return messages;

@@ -49,11 +49,11 @@ public class ClientUnpacker {
 			// GUI.setMessageListModel(params) ??
 
 			System.out.println(params.size());
-			ServerData.messages = (ArrayList<Message>) params;
+			ServerData.messages = (ArrayList<ArrayList<Message>>) params;
 		}
 		if (msg.getMessageName() == CommEnum.NEWMESSAGES)
 		{
-			ServerData.messages = (ArrayList<Message>) params;
+			ServerData.messages = (ArrayList<ArrayList<Message>>) params;
 			System.out.println("New messages received from server!");
 		}
 		if (msg.getMessageName() == CommEnum.FARMSREPLY)
