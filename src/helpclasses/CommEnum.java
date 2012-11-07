@@ -66,7 +66,10 @@ public enum CommEnum {
     REGISTERNEWUSER,
 	
 	// SERVER -> CLIENT UPDATED MESSAGES
-	NEWMESSAGES
+	NEWMESSAGES,
+	
+	// SERVER-> CLIENT ALARM notification
+	NEWALARM
 	
 	
 }

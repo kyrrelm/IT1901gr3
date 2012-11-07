@@ -20,6 +20,8 @@ public class ServerThread extends Thread
 	private boolean loggedIn = false;
 	private Owner owner = null;
 	
+
+	
 	public ServerThread(Socket socket, int threadNumber)  
 	{
 		super("ServerThread");
@@ -84,8 +86,11 @@ public class ServerThread extends Thread
 
 	}
 
-
-	public void sendMessage(CommMessage<?> msg)
+	/**
+	 * sends a CommMessage, synchronized because it is accessed both by this thread and the main thread in Server.java
+	 * @param msg
+	 */
+	public synchronized void sendMessage(CommMessage<?> msg)
 	{
 		try
 		{
@@ -107,7 +112,9 @@ public class ServerThread extends Thread
 	
 	public void close()
 	{
-		Server.loggedInClients.remove(getOwner());
+		int clientIndex = Server.loggedInClients.indexOf(getOwner().getOwnerId());
+		if (clientIndex != -1)
+			Server.loggedInClients.remove(clientIndex);
 		out = null;
 		in = null;
 		connection = null;
@@ -131,5 +138,7 @@ public class ServerThread extends Thread
 	{
 		return owner;
 	}
+	
+	
 
 }

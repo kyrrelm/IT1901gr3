@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Random;
 
+import server.Server;
+
 import map.Constants;
 
 import db.DBAccess;
@@ -30,6 +32,11 @@ public class Simulation extends Thread{
 	
 	public boolean stop = false;
 	public int refreshRate; 
+	
+	/**
+	 * check every 5 seconds if there is an alarm!
+	 */
+	public int alarmRate = 300000;
 
 	private int minPulse = 40;
 	private int maxPulse = 100;
@@ -47,13 +54,13 @@ public class Simulation extends Thread{
 	 */
 	public Simulation(int refreshRate)
 	{
+		
 		// kaller Thread
 		super("SimulationThread");
 		
 		
 		messages = new ArrayList<Message>();
 		this.refreshRate = refreshRate;
-		
 		getData();
 	}
 	
@@ -73,14 +80,23 @@ public class Simulation extends Thread{
 	 */
 	public void simLoop()
 	{
+		long waitTime = 0;
 		while(!stop)
 		{
-			randomPos();
-			randomTemp();
-			randomPulse();
-			setData();
+			if (waitTime >= refreshRate)
+			{
+				randomPos();
+				randomTemp();
+				randomPulse();
+				setData();
+				
+				waitTime = 0;
+			}
 			
-			try { Thread.sleep(refreshRate); } catch (InterruptedException e) { e.printStackTrace(); } //tråden sover
+			generateAlarm();
+			
+			try { Thread.sleep(alarmRate); } catch (InterruptedException e) { e.printStackTrace(); } //tråden sover
+			waitTime += alarmRate;
 		}
 	}
 
@@ -161,5 +177,23 @@ public class Simulation extends Thread{
 	public void stopThread()
 	{
 		stop = true;
+	}
+	
+	
+	
+	public void generateAlarm()
+	{
+		Random r = new Random();
+		
+		if (r.nextInt(12*24)  == 0)
+		{
+			int randomIndex = r.nextInt(messages.size());
+			while (!(messages.get(randomIndex).isAlarm()))
+				randomIndex = r.nextInt(messages.size());
+			
+			// fire  alarm på randomIndex
+			Server.fireAlarm(messages.get(randomIndex));
+		}
+			
 	}
 }

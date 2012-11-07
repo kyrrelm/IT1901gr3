@@ -80,4 +80,21 @@ public class SocketServer {
 			e.printStackTrace();
 		}
 	}
+	
+	public ServerThread getThread(int ownerID)
+	{
+		for (ServerThread st: threads)
+		{
+			if (st.getOwner().getOwnerId() == ownerID)
+			{
+				return st;
+			}
+		}
+		return null;
+	}
+	
+	public ArrayList<ServerThread> getThreads()
+	{
+		return threads;
+	}
 }

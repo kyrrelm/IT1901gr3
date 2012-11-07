@@ -1028,5 +1028,38 @@ public class DBAccess {
 		}
 		
 	}
+	
+	
+	public static Owner getOwnerBySheepID(int sheepId)
+	{
+		try {
+			Statement statement = con.createStatement();
+			
+			ResultSet resultSet = statement.executeQuery(
+					"SELECT o.* FROM Owner o, Sheep s WHERE s.SheepID = "+ sheepId +" AND s.OwnerID = o.OwnerID");
+			
+			Owner owner = null;
+			
+			
+			while(resultSet.next())	{
+				owner = new Owner(Integer.parseInt(resultSet.getString(1)),
+						resultSet.getString(2),
+						resultSet.getString(3), resultSet.getString(4),
+						resultSet.getString(5), 
+						Integer.parseInt(resultSet.getString(6)),
+						resultSet.getString(7),
+						Integer.parseInt(resultSet.getString(8)),
+						resultSet.getString(9));						
+			}
+			
+			return owner;
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+			
+			return null;
+		}
+	}
+	
 	//Dette er en test
 }
