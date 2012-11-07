@@ -379,7 +379,10 @@ public class RegisterNewUser extends javax.swing.JFrame {
     
     
     /**
-     * This function is not yet complete.
+     * This function handles the registering of a new user
+     * 
+     * @author Kenneth
+     * 
      * @param evt 
      */
     private void registerNewUserActionPerformed(
@@ -440,6 +443,13 @@ public class RegisterNewUser extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             isValuesValid = false;
         }
+        else if(password1.equals(password2)) {
+            JOptionPane.showMessageDialog(null,
+                    "The fields for the passwords are not equal!",
+                    "Not valid contact information",
+                    JOptionPane.ERROR_MESSAGE);
+            isValuesValid = false;
+        }
         
         
         
@@ -451,7 +461,8 @@ public class RegisterNewUser extends javax.swing.JFrame {
             owner.add(new Owner(-1,
                     username, password1, firstName, lastName, 
                     Integer.parseInt(telephoneNumber), emailAddress,
-                    Integer.parseInt(friendTelephoneNumber), friendEmailAddress));
+                    Integer.parseInt(friendTelephoneNumber),
+                    friendEmailAddress));
 
 		
             Client.sockCli.sendMessage(new CommMessage<Owner>(

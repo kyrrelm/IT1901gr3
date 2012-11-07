@@ -113,7 +113,7 @@ public class ServerUnpacker {
 	 *  updating of the contact information in the database for the owner.
 	 *  It updates PrimaryTLF, PrimaryMail, SecondaryTLF and SecondaryMail
          * 
-         * @author Kenneth Pettersen Lund
+         * @author Kenneth
 	 */
 	if(msg.getMessageName() == CommEnum.UPDATECONTACTINFORMATION) {
             Owner owner = (Owner) params.get(0);
@@ -129,8 +129,16 @@ public class ServerUnpacker {
 	}
         
         /**
+         * Here we call the relevant function in DBAccess.java. This will
+         * register a new user.
          * 
+         * @author Kenneth
          */
+        if(msg.getMessageName() == CommEnum.REGISTERNEWUSER) {
+            Owner owner = (Owner) params.get(0);
+            
+            //DBAccess.registerNewUser()
+        }
 		
     return null;
 		
