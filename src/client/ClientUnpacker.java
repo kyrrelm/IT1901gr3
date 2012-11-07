@@ -2,8 +2,6 @@ package client;
 
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 import helpclasses.CommEnum;
 import helpclasses.CommMessage;
 import helpclasses.Farm;
@@ -74,14 +72,9 @@ public class ClientUnpacker {
 
 		}
 		
-		if  (msg.getMessageName() ==  CommEnum.NEWALARM)
+		if (msg.getMessageName() == CommEnum.USERNAMEALREADYTAKEN)
 		{
-			JOptionPane.showMessageDialog(client.Client.hub, "A Sheep is under attack!", "Update(filter) your messages, and check your email.", JOptionPane.INFORMATION_MESSAGE);
-		}
-		
-		if (msg.getMessageName() == CommEnum.NEWMESSAGES)
-		{
-			JOptionPane.showMessageDialog(client.Client.hub, "Messages have been updated.", "Update(filter) your messages!", JOptionPane.INFORMATION_MESSAGE);
+			gui.RegisterNewUser.usernameTaken = true;
 		}
 
 		return null;

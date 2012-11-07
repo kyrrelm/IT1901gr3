@@ -106,6 +106,7 @@ public class DBAccess {
 			String lastName, String tlf, String email, String secondaryTlf,
 			String secondaryEmail) {
 		
+		
 		try {
 			Statement st = con.createStatement();
 			/*    FOR TESTING:

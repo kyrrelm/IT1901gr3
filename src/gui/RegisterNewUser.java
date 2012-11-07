@@ -21,6 +21,9 @@ import helpclasses.Owner;
  */
 public class RegisterNewUser extends javax.swing.JFrame {
 
+	public static boolean usernameTaken = false;
+	
+	
     /**
      * Creates new form NewUser
      */
@@ -452,9 +455,6 @@ public class RegisterNewUser extends javax.swing.JFrame {
         }
         
         
-        
-        
-        
         if(isValuesValid) {
             //Uncertain about using an ArrayList when i'm only sending 1 owner
             ArrayList<Owner> owner = new ArrayList<Owner>();
@@ -462,15 +462,28 @@ public class RegisterNewUser extends javax.swing.JFrame {
                     username, password1, firstName, lastName, 
                     Integer.parseInt(telephoneNumber), emailAddress,
                     Integer.parseInt(friendTelephoneNumber),
-                    friendEmailAddress));
-
+                    friendEmailAddress));            
+            
 		
             Client.sockCli.sendMessage(new CommMessage<Owner>(
                     CommEnum.REGISTERNEWUSER, owner));
             
             
-            this.setVisible(false);
-            Client.hub.setVisible(true);
+            if (usernameTaken == true)
+            {
+            	usernameTaken = false;
+            	JOptionPane.showMessageDialog(null,
+            			"Username has already been taken!",
+            			"Not valid contact information",
+            			JOptionPane.ERROR_MESSAGE);           	
+            }
+            else
+            {
+            	this.setVisible(false);
+            	Client.hub.setVisible(true);
+            	Client.hub.initComp();
+            	// login visible
+            }
         }
     }//GEN-LAST:event_registerNewUserActionPerformed
 

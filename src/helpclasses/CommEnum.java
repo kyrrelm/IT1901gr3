@@ -69,7 +69,10 @@ public enum CommEnum {
 	NEWMESSAGES,
 	
 	// SERVER-> CLIENT ALARM notification
-	NEWALARM
+	NEWALARM,
+	
+	// SERVER-> CLIENT User already in database
+	USERNAMEALREADYTAKEN
 	
 	
 }
