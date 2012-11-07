@@ -60,6 +60,8 @@ public class Server
 		EmailSender.sendEmail(o.getPrimaryMail(), title, body);
 		EmailSender.sendEmail(o.getSecondaryMail(), title2, body);
 		
+		//SMSSender.SendSMS(body)
+		
 		
 		
 		// check if that user is logged on!

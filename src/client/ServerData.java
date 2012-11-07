@@ -29,24 +29,42 @@ public class ServerData {
 	 * @param allSheeps Show all sheep from the given farm
 	 * @return ArrayList<Message>
 	 */
-	public static ArrayList<Message> filterMessages(boolean onlyAlarm,
+	public static ArrayList<ArrayList<Message>> filterMessages(boolean onlyAlarm,
 			String farmName, String sheep, boolean allFarms, boolean allSheeps){
-		ArrayList<Message> tmp = (ArrayList<Message>) messages.clone();
-		for (int i = 0; i < tmp.size(); i++) {
-			if (onlyAlarm != tmp.get(i).isAlarm()){
-				tmp.remove(i--);
-			}
-			else if(!allSheeps){
-				if (Integer.parseInt(sheep) != tmp.get(i).getSheepId()){
-					tmp.remove(i--);
+		ArrayList<ArrayList<Message>> tmp = (ArrayList<ArrayList<Message>>) messages.clone();
+		
+		for (ArrayList<Message> l: tmp)
+		{
+			if (onlyAlarm)
+			{
+				if (!(l.get(0).isAlarm()))
+				{
+					tmp.remove(l);
+					continue;
 				}
 			}
-			else if(!allFarms){
-				if (getFarmByName(farmName).getFarmId() != tmp.get(i).getSheep().getFarmId()){
-					tmp.remove(i--);
+			if (!allSheeps)
+			{
+				if (!(Integer.parseInt(sheep) == l.get(0).getSheepId()))
+				{
+					tmp.remove(l);
+					continue;
 				}
 			}
+			
+			if (!allFarms)
+			{
+				if (!(getFarmByName(farmName).getFarmId() == l.get(0).getSheep().getFarmId()))
+				{
+					tmp.remove(l);
+					continue;
+				}
+				
+			}
+			
+			
 		}
+		
 		return tmp;
 	}
 	/**
