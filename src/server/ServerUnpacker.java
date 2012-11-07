@@ -11,19 +11,20 @@ import java.util.ArrayList;
 
 import db.DBAccess;
 
-public class ServerUnpacker {
+public class ServerUnpacker
+{
 	
     public static synchronized CommMessage<?> unpackServerMessage(CommMessage<?> msg, ServerThread st)
     {
 		
         ArrayList<?> params = msg.getParamList();
 		
-	/***
-	 * @author HalvorGB
-	 * @params String username, String password
-	 */
-	if (msg.getMessageName() == CommEnum.LOGIN)
-	{
+        /***
+         * @author HalvorGB
+         * @params String username, String password
+         */
+        if (msg.getMessageName() == CommEnum.LOGIN)
+        {
 			
             String usr = (String) params.get(0);
             String pwd = (String) params.get(1);		
@@ -45,7 +46,7 @@ public class ServerUnpacker {
             else // ikke fungerte
                 return new CommMessage<String>(CommEnum.LOGINFAILED, null);
 			
-	}
+        }
 		
 	// resten av metodene krever at brukeren er logget inn i gitt tr�d.
 	if (!st.getLoggedIn())
@@ -75,7 +76,7 @@ public class ServerUnpacker {
 	 * @author HalvorGB
 	 * @params An Owner
 	 */
-        if (msg.getMessageName() == CommEnum.GETMESSAGES)
+	if (msg.getMessageName() == CommEnum.GETMESSAGES)
 	{
             ArrayList<ArrayList<Message>> Msgs = DBAccess.getLastFiveMessagesByOwner(st.getOwner().getOwnerId());
             System.out.println(st.getOwner().getOwnerId());
@@ -112,8 +113,8 @@ public class ServerUnpacker {
 	 * Here we call the relevant function in DBAccess.java. This handle the
 	 *  updating of the contact information in the database for the owner.
 	 *  It updates PrimaryTLF, PrimaryMail, SecondaryTLF and SecondaryMail
-         * 
-         * @author Kenneth
+     * 
+     * @author Kenneth
 	 */
 	if(msg.getMessageName() == CommEnum.UPDATECONTACTINFORMATION) {
             Owner owner = (Owner) params.get(0);
@@ -128,9 +129,9 @@ public class ServerUnpacker {
             return new CommMessage<Owner>(CommEnum.SUCCESS, null);
 	}
         
-        /**
-         * Here we call the relevant function in DBAccess.java. This will
-         * register a new user.
+    /**
+     * Here we call the relevant function in DBAccess.java. This will
+      * register a new user.
          * 
          * @author Kenneth
          */

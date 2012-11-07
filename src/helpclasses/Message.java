@@ -116,7 +116,7 @@ public class Message implements Serializable {
 		if(this.alarm == true)
 			color = "red";
 		else
-			color = "green";
+			color = "blue";
 		return "<html><span style=\"color:"+ color +"\"><b>Message Id: " + messageId + ", Sheep Id: " + sheepId + "</b></span>" +
 				"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date: " + dateTime + ", Pulse: " +
 				pulse + ", Temperature: " + temperature +

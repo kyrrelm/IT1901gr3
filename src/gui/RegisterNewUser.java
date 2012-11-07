@@ -111,7 +111,7 @@ public class RegisterNewUser extends javax.swing.JFrame {
         });
 
         telephoneNumberLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        telephoneNumberLabel.setText("Telephone number:");
+        telephoneNumberLabel.setText("Telephone Number:");
 
         editTelephoneNumber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         editTelephoneNumber.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +128,7 @@ public class RegisterNewUser extends javax.swing.JFrame {
         });
 
         friendTelephoneNumberLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        friendTelephoneNumberLabel.setText("Friend's telephone number:");
+        friendTelephoneNumberLabel.setText("Friend's Telephone Number:");
 
         editEmailAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         editEmailAddress.addActionListener(new java.awt.event.ActionListener() {
@@ -138,10 +138,10 @@ public class RegisterNewUser extends javax.swing.JFrame {
         });
 
         emailAddressLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        emailAddressLabel.setText("Email address:");
+        emailAddressLabel.setText("Email Address:");
 
         friendEmailAddressLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        friendEmailAddressLabel.setText("Friend's email address:");
+        friendEmailAddressLabel.setText("Friend's Email Address:");
 
         editFriendEmailAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         editFriendEmailAddress.addActionListener(new java.awt.event.ActionListener() {
@@ -248,7 +248,7 @@ public class RegisterNewUser extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(editTelephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(editTelephoneNumber)
                                             .addComponent(editFriendTelephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(editUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(editPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -399,7 +399,7 @@ public class RegisterNewUser extends javax.swing.JFrame {
         String lastName              = editLastName.getText();
         String telephoneNumber       = editTelephoneNumber.getText();
         String emailAddress          = editEmailAddress.getText();
-        String friendTelephoneNumber = editTelephoneNumber.getText();
+        String friendTelephoneNumber = editFriendTelephoneNumber.getText();
         String friendEmailAddress    = editFriendEmailAddress.getText();
         String username              = editUsername.getText();
         String password1             = editPassword1.getText();
@@ -437,7 +437,7 @@ public class RegisterNewUser extends javax.swing.JFrame {
         }
         else if(username.isEmpty()) {
             JOptionPane.showMessageDialog(null,
-                    "Field for Email Address is empty!",
+                    "Field for Username is empty!",
                     "Not valid contact information",
                     JOptionPane.ERROR_MESSAGE);
             isValuesValid = false;
@@ -449,7 +449,7 @@ public class RegisterNewUser extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             isValuesValid = false;
         }
-        else if(password1.equals(password2)) {
+        else if(!password1.equals(password2)) {
             JOptionPane.showMessageDialog(null,
                     "The fields for the passwords are not equal!",
                     "Not valid contact information",
