@@ -134,14 +134,26 @@ public class ServerUnpacker {
          * 
          * @author Kenneth
          */
-        if(msg.getMessageName() == CommEnum.REGISTERNEWUSER) {
-            
-        	boolean isValidUsername = false;
+        if(msg.getMessageName() == CommEnum.REGISTERNEWUSER) 
+        {
         	Owner owner = (Owner) params.get(0);
-            
-        	isValidUsername = DBAccess.isUsernameTaken(owner.getUsername());
-            
-            
+        	
+        	
+        	if(db.DBAccess.isUsernameTaken(owner.getUsername()))
+        	{
+        		return new CommMessage<Integer>(CommEnum.USERNAMEALREADYTAKEN, null);
+        	}
+        	
+        	
+        	db.DBAccess.addOwner(owner.getUsername(), owner.getPassword(),
+        			owner.getFirstName(), owner.getLastName(),
+        			Integer.toString(owner.getPrimaryTLF()),
+        			owner.getPrimaryMail(),
+        			Integer.toString(owner.getSecondaryTLF()),
+        			owner.getSecondaryMail());
+           
+        	return new CommMessage<Owner>(CommEnum.SUCCESS, null);
+        	//isValidUsername = DBAccess.isUsernameTaken(owner.getUsername());         
         }
 		
     return null;
