@@ -267,6 +267,13 @@ public class DBAccess {
 		//}
 	}
 	
+	
+	/**
+	 * Function checks to see if username is already in database
+	 * 
+	 * @param Kenneth
+	 * @return true if username is taken, false otherwise
+	 */
 	public static boolean isUsernameTaken(String userName) {
 		try {
 			Statement statement = con.createStatement();
@@ -295,7 +302,14 @@ public class DBAccess {
 		}
 	}
 	
-	
+	/**
+	 * Function checks to see if sheep name is taken
+	 * @author Kenneth
+	 * 
+	 * @param sheepName The name of the sheep
+	 * @param farmId - The Id of the farm where the sheep belong
+	 * @return true if sheepName is taken, false otherwise
+	 */
 	public static boolean isSheepNameTaken(String sheepName, int farmId) {
 		try {
 			Statement statement = con.createStatement();
@@ -1010,7 +1024,9 @@ public class DBAccess {
 		
 		System.out.println("All records deleted from table Sheep.");
 	}
-
+	
+	
+	
 	public static void removeSheep(int sheepId) {
 		try {
 			Statement statement = con.createStatement();
@@ -1028,5 +1044,4 @@ public class DBAccess {
 		}
 		
 	}
-	//Dette er en test
 }
