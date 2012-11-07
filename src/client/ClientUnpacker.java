@@ -2,6 +2,8 @@ package client;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import helpclasses.CommEnum;
 import helpclasses.CommMessage;
 import helpclasses.Farm;
@@ -70,6 +72,16 @@ public class ClientUnpacker {
 			// Trengs denne? Kanskje en liten grafik i et hjørne som viser at kommandoen ble ekskevert riktig, ikke et popup selvsagt.
 			System.out.println("Transfer was a success!");
 
+		}
+		
+		if  (msg.getMessageName() ==  CommEnum.NEWALARM)
+		{
+			JOptionPane.showMessageDialog(client.Client.hub, "A Sheep is under attack!", "Update(filter) your messages, and check your email.", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+		if (msg.getMessageName() == CommEnum.NEWMESSAGES)
+		{
+			JOptionPane.showMessageDialog(client.Client.hub, "Messages have been updated.", "Update(filter) your messages!", JOptionPane.INFORMATION_MESSAGE);
 		}
 
 		return null;

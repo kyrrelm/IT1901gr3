@@ -31,16 +31,16 @@ public class ServerUnpacker {
             Owner own = DBAccess.getOwner(usr, pwd);
 			
             // hvis eier med user/pw eksisterer OG ingen med det navnet er logget inn.
-            if ((own != null && !(Server.loggedInClients.contains(own)))) // inloggingen fungerte
+            if ((own != null && !(Server.loggedInClients.contains(own.getOwnerId())))) // inloggingen fungerte
             {
                 //Hva gj�r denne? Hilsen Kyrre :)
-		st.setLoggedIn(true);
-		Server.loggedInClients.add(own);
-		st.setOwner(own);
-				
-		ArrayList<Owner> tempArr = new ArrayList<Owner>();
-		tempArr.add(own);
-		return new CommMessage<Owner>(CommEnum.LOGINSUCCESSFUL, tempArr);
+            	st.setLoggedIn(true);
+				Server.loggedInClients.add(own.getOwnerId());
+				st.setOwner(own);
+						
+				ArrayList<Owner> tempArr = new ArrayList<Owner>();
+				tempArr.add(own);
+				return new CommMessage<Owner>(CommEnum.LOGINSUCCESSFUL, tempArr);
             }
             else // ikke fungerte
                 return new CommMessage<String>(CommEnum.LOGINFAILED, null);

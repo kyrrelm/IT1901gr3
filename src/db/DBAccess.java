@@ -268,14 +268,6 @@ public class DBAccess {
 		//}
 	}
 	
-	
-	/**
-	 * Function checks to see if username is already in database
-	 * 
-	 * @author Kenneth
-	 * @param - The username to check
-	 * @return - true if username is taken, false otherwise
-	 */
 	public static boolean isUsernameTaken(String userName) {
 		try {
 			Statement statement = con.createStatement();
@@ -304,14 +296,7 @@ public class DBAccess {
 		}
 	}
 	
-	/**
-	 * Function checks to see if sheep name is taken
-	 * @author Kenneth
-	 * 
-	 * @param sheepName The name of the sheep
-	 * @param farmId - The Id of the farm where the sheep belong
-	 * @return true if sheepName is taken, false otherwise
-	 */
+	
 	public static boolean isSheepNameTaken(String sheepName, int farmId) {
 		try {
 			Statement statement = con.createStatement();
@@ -339,12 +324,7 @@ public class DBAccess {
 	 * Korrekt, bør fikses - Halvor
 	 	* - Tror ikke denne metoden brukes til noe uansett.	 
 	 */
-	/**
-	 * Function retrives a farm
-	 * @author Kenneth
-	 * @param ownerId - The Id of the owner of the user
-	 * @return - The farm-object if found, null otherwise
-	 */
+	
 	public static Farm getFarm(int ownerId) {
 		try {
 			Statement statement = con.createStatement();
@@ -371,23 +351,16 @@ public class DBAccess {
 		}
 	}
 	
-	
-	/**
-	 * Function returns all the farms for a specific user
-	 * 
-	 * @author Kenneth
-	 * @param ownerId - The Id of the owner
-	 * @return - An arraylist with farms, null otherwise
-	 */
+	//returnerer alle bondens gårder
 	public static ArrayList<Farm> getFarmsByOwner(int ownerId) {
 		try {
 			Statement statement = con.createStatement();
 			ArrayList<Farm> farms = new ArrayList<Farm>();
 			
-					
+		
+			
 			ResultSet resultSet = statement.executeQuery(
 					"SELECT * FROM Farm WHERE OwnerID = '" + ownerId + "'");
-		
 			
 			while(resultSet.next()) {
 				farms.add(new Farm(Integer.parseInt(resultSet.getString(1)),
@@ -403,24 +376,15 @@ public class DBAccess {
 			return null;
 		}
 	}
-	
-	
-	/**
-	 * Function retrives all the sheeps for an owner
-	 * 
-	 * @author Kenneth
-	 * @param ownerId - The id of the user owning the sheeps
-	 * @return - An ArrayList with the sheeps - null otherwise
-	 */
 	public static ArrayList<Sheep> getAllSheepByOwner(int ownerId) {
 		try {
 			Statement statement = con.createStatement();
 			ArrayList<Sheep> sheep = new ArrayList<Sheep>();
-					
+			
+		
 			
 			ResultSet resultSet = statement.executeQuery(
 					"SELECT * FROM Sheep WHERE OwnerID = '" + ownerId + "'");
-			
 			
 			while(resultSet.next()) {
 				sheep.add(new Sheep(Integer.parseInt(resultSet.getString(1)), 
@@ -436,15 +400,6 @@ public class DBAccess {
 			return null;
 		}
 	}
-	
-	
-	/**
-	 * Function returns a message
-	 * 
-	 * @author Kenneth
-	 * @param messageId - The id of the message to get
-	 * @return - A Message-object, null otherwise
-	 */
 	public static Message getMessage(int messageId) {
 		try {
 			Statement statement = con.createStatement();
@@ -582,13 +537,7 @@ public class DBAccess {
 		}
 	}
 	
-	/**
-	 * This function retrieves an owner
-	 * @author Kenneth
-	 * @param username - The username of the owner
-	 * @param password - The password of the owner
-	 * @return - An Owner-object if owner found, null otherwise
-	 */
+	
 	public static Owner getOwner(String username, String password) {
 		try {
 			Statement statement = con.createStatement();
@@ -622,9 +571,8 @@ public class DBAccess {
 	}
 	
 	/**
-	 * Function updates all contact information for the owner
+	 * Function updates all contactinformation for the owner
 	 * 
-	 * @author Kenneth
 	 * @param username - Username of the owner
 	 * @param password - Password for the owner
 	 * @param telephone - The owner's new telephonenumber
@@ -668,8 +616,6 @@ public class DBAccess {
 	
 	/**
 	 * Function updates the owner's emailadress in the database
-	 * 
-	 * @author Kenneth
 	 * @param username - Username of the owner
 	 * @param password - Password for the owner
 	 * @param email - The new emailadress
@@ -706,7 +652,6 @@ public class DBAccess {
 	/**
 	 * Function updates the owner's private telephonenumber in the database.
 	 * 
-	 * @author Kenneth
 	 * @param username - Username of the owner
 	 * @param password - Password for the owner
 	 * @param telephone - The new telephonenumber
@@ -745,7 +690,6 @@ public class DBAccess {
 	 * Function updates the emailadress in the database of the owner's
 	 *  friend.
 	 * 
-	 * @author Kenneth
 	 * @param username - Username of the owner
 	 * @param password - Password for the owner
 	 * @param friendEmail - The new emailadress for the friend
@@ -784,7 +728,6 @@ public class DBAccess {
 	 * Function updates the telephonenumber in the database of the owner's
 	 *  friend.
 	 * 
-	 * @author Kenneth
 	 * @param username - Username of the owner
 	 * @param password - Password for the owner
 	 * @param friendTelephone - The new telephonenumber for the friend
@@ -820,12 +763,7 @@ public class DBAccess {
 	}
 	
 	
-	/**
-	 * Function retrives the last added sheep to the database
-	 * 
-	 * @author Kenneth
-	 * @return - The last added sheep in database, null otherwise
-	 */
+	
 	public static Sheep getLastAddedSheep() {
 		try {
 			Statement statement = con.createStatement();
@@ -853,14 +791,6 @@ public class DBAccess {
 		}
 	}
 	
-	
-	/**
-	 * Function gets all the sheeps for a specific user
-	 * 
-	 * @author Kenneth
-	 * @param ownerID - The id of the owner of the sheeps
-	 * @return - An ArrayList of sheeps, null otherwise
-	 */
 	public static ArrayList<Sheep> getSheepByOwnerID(int ownerID)
 	{
 		try {
@@ -890,29 +820,37 @@ public class DBAccess {
 		}
 	}
 	
-	
-	/**
-	 * Function retrives a sheep based on its id
-	 * 
-	 * @author Kenneth
-	 * @param id - The id of the sheep
-	 * @return - A Sheep-object if sheep is found, null otherwise
-	 */
 	public static Sheep getSheepById(int id)
 	{
 		try {
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(String.format(
-					"SELECT * FROM Sheep WHERE SheepID = %d", id));	
+			/*    FOR TESTING:
+			String s = 
+			System.out.println(s);
+			*/
+							// merk: query
+			ResultSet rs = st.executeQuery(String.format("SELECT * FROM Sheep WHERE SheepID = %d", id));
+
+			
+			// Som eksempel: itererer over alle resultatene, dette er bare et eksempel i getSheepByID fordi sheepID er unik for hver sau!
+			// hvis en skulle finne alle sauene som tilhører en spesiell bonde (eller bare alle sauene totalt) er det som under en burde bruke
+			
 			Sheep shp = null;
 			
-			
-			while (rs.next()) {		    
+			while (rs.next()) // sheepID, birthYear, farmID, ownerID
+			{												        // year har fucked format, burde bytte til INT i databasen...
+			/*	shp = new Sheep(Integer.parseInt(rs.getString(1)),
+						rs.getString(2),
+						Integer.parseInt(rs.getString(3).substring(0, 4)),
+						Integer.parseInt(rs.getString(3)),
+						Integer.parseInt(rs.getString(4)));
+			*/
 				shp = new Sheep(Integer.parseInt(rs.getString(1)),
 						rs.getString(2),
 						Integer.parseInt(rs.getString(3).substring(0, 4)),
 						Integer.parseInt(rs.getString(4)),
-						Integer.parseInt(rs.getString(5)));	
+						Integer.parseInt(rs.getString(5)));
+				
 			}
 			
 			return shp;
@@ -1107,4 +1045,37 @@ public class DBAccess {
 		}
 		
 	}
+	
+	
+	public static Owner getOwnerBySheepID(int sheepId)
+	{
+		try {
+			Statement statement = con.createStatement();
+			
+			ResultSet resultSet = statement.executeQuery(
+					"SELECT o.* FROM Owner o, Sheep s WHERE s.SheepID = "+ sheepId +" AND s.OwnerID = o.OwnerID");
+			
+			Owner owner = null;
+			
+			
+			while(resultSet.next())	{
+				owner = new Owner(Integer.parseInt(resultSet.getString(1)),
+						resultSet.getString(2),
+						resultSet.getString(3), resultSet.getString(4),
+						resultSet.getString(5), 
+						Integer.parseInt(resultSet.getString(6)),
+						resultSet.getString(7),
+						Integer.parseInt(resultSet.getString(8)),
+						resultSet.getString(9));						
+			}
+			
+			return owner;
+		}
+		catch(SQLException exception) {
+			exception.printStackTrace();
+			
+			return null;
+		}
+	}
+	
 }

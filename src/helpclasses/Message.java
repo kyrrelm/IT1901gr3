@@ -101,6 +101,12 @@ public class Message implements Serializable {
 	{
 		return sheep;
 	}
+	
+	public Date getDateTime()
+	{
+		return dateTime;
+	}
+	
 	/**
 	 * @author Kyrre
 	 * Uses html to color code Messages, and formate it.
