@@ -718,9 +718,14 @@ public class Hub extends javax.swing.JFrame {
 	private void filtersFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtersFilterButtonActionPerformed
 		String farm = (String) filtersFarmComboBox.getSelectedItem();
                 String sheep = (String) filtersSheepComboBox.getSelectedItem();
-		ArrayList<Message> tmpmgs = ServerData.filterMessages(onlyAlarm, farm, sheep, farm.equals("All farms"), sheep.equals("All sheep"));
+		ArrayList<ArrayList<Message>> tmp = ServerData.filterMessages(onlyAlarm, farm, sheep, farm.equals("All farms"), sheep.equals("All sheep"));
+		ArrayList<Message> tmpmgs = new ArrayList<Message>();
+		
+		for (ArrayList<Message> l : tmp) {
+			tmpmgs.add(l.get(0));
+		}
 		messageList.setListData(tmpmgs.toArray());
-		GenerateMap.UpdateMap(tmpmgs);
+		GenerateMap.UpdateMap(tmp);
 		mapPanel.reload();
 		
 		
@@ -969,10 +974,14 @@ public class Hub extends javax.swing.JFrame {
 		if (ServerData.isLoggedIn)
 		{
 			Client.sockCli.sendMessage(new CommMessage<String>(CommEnum.GETMESSAGES, null));
-
-			messageList.setListData(ServerData.messages.toArray());
+			
+			ArrayList<Message> tmpmgs = new ArrayList<Message>();
+			
+			for (ArrayList<Message> l : ServerData.messages) {
+				tmpmgs.add(l.get(0));
+			}
+			messageList.setListData(tmpmgs.toArray());
 			messageList.setVisible(true);
-			System.out.println(ServerData.messages.get(0).toString());
 			
 			GenerateMap.UpdateMap(ServerData.messages);
 			mapPanel.reload();

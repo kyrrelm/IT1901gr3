@@ -77,10 +77,10 @@ public class ServerUnpacker {
 	 */
         if (msg.getMessageName() == CommEnum.GETMESSAGES)
 	{
-            ArrayList<Message> Msgs = DBAccess.getLastFiveMessagesByOwner(st.getOwner().getOwnerId());
+            ArrayList<ArrayList<Message>> Msgs = DBAccess.getLastFiveMessagesByOwner(st.getOwner().getOwnerId());
             System.out.println(st.getOwner().getOwnerId());
             System.out.println(Msgs.size());
-            return new CommMessage<Message>(CommEnum.MESSAGESREPLY, Msgs);
+            return new CommMessage<ArrayList<Message>>(CommEnum.MESSAGESREPLY, Msgs);
 	}
 		
 	if (msg.getMessageName() == CommEnum.GETFARMS)
