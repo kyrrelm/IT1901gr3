@@ -1,12 +1,25 @@
- 		// end of generated code
+
+		
+		// end of generated code
         showLastMessages(map, mainArray);
         
         
       }
     }
-    function createMarker(point, label) 
+    function createMarker(point, label, alarm) 
     {
-        var marker = new GMarker(point);
+		var marker;
+		if (alarm == true)
+		{
+			markerOptions = { icon:redIcon };
+			marker = new GMarker(point, markerOptions)	
+		}
+		else
+		{
+			markerOptions = { icon:greenIcon };
+			marker = new GMarker(point, markerOptions)
+		}
+
         GEvent.addListener(marker, "click", function() {
             marker.openInfoWindowHtml("<font size=\"1\">"+label+"</font>"); 
         });

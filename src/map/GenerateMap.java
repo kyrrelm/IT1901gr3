@@ -103,7 +103,7 @@ public class GenerateMap {
 				{
 					// pointString:
 					Message m = l.get(i);
-					pointString += "createMarker(new GLatLng(" + m.getPositionY() + ", " + m.getPositionX() + "),\"" + m.toStringMap() + "\")";
+					pointString += "createMarker(new GLatLng(" + m.getPositionX() + ", " + m.getPositionY() + "),\"" + m.toStringMap() + "\", " + m.isAlarm() + ")";
 					// hvis det ikke er det siste elementet: legg til et komma
 					if ((i + 1) < l.size())
 					{
@@ -120,7 +120,7 @@ public class GenerateMap {
 						if (lower)
 						{
 							Message prev = l.get(i-1);
-							lineString += "new GPolyline([new GLatLng(" + prev.getPositionY() + ", " + prev.getPositionX() + "), new GLatLng(" + m.getPositionY() + ", " + m.getPositionX() + ")], \"ff0000\", 5)";
+							lineString += "new GPolyline([new GLatLng(" + prev.getPositionX() + ", " + prev.getPositionY() + "), new GLatLng(" + m.getPositionY() + ", " + m.getPositionX() + ")], \"ff0000\", 5)";
 							
 							// if there are more lines to be added, add a comma
 							if (upper)
@@ -130,7 +130,7 @@ public class GenerateMap {
 						if (upper)
 						{
 							Message next = l.get(i+1);
-							lineString += "new GPolyline([new GLatLng(" + m.getPositionY() + ", " + m.getPositionX() + "), new GLatLng(" + next.getPositionY() + ", " + next.getPositionX() + ")], \"ff0000\", 5)";
+							lineString += "new GPolyline([new GLatLng(" + m.getPositionX() + ", " + m.getPositionY() + "), new GLatLng(" + next.getPositionY() + ", " + next.getPositionX() + ")], \"ff0000\", 5)";
 							
 							// if there are more lines to be added, add a comma
 							if ((i + 1 + 1) < l.size())

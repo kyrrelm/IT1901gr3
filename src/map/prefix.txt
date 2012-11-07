@@ -7,6 +7,13 @@
     var isShowingHistory = false;
     var mainArray = new Array();
     var lineArray = new Array();
+	
+	var redIcon = new GIcon(G_DEFAULT_ICON);
+	redIcon.image = "http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png";
+	
+	var greenIcon = new GIcon(G_DEFAULT_ICON);
+	greenIcon.image = "http://www.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png";
+	
         
         
     // We define the function first
@@ -64,4 +71,7 @@
         map.addOverlay(myTileLayer);
         map.addControl(new TextualZoomControl());
         
+		
         // start of generated code:
+
+		
