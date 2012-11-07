@@ -1,5 +1,14 @@
 package gui;
 
+import javax.swing.JOptionPane;
+import java.util.ArrayList;
+
+import client.Client;
+import client.ServerData;
+import helpclasses.CommEnum;
+import helpclasses.CommMessage;
+import helpclasses.Owner;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -8,6 +17,7 @@ package gui;
 /**
  *
  * @author Kyrre
+ * @author Kenneth
  */
 public class RegisterNewUser extends javax.swing.JFrame {
 
@@ -29,23 +39,23 @@ public class RegisterNewUser extends javax.swing.JFrame {
 
         newUserLabel = new javax.swing.JLabel();
         firstNameLabel = new javax.swing.JLabel();
-        firstName = new javax.swing.JTextField();
+        editFirstName = new javax.swing.JTextField();
         lastNameLabel = new javax.swing.JLabel();
-        lastName = new javax.swing.JTextField();
+        editLastName = new javax.swing.JTextField();
         usernameLabel = new javax.swing.JLabel();
-        username = new javax.swing.JTextField();
+        editUsername = new javax.swing.JTextField();
         telephoneNumberLabel = new javax.swing.JLabel();
-        telephoneNumber = new javax.swing.JTextField();
-        friendTelephoneNumber = new javax.swing.JTextField();
+        editTelephoneNumber = new javax.swing.JTextField();
+        editFriendTelephoneNumber = new javax.swing.JTextField();
         friendTelephoneNumberLabel = new javax.swing.JLabel();
-        emailAddress = new javax.swing.JTextField();
+        editEmailAddress = new javax.swing.JTextField();
         emailAddressLabel = new javax.swing.JLabel();
         friendEmailAddressLabel = new javax.swing.JLabel();
-        friendEmailAddress = new javax.swing.JTextField();
+        editFriendEmailAddress = new javax.swing.JTextField();
         passwordLabel1 = new javax.swing.JLabel();
-        password1 = new javax.swing.JTextField();
+        editPassword1 = new javax.swing.JTextField();
         passwordLabel2 = new javax.swing.JLabel();
-        password2 = new javax.swing.JTextField();
+        editPassword2 = new javax.swing.JTextField();
         submit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -58,7 +68,6 @@ public class RegisterNewUser extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         newUserLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -68,57 +77,57 @@ public class RegisterNewUser extends javax.swing.JFrame {
         firstNameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         firstNameLabel.setText("First Name:");
 
-        firstName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        firstName.addActionListener(new java.awt.event.ActionListener() {
+        editFirstName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        editFirstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstNameActionPerformed(evt);
+                editFirstNameActionPerformed(evt);
             }
         });
 
         lastNameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lastNameLabel.setText("Last Name:");
 
-        lastName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lastName.addActionListener(new java.awt.event.ActionListener() {
+        editLastName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        editLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lastNameActionPerformed(evt);
+                editLastNameActionPerformed(evt);
             }
         });
 
         usernameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         usernameLabel.setText("Username:");
 
-        username.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        username.addActionListener(new java.awt.event.ActionListener() {
+        editUsername.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        editUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernameActionPerformed(evt);
+                editUsernameActionPerformed(evt);
             }
         });
 
         telephoneNumberLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         telephoneNumberLabel.setText("Telephone number:");
 
-        telephoneNumber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        telephoneNumber.addActionListener(new java.awt.event.ActionListener() {
+        editTelephoneNumber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        editTelephoneNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                telephoneNumberActionPerformed(evt);
+                editTelephoneNumberActionPerformed(evt);
             }
         });
 
-        friendTelephoneNumber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        friendTelephoneNumber.addActionListener(new java.awt.event.ActionListener() {
+        editFriendTelephoneNumber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        editFriendTelephoneNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                friendTelephoneNumberActionPerformed(evt);
+                editFriendTelephoneNumberActionPerformed(evt);
             }
         });
 
         friendTelephoneNumberLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         friendTelephoneNumberLabel.setText("Friend's telephone number:");
 
-        emailAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        emailAddress.addActionListener(new java.awt.event.ActionListener() {
+        editEmailAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        editEmailAddress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailAddressActionPerformed(evt);
+                editEmailAddressActionPerformed(evt);
             }
         });
 
@@ -128,30 +137,30 @@ public class RegisterNewUser extends javax.swing.JFrame {
         friendEmailAddressLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         friendEmailAddressLabel.setText("Friend's email address:");
 
-        friendEmailAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        friendEmailAddress.addActionListener(new java.awt.event.ActionListener() {
+        editFriendEmailAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        editFriendEmailAddress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                friendEmailAddressActionPerformed(evt);
+                editFriendEmailAddressActionPerformed(evt);
             }
         });
 
         passwordLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         passwordLabel1.setText("Password:");
 
-        password1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        password1.addActionListener(new java.awt.event.ActionListener() {
+        editPassword1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        editPassword1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                password1ActionPerformed(evt);
+                editPassword1ActionPerformed(evt);
             }
         });
 
         passwordLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         passwordLabel2.setText("Retype Password:");
 
-        password2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        password2.addActionListener(new java.awt.event.ActionListener() {
+        editPassword2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        editPassword2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                password2ActionPerformed(evt);
+                editPassword2ActionPerformed(evt);
             }
         });
 
@@ -233,10 +242,10 @@ public class RegisterNewUser extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(telephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(friendTelephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(password1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(editTelephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(editFriendTelephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(editUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(editPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel9)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -255,14 +264,14 @@ public class RegisterNewUser extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(password2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(emailAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(friendEmailAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(editPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(editEmailAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(editFriendEmailAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(editFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(editLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(359, 359, 359)
                         .addComponent(submit)))
@@ -278,13 +287,13 @@ public class RegisterNewUser extends javax.swing.JFrame {
                     .addComponent(firstNameLabel)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(firstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lastNameLabel)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(telephoneNumberLabel)
@@ -293,22 +302,22 @@ public class RegisterNewUser extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(telephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(emailAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(editTelephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editEmailAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(friendTelephoneNumberLabel)
                     .addComponent(friendEmailAddressLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(friendTelephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(friendEmailAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(editFriendTelephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editFriendEmailAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usernameLabel)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordLabel1)
@@ -317,8 +326,8 @@ public class RegisterNewUser extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(password1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(password2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(editPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -332,44 +341,126 @@ public class RegisterNewUser extends javax.swing.JFrame {
         setBounds((screenSize.width-816)/2, (screenSize.height-638)/2, 816, 638);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void firstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameActionPerformed
+    private void editFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editFirstNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_firstNameActionPerformed
+    }//GEN-LAST:event_editFirstNameActionPerformed
 
-    private void lastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameActionPerformed
+    private void editLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLastNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_lastNameActionPerformed
+    }//GEN-LAST:event_editLastNameActionPerformed
 
-    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
+    private void editUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_usernameActionPerformed
+    }//GEN-LAST:event_editUsernameActionPerformed
 
-    private void telephoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telephoneNumberActionPerformed
+    private void editTelephoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTelephoneNumberActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_telephoneNumberActionPerformed
+    }//GEN-LAST:event_editTelephoneNumberActionPerformed
 
-    private void friendTelephoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friendTelephoneNumberActionPerformed
+    private void editFriendTelephoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editFriendTelephoneNumberActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_friendTelephoneNumberActionPerformed
+    }//GEN-LAST:event_editFriendTelephoneNumberActionPerformed
 
-    private void emailAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailAddressActionPerformed
+    private void editEmailAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editEmailAddressActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_emailAddressActionPerformed
+    }//GEN-LAST:event_editEmailAddressActionPerformed
 
-    private void friendEmailAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friendEmailAddressActionPerformed
+    private void editFriendEmailAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editFriendEmailAddressActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_friendEmailAddressActionPerformed
+    }//GEN-LAST:event_editFriendEmailAddressActionPerformed
 
-    private void password2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_password2ActionPerformed
+    private void editPassword2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPassword2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_password2ActionPerformed
+    }//GEN-LAST:event_editPassword2ActionPerformed
 
-    private void password1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_password1ActionPerformed
+    private void editPassword1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPassword1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_password1ActionPerformed
+    }//GEN-LAST:event_editPassword1ActionPerformed
+    
+    
+    /**
+     * This function is not yet complete.
+     * @param evt 
+     */
+    private void registerNewUserActionPerformed(
+    		java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerNewUserActionPerformed
+        
+        boolean isValuesValid        = true;
+        String firstName             = editFirstName.getText();
+        String lastName              = editLastName.getText();
+        String telephoneNumber       = editTelephoneNumber.getText();
+        String emailAddress          = editEmailAddress.getText();
+        String friendTelephoneNumber = editTelephoneNumber.getText();
+        String friendEmailAddress    = editFriendEmailAddress.getText();
+        String username              = editUsername.getText();
+        String password1             = editPassword1.getText();
+        String password2             = editPassword2.getText();
+        
+        
+        //We checks to see if the user has entered valid values
+        if(firstName.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Field for First Name is empty!",
+                    "Not valid contact information",
+                    JOptionPane.ERROR_MESSAGE);
+            isValuesValid = false;
+        }
+        else if(lastName.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Field for Last Name is empty!",
+                    "Not valid contact information",
+                    JOptionPane.ERROR_MESSAGE);
+            isValuesValid = false;
+        }
+        else if(telephoneNumber.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Field for Telephone Number is empty!",
+                    "Not valid contact information",
+                    JOptionPane.ERROR_MESSAGE);
+            isValuesValid = false;
+        }
+        else if(emailAddress.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Field for Email Address is empty!",
+                    "Not valid contact information",
+                    JOptionPane.ERROR_MESSAGE);
+            isValuesValid = false;
+        }
+        else if(username.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Field for Email Address is empty!",
+                    "Not valid contact information",
+                    JOptionPane.ERROR_MESSAGE);
+            isValuesValid = false;
+        }
+        else if(password1.isEmpty() || password2.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Both password fields are required!",
+                    "Not valid contact information",
+                    JOptionPane.ERROR_MESSAGE);
+            isValuesValid = false;
+        }
+        
+        
+        
+        
+        
+        if(isValuesValid) {
+            //Uncertain about using an ArrayList when i'm only sending 1 owner
+            ArrayList<Owner> owner = new ArrayList<Owner>();
+            owner.add(new Owner(-1,
+                    username, password1, firstName, lastName, 
+                    Integer.parseInt(telephoneNumber), emailAddress,
+                    Integer.parseInt(friendTelephoneNumber), friendEmailAddress));
 
-    private void registerNewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerNewUserActionPerformed
-        // TODO add your handling code here:
+		
+            Client.sockCli.sendMessage(new CommMessage<Owner>(
+                    CommEnum.REGISTERNEWUSER, owner));
+            
+            
+            this.setVisible(false);
+            Client.hub.setVisible(true);
+        }
     }//GEN-LAST:event_registerNewUserActionPerformed
 
     /**
@@ -407,13 +498,18 @@ public class RegisterNewUser extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField emailAddress;
+    private javax.swing.JTextField editEmailAddress;
+    private javax.swing.JTextField editFirstName;
+    private javax.swing.JTextField editFriendEmailAddress;
+    private javax.swing.JTextField editFriendTelephoneNumber;
+    private javax.swing.JTextField editLastName;
+    private javax.swing.JTextField editPassword1;
+    private javax.swing.JTextField editPassword2;
+    private javax.swing.JTextField editTelephoneNumber;
+    private javax.swing.JTextField editUsername;
     private javax.swing.JLabel emailAddressLabel;
-    private javax.swing.JTextField firstName;
     private javax.swing.JLabel firstNameLabel;
-    private javax.swing.JTextField friendEmailAddress;
     private javax.swing.JLabel friendEmailAddressLabel;
-    private javax.swing.JTextField friendTelephoneNumber;
     private javax.swing.JLabel friendTelephoneNumberLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -424,17 +520,12 @@ public class RegisterNewUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField lastName;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JLabel newUserLabel;
-    private javax.swing.JTextField password1;
-    private javax.swing.JTextField password2;
     private javax.swing.JLabel passwordLabel1;
     private javax.swing.JLabel passwordLabel2;
     private javax.swing.JButton submit;
-    private javax.swing.JTextField telephoneNumber;
     private javax.swing.JLabel telephoneNumberLabel;
-    private javax.swing.JTextField username;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }

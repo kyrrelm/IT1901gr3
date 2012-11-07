@@ -34,6 +34,7 @@ import java.io.IOException;
 /**
  *
  * @author Kyrre
+ * @author Kenneth
  */
 public class Hub extends javax.swing.JFrame {
 
@@ -655,7 +656,7 @@ public class Hub extends javax.swing.JFrame {
 
 	private void addFarmAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFarmAddActionPerformed
 		String farmName = addFarmName.getText();
-		if (farmName.length() >= 3) {
+    		if (farmName.length() >= 3) {
 			addFarmName.setText(null);
 			ArrayList<Farm> metadata = new ArrayList<Farm>();
 			metadata.add(new Farm(-1, farmName, ServerData.owner.getOwnerId()));
