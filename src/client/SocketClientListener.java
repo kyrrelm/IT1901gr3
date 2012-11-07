@@ -44,6 +44,10 @@ public class SocketClientListener extends Thread
 				{
 					ClientUnpacker.unpackClientMessage(message);
 				}
+				else if (message.getMessageName() == CommEnum.NEWALARM)
+				{
+					ClientUnpacker.unpackClientMessage(message);
+				}
 				else
 					messageQueue.add(message);
 				

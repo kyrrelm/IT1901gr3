@@ -227,17 +227,9 @@ public class DBAccess {
 	 * @param sheepId
 	 * The ID of the sheep.
 	 */
-	public static void addMessage(int pulse, int temperature,
+	public static synchronized Message addMessage(int pulse, int temperature,
 			int status, double positionX, double positionY, int sheepId) {
 		
-		/**
-		 * Ensures that it is not possible to simultanously update and receive data
-		 * -- See method getLastMessages for reference.
-		 * 
-		 * DEPRECATED
-		 * @author halvor
-		 */
-		//synchronized (DBAccess.class){
 		
 		// timestamp moved here.
 		java.util.Date date = new java.util.Date();
@@ -245,7 +237,7 @@ public class DBAccess {
 				new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String dateTime = simpleDateFormat.format(date);
 		
-		
+		Message message = null;
 		
 			try {
 				Statement st = con.createStatement();
@@ -261,12 +253,28 @@ public class DBAccess {
 						String.valueOf(temperature), String.valueOf(status), 
 						String.valueOf(positionX), String.valueOf(positionY),
 						String.valueOf(sheepId)));
+				
+				
+				ResultSet resultSet = st.executeQuery(
+						"SELECT * FROM Message ORDER BY MessageID DESC LIMIT 1");
+				
+				if(resultSet.last()) {
+					String sheepID = resultSet.getString(8);
+					message = new Message(Integer.parseInt(resultSet.getString(1)),
+							resultSet.getDate(2), 
+							Integer.parseInt(resultSet.getString(3)),
+							Float.parseFloat(resultSet.getString(4)),
+							Integer.parseInt(resultSet.getString(5)),
+							Double.parseDouble(resultSet.getString(6)),
+							Double.parseDouble(resultSet.getString(7)),
+							Integer.parseInt(resultSet.getString(8)),
+							getSheepById(Integer.parseInt(sheepID)));
+				}
 			}
 			catch(SQLException e) {
 				e.printStackTrace();
-				return;
 			}
-		//}
+		return message;
 	}
 	
 	public static boolean isUsernameTaken(String userName) {
@@ -914,10 +922,13 @@ public class DBAccess {
 			{
 				int SheepID = s.getSheepId();
 				
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM Message WHERE SheepID = " + SheepID + " AND Status = 0 ORDER BY MessageID DESC LIMIT 0,1");
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM Message WHERE SheepID = " + SheepID + " ORDER BY MessageID DESC LIMIT 0,1");
 				
 				while(resultSet.next())
 				{
+					// kun legg til sauer som er levannes
+					if (Integer.parseInt(resultSet.getString(5)) == 0)
+					{
 					messages.add( new Message(Integer.parseInt(resultSet.getString(1)),
 							resultSet.getDate(2), 
 							Integer.parseInt(resultSet.getString(3)),
@@ -927,6 +938,7 @@ public class DBAccess {
 							Double.parseDouble(resultSet.getString(7)),
 							Integer.parseInt(resultSet.getString(8)),
 							s));
+					}
 				}
 				
 			}				

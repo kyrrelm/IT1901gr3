@@ -71,12 +71,14 @@ public class Server
 		//SMSSender.SendSMS(body)
 		
 		
-		System.out.println("LOL");
+		System.out.println("LOL: " + o.getOwnerId());
 		
 		// check if that user is logged on!
 		
 		if (loggedInClients.contains(o.getOwnerId()))
 		{
+			if (sockServ.getThread(o.getOwnerId()) == null)
+				return;
 			ServerThread st =  sockServ.getThread(o.getOwnerId());
 			CommMessage<Integer> cm = new CommMessage<Integer>(CommEnum.NEWALARM, null);
 			st.sendMessage(cm);
