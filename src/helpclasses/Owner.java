@@ -15,7 +15,8 @@ public class Owner implements Serializable {
 	private int secondaryTLF;
 	private String secondaryMail;
 	
-	public Owner(int ownerId, String username, String password, String firstName, String lastName, int primaryTLF,
+	public Owner(int ownerId, String username, String password,
+			String firstName, String lastName, int primaryTLF,
 			String primaryMail, int secondaryTLF, String secondaryMail) {
 		
 		super();

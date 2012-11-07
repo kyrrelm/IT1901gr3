@@ -23,7 +23,6 @@ public class ClientUnpacker {
 			ServerData.isLoggedIn = true;
 			//Setter owner i ServerData ved Login
 			ServerData.owner = ((Owner) params.get(0));
-			System.out.println(((Owner) params.get(0)).getFirstName());
 		}
 
 		if (msg.getMessageName() == CommEnum.LOGINFAILED)
@@ -48,7 +47,7 @@ public class ClientUnpacker {
 			// eksempel: her er det returnert en ArrayList med messages!
 			// GUI.setMessageListModel(params) ??
 
-			System.out.println(params.size());
+			
 			ServerData.messages = (ArrayList<ArrayList<Message>>) params;
 		}
 

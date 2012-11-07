@@ -465,7 +465,8 @@ public class RegisterNewUser extends javax.swing.JFrame {
                     username, password1, firstName, lastName, 
                     Integer.parseInt(telephoneNumber), emailAddress,
                     Integer.parseInt(friendTelephoneNumber),
-                    friendEmailAddress));            
+                    friendEmailAddress));
+            
             
             //We now send a message that we want to register a new user
             Client.sockCli.sendMessage(new CommMessage<Owner>(
@@ -490,8 +491,8 @@ public class RegisterNewUser extends javax.swing.JFrame {
             	// to false. Then make the hub window visible and initialize
             	// its functions and data
             	this.setVisible(false);
-            	Client.hub.setVisible(true);
-            	Client.hub.initComp();
+            	Client.login.setVisible(true);
+            	//Client.hub.initComp();
             }
         }
     }//GEN-LAST:event_registerNewUserActionPerformed

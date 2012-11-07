@@ -808,6 +808,8 @@ public class Hub extends javax.swing.JFrame {
 	 * This function checks to see if the given telephone numbers and email
 	 * addresses is valid. Error message is given if a non-valid value is
 	 *  found.
+	 * 
+	 * @author Kenneth 
 	 * @param telephoneNumber1
 	 * @param emailAddress1
 	 * @param telephoneNumber2

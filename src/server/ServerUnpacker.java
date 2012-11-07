@@ -9,6 +9,8 @@ import helpclasses.Sheep;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import db.DBAccess;
 
 public class ServerUnpacker
@@ -138,7 +140,7 @@ public class ServerUnpacker
         if(msg.getMessageName() == CommEnum.REGISTERNEWUSER) 
         {
         	Owner owner = (Owner) params.get(0);
-        	
+        	owner.toString();
         	
         	if(db.DBAccess.isUsernameTaken(owner.getUsername()))
         	{
