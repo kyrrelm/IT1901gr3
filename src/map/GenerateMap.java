@@ -76,11 +76,11 @@ public class GenerateMap {
 	}
 	
 	
-	public static void UpdateMap(ArrayList<ArrayList<Message>> messages)
+	public static void UpdateMap(ArrayList<ArrayList<Message>> sortedmsg)
 	{
 		String path =  GenerateMap.class.getClassLoader().getResource(gui.MapPanel.localURL).getPath().replaceAll("%20",  " ");
 		
-		ArrayList<ArrayList<Message>> sortedmsg = new ArrayList<ArrayList<Message>>();
+		
 		ArrayList<Integer> sheepIDs  = new ArrayList<Integer>();
 		//sorter arraylist message inn i arraylist<Arraylist<msg>!
 		
