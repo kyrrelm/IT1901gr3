@@ -77,6 +77,7 @@ public class ClientUnpacker {
 		}
 		if (msg.getMessageName() == CommEnum.NEWALARM)
 		{
+			System.out.println("HEHEHE");
 			JOptionPane.showMessageDialog(client.Client.hub, "Hit refresh to receive your new urgent message.", "ALARM!", JOptionPane.WARNING_MESSAGE);
 		}
 		

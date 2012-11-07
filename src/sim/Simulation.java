@@ -198,11 +198,11 @@ public class Simulation extends Thread{
 			// make that shit!
 			double x = Constants.minLon + (Constants.maxLon - Constants.minLon) * r.nextDouble();
 			double y = Constants.minLat +  (Constants.maxLat - Constants.minLat) * r.nextDouble();
-			db.DBAccess.addMessage(0, 0, 1, x, y, messages.get(randomIndex).getSheepId());
+			Message tmptmp = db.DBAccess.addMessage(0, 0, 1, x, y, messages.get(randomIndex).getSheepId());
 			
 			messages.remove(randomIndex);
 			// fire  alarm på randomIndex
-			Server.fireAlarm(messages.get(randomIndex));
+			Server.fireAlarm(tmptmp);
 			return true;
 		}
 		return false;

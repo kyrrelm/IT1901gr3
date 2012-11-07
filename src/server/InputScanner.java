@@ -70,16 +70,20 @@ public class InputScanner extends Thread
 		
 		Random r = new Random();
 		
+		
+		if (tmp.size() < 2)
+			return;
 		int randomIndex = r.nextInt(tmp.size());
 		while (tmp.get(randomIndex).isAlarm())
 			randomIndex = r.nextInt(tmp.size());
 		
+		
 		// make that shit!
 		double x = Constants.minLon + (Constants.maxLon - Constants.minLon) * r.nextDouble();
 		double y = Constants.minLat +  (Constants.maxLat - Constants.minLat) * r.nextDouble();
-		db.DBAccess.addMessage(0, 0, 1, x, y, tmp.get(randomIndex).getSheepId());
-		
+		Message tmptmp = db.DBAccess.addMessage(0, 0, 1, x, y, tmp.get(randomIndex).getSheepId());
+		System.out.println(tmptmp.getSheepId());
 		// fire  alarm på randomIndex
-		Server.fireAlarm(tmp.get(randomIndex));;
+		Server.fireAlarm(tmptmp);;
 	}
 }
