@@ -10,9 +10,19 @@
 	
 	var redIcon = new GIcon(G_DEFAULT_ICON);
 	redIcon.image = "http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png";
-	
+	redIcon.iconSize = new GSize(15, 15);
+	redIcon.iconSize = new GSize(15, 15);
+	redIcon.shadow = null;
+	redIcon.iconAnchor = new GPoint(11, 11);
+	redIcon.infoWindowAnchor = new GPoint(12, 1);
+	redIcon.infoShadowAnchor = new GPoint(12, 1);
 	var greenIcon = new GIcon(G_DEFAULT_ICON);
-	greenIcon.image = "http://www.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png";
+	greenIcon.image = "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png";
+	greenIcon.iconSize = new GSize(15, 15);
+	greenIcon.shadow = null;
+	greenIcon.iconAnchor = new GPoint(11, 11);
+	greenIcon.infoWindowAnchor = new GPoint(12, 1);
+	greenIcon.infoShadowAnchor = new GPoint(12, 1);
 	
         
         
