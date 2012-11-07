@@ -873,7 +873,7 @@ public class Hub extends javax.swing.JFrame {
 	 * @return true if valid email address false otherwise
 	 */
 	private boolean isEmailAddress(String value) {
-		String values = "@.";
+		String values = "@";
 		
 		if(value.contains(values)) {
 			return true;
