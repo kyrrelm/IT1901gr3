@@ -74,6 +74,7 @@ public class Hub extends javax.swing.JFrame {
         filtersAlarmCheckBox = new javax.swing.JCheckBox();
         filtersAlarmLabel = new javax.swing.JLabel();
         filtersFilterButton = new javax.swing.JButton();
+        filtersFilterUpdateJButton = new javax.swing.JButton();
         tabOptions = new javax.swing.JTabbedPane();
         addSheep = new javax.swing.JPanel();
         addSheepTitleLabel = new javax.swing.JLabel();
@@ -220,6 +221,13 @@ public class Hub extends javax.swing.JFrame {
             }
         });
 
+        filtersFilterUpdateJButton.setText("Update");
+        filtersFilterUpdateJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filtersFilterUpdateJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelFiltersLayout = new javax.swing.GroupLayout(panelFilters);
         panelFilters.setLayout(panelFiltersLayout);
         panelFiltersLayout.setHorizontalGroup(
@@ -235,9 +243,13 @@ public class Hub extends javax.swing.JFrame {
                             .addComponent(filtersFarmLabel)
                             .addComponent(filtersSheepLabel)
                             .addComponent(filtersAlarmLabel)
-                            .addComponent(filtersAlarmCheckBox)
-                            .addComponent(filtersFilterButton))
-                        .addGap(0, 33, Short.MAX_VALUE)))
+                            .addComponent(filtersAlarmCheckBox))
+                        .addGap(0, 33, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFiltersLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(panelFiltersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(filtersFilterButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(filtersFilterUpdateJButton, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         panelFiltersLayout.setVerticalGroup(
@@ -258,7 +270,9 @@ public class Hub extends javax.swing.JFrame {
                 .addComponent(filtersAlarmCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(filtersFilterButton)
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
+                .addComponent(filtersFilterUpdateJButton)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout panelHomeLayout = new javax.swing.GroupLayout(panelHome);
@@ -785,6 +799,10 @@ public class Hub extends javax.swing.JFrame {
     private void editTelephoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTelephoneNumberActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_editTelephoneNumberActionPerformed
+
+    private void filtersFilterUpdateJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtersFilterUpdateJButtonActionPerformed
+        refreshMessages();
+    }//GEN-LAST:event_filtersFilterUpdateJButtonActionPerformed
 	
 	/**
 	 * This function checks to see if the given telephone numbers and email
@@ -896,6 +914,7 @@ public class Hub extends javax.swing.JFrame {
     private javax.swing.JComboBox filtersFarmComboBox;
     private javax.swing.JLabel filtersFarmLabel;
     private javax.swing.JButton filtersFilterButton;
+    private javax.swing.JButton filtersFilterUpdateJButton;
     private javax.swing.JLabel filtersLabel;
     private javax.swing.JComboBox filtersSheepComboBox;
     private javax.swing.JLabel filtersSheepLabel;
