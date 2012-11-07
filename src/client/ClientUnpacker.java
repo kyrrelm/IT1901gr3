@@ -2,6 +2,8 @@ package client;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import helpclasses.CommEnum;
 import helpclasses.CommMessage;
 import helpclasses.Farm;
@@ -49,11 +51,7 @@ public class ClientUnpacker {
 			System.out.println(params.size());
 			ServerData.messages = (ArrayList<ArrayList<Message>>) params;
 		}
-		if (msg.getMessageName() == CommEnum.NEWMESSAGES)
-		{
-			ServerData.messages = (ArrayList<ArrayList<Message>>) params;
-			System.out.println("New messages received from server!");
-		}
+
 		if (msg.getMessageName() == CommEnum.FARMSREPLY)
 		{
 
@@ -70,6 +68,16 @@ public class ClientUnpacker {
 			// Trengs denne? Kanskje en liten grafik i et hjørne som viser at kommandoen ble ekskevert riktig, ikke et popup selvsagt.
 			System.out.println("Transfer was a success!");
 
+		}
+		
+		if (msg.getMessageName() == CommEnum.NEWMESSAGES)
+		{
+			JOptionPane.showMessageDialog(client.Client.hub, "New messages", "Hit refresh to receive your new messages.", JOptionPane.INFORMATION_MESSAGE);
+			
+		}
+		if (msg.getMessageName() == CommEnum.NEWALARM)
+		{
+			JOptionPane.showMessageDialog(client.Client.hub, "ALARM!", "Hit refresh to receive your new urgent message.", JOptionPane.WARNING_MESSAGE);
 		}
 		
 		if (msg.getMessageName() == CommEnum.USERNAMEALREADYTAKEN)
