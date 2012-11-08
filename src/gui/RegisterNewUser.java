@@ -59,9 +59,7 @@ public class RegisterNewUser extends javax.swing.JFrame {
         friendEmailAddressLabel = new javax.swing.JLabel();
         editFriendEmailAddress = new javax.swing.JTextField();
         passwordLabel1 = new javax.swing.JLabel();
-        editPassword1 = new javax.swing.JTextField();
         passwordLabel2 = new javax.swing.JLabel();
-        editPassword2 = new javax.swing.JTextField();
         submit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -72,6 +70,8 @@ public class RegisterNewUser extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        editPassword1 = new javax.swing.JPasswordField();
+        editPassword2 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -153,22 +153,8 @@ public class RegisterNewUser extends javax.swing.JFrame {
         passwordLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         passwordLabel1.setText("Password:");
 
-        editPassword1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        editPassword1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editPassword1ActionPerformed(evt);
-            }
-        });
-
         passwordLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         passwordLabel2.setText("Retype Password:");
-
-        editPassword2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        editPassword2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editPassword2ActionPerformed(evt);
-            }
-        });
 
         submit.setText("Submit");
         submit.addActionListener(new java.awt.event.ActionListener() {
@@ -212,6 +198,10 @@ public class RegisterNewUser extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 0, 0));
         jLabel9.setText("*");
 
+        editPassword1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        editPassword2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -233,30 +223,38 @@ public class RegisterNewUser extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(telephoneNumberLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel4))
-                                    .addComponent(friendTelephoneNumberLabel)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(usernameLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel6))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(passwordLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel7))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(10, 10, 10)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(editTelephoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                                                    .addComponent(editFriendTelephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(editUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(telephoneNumberLabel)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(jLabel4))
+                                                    .addComponent(friendTelephoneNumberLabel)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(usernameLabel)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(jLabel6))
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(passwordLabel1)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(jLabel7))
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(jLabel9)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(jLabel1)))
+                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addGap(48, 48, 48))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(editTelephoneNumber)
-                                            .addComponent(editFriendTelephoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(editUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(editPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel1)))
-                                .addGap(48, 48, 48)
+                                        .addComponent(editPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(emailAddressLabel)
@@ -270,9 +268,9 @@ public class RegisterNewUser extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(editPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(editEmailAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(editFriendEmailAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(editFriendEmailAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(editPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,7 +279,7 @@ public class RegisterNewUser extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(359, 359, 359)
                         .addComponent(submit)))
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,13 +332,13 @@ public class RegisterNewUser extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel9))
                 .addGap(18, 18, 18)
                 .addComponent(submit)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -374,14 +372,6 @@ public class RegisterNewUser extends javax.swing.JFrame {
     private void editFriendEmailAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editFriendEmailAddressActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_editFriendEmailAddressActionPerformed
-
-    private void editPassword2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPassword2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editPassword2ActionPerformed
-
-    private void editPassword1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPassword1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editPassword1ActionPerformed
     
     
     /**
@@ -537,8 +527,8 @@ public class RegisterNewUser extends javax.swing.JFrame {
     private javax.swing.JTextField editFriendEmailAddress;
     private javax.swing.JTextField editFriendTelephoneNumber;
     private javax.swing.JTextField editLastName;
-    private javax.swing.JTextField editPassword1;
-    private javax.swing.JTextField editPassword2;
+    private javax.swing.JPasswordField editPassword1;
+    private javax.swing.JPasswordField editPassword2;
     private javax.swing.JTextField editTelephoneNumber;
     private javax.swing.JTextField editUsername;
     private javax.swing.JLabel emailAddressLabel;
