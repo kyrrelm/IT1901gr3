@@ -425,6 +425,25 @@ public class RegisterNewUser extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             isValuesValid = false;
         }
+        else if(!emailAddress.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)" +
+        		"*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+        	JOptionPane.showMessageDialog(null,
+        			"The field for Email Address is not valid!",
+        			"Not valid contact information",
+        			JOptionPane.ERROR_MESSAGE);
+        	isValuesValid = false;
+        }
+        else if(!friendEmailAddress.isEmpty()) {
+        	if(!friendEmailAddress.matches("^[_A-Za-z0-9-\\+]+(\\." +
+        			"[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*" +
+        			"(\\.[A-Za-z]{2,})$")) {
+            	JOptionPane.showMessageDialog(null,
+            			"The field for Friend's Email Address is not valid!",
+            			"Not valid contact information",
+            			JOptionPane.ERROR_MESSAGE);
+            	isValuesValid = false;
+            }
+        }    
         else if(username.isEmpty()) {
             JOptionPane.showMessageDialog(null,
                     "Field for Username is empty!",
@@ -448,8 +467,65 @@ public class RegisterNewUser extends javax.swing.JFrame {
         }
         
         
+        //We perform checks to see if the phone numbers are actually numbers
+        // and that they contain 8 numbers. (Telephone numbers in Norway has 8
+        // numbers)
+        if(!telephoneNumber.isEmpty()) {
+        	try {
+        		int number = Integer.parseInt(telephoneNumber);
+        		
+        		
+        		//If telephone number is a number but less than 10 000 000 or
+        		// greater than 99 999 999 we indicate that it is not valid.
+        		if(number < 10000000 || number > 99999999) {
+        			JOptionPane.showMessageDialog(null,
+        					"The field for Telephone Number is not valid!",
+        					"Not valid contact information",
+        					JOptionPane.ERROR_MESSAGE);
+        			isValuesValid = false;
+        		}
+        	}
+        	catch(Exception exception) {
+        		JOptionPane.showMessageDialog(null,
+        				"The field for Telephone Number is not valid!",
+        				"Not valid contact information",
+        				JOptionPane.ERROR_MESSAGE);
+        		isValuesValid = false;
+        	}
+        }
+        
+                
+        if(!friendTelephoneNumber.isEmpty()) {
+        	try {
+        		int number = Integer.parseInt(friendTelephoneNumber);
+        		
+        		
+        		//If telephone number is a number but less than 10 000 000 or
+        		// greater than 99 999 999 we indicate that it is not valid.
+        		if(number < 10000000 || number > 99999999) {
+        			JOptionPane.showMessageDialog(null,
+        					"The field for Friend's Telephone Number is not " +
+        					"valid!",
+        					"Not valid contact information",
+        					JOptionPane.ERROR_MESSAGE);
+        			isValuesValid = false;
+        		}
+        	}
+        	catch(Exception exception) {
+        		JOptionPane.showMessageDialog(null,
+        				"The field for Friend's Telephone Number is not valid!",
+        				"Not valid contact information",
+        				JOptionPane.ERROR_MESSAGE);
+        		isValuesValid = false;
+        	}
+        }
+        //The -1 indicate that the field for the telephone number is empty
+        else/*(friendTelephoneNumber.isEmpty())*/ {
+        	friendTelephoneNumber = "-1";
+        }
+        
+        
         if(isValuesValid) {
-            //Uncertain about using an ArrayList when i'm only sending 1 owner
             ArrayList<Owner> owner = new ArrayList<Owner>();
             owner.add(new Owner(-1,
                     username, password1, firstName, lastName, 
@@ -466,7 +542,7 @@ public class RegisterNewUser extends javax.swing.JFrame {
             //If the function isUsernameTaken called from ServerUnpacker.java
             // returns false, then it will eventuelly updata the global
             // variable usernameTaken
-            if (usernameTaken == true)
+            if(usernameTaken == true)
             {
             	usernameTaken = false;
             	
@@ -482,6 +558,7 @@ public class RegisterNewUser extends javax.swing.JFrame {
             	// its functions and data
             	this.setVisible(false);
             	Client.login.setVisible(true);
+            	//Client.hub.setVisible(true);
             	//Client.hub.initComp();
             }
         }

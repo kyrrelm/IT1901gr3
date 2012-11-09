@@ -57,26 +57,39 @@ public class ServerUnpacker
          * 
          * @author Kenneth
          */
-         if(msg.getMessageName() == CommEnum.REGISTERNEWUSER) 
-         {
-        	 Owner owner = (Owner) params.get(0);
+        if(msg.getMessageName() == CommEnum.REGISTERNEWUSER) 
+        {
+        	Owner owner = (Owner) params.get(0);
+        	
+        	//We initialize this variable to the empty string and use it if
+        	// the friend's telephone number is flagged with '-1' which
+        	// indicates that no telephone number has been entered
+        	String friendTelephoneNumber = ""; 
         	 
-        	 
-        	 if(db.DBAccess.isUsernameTaken(owner.getUsername()))
-        	 {
-        		 return new CommMessage<Integer>(CommEnum.USERNAMEALREADYTAKEN, null);
-        	 }
+        	if(db.DBAccess.isUsernameTaken(owner.getUsername()))
+        	{
+        		return new CommMessage<Integer>(CommEnum.USERNAMEALREADYTAKEN, null);
+        	}
+            
+        	
+        	//If user has not entered a telephonenumber for a friend, then the
+        	// value for owner.getSecondaryTLF() eqals -1. This indicates that
+        	// we need to use the friendTelephoneNumber set to the empty String
+        	// and the phone number entered otherwise
+        	if(owner.getSecondaryTLF() != -1) {
+        		friendTelephoneNumber = Integer.toString(owner.getSecondaryTLF());
+        	}
             	
-            	
-        	 db.DBAccess.addOwner(owner.getUsername(), owner.getPassword(),
-        			 owner.getFirstName(), owner.getLastName(),
-        			 Integer.toString(owner.getPrimaryTLF()),
-        			 owner.getPrimaryMail(),
-        			 Integer.toString(owner.getSecondaryTLF()),
-        			 owner.getSecondaryMail());
+        	
+        	db.DBAccess.addOwner(owner.getUsername(), owner.getPassword(),
+        			owner.getFirstName(), owner.getLastName(),
+        			Integer.toString(owner.getPrimaryTLF()),
+        			owner.getPrimaryMail(),
+        			friendTelephoneNumber,
+        			owner.getSecondaryMail());
                
             return new CommMessage<Owner>(CommEnum.SUCCESS, null);         
-         }
+        }
 
 
         // resten av metodene krever at brukeren er logget inn i gitt tr�d.
