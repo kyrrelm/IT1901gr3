@@ -762,9 +762,17 @@ public class Hub extends javax.swing.JFrame {
 		// TODO add your handling code here:
 		//refreshMessages();
 	}//GEN-LAST:event_tabHomeStateChanged
-
+	
+	
+	/**
+	 * Here we handle all the things related to the user updating his contact
+	 *  information.
+	 *  
+	 * @author Kenneth 
+	 * @param evt
+	 */
 	private void updateContactInformationActionPerformed(
-			java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateContactInformationActionPerformed
+			java.awt.event.ActionEvent evt) {
 		boolean isValuesValid		 = false;
 		String telephoneNumber 		 = editTelephoneNumber.getText();
 		String emailAddress	   		 = editEmailAddress.getText();
@@ -817,16 +825,31 @@ public class Hub extends javax.swing.JFrame {
 	 *  found.
 	 * 
 	 * @author Kenneth 
-	 * @param telephoneNumber1
-	 * @param emailAddress1
-	 * @param telephoneNumber2
-	 * @param emailAddress2
+	 * @param telephoneNumber1 - Telephone number for the owner
+	 * @param emailAddress1 - Email address for the owner
+	 * @param telephoneNumber2 - Telephone number for a friend
+	 * @param emailAddress2 - Email address for a friend
 	 * @return true if all values are valid, false otherwise
 	 */
 	private boolean isContactInformationValid(String telephoneNumber1,
 			String emailAddress1, String telephoneNumber2,
 			String emailAddress2) {
 		
+		
+		if(telephoneNumber1.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Field for Telephone Number is empty!",
+                    "Not valid contact information",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        else if(emailAddress1.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Field for Email Address is empty!",
+                    "Not valid contact information",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }	
 		if(!isTelephoneNumber(telephoneNumber1)) {
 			JOptionPane.showMessageDialog(null, telephoneNumber1 +
 					" is not a valid telephoneNumber", 
@@ -841,54 +864,68 @@ public class Hub extends javax.swing.JFrame {
 					JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
-		if(!isTelephoneNumber(telephoneNumber2)) {
-			JOptionPane.showMessageDialog(null, telephoneNumber2 +
-					" is not a valid telephoneNumber", 
-					"Not valid contact information",
-					JOptionPane.ERROR_MESSAGE);
-			return false;
+		if(!telephoneNumber2.isEmpty()) {
+			if(!isTelephoneNumber(telephoneNumber2)) {
+				JOptionPane.showMessageDialog(null, telephoneNumber2 +
+						" is not a valid telephoneNumber", 
+						"Not valid contact information",
+						JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
 		}
-		if(!isEmailAddress(emailAddress2)) {
-			JOptionPane.showMessageDialog(null, emailAddress2 +
-					" is not a valid email address", 
-					"Not valid contact information",
-					JOptionPane.ERROR_MESSAGE);
-			return false;
+		if(!emailAddress2.isEmpty()) {
+			if(!isEmailAddress(emailAddress2)) {
+				JOptionPane.showMessageDialog(null, emailAddress2 +
+						" is not a valid email address", 
+						"Not valid contact information",
+						JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
 		}
 		
 		return true;
 	}
 	
 	/**
-	 * Function checks to see if paramter is a telephone number.
-	 *  (Could be improved)
-	 * @param value
-	 * @return true if value contains only integers, false otherwise
+	 * Function checks to see if parameter is a telephone number.
+	 * 
+	 * @author Kenneth
+	 * @param telephoneNumber - The telephone number we want to check for
+	 *  validity
+	 * @return true if value contains 8 integers, false otherwise
 	 */
-	private boolean isTelephoneNumber(String value) {
+	private boolean isTelephoneNumber(String telephoneNumber) {		
 		try {
-			Integer.parseInt(value);
-			return true;
-		}
-		catch(Exception exception) {
-			return false;
-		}
+    		int number = Integer.parseInt(telephoneNumber);
+    		
+    		
+    		//If telephone number is a number but less than 10 000 000 or
+    		// greater than 99 999 999 we indicate that it is not valid.
+    		if(number < 10000000 || number > 99999999) {
+    			return false;
+    		}
+    	}
+    	catch(Exception exception) {
+    		return false;
+    	}
+		
+		return true;
 	}
 	
 	/**
-	 * Function checks to sees if paramter is a valid email address.
-	 *  (Could be improved. Is very simple)
-	 * @param value
-	 * @return true if valid email address false otherwise
-	 */
-	private boolean isEmailAddress(String value) {
-		String values = "@";
+	 * Function checks to see if an email address is valid.
+	 * 
+	 * @author Kenneth
+	 * @param emailAddress - The email address we want to check for validity
+	 * @return true if valid email address, false otherwise
+    */
+	private boolean isEmailAddress(String emailAddress) {
+		if(!emailAddress.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)" +
+        		"*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+        	return false;
+        }
 		
-		if(value.contains(values)) {
-			return true;
-		}
-		
-		return false;	
+		return true;
 	}
 	
 	
