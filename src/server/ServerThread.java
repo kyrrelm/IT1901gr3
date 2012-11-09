@@ -112,9 +112,12 @@ public class ServerThread extends Thread
 	
 	public void close()
 	{
-		int clientIndex = Server.loggedInClients.indexOf(getOwner().getOwnerId());
-		if (clientIndex != -1)
-			Server.loggedInClients.remove(clientIndex);
+		if (getOwner() != null)
+		{
+			int clientIndex = Server.loggedInClients.indexOf(getOwner().getOwnerId());
+			if (clientIndex != -1)
+				Server.loggedInClients.remove(clientIndex);
+		}
 		out = null;
 		in = null;
 		connection = null;
