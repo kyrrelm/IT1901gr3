@@ -1006,7 +1006,7 @@ public class Hub extends javax.swing.JFrame {
 		BufferedImage image = null;
 		try {
 			image = ImageIO.read(
-					this.getClass().getResource("/res/hatt.png"));
+					this.getClass().getResource("/res/briller_hatt.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
