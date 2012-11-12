@@ -27,6 +27,8 @@ public class Client {
 	public static Hub hub;
 	public static SocketClient sockCli;
 	public static boolean ServerUp = true;
+	public static String name = "Sheep Stalker";
+	public static String version = "beta 1.0";
     
 	public static void main(String[] args) {
 		// brukernavn s� jeg � logge meg p� mysqladmin hele tida: Superman3440/Sheep

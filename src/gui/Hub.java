@@ -988,7 +988,6 @@ public class Hub extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 	private boolean onlyAlarm = false;
-	private String version = "alpha 0.1";
 
 	public void initComp(){
 		Client.sockCli.sendMessage(new CommMessage<Farm>(CommEnum.GETFARMS, null));
@@ -998,8 +997,7 @@ public class Hub extends javax.swing.JFrame {
 		initRemoveFarm();
 		refreshMessages();
 		setIcon();
-		this.setTitle("SheepStalker " + version );
-
+		this.setTitle(Client.name + " " + Client.version);
 	}
 
 	private void setIcon(){

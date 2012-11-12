@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 
 import client.Client;
 import client.ServerData;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -31,7 +32,8 @@ public class Login extends javax.swing.JFrame {
 		initComponents();
 		if(!Client.ServerUp)
 			JOptionPane.showMessageDialog(this, "Could not connect to server", "Connection Error", JOptionPane.ERROR_MESSAGE);
-	}
+           	initComp();
+        }
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
@@ -46,9 +48,9 @@ public class Login extends javax.swing.JFrame {
         labelUser = new javax.swing.JLabel();
         labelPassword = new javax.swing.JLabel();
         password = new javax.swing.JPasswordField();
-        labelLogin = new javax.swing.JLabel();
         login = new javax.swing.JButton();
         registerNewUser = new javax.swing.JButton();
+        test = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -76,9 +78,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        labelLogin.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        labelLogin.setText("Login");
-
         login.setText("Login");
         login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,55 +93,59 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        test.setMaximumSize(new java.awt.Dimension(113, 113));
+        test.setMinimumSize(new java.awt.Dimension(113, 113));
+        test.setPreferredSize(new java.awt.Dimension(113, 113));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(test, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelPassword)
+                    .addComponent(labelUser)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(labelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelUser)
-                            .addComponent(labelPassword)
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(login)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(registerNewUser))
-                                    .addComponent(password)
-                                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(63, Short.MAX_VALUE))
+                                .addComponent(login)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(registerNewUser))
+                            .addComponent(password)
+                            .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(labelUser)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelPassword)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(login)
-                    .addComponent(registerNewUser))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelUser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelPassword)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(login)
+                            .addComponent(registerNewUser)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(test, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleDescription("");
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-296)/2, (screenSize.height-238)/2, 296, 238);
+        setBounds((screenSize.width-387)/2, (screenSize.height-194)/2, 387, 194);
     }// </editor-fold>//GEN-END:initComponents
 
 	private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
@@ -169,13 +172,21 @@ public class Login extends javax.swing.JFrame {
 
 	}//GEN-LAST:event_loginActionPerformed
 
-	//Legger inn støte for bruk av Enter ved Login
+	/**
+	 * This method is called when the user hits enter and the marker is in the password field.
+	 * It is called so that loginActionPreformed() will get called upon hitting enter.
+	 * @author Kyrre 
+	 */
 	private void passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyPressed
 		// TODO add your handling code here:
 		if(evt.getKeyCode() == KeyEvent.VK_ENTER)
 			loginActionPerformed(null);
 	}//GEN-LAST:event_passwordKeyPressed
-
+	
+	/**
+	 * This method is called when the user clicks Register User and brings up the registerNewUser class in client.Client
+	 * @param evt
+	 */
     private void registerNewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerNewUserActionPerformed
         
     	this.setVisible(false);
@@ -190,21 +201,24 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordActionPerformed
 
-	/**
-	 * @param args the command line arguments
-	 */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel labelLogin;
     private javax.swing.JLabel labelPassword;
     private javax.swing.JLabel labelUser;
     private javax.swing.JButton login;
     private javax.swing.JPasswordField password;
     private javax.swing.JButton registerNewUser;
+    private javax.swing.JLabel test;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 
-	//Enndre denne metoden når brukernavn og passord spørring implementeres
+	/**
+	 * This method is called to check if username and password exist in the database
+	 * by calling sockCli.sendMessage with the enum LOGIN
+	 * @author Kyrre
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	private boolean isUsernameAndPassword(String username, String password) {
 
 		if (username.length() == 0 || password.length() == 0)
@@ -215,5 +229,10 @@ public class Login extends javax.swing.JFrame {
 		al.add(password);
 		Client.sockCli.sendMessage(new CommMessage<String>(CommEnum.LOGIN, al));
 		return client.ServerData.isLoggedIn;
+	}
+	private void initComp(){
+		ImageIcon img = new ImageIcon(getClass().getResource("/res/briller_hatt_liten.png"));
+        test.setIcon(img);
+        this.setTitle(Client.name + " " + Client.version);
 	}
 }
