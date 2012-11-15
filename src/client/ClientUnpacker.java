@@ -80,9 +80,18 @@ public class ClientUnpacker {
 			JOptionPane.showMessageDialog(client.Client.hub, "Hit refresh to receive your new urgent message.", "ALARM!", JOptionPane.WARNING_MESSAGE);
 		}
 		
+		//If username is already taken, set the global variable
+		// isUserNameTaken in RegisterUser.java to true
 		if (msg.getMessageName() == CommEnum.USERNAMEALREADYTAKEN)
 		{
-			gui.RegisterNewUser.usernameTaken = true;
+			gui.RegisterNewUser.isUsernameTaken = true;
+		}
+		
+		//If email address is already taken, set the global variable
+		// isEmailAddressTaken in RegisterUser.java to true
+		if(msg.getMessageName() == CommEnum.EMAILADDRESSALREADYTAKEN)
+		{
+			gui.RegisterNewUser.isEmailAddressTaken = true;
 		}
 
 		return null;

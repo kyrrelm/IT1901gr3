@@ -785,18 +785,34 @@ public class Hub extends javax.swing.JFrame {
 		
 		
 		if(isValuesValid) {
-			//Uncertain about using an ArrayList when i'm only send 1 owner
 			ArrayList<Owner> owner = new ArrayList<Owner>();
+			
+			//In the case where the user is updating the telephone number of
+			// his friend with an empty string, we need to handle this
+			int friendTelephone = -1;
+			
+			
+			if(!friendTelephoneNumber.isEmpty())
+			{
+				friendTelephone = Integer.parseInt(friendTelephoneNumber);
+			}
+			System.out.println("friendTelephone: " + friendTelephone);
+			
 			owner.add(new Owner(-1,
 					ServerData.owner.getUsername(),
 					ServerData.owner.getPassword(),
-					"", "",
+					"Empty", "Empty",
 					Integer.parseInt(telephoneNumber), emailAddress,
-					Integer.parseInt(friendTelephoneNumber), friendEmailAddress));
+					friendTelephone, friendEmailAddress));
 
 		
 			Client.sockCli.sendMessage(new CommMessage<Owner>(
 					CommEnum.UPDATECONTACTINFORMATION, owner));
+			
+			
+			JOptionPane.showMessageDialog(null, "Database was updated!",
+            		"Contact Information Updated",
+            		JOptionPane.INFORMATION_MESSAGE);
 		}
 
 		// TODO add your handling code here:
@@ -819,6 +835,7 @@ public class Hub extends javax.swing.JFrame {
         refreshMessages();
     }//GEN-LAST:event_filtersFilterUpdateJButtonActionPerformed
 	
+    
 	/**
 	 * This function checks to see if the given telephone numbers and email
 	 * addresses is valid. Error message is given if a non-valid value is
@@ -843,7 +860,7 @@ public class Hub extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        else if(emailAddress1.isEmpty()) {
+        if(emailAddress1.isEmpty()) {
             JOptionPane.showMessageDialog(null,
                     "Field for Email Address is empty!",
                     "Not valid contact information",
@@ -852,7 +869,7 @@ public class Hub extends javax.swing.JFrame {
         }	
 		if(!isTelephoneNumber(telephoneNumber1)) {
 			JOptionPane.showMessageDialog(null, telephoneNumber1 +
-					" is not a valid telephoneNumber", 
+					" is not a valid telephone number", 
 					"Not valid contact information",
 					JOptionPane.ERROR_MESSAGE);
 			return false;
@@ -867,7 +884,7 @@ public class Hub extends javax.swing.JFrame {
 		if(!telephoneNumber2.isEmpty()) {
 			if(!isTelephoneNumber(telephoneNumber2)) {
 				JOptionPane.showMessageDialog(null, telephoneNumber2 +
-						" is not a valid telephoneNumber", 
+						" is not a valid telephone number", 
 						"Not valid contact information",
 						JOptionPane.ERROR_MESSAGE);
 				return false;
@@ -885,6 +902,7 @@ public class Hub extends javax.swing.JFrame {
 		
 		return true;
 	}
+	
 	
 	/**
 	 * Function checks to see if parameter is a telephone number.
@@ -911,6 +929,7 @@ public class Hub extends javax.swing.JFrame {
 		
 		return true;
 	}
+	
 	
 	/**
 	 * Function checks to see if an email address is valid.
@@ -1015,14 +1034,26 @@ public class Hub extends javax.swing.JFrame {
 		addSheepFarm.setModel(new DefaultComboBoxModel(ServerData.getFarmNames()));
 	}
 
+	
 	/**
 	 * Function initializes contact information for the user. The contact
 	 * information can be seen in the tab Options->Edit Contact Information
+	 * 
+	 * @author Kenneth
 	 */
 	private void initContactInformation() {
+		String friendTelephoneNumber = "";
+		
+		
+		if(ServerData.owner.getSecondaryTLF() > 0)
+		{
+			friendTelephoneNumber = String.valueOf(
+					ServerData.owner.getSecondaryTLF());
+		}
+		
 		editTelephoneNumber.setText(String.valueOf(ServerData.owner.getPrimaryTLF()));
 		editEmailAddress.setText(ServerData.owner.getPrimaryMail());
-		editFriendTelephoneNumber.setText(String.valueOf(ServerData.owner.getSecondaryTLF()));
+		editFriendTelephoneNumber.setText(friendTelephoneNumber);
 		editFriendEmailAddress.setText(ServerData.owner.getSecondaryMail());
 
 	}

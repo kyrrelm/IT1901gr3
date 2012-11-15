@@ -72,7 +72,12 @@ public enum CommEnum {
 	NEWALARM,
 	
 	// SERVER-> CLIENT User already in database
-	USERNAMEALREADYTAKEN
+	USERNAMEALREADYTAKEN,
+	
+	//SERVER-> CLIENT Email address already in database (The email address
+	// for the registered user)
+	EMAILADDRESSALREADYTAKEN
+	
 	
 	
 }

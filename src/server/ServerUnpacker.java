@@ -52,8 +52,8 @@ public class ServerUnpacker
         
         
         /**
-         * Here we call the relevant function in DBAccess.java. This will
-         * register a new user.
+         * Here we call the relevant functions in DBAccess.java. This will
+         * register a new user if everything is ok.
          * 
          * @author Kenneth
          */
@@ -65,14 +65,25 @@ public class ServerUnpacker
         	// the friend's telephone number is flagged with '-1' which
         	// indicates that no telephone number has been entered
         	String friendTelephoneNumber = ""; 
-        	 
+        	
+        	
+        	//We check if the username has already been taken
         	if(db.DBAccess.isUsernameTaken(owner.getUsername()))
         	{
-        		return new CommMessage<Integer>(CommEnum.USERNAMEALREADYTAKEN, null);
+        		return new CommMessage<Integer>(CommEnum.USERNAMEALREADYTAKEN,
+        				null);
         	}
-            
-        	
-        	//If user has not entered a telephonenumber for a friend, then the
+            //We check to see if the email address has already been taken.
+        	// (This indicates that the new user is already registered. This
+        	// means that several users cannot share an email address).
+        	if(db.DBAccess.isEmailAddressTaken(owner.getPrimaryMail()))
+        	{
+        		return new CommMessage<Integer>(
+        				CommEnum.EMAILADDRESSALREADYTAKEN, null);
+        	}
+        			
+        	        	
+        	//If user has not entered a telephone number for a friend, then the
         	// value for owner.getSecondaryTLF() eqals -1. This indicates that
         	// we need to use the friendTelephoneNumber set to the empty String
         	// and the phone number entered otherwise
@@ -162,18 +173,19 @@ public class ServerUnpacker
 	 */
 	if(msg.getMessageName() == CommEnum.UPDATECONTACTINFORMATION) {
             Owner owner = (Owner) params.get(0);
-
+            
+            
             DBAccess.updateOwnerContactInformation(
                     owner.getUsername(), owner.getPassword(),
                     String.valueOf(owner.getPrimaryTLF()),
                     owner.getPrimaryMail(),
                     String.valueOf(owner.getSecondaryTLF()),
                     owner.getSecondaryMail());
+                                   
 
             return new CommMessage<Owner>(CommEnum.SUCCESS, null);
 	}
         
-    
 
     return null;
 

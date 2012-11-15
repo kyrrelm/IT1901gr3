@@ -241,10 +241,7 @@ public class DBAccess {
 		
 			try {
 				Statement st = con.createStatement();
-			
-			
-			
-				
+									
 				st.executeUpdate("INSERT INTO Message(DateTime, Pulse," +
 						" Temperature, Status, PositionX, PositionY, SheepID) " +
 						"VALUES" + String.format("(\"%s\", \"%s\", \"%s\"," +
@@ -254,9 +251,9 @@ public class DBAccess {
 						String.valueOf(positionX), String.valueOf(positionY),
 						String.valueOf(sheepId)));
 				
-				
 				ResultSet resultSet = st.executeQuery(
 						"SELECT * FROM Message ORDER BY MessageID DESC LIMIT 1");
+				
 				
 				if(resultSet.last()) {
 					String sheepID = resultSet.getString(8);
@@ -277,17 +274,27 @@ public class DBAccess {
 		return message;
 	}
 	
-	public static boolean isUsernameTaken(String userName) {
+	
+	/**
+	 * Here we check to see if the username sent as a parameter is already in
+	 *  the database
+	 * 
+	 * @author Kenneth
+	 * @param userName - The username we want to check
+	 * @return true if userName is already in the database, false otherwise
+	 */
+	public static boolean isUsernameTaken(String userName)
+	{
 		try {
 			Statement statement = con.createStatement();
 			
 			ResultSet resultSet = statement.executeQuery(
-					"SELECT * From Owner WHERE UserName = '" + userName + "'");
+					"SELECT * FROM Owner WHERE UserName = '" + userName + "'");
 			int counter = 0;
 			
 			
 			while(resultSet.next()) {
-				counter = counter + 1;
+				counter += 1;
 			}
 			
 			
@@ -306,6 +313,60 @@ public class DBAccess {
 	}
 	
 	
+	/**
+	 * This function checks to see if an email address is already in the
+	 *  database. (We check the email addresses for the owners. This is used
+	 *  to prevent a user to register again if he is already registered. This
+	 *  again means that several owners cannot share an email address). 
+	 *  
+	 * @author Kenneth
+	 * @param emailAddress - The email address we want to check
+	 * @return true if email address is already in database, false otherwise
+	 */
+	public static boolean isEmailAddressTaken(String emailAddress)
+	{
+		try {
+			Statement statement = con.createStatement();
+			
+			ResultSet resultSet = statement.executeQuery(
+					"SELECT * FROM Owner WHERE PrimaryMail = '" + 
+					emailAddress + "'");
+			int counter = 0;
+			
+			
+			while(resultSet.next())
+			{
+				counter += 1;
+			}
+			
+			
+			if(counter > 0)
+			{
+				return true;
+			}
+			
+			
+			return false;
+		}
+		catch(SQLException exception)
+		{
+			exception.printStackTrace();
+			
+			return true;
+		}
+	}
+	
+	
+	/**
+	 * This function checks to see if a sheep name already is taken for a
+	 *  specific farm.
+	 * 
+	 * @author Kenneth
+	 * @param sheepName - The sheep name we want to check
+	 * @param farmId - The id of the farm where the sheep is
+	 * @return true if the farm already has a sheep by the name of sheepName,
+	 *  false otherwise
+	 */
 	public static boolean isSheepNameTaken(String sheepName, int farmId) {
 		try {
 			Statement statement = con.createStatement();
@@ -409,6 +470,8 @@ public class DBAccess {
 			return null;
 		}
 	}
+	
+	
 	public static Message getMessage(int messageId) {
 		try {
 			Statement statement = con.createStatement();
@@ -559,14 +622,28 @@ public class DBAccess {
 			
 			
 			while(resultSet.next())	{
+				//In case the database stores a friend's telephone number as a
+				// empty String, we would get an error if we tried to convert it to
+				// an integer. Therefore we need to check this and handle it if
+				// this is the case. Kenneth
+				int friendTelephoneNumber = -1;
+				String temp = resultSet.getString(8);
+				
+				
+				if(!temp.isEmpty())
+				{
+					friendTelephoneNumber = Integer.parseInt(temp);
+				}
+								
+				
 				owner = new Owner(Integer.parseInt(resultSet.getString(1)),
 						resultSet.getString(2),
 						resultSet.getString(3), resultSet.getString(4),
 						resultSet.getString(5), 
 						Integer.parseInt(resultSet.getString(6)),
 						resultSet.getString(7),
-						Integer.parseInt(resultSet.getString(8)),
-						resultSet.getString(9));						
+						friendTelephoneNumber,
+						resultSet.getString(9));					
 			}
 			
 			return owner;
@@ -581,6 +658,7 @@ public class DBAccess {
 	/**
 	 * Function updates all contactinformation for the owner
 	 * 
+	 * @author Kenneth
 	 * @param username - Username of the owner
 	 * @param password - Password for the owner
 	 * @param telephone - The owner's new telephonenumber
@@ -592,26 +670,31 @@ public class DBAccess {
 	public static Owner updateOwnerContactInformation(String username,
 			String password, String telephone, String email,
 			String friendTelephone, String friendEmail) {
+		
+		
 		try {
 			Statement statement = con.createStatement();
+						
+			//If friend telephone number is flagged with -1, then this means
+			// that the field for this number is empty and we shall update with
+			// an empty string
+			String friendTelephoneNumber = "";
 			
 			
-			//We expect all fields to be non-empyy
-			if(telephone == "" || email == "" || friendTelephone == "" ||
-					friendEmail == "") {
-				return null;
+			if(Integer.parseInt(friendTelephone) > 0)
+			{
+				friendTelephoneNumber = friendTelephone;
 			}
-			System.out.println("About to execute update!");
+			
 			
 			statement.executeUpdate(
 					"UPDATE Owner SET PrimaryTLF='" + telephone +
 					"', PrimaryMail='" + email +
-					"', SecondaryTLF='" + friendTelephone +
+					"', SecondaryTLF='" + friendTelephoneNumber +
 					"', SecondaryMail='" + friendEmail +
 					"' WHERE Username='" + username + "' AND Password='" +
 					password + "'");
-			
-			System.out.println("Database was updated!");
+						
 			
 			return getOwner(username, password);
 		}
@@ -622,8 +705,11 @@ public class DBAccess {
 		}
 	}
 	
+	
 	/**
 	 * Function updates the owner's emailadress in the database
+	 * 
+	 * @author Kenneth
 	 * @param username - Username of the owner
 	 * @param password - Password for the owner
 	 * @param email - The new emailadress
@@ -657,9 +743,11 @@ public class DBAccess {
 		}
 	}
 	
+	
 	/**
 	 * Function updates the owner's private telephonenumber in the database.
 	 * 
+	 * @author Kenneth
 	 * @param username - Username of the owner
 	 * @param password - Password for the owner
 	 * @param telephone - The new telephonenumber
@@ -694,10 +782,12 @@ public class DBAccess {
 		}
 	}
 	
+	
 	/**
 	 * Function updates the emailadress in the database of the owner's
 	 *  friend.
 	 * 
+	 * @author Kenneth
 	 * @param username - Username of the owner
 	 * @param password - Password for the owner
 	 * @param friendEmail - The new emailadress for the friend
@@ -732,10 +822,12 @@ public class DBAccess {
 		}
 	}
 	
+	
 	/**
 	 * Function updates the telephonenumber in the database of the owner's
 	 *  friend.
 	 * 
+	 * @author Kenneth
 	 * @param username - Username of the owner
 	 * @param password - Password for the owner
 	 * @param friendTelephone - The new telephonenumber for the friend
@@ -973,6 +1065,7 @@ public class DBAccess {
 		System.out.println("All records deleted from table Farm.");
 	}	
 	
+	
 	/***
 	 * Deletes all records in table 'Message'
 	 * 
@@ -992,6 +1085,7 @@ public class DBAccess {
 		
 		System.out.println("All records deleted from table Message.");
 	}
+	
 	
 	/***
 	 * Deletes all records in table 'Owner'
@@ -1071,14 +1165,28 @@ public class DBAccess {
 			
 			
 			while(resultSet.next())	{
+				//In case the database stores a friend's telephone number as a
+				// empty String, we would get an error if we tried to convert it to
+				// an integer. Therefore we need to check this and handle it if
+				// this is the case. Kenneth
+				int friendTelephoneNumber = -1;
+				String temp = resultSet.getString(8);
+				
+				
+				if(!temp.isEmpty())
+				{
+					friendTelephoneNumber = Integer.parseInt(temp);
+				}
+				
+				
 				owner = new Owner(Integer.parseInt(resultSet.getString(1)),
 						resultSet.getString(2),
 						resultSet.getString(3), resultSet.getString(4),
 						resultSet.getString(5), 
 						Integer.parseInt(resultSet.getString(6)),
 						resultSet.getString(7),
-						Integer.parseInt(resultSet.getString(8)),
-						resultSet.getString(9));						
+						friendTelephoneNumber,
+						resultSet.getString(9));					
 			}
 			
 			return owner;
