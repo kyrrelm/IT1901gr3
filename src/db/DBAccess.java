@@ -43,7 +43,8 @@ public class DBAccess {
 		}
 		catch (ClassNotFoundException ex) 
 		{
-			System.out.println("Feilet under driverlasting: "+ ex.getMessage());
+			System.out.println("Feilet under driverlasting: "+
+					ex.getMessage());
 		} 
 	}
 	
@@ -63,12 +64,15 @@ public class DBAccess {
 	public static void removeFarm(int FarmId){
 		try {
 			Statement st = con.createStatement();	
-			st.executeUpdate("DELETE FROM Farm WHERE FarmID = '" + FarmId + "'");
+			st.executeUpdate("DELETE FROM Farm WHERE FarmID = '" + FarmId + 
+					"'");
 			
 			
-			// Slett alle sauene som tilhørte den gården ELLER sett FarmID til noe rart og unikt, eks: -1
+			// Slett alle sauene som tilhørte den gården ELLER sett FarmID til
+			// noe rart og unikt, eks: -1
 			// -1 nu.
-			st.executeUpdate("UPDATE Sheep SET FarmID=-1 WHERE FarmID=" + FarmId);
+			st.executeUpdate("UPDATE Sheep SET FarmID=-1 WHERE FarmID=" +
+					FarmId);
 			
 			
 			
@@ -110,12 +114,20 @@ public class DBAccess {
 		try {
 			Statement st = con.createStatement();
 			/*    FOR TESTING:
-			String s = "INSERT INTO Owner(Password, FirstName, LastName, PrimaryTLF, PrimaryMail, SecondaryTLF, SecondaryMail) VALUES " + String.format("(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",  pw, name, tlf, email, secondaryTlf, secondaryEmail); 
+			String s = "INSERT INTO Owner(Password, FirstName, LastName, 
+				PrimaryTLF, PrimaryMail, SecondaryTLF, SecondaryMail) VALUES " +
+					String.format(
+					"(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",
+					 pw, name, tlf, email, secondaryTlf, secondaryEmail); 
 			System.out.println(s);
 			*/
-			st.executeUpdate("INSERT INTO Owner(Username, Password, FirstName, LastName, PrimaryTLF, PrimaryMail, SecondaryTLF, SecondaryMail) VALUES "
-			+ String.format("(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",
-			username, pw, firstName, lastName, tlf, email, secondaryTlf, secondaryEmail));
+			st.executeUpdate("INSERT INTO Owner(" + 
+					"Username, Password, FirstName, LastName, PrimaryTLF," +
+					" PrimaryMail, SecondaryTLF, SecondaryMail) VALUES "
+			+ String.format("(\"%s\", \"%s\", \"%s\", \"%s\", \"%s\"," +
+					" \"%s\", \"%s\", \"%s\")",
+			username, pw, firstName, lastName, tlf, email, secondaryTlf,
+			secondaryEmail));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -137,15 +149,9 @@ public class DBAccess {
 		try {
 			Statement statement = con.createStatement();
 			
-			/*    FOR TESTING:
-			String s = 
-			System.out.println(s);
-			*/
 			statement.executeUpdate("INSERT INTO Farm(Name, OwnerID) VALUES " +
 					String.format("(\"%s\", \"%d\")", name, ownerId));
-			
-			
-			
+									
 			/*st.executeUpdate("INSERT INTO Farm(Name, OwnerID) VALUES " 
 					+ String.format("(\"%s\", \"%s\")",  "1830", 
 							String.valueOf(ownerID)));*/
@@ -157,7 +163,8 @@ public class DBAccess {
 	}
 	
 	/**Adds a sheep to the database.
-	 * Note: This method is synchronized because it checks the last sheep added to get back the sheepID (to create a message)
+	 * Note: This method is synchronized because it checks the last sheep added
+	 *  to get back the sheepID (to create a message)
 	 * @author halvor
 	 * 
 	 * 
@@ -170,9 +177,9 @@ public class DBAccess {
 	 * @param ownerID
 	 * The owner that the sheep belongs to.
 	 */
-	public static synchronized void addSheep(String name, int birthYear, int farmID, int ownerID)
-	{
-		
+	public static synchronized void addSheep(String name, int birthYear,
+			int farmID, int ownerID)
+	{		
 		try {
 			Statement st = con.createStatement();
 		
@@ -180,19 +187,24 @@ public class DBAccess {
 			String s = 
 			System.out.println(s);
 			*/
-			st.executeUpdate("INSERT INTO Sheep(Name, BirthYear, FarmID, OwnerID) VALUES "
+			st.executeUpdate(
+					"INSERT INTO Sheep(Name, BirthYear, FarmID, OwnerID)" +
+							" VALUES "
 				+ String.format("(\"%s\", \"%s\", \"%s\", \"%s\")",
 					/*"1941",*/ name, String.valueOf(birthYear),
 					String.valueOf(farmID), String.valueOf(ownerID)));
 			
 			// finn ut hva sauIDen ble for sauen man akuratt la til!
-			ResultSet rs = st.executeQuery("SELECT SheepID FROM Sheep ORDER BY SheepID desc limit 1");
+			ResultSet rs = st.executeQuery(
+					"SELECT SheepID FROM Sheep ORDER BY SheepID desc limit 1");
 			rs.next();
 			int sheepID = rs.getInt(1);
 			
 			Random r = new Random();
-			double positionX = Constants.minLon + (Constants.maxLon - Constants.minLon) * r.nextDouble();
-			double positionY = Constants.minLat +  (Constants.maxLat - Constants.minLat) * r.nextDouble();
+			double positionX = Constants.minLon +
+					(Constants.maxLon - Constants.minLon) * r.nextDouble();
+			double positionY = Constants.minLat +
+					(Constants.maxLat - Constants.minLat) * r.nextDouble();
 
 			// legg til en melding for denne sauenyyyyyyyyyyyyyyy
 			java.util.Date date = new java.util.Date();
@@ -243,7 +255,8 @@ public class DBAccess {
 				Statement st = con.createStatement();
 									
 				st.executeUpdate("INSERT INTO Message(DateTime, Pulse," +
-						" Temperature, Status, PositionX, PositionY, SheepID) " +
+						" Temperature, Status, PositionX, PositionY," +
+						" SheepID) " +
 						"VALUES" + String.format("(\"%s\", \"%s\", \"%s\"," +
 								" \"%s\", \"%s\", \"%s\", \"%s\")",
 						dateTime, String.valueOf(pulse), 
@@ -252,12 +265,14 @@ public class DBAccess {
 						String.valueOf(sheepId)));
 				
 				ResultSet resultSet = st.executeQuery(
-						"SELECT * FROM Message ORDER BY MessageID DESC LIMIT 1");
+						"SELECT * FROM Message" +
+								" ORDER BY MessageID DESC LIMIT 1");
 				
 				
 				if(resultSet.last()) {
 					String sheepID = resultSet.getString(8);
-					message = new Message(Integer.parseInt(resultSet.getString(1)),
+					message = new Message(Integer.parseInt(
+							resultSet.getString(1)),
 							resultSet.getDate(2), 
 							Integer.parseInt(resultSet.getString(3)),
 							Float.parseFloat(resultSet.getString(4)),
@@ -389,7 +404,8 @@ public class DBAccess {
 		}
 	}
 	
-	/*Kan hende jeg misforstår, men vil ikke denne metoden kunn returnere siste farm,
+	/*Kan hende jeg misforstår, men vil ikke denne metoden kunn returnere 
+	 * siste farm,
 	 * selv hvis bonden har flere?
 	 * Korrekt, bør fikses - Halvor
 	 	* - Tror ikke denne metoden brukes til noe uansett.	 
@@ -404,7 +420,8 @@ public class DBAccess {
 					"SELECT * FROM Farm WHERE OwnerID = '" + ownerId + "'");
 								
 			
-			//The FarmID we are interested in will be the last added in database
+			//The FarmID we are interested in will be the last added in
+			// database
 			while(resultSet.next()) {
 				farm = new Farm(Integer.parseInt(resultSet.getString(1)),
 						resultSet.getString(2),
@@ -446,6 +463,8 @@ public class DBAccess {
 			return null;
 		}
 	}
+	
+	
 	public static ArrayList<Sheep> getAllSheepByOwner(int ownerId) {
 		try {
 			Statement statement = con.createStatement();
@@ -458,8 +477,10 @@ public class DBAccess {
 			
 			while(resultSet.next()) {
 				sheep.add(new Sheep(Integer.parseInt(resultSet.getString(1)), 
-						resultSet.getString(2), Integer.parseInt(resultSet.getString(3)),
-						Integer.parseInt(resultSet.getString(4)), Integer.parseInt(resultSet.getString(5))));
+						resultSet.getString(2),
+						Integer.parseInt(resultSet.getString(3)),
+						Integer.parseInt(resultSet.getString(4)),
+						Integer.parseInt(resultSet.getString(5))));
 			}
 			
 			return sheep;
@@ -514,7 +535,8 @@ public class DBAccess {
 	{
 		
 		/**
-		 * Ensures that it is not possible to simultanously update and receive data
+		 * Ensures that it is not possible to simultanously update and receive
+		 *  data 
 		 * -- See method addMessage for reference.
 		 * DEPRECATED
 		 * @author halvor
@@ -527,13 +549,16 @@ public class DBAccess {
 				
 			
 				
-				ResultSet resultSet = statement.executeQuery("SELECT m.* FROM Message m, Sheep s " +
-																"WHERE m.SheepID = s.SheepID " +
-																"AND s.OwnerID = " + OwnerID);
+				ResultSet resultSet = statement.executeQuery(
+						"SELECT m.* FROM Message m, Sheep s " +
+						"WHERE m.SheepID = s.SheepID " +
+						"AND s.OwnerID = " + OwnerID);
+				
 				
 				while(resultSet.next()) {
 					String sheepID = resultSet.getString(8);
-					messages.add( new Message(Integer.parseInt(resultSet.getString(1)),
+					messages.add( new Message(Integer.parseInt(
+							resultSet.getString(1)),
 							resultSet.getDate(2), 
 							Integer.parseInt(resultSet.getString(3)),
 							Float.parseFloat(resultSet.getString(4)),
@@ -554,25 +579,30 @@ public class DBAccess {
 		//}
 	}
 	
-	/**Returns every message by first building an arraylist of all sheep belonging to the owner, then getting the last 5 messages of those sheep.
+	/**Returns every message by first building an arraylist of all sheep
+	 *  belonging to the owner, then getting the last 5 messages of those
+	 *   sheep.
 	 * @author halvor
 	 * 
 	 * @param OwnerID
 	 * The owner's ID.
 	 * @return Last 5 messages of all sheep belonging to the owner.
 	 */
-	public static ArrayList<ArrayList<Message>> getLastFiveMessagesByOwner(int OwnerID) 
+	public static ArrayList<ArrayList<Message>> getLastFiveMessagesByOwner(
+			int OwnerID) 
 	{
 		
 		/**
-		 * Ensures that it is not possible to simultanously update and receive data
+		 * Ensures that it is not possible to simultanously update and receive
+		 *  data
 		 * -- See method addMessage for reference.
 		 * @author halvor
 		 */		
 		
 		try {
 			Statement statement = con.createStatement();
-			ArrayList<ArrayList<Message>> messages = new ArrayList<ArrayList<Message>>();
+			ArrayList<ArrayList<Message>> messages = 
+					new ArrayList<ArrayList<Message>>();
 			
 			// finn alle sauene til duden:
 			ArrayList<Sheep> sheeple = getSheepByOwnerID(OwnerID);
@@ -582,19 +612,22 @@ public class DBAccess {
 			{
 				int SheepID = s.getSheepId();
 				
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM Message WHERE SheepID = " + SheepID + " ORDER BY MessageID DESC LIMIT 0,5");
+				ResultSet resultSet = statement.executeQuery(
+						"SELECT * FROM Message WHERE SheepID = " + SheepID +
+						" ORDER BY MessageID DESC LIMIT 0,5");
 				ArrayList<Message> tmp = new ArrayList<Message>();
 				while(resultSet.next())
 				{
-							tmp.add( new Message(Integer.parseInt(resultSet.getString(1)),
-							resultSet.getDate(2), 
-							Integer.parseInt(resultSet.getString(3)),
-							Float.parseFloat(resultSet.getString(4)),
-							Integer.parseInt(resultSet.getString(5)),
-							Double.parseDouble(resultSet.getString(6)),
-							Double.parseDouble(resultSet.getString(7)),
-							Integer.parseInt(resultSet.getString(8)),
-							s));
+							tmp.add( new Message(Integer.parseInt(
+									resultSet.getString(1)),
+									resultSet.getDate(2), 
+									Integer.parseInt(resultSet.getString(3)),
+									Float.parseFloat(resultSet.getString(4)),
+									Integer.parseInt(resultSet.getString(5)),
+									Double.parseDouble(resultSet.getString(6)),
+									Double.parseDouble(resultSet.getString(7)),
+									Integer.parseInt(resultSet.getString(8)),
+									s));
 				}
 				messages.add(tmp);
 			}				
@@ -623,9 +656,9 @@ public class DBAccess {
 			
 			while(resultSet.next())	{
 				//In case the database stores a friend's telephone number as a
-				// empty String, we would get an error if we tried to convert it to
-				// an integer. Therefore we need to check this and handle it if
-				// this is the case. Kenneth
+				// empty String, we would get an error if we tried to convert
+				// it to an integer. Therefore we need to check this and handle
+				// it if this is the case. Kenneth
 				int friendTelephoneNumber = -1;
 				String temp = resultSet.getString(8);
 				
@@ -868,7 +901,8 @@ public class DBAccess {
 		try {
 			Statement statement = con.createStatement();
 			
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM Sheep");
+			ResultSet resultSet = statement.executeQuery(
+					"SELECT * FROM Sheep");
 			
 			Sheep sheep = null;
 			
@@ -896,7 +930,8 @@ public class DBAccess {
 		try {
 			Statement st = con.createStatement();
 
-			ResultSet rs = st.executeQuery(String.format("SELECT * FROM Sheep WHERE OwnerID = %d", ownerID));
+			ResultSet rs = st.executeQuery(String.format(
+					"SELECT * FROM Sheep WHERE OwnerID = %d", ownerID));
 			
 			ArrayList<Sheep> shp = new ArrayList<Sheep>();
 			
@@ -929,16 +964,19 @@ public class DBAccess {
 			System.out.println(s);
 			*/
 							// merk: query
-			ResultSet rs = st.executeQuery(String.format("SELECT * FROM Sheep WHERE SheepID = %d", id));
+			ResultSet rs = st.executeQuery(String.format(
+					"SELECT * FROM Sheep WHERE SheepID = %d", id));
 
 			
-			// Som eksempel: itererer over alle resultatene, dette er bare et eksempel i getSheepByID fordi sheepID er unik for hver sau!
-			// hvis en skulle finne alle sauene som tilhører en spesiell bonde (eller bare alle sauene totalt) er det som under en burde bruke
+			// Som eksempel: itererer over alle resultatene, dette er bare et
+			// eksempel i getSheepByID fordi sheepID er unik for hver sau!
+			// hvis en skulle finne alle sauene som tilhører en spesiell bonde
+			//(eller bare alle sauene totalt) er det som under en burde bruke
 			
 			Sheep shp = null;
 			
 			while (rs.next()) // sheepID, birthYear, farmID, ownerID
-			{												        // year har fucked format, burde bytte til INT i databasen...
+			{			      
 			/*	shp = new Sheep(Integer.parseInt(rs.getString(1)),
 						rs.getString(2),
 						Integer.parseInt(rs.getString(3).substring(0, 4)),
@@ -976,7 +1014,7 @@ public class DBAccess {
 			ArrayList<Sheep> sheep = new ArrayList<Sheep>();
 			
 			while (rs.next()) // sheepID, birthYear, farmID, ownerID
-			{												        // year har fucked format, burde bytte til INT i databasen...
+			{			      
 				shp = new Sheep(Integer.parseInt(rs.getString(1)),
 						rs.getString(2),
 						Integer.parseInt(rs.getString(3).substring(0, 4)),
@@ -996,7 +1034,8 @@ public class DBAccess {
 	
 	/**
 	 * Henter ut den siste messagen per sheepID
-	 * TODO: Finne ut en måte å gjøre dette i et SQL kall istedetfor å hente ALLE beskjedene og så filtrere dem her.
+	 * TODO: Finne ut en måte å gjøre dette i et SQL kall istedetfor å hente
+	 *  ALLE beskjedene og så filtrere dem her.
 	 * @author halvor
 	 */
 	public static ArrayList<Message> getLastMessages()
@@ -1014,14 +1053,17 @@ public class DBAccess {
 			{
 				int SheepID = s.getSheepId();
 				
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM Message WHERE SheepID = " + SheepID + " ORDER BY MessageID DESC LIMIT 0,1");
+				ResultSet resultSet = statement.executeQuery(
+						"SELECT * FROM Message WHERE SheepID = " +
+						SheepID + " ORDER BY MessageID DESC LIMIT 0,1");
 				
 				while(resultSet.next())
 				{
 					// kun legg til sauer som er levannes
 					if (Integer.parseInt(resultSet.getString(5)) == 0)
 					{
-					messages.add( new Message(Integer.parseInt(resultSet.getString(1)),
+					messages.add( new Message(Integer.parseInt(
+							resultSet.getString(1)),
 							resultSet.getDate(2), 
 							Integer.parseInt(resultSet.getString(3)),
 							Float.parseFloat(resultSet.getString(4)),
@@ -1131,18 +1173,19 @@ public class DBAccess {
 	/**
 	 * Funtion removes a sheep based on a sheep id
 	 * 
-	 * @author Kenneth
 	 * @param sheepId - The id of the sheep to remove
 	 */
 	public static void removeSheep(int sheepId) {
 		try {
 			Statement statement = con.createStatement();
 			
-			statement.executeUpdate("DELETE FROM Sheep WHERE SheepID = '" + sheepId + "'");
+			statement.executeUpdate("DELETE FROM Sheep WHERE SheepID = '" +
+					sheepId + "'");
 			
 			// også fjern beskjeder ang. den sauen -halvor
 			
-			statement.executeUpdate("DELETE FROM Message WHERE SheepID = '" + sheepId + "'");
+			statement.executeUpdate("DELETE FROM Message WHERE SheepID = '" +
+					sheepId + "'");
 		}
 		catch(SQLException exception) {
 			exception.printStackTrace();
@@ -1159,16 +1202,17 @@ public class DBAccess {
 			Statement statement = con.createStatement();
 			
 			ResultSet resultSet = statement.executeQuery(
-					"SELECT o.* FROM Owner o, Sheep s WHERE s.SheepID = "+ sheepId +" AND s.OwnerID = o.OwnerID");
+					"SELECT o.* FROM Owner o, Sheep s WHERE s.SheepID = " +
+							sheepId + " AND s.OwnerID = o.OwnerID");
 			
 			Owner owner = null;
 			
 			
 			while(resultSet.next())	{
 				//In case the database stores a friend's telephone number as a
-				// empty String, we would get an error if we tried to convert it to
-				// an integer. Therefore we need to check this and handle it if
-				// this is the case. Kenneth
+				// empty String, we would get an error if we tried to convert
+				// it to an integer. Therefore we need to check this and handle
+				// it if this is the case. Kenneth
 				int friendTelephoneNumber = -1;
 				String temp = resultSet.getString(8);
 				

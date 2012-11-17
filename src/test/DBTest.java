@@ -1,5 +1,6 @@
 /***
- * This class is used for testing, generating data, deleting contents in database
+ * This class is used for testing, generating data, deleting contents in 
+ *  database
  * 
  * @author Kenneth Pettersen Lund
  */
@@ -41,7 +42,7 @@ public class DBTest {
 				};
 		
 		String[] lastNames  = { "Larsen", "Evensen", "Lie", "Wold", "Sandnes",
-				"Krokstad", "Leinum", "Vestvik", "Dybvadsskog", "Matberg,",
+				"Krokstad", "Leinum", "Vestvik", "Dybvadsskog", "Matberg",
 				"Solsem", "Nordfjord", "Falkfjell", "Matberg", "Selvik",
 				"Digre", "Karlsen", "Hallem", "Strand", "Mattingsdal" 
 				};
@@ -109,23 +110,28 @@ public class DBTest {
 				username = username + phoneNumber.substring(0, 4);
 				isUsernameTaken = DBAccess.isUsernameTaken(username);
 			}
-			
-			
+						
 			
 			//We add owner to database
-			DBAccess.addOwner(username, password, firstName + middleName, lastName,
-					phoneNumber, email, friendPhoneNumber, friendEmail);
+			DBAccess.addOwner(username, password, firstName + middleName,
+					lastName, phoneNumber, email, friendPhoneNumber, 
+					friendEmail);
 			//Get ownerId
 			Owner owner = DBAccess.getOwner(username, password);
 			
-			
-
 			Sheep sheep   = null;
 		
 			
 			//Generate data for farm
 			for(int k = 0; k <= nFarms; k++) {
-				DBAccess.addFarm(owner.getLastName() + " gaard", owner.getOwnerId());
+				String farmName = owner.getLastName() + " gaard";
+				
+				
+				if(nFarms > 0)
+					farmName = owner.getLastName() + " gaard " + (k + 1);
+				
+				
+				DBAccess.addFarm(farmName, owner.getOwnerId());
 				
 				//Genererate sheep for farm
 				boolean hasName  = false;
@@ -145,7 +151,8 @@ public class DBTest {
 					
 					if(hasName == true) {				
 						if(DBAccess.isSheepNameTaken(
-								sheepNames[indexNo], farm.getFarmId()) == false) {				
+								sheepNames[indexNo],
+								farm.getFarmId()) == false) {				
 							sheepName = sheepNames[indexNo];
 						}
 					}
@@ -159,7 +166,7 @@ public class DBTest {
 					
 					java.util.Date date = new java.util.Date();
 					java.text.SimpleDateFormat simpleDateFormat = 
-							new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					String currentTime = simpleDateFormat.format(date);
 					DBAccess.addMessage(currentTime, 75, 35, 0,
 							positionX, positionY, sheep.getSheepId());
