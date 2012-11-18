@@ -31,9 +31,9 @@ public class Server
 		db.DBAccess.open();
 		
 		// start simulation thread!
-		Simulation sim = new Simulation(28800000);
+		//Simulation sim = new Simulation(28800000);
 		//Simulation sim = new Simulation(10000);
-		sim.start();
+		//sim.start();
 		
 		InputScanner is = new InputScanner();
 		is.start();
@@ -44,7 +44,7 @@ public class Server
 		
 		is.stopThread();
 		
-		sim.stopThread();
+		//sim.stopThread();
 		
 		sockServ.close();
 		

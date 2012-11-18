@@ -3,6 +3,8 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javafx.application.Platform;
@@ -17,7 +19,11 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import com.sun.javafx.application.PlatformImpl;
-
+/**
+ * A JPanel with a sub JFXPanel showing the local web page map.html
+ * @author halvor
+ *
+ */
 public class MapPanel extends JPanel{
 	private JFXPanel jfxPanel;
 	private WebView webView;
@@ -88,9 +94,27 @@ public class MapPanel extends JPanel{
 	                    webView.setMinSize(540, 540);
 	                    webView.setMaxSize(540, 540);
 	                    
-	                    URL url = getClass().getResource("/" + localURL);
-	            		System.out.println(url.toExternalForm());
+	                    //URL url = getClass().getResource("/" + localURL);
+	            		//System.out.println(url.toExternalForm());
+	            		//System.out.println("LOL?");
+	            		//String path = 
+	            		URL url = null;
+	            		String filePath = new File(MapPanel.class.getProtectionDomain().getCodeSource().getLocation().getPath()).toURI().toString();
+	            		// trim bort /. fra filePath
+	            		System.out.println(filePath);
+	            		if (filePath.charAt(filePath.length()-2) == '.')
+	            			filePath = filePath.substring(0, filePath.length() - 2);
 	            		
+	            		System.out.println(filePath);
+						try {
+							url = new URL(filePath + gui.MapPanel.localURL);
+						} catch (MalformedURLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							return;
+						}
+						System.out.println(url.toString());
+						
 	            		webEngine = webView.getEngine();
 	            		webEngine.load(url.toExternalForm());
 	                    

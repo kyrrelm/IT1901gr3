@@ -1,5 +1,6 @@
 package map;
 
+import gui.MapPanel;
 import helpclasses.Message;
 
 import java.io.BufferedReader;
@@ -78,12 +79,20 @@ public class GenerateMap {
 	
 	public static void UpdateMap(ArrayList<ArrayList<Message>> sortedmsg)
 	{
-		String path =  GenerateMap.class.getClassLoader().getResource(gui.MapPanel.localURL).getPath().replaceAll("%20",  " ");
+		//String path =  GenerateMap.class.getClassLoader().getResource(gui.MapPanel.localURL).getPath().replaceAll("%20",  " ");
+		//String path = new File(MapPanel.class.getProtectionDomain().getCodeSource().getLocation().getPath()).toURI().toString() + gui.MapPanel.localURL;
 		
+		String folderPath = new File(GenerateMap.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getAbsolutePath().toString();
+		System.out.println(folderPath);
+		// trim bort . fra folderPath
+		if (folderPath.charAt(folderPath.length()-1) == '.')
+			folderPath = folderPath.substring(0, folderPath.length() - 1);
+		if (folderPath.charAt(folderPath.length()-1) != '\\')
+				folderPath = folderPath + "\\";
 		
-		ArrayList<Integer> sheepIDs  = new ArrayList<Integer>();
-		//sorter arraylist message inn i arraylist<Arraylist<msg>!
+		String path = folderPath + gui.MapPanel.localURL;
 		
+		System.out.println(path);
 		try {
 			File file = new File(path);
 			
