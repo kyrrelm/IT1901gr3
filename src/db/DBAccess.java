@@ -60,7 +60,11 @@ public class DBAccess {
 		}
 	}
 
-	//kan noen skrive denne metoden? plizzz
+	/**
+	 * Removes a farm from the database
+	 * @param FarmId
+	 * @author Kyrre
+	 */
 	public static void removeFarm(int FarmId){
 		try {
 			Statement st = con.createStatement();	
@@ -404,13 +408,11 @@ public class DBAccess {
 		}
 	}
 	
-	/*Kan hende jeg misforstår, men vil ikke denne metoden kunn returnere 
-	 * siste farm,
-	 * selv hvis bonden har flere?
-	 * Korrekt, bør fikses - Halvor
-	 	* - Tror ikke denne metoden brukes til noe uansett.	 
+	/**
+	 * 
+	 * @param ownerId
+	 * @return Returns the last farm of the specified owner
 	 */
-	
 	public static Farm getFarm(int ownerId) {
 		try {
 			Statement statement = con.createStatement();
@@ -438,7 +440,10 @@ public class DBAccess {
 		}
 	}
 	
-	//returnerer alle bondens gårder
+	/**
+	 * @param ownerId
+	 * @return All farms by the specified owner
+	 */
 	public static ArrayList<Farm> getFarmsByOwner(int ownerId) {
 		try {
 			Statement statement = con.createStatement();
@@ -464,7 +469,11 @@ public class DBAccess {
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @param ownerId
+	 * @return All sheep belonging the specified owner, regardless of farm.
+	 */
 	public static ArrayList<Sheep> getAllSheepByOwner(int ownerId) {
 		try {
 			Statement statement = con.createStatement();
@@ -492,7 +501,12 @@ public class DBAccess {
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @param messageId
+	 * @return Message with the specified messageId
+	 * @author Kyrre
+	 */
 	public static Message getMessage(int messageId) {
 		try {
 			Statement statement = con.createStatement();
@@ -641,7 +655,12 @@ public class DBAccess {
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @param username
+	 * @param password
+	 * @return Owner with the specified username and password.
+	 */
 	public static Owner getOwner(String username, String password) {
 		try {
 			Statement statement = con.createStatement();
@@ -896,7 +915,10 @@ public class DBAccess {
 	}
 	
 	
-	
+	/**
+	 * 
+	 * @return Lat adde sheep, regardless of owner or farm.
+	 */
 	public static Sheep getLastAddedSheep() {
 		try {
 			Statement statement = con.createStatement();
@@ -924,7 +946,11 @@ public class DBAccess {
 			return null;
 		}
 	}
-	
+	/**
+	 * 
+	 * @param ownerID
+	 * @return All sheep belonging the specified owner
+	 */
 	public static ArrayList<Sheep> getSheepByOwnerID(int ownerID)
 	{
 		try {
@@ -954,7 +980,11 @@ public class DBAccess {
 			return null;
 		}
 	}
-	
+	/**
+	 * 
+	 * @param id
+	 * @return Last sheep of the specified owner
+	 */
 	public static Sheep getSheepById(int id)
 	{
 		try {
@@ -1195,7 +1225,12 @@ public class DBAccess {
 		
 	}
 	
-	
+	/**
+	 * 
+	 * @param sheepId
+	 * @return The specified owner by sheepId
+	 * @author Kyrre
+	 */
 	public static Owner getOwnerBySheepID(int sheepId)
 	{
 		try {
