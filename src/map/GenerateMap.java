@@ -12,6 +12,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Generates the kart.html file, prefix.txt and suffix.txt holds all static data.
+ * In between the prefix and suffix it generates the points and history lines and saves them in Javascript arrays. 
+ * 
+ * In hindsight the way the GPolyLines are generated seems strange, but it made sense at the time and most importantly it works.
+ * 
+ * @author halvor
+ *
+ */
 public class GenerateMap {
 	
 	final static String prefixPath = "map/prefix.txt";

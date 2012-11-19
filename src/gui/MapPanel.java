@@ -101,11 +101,11 @@ public class MapPanel extends JPanel{
 	            		URL url = null;
 	            		String filePath = new File(MapPanel.class.getProtectionDomain().getCodeSource().getLocation().getPath()).toURI().toString();
 	            		// trim bort /. fra filePath
-	            		System.out.println(filePath);
+	            		//System.out.println(filePath);
 	            		if (filePath.charAt(filePath.length()-2) == '.')
 	            			filePath = filePath.substring(0, filePath.length() - 2);
 	            		
-	            		System.out.println(filePath);
+	            		//System.out.println(filePath);
 						try {
 							url = new URL(filePath + gui.MapPanel.localURL);
 						} catch (MalformedURLException e) {
@@ -113,7 +113,7 @@ public class MapPanel extends JPanel{
 							e.printStackTrace();
 							return;
 						}
-						System.out.println(url.toString());
+						//System.out.println(url.toString());
 						
 	            		webEngine = webView.getEngine();
 	            		webEngine.load(url.toExternalForm());
