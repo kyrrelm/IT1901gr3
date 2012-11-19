@@ -245,12 +245,21 @@ public class Login extends javax.swing.JFrame {
 		Client.sockCli.sendMessage(new CommMessage<String>(CommEnum.LOGIN, al));
 		return client.ServerData.isLoggedIn;
 	}
+	
+	/**
+	 * Initializes top left icon, title
+	 * and big icon.
+	 */
 	private void initComp(){
 		ImageIcon img = new ImageIcon(getClass().getResource("/res/briller_hatt_liten.png"));
         test.setIcon(img);
         this.setTitle(Client.name + " " + Client.version);
         setIcon();
 	}
+	/**
+	 * Sets the top left icon
+	 * in the login window
+	 */
 	private void setIcon(){
 		BufferedImage image = null;
 		try {
