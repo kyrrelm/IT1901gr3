@@ -87,7 +87,10 @@ public class SocketClientListener extends Thread
 			
 		}
 	}
-	
+	/**
+	 * Gets Last Messages from the server
+	 * @return LinkedList<CommMessage<?>>
+	 */
 	public CommMessage<?> getLatestMessage()
 	{
 		// hvis denne metoden blir kalt før listenToInput er ferdig -> vent litt så gjør det igjen.
