@@ -184,7 +184,10 @@ public class Simulation extends Thread{
 	}
 	
 	
-	
+	/**
+	 * generates alarm messages
+	 * @return
+	 */
 	public boolean generateAlarm()
 	{
 		Random r = new Random();

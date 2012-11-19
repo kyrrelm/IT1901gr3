@@ -1,5 +1,8 @@
 package map;
-
+/**
+ * Constants used to define the boarders of the simulation, and to center the map
+ * @author Kyrre
+ */
 public class Constants {
 	
 	final public static double minLat = 62.4;
