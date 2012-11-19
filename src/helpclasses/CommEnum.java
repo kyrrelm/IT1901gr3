@@ -1,5 +1,11 @@
 package helpclasses;
 
+/**
+ * Enum identifying each CommMessage and their implicit type.
+ * 
+ * @author halvor
+ *
+ */
 public enum CommEnum {
 	
 	//LOGIN REQUEST CLIENT->SERVER

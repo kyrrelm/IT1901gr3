@@ -8,6 +8,14 @@ import java.util.Scanner;
 
 import map.Constants;
 
+/**
+ * Solely for testing: this allows you to kill sheep by console input serverside.
+ * Usage:
+ * "K ownerID"
+ * 
+ * @author halvor
+ *
+ */
 public class InputScanner extends Thread
 {
 	private boolean stop = false;

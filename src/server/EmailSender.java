@@ -13,7 +13,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- * 
+ * A method to send emails from the Gmail account I set up for the project.
  * 
  * @author halvor
  *

@@ -51,7 +51,12 @@ public class Server
 		db.DBAccess.close();
 		
 	}
-	
+	/**
+	 * Called when a sheep is attacked.
+	 * @param m the message corresponding to the sheep under attack
+	 * 
+	 * @author halvor
+	 */
 	
 	public static void fireAlarm(Message m)
 	{
@@ -70,11 +75,7 @@ public class Server
 		*/
 		//SMSSender.SendSMS(body)
 		
-		
-		System.out.println("LOL: " + o.getOwnerId());
-		
 		// check if that user is logged on!
-		
 		if (loggedInClients.contains(o.getOwnerId()))
 		{
 			if (sockServ.getThread(o.getOwnerId()) == null)
@@ -87,6 +88,11 @@ public class Server
 		
 	}
 	
+	/**
+	 * Called when the regular update from Simulation is done, notifying any logged on users that there are new messages.
+	 * 
+	 * @author halvor
+	 */
 	public static void fireUpdateMessages()
 	{
 		ArrayList<ServerThread> sts =  sockServ.getThreads();

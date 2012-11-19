@@ -10,6 +10,20 @@ import server.ServerThread;
 
 import helpclasses.*;
 
+
+
+/**
+ * This is an attempt to make the connection asynchronous, we had to make it halfway because of time constraints.
+ * Meaning that if there is a timeout of larger than 10 seconds the application will simply exit with an error explaining why.
+ * This rarely happens though and since there is never any significant temporary data in the application the inconvenience is minor.
+ * 
+ * TODO in 2013 :p
+ * Give each message sent to server an unique MessageID that the client waits for or some such.
+ * 
+ * 
+ * @author halvor
+ *
+ */
 public class SocketClientListener extends Thread
 {
 	static int count = 0;

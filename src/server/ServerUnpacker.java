@@ -13,6 +13,11 @@ import javax.swing.JOptionPane;
 
 import db.DBAccess;
 
+/**
+ * This class handles client->server messages and the actions that these messages require. For example querying the database for all sheep corresponding to the owner logged in and sending a reply back to the client with said sheep.
+ * @author halvor
+ *
+ */
 public class ServerUnpacker
 {
 

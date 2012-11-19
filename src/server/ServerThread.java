@@ -9,6 +9,12 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 
+/**
+ * There is one of of these threads for each user logged in, it holds the ID of the Owner logged in and handles all input and output.
+ * 
+ * @author halvor
+ *
+ */
 public class ServerThread extends Thread
 {
 	

@@ -11,6 +11,13 @@ import helpclasses.Message;
 import helpclasses.Owner;
 import helpclasses.Sheep;
 
+/**
+ * This class handles server->client messages and the actions that these messages require. For example updating the ServerData.messages arraylist when a message update has come.
+ * 
+ * 
+ * @author halvor
+ *
+ */
 public class ClientUnpacker {
 
 	public static CommMessage<?> unpackClientMessage(CommMessage<?> msg)
