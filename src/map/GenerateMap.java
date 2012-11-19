@@ -92,7 +92,7 @@ public class GenerateMap {
 		//String path = new File(MapPanel.class.getProtectionDomain().getCodeSource().getLocation().getPath()).toURI().toString() + gui.MapPanel.localURL;
 		
 		String folderPath = new File(GenerateMap.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getAbsolutePath().toString();
-		System.out.println(folderPath);
+		//System.out.println(folderPath);
 		// trim bort . fra folderPath
 		if (folderPath.charAt(folderPath.length()-1) == '.')
 			folderPath = folderPath.substring(0, folderPath.length() - 1);
@@ -101,7 +101,7 @@ public class GenerateMap {
 		
 		String path = folderPath + gui.MapPanel.localURL;
 		
-		System.out.println(path);
+		//System.out.println(path);
 		try {
 			File file = new File(path);
 			
