@@ -92,24 +92,15 @@ public class DBAccess {
 	 * @author halvor
 	 * 
 	 * 
-	 * @param username
-	 * User Name
-	 * @param pw
-	 * Passsword
-	 * @param firstName
-	 * First name of owner
-	 * @param lastName
-	 * Last name of owner
-	 * @param tlf
-	 * Telephone number of the owner 
-	 * @param email
-	 * Email adress of the owner
-	 * @param secondaryTlf
-	 * Telephone number of the secondary contact person
-	 * @param secondaryEmail
-	 * Email adress of the secondary contact person
-	 */
-				
+	 * @param username User Name
+	 * @param pw Passsword
+	 * @param firstName First name of owner
+	 * @param lastName Last name of owner
+	 * @param tlf Telephone number of the owner 
+	 * @param email Email adress of the owner
+	 * @param secondaryTlf Telephone number of the secondary contact person
+	 * @param secondaryEmail Email adress of the secondary contact person
+	 */	
 	public static void addOwner(String username, String pw, String firstName,
 			String lastName, String tlf, String email, String secondaryTlf,
 			String secondaryEmail) {
@@ -143,10 +134,8 @@ public class DBAccess {
 	 * Adds a farm to the database, requires an owner.
 	 * @author halvor
 	 * 
-	 * @param name
-	 * The name of the farm
-	 * @param ownerId
-	 * The ID of the owner.
+	 * @param name The name of the farm
+	 * @param ownerId The ID of the owner.
 	 */
 	public static void addFarm(String name, int ownerId)
 	{
@@ -172,14 +161,10 @@ public class DBAccess {
 	 * @author halvor
 	 * 
 	 * 
-	 * @param name
-	 * The sheep's name or ID Tag
-	 * @param birthYear
-	 * The year the sheep was born
-	 * @param farmID
-	 * The farm that the sheep belongs to.
-	 * @param ownerID
-	 * The owner that the sheep belongs to.
+	 * @param name The sheep's name or ID Tag
+	 * @param birthYear The year the sheep was born
+	 * @param farmID The farm that the sheep belongs to.
+	 * @param ownerID The owner that the sheep belongs to.
 	 */
 	public static synchronized void addSheep(String name, int birthYear,
 			int farmID, int ownerID)
@@ -211,10 +196,6 @@ public class DBAccess {
 					(Constants.maxLat - Constants.minLat) * r.nextDouble();
 
 			// legg til en melding for denne sauenyyyyyyyyyyyyyyy
-			java.util.Date date = new java.util.Date();
-			java.text.SimpleDateFormat simpleDateFormat = 
-					new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String currentTime = simpleDateFormat.format(date);
 			addMessage(75, 35, 0,
 					positionX, positionY, sheepID);
 			
@@ -230,18 +211,12 @@ public class DBAccess {
 	 * Note: this method is called by addsheep
 	 * @author halvor
 	 * 
-	 * @param pulse
-	 * The sheep's pulse.
-	 * @param temperature
-	 * the sheep's temperature.
-	 * @param status
-	 * Sheep status, 0 = healthy, 1 = under attack
-	 * @param positionX
-	 * The Longtitude.
-	 * @param positionY
-	 * The Latitude.
-	 * @param sheepId
-	 * The ID of the sheep.
+	 * @param pulse The sheep's pulse.
+	 * @param temperature the sheep's temperature.
+	 * @param status Sheep status, 0 = healthy, 1 = under attack
+	 * @param positionX The Longtitude.
+	 * @param positionY The Latitude.
+	 * @param sheepId The ID of the sheep.
 	 */
 	public static synchronized Message addMessage(int pulse, int temperature,
 			int status, double positionX, double positionY, int sheepId) {
@@ -598,8 +573,7 @@ public class DBAccess {
 	 *   sheep.
 	 * @author halvor
 	 * 
-	 * @param OwnerID
-	 * The owner's ID.
+	 * @param OwnerID The owner's ID.
 	 * @return Last 5 messages of all sheep belonging to the owner.
 	 */
 	public static ArrayList<ArrayList<Message>> getLastFiveMessagesByOwner(
@@ -917,7 +891,7 @@ public class DBAccess {
 	
 	/**
 	 * 
-	 * @return Lat adde sheep, regardless of owner or farm.
+	 * @return Lat added sheep, regardless of owner or farm.
 	 */
 	public static Sheep getLastAddedSheep() {
 		try {

@@ -46,6 +46,10 @@ public class SocketClientListener extends Thread
 		stop = true;
 	}
 	
+	/**
+	 * Listens to incoming messages from the server, if the message is not something the client waits for, handle it directly, else append it to the queue.
+	 * @author halvor
+	 */
 	private void listenToInput()
 	{
 		while(!stop)
@@ -75,21 +79,14 @@ public class SocketClientListener extends Thread
 				stopThread();
 			}
 			
-			/** TRUKKE DET HER TRENGS!
-			// sleep for a while!
-	        try {
-				ServerThread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			*/
 			
 		}
 	}
 	/**
 	 * Gets Last Messages from the server
 	 * @return LinkedList<CommMessage<?>>
+	 * 
+	 * @author halvor & Kyrre
 	 */
 	public CommMessage<?> getLatestMessage()
 	{

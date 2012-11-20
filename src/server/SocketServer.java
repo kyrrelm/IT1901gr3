@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * NOTE: In order for multiple connections to be handled simultaneously, a new thread
  * must be created for each connection. THIS HASN'T BEEN IMPLEMENTED
  * @author Jama
- *
+ * 
  */
 public class SocketServer {
 

@@ -59,9 +59,8 @@ public class SocketClient {
 
 	/**
 	 * Sends a message to the server, this message is an object of a class.
-	 * Probably class Message, could even be a simple String.
 	 * @param o The object to be sent
-	 * @return 
+	 * @author halvor
 	 */
 	public void sendMessage(CommMessage<?> o)
 	{
@@ -78,31 +77,6 @@ public class SocketClient {
 
 		// socketClientListener lytter til alle beskjeder sendt tilbake til client. Spør sCL om siste mottatte beskjed.
 		ClientUnpacker.unpackClientMessage(socketClientListener.getLatestMessage());
-
-		
-		// UTELDET UNDER, REPLIES BLIR HÅNDTERT I socketClientListener
-		/*
-		// TODO: wait for reply!
-		// If reply != null? alltid?
-		try {
-			CommMessage<?> message = (CommMessage<?>) in.readObject();
-
-			//System.out.println(message.getMessageName());
-
-			ClientUnpacker.unpackClientMessage(message);
-
-
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.err.println("Class not recognized");
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("Socket closed!");
-			close();
-		}
-		
-		*/
 
 	}
 

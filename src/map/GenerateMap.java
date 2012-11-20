@@ -47,12 +47,24 @@ public class GenerateMap {
 //	}
 	
 	
+	/** 
+	 * Called once, loads the prefix and subfix files into memory as strings. For faster use later.
+	 * @author halvor
+	 */
 	public static void initGenerator()
 	{
 		prefix = loadFile(prefixPath);
 		suffix = loadFile(suffixPath);
 	}
 	
+	/**
+	 * Loads a file into a string.
+	 * 
+	 * @author halvor
+	 * 
+	 * @param fileName filename...
+	 * @return A string holding the entire file
+	 */
 	public static  String loadFile(String fileName)
 	{	
 		
@@ -86,6 +98,13 @@ public class GenerateMap {
 	}
 	
 	
+	/**
+	 * Writes the kart.html file.
+	 * prefix, GENERATED DATA, suffix
+	 * 
+	 * 
+	 * @param sortedmsg the messages to be added
+	 */
 	public static void UpdateMap(ArrayList<ArrayList<Message>> sortedmsg)
 	{
 		//String path =  GenerateMap.class.getClassLoader().getResource(gui.MapPanel.localURL).getPath().replaceAll("%20",  " ");
@@ -169,7 +188,7 @@ public class GenerateMap {
 				sheepCount++;
 			}
 			
-			String test = "createMarker(new GLatLng( Y , X ),\" desc \")";
+			//String test = "createMarker(new GLatLng( Y , X ),\" desc \")";
 			/*
 			for (Message m : msg) {
 				fw.write("map.addOverlay(createMarker(new GLatLng("+m.getPositionY()+","+ m.getPositionX()+"),\""+ m.toStringMap()+"\"));\n");
@@ -184,13 +203,6 @@ public class GenerateMap {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		// lag en fil kalt map.html
-		// legg til prefix
-		
-		// TODO: Legg til alle points!
-		
-		// legg til suffix
 		
 	}
 }

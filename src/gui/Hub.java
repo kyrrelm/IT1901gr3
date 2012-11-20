@@ -1114,6 +1114,8 @@ public class Hub extends javax.swing.JFrame {
 	}
 	/**
 	 * Downloads new messages from the database.
+	 * 
+	 * TODO: Apply filter to them.
 	 */
 	private void refreshMessages()
 	{

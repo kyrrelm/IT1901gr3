@@ -48,8 +48,6 @@ public class Simulation extends Thread{
 	/**
 	 * The simulation constructor, any values you'd want to variable between different simulations should
 	 * be supplied as a constructor parameter.
-	 * @param maxHerdX The maximum movement for the herd
-	 * @param maxHerdY
 	 * @param refreshRate Amount of milliseconds between each value refresh in sheep ArrayList and DB dump
 	 */
 	public Simulation(int refreshRate)
@@ -96,21 +94,19 @@ public class Simulation extends Thread{
 			generateAlarm();
 			
 			try { Thread.sleep(alarmRate); } catch (InterruptedException e) { e.printStackTrace(); } //tråden sover
-			
+			waitTime += alarmRate;
 			// for speedy generering
 			//try { Thread.sleep(refreshRate); } catch (InterruptedException e) { e.printStackTrace(); } //tråden sover
-			waitTime += alarmRate;
+			//waitTime += refreshRate;
 		}
 	}
 
 	/**
 	 * Gets all the data from the database. Need only run it once per simulation.
+	 * @author halvor
 	 */
 	public void getData()
 	{
-		// en liste med sauene er ikke særlig brukbar da den ikke inneholder posisjoner. (I DB)
-		// IMO burde vi endre DBACCESS.addsheep slik at den lager en message i databasen når en sau er addet til DB (for å forhindre at sauer som ikke har noen meldinger blir usynlige for Simulation)
-		// og operere med meldinger her.
 		messages = DBAccess.getLastMessages();
 	}
 
@@ -135,7 +131,8 @@ public class Simulation extends Thread{
 	 * 
 	 * 
 	 * Bug: position is completely random, does not take into account any max movement per day.
-	 *  ^Halvor. 
+	 *  ^Halvor.
+	 *  @author Jama & halvor 
 	 */
 	public void randomPos() 
 	{
@@ -152,6 +149,8 @@ public class Simulation extends Thread{
 
 	/**
 	 * Sets random temperature between minTemp and maxTemp
+	 * 
+	 * @author jama
 	 */
 	public void randomTemp()
 	{
@@ -166,6 +165,8 @@ public class Simulation extends Thread{
 
 	/**
 	 * Sets a random pulse between minPulse and maxPulse
+	 * 
+	 * @author jama
 	 */
 	public void randomPulse()
 	{
@@ -185,10 +186,13 @@ public class Simulation extends Thread{
 	
 	
 	/**
-	 * generates alarm messages
-	 * @return
+	 * generates alarm messages, as this check is ran every 5 minutes and the chance to create an alarm = 1/(12*24), the chance for an alarm to happen each 24 hours is 1.
+	 * 
+	 * @author halvor
+	 * 
+	 * 
 	 */
-	public boolean generateAlarm()
+	public void generateAlarm()
 	{
 		Random r = new Random();
 		
@@ -206,8 +210,6 @@ public class Simulation extends Thread{
 			messages.remove(randomIndex);
 			// fire  alarm på randomIndex
 			Server.fireAlarm(tmptmp);
-			return true;
 		}
-		return false;
 	}
 }

@@ -1,6 +1,6 @@
 package map;
 /**
- * Constants used to define the boarders of the simulation, and to center the map
+ * Constants used to define the borders of the simulation, and the center the map
  * @author Kyrre
  */
 public class Constants {

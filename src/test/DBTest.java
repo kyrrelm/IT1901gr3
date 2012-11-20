@@ -2,7 +2,7 @@
  * This class is used for testing, generating data, deleting contents in 
  *  database
  * 
- * @author Kenneth Pettersen Lund
+ * @author Kenneth Pettersen Lund & Halvor
  */
 
 
@@ -83,13 +83,17 @@ public class DBTest {
 				middleName = " " + middleNames[generator.nextInt(20)];
 			}
 			
-			
+			/*
 			String email 	   = firstName.toLowerCase() + 
 					middleName.trim().toLowerCase() + lastName.toLowerCase() +
 					"@ntnu.no";
 			String friendEmail = friendFirstName.trim().toLowerCase() +
 					friendLastName.toLowerCase() + "@ntnu.no";
+			*/
 			
+			// For testing: Only send emails to an email we can check!
+			String email = "sheepstalker2013@gmail.com";
+			String friendEmail = "sheepstalker2013@gmail.com";
 			
 			//Generate phone numbers
 			for(int j = 0; j < 8; j++) {
@@ -135,7 +139,7 @@ public class DBTest {
 				
 				//Genererate sheep for farm
 				boolean hasName  = false;
-				int nSheep       = generator.nextInt(15);
+				int nSheep 		 = generator.nextInt(100);
 				int indexNo		 = 0;
 				int birthYear    = 2010;
 				String sheepName = "";
@@ -148,7 +152,7 @@ public class DBTest {
 					indexNo    = generator.nextInt(20);
 					sheepName = "";
 					
-					
+					/*
 					if(hasName == true) {				
 						if(DBAccess.isSheepNameTaken(
 								sheepNames[indexNo],
@@ -156,21 +160,12 @@ public class DBTest {
 							sheepName = sheepNames[indexNo];
 						}
 					}
-					
+					*/
 					
 					DBAccess.addSheep(sheepName, birthYear,
 							farm.getFarmId(), owner.getOwnerId());
 					sheep = DBAccess.getLastAddedSheep();
 					
-					/* det her blir gjort i DBAccess.addsheep!
-					
-					java.util.Date date = new java.util.Date();
-					java.text.SimpleDateFormat simpleDateFormat = 
-						new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					String currentTime = simpleDateFormat.format(date);
-					DBAccess.addMessage(currentTime, 75, 35, 0,
-							positionX, positionY, sheep.getSheepId());
-							*/		
 				}
 			}
 		}

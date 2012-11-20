@@ -26,6 +26,8 @@ public class EmailSender
 	final static String password = "sheepsheep";
 	
 	/**
+	 * Sends an email!
+	 * 
 	 * @author halvor
 	 * 
 	 *  

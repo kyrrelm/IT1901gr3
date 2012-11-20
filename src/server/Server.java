@@ -22,6 +22,17 @@ public class Server
 	 */
 	public static ArrayList<Integer> loggedInClients = new ArrayList<Integer>();
 	public static SocketServer sockServ;
+	
+	
+	
+	/**
+	 * Entry point for the Server application.
+	 * @param asdasd
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * 
+	 * @author halvor
+	 */
 	public static void main(String asdasd[]) throws InstantiationException, IllegalAccessException
 	{
 		//force ipv4
@@ -31,9 +42,9 @@ public class Server
 		db.DBAccess.open();
 		
 		// start simulation thread!
-		//Simulation sim = new Simulation(28800000);
-		//Simulation sim = new Simulation(10000);
-		//sim.start();
+		Simulation sim = new Simulation(28800000);
+		//Simulation sim = new Simulation(10000);   // for generating data after a DB reset
+		sim.start();
 		
 		InputScanner is = new InputScanner();
 		is.start();
@@ -69,10 +80,9 @@ public class Server
 		String body  = "The sheep with ID " + m.getSheepId() + " was attacked! \n";
 		body        += "Date: "+ m.getDateTime() + "\n";
 		body        += "Position: (" + m.getPositionX() +", "  +m.getPositionY() + ")\n";
-		/*
+		
 		EmailSender.sendEmail(o.getPrimaryMail(), title, body);
 		EmailSender.sendEmail(o.getSecondaryMail(), title2, body);
-		*/
 		//SMSSender.SendSMS(body)
 		
 		// check if that user is logged on!

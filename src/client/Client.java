@@ -30,9 +30,11 @@ public class Client {
 	public static String name = "Sheep Stalker";
 	public static String version = "beta 1.0";
     
+	/**
+	 * Entry point of the client application 
+	 * @param args _
+	 */
 	public static void main(String[] args) {
-		// brukernavn s� jeg � logge meg p� mysqladmin hele tida: Superman3440/Sheep
-
 		
 		//force ipv4
 		System.setProperty("java.net.preferIPv4Stack" , "true");

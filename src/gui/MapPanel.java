@@ -79,6 +79,9 @@ public class MapPanel extends JPanel{
 		setBackground(new Color(0, 0, 0));
 	}
 	
+	/**
+	 * Sets up the JFXPanel and WebEngine in a seperate JavaFX thread
+	 */
 	private void createScene()
 	{
 		PlatformImpl.startup(
@@ -127,6 +130,9 @@ public class MapPanel extends JPanel{
 	            });  
 	}
 	
+	/**
+	 * Reloads the page in the JavaFX thread.
+	 */
 	public void reload()
 	{
 		Platform.runLater(new Runnable() {

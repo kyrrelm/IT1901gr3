@@ -47,14 +47,16 @@ public class ServerThread extends Thread
 		}
 		
 	}
-	
+	/**
+	 * Read incoming messages, parse message by using ServerUnpacker, send reply as returne by ServerUnpacker.
+	 * 
+	 * @author halvor
+	 */
 	public void run()
 	{
 		while (!stop)
 		{
-			/**
-			 * Read incoming messages, parse message by using ServerUnpacker, send reply as returner by ServerUnpacker.
-			 */
+			
 	        try {
 				CommMessage<?> message = (CommMessage<?>) in.readObject();
 				
@@ -95,6 +97,8 @@ public class ServerThread extends Thread
 	/**
 	 * sends a CommMessage, synchronized because it is accessed both by this thread and the main thread in Server.java
 	 * @param msg
+	 * 
+	 * @author halvor
 	 */
 	public synchronized void sendMessage(CommMessage<?> msg)
 	{
@@ -115,7 +119,11 @@ public class ServerThread extends Thread
 	{
 		stop = true;
 	}
-	
+	/**
+	 * closes the connection of this thread, if there is a user logged on, remove that user from the list of logged in clients.
+	 * 
+	 * @author halvor
+	 */
 	public void close()
 	{
 		if (getOwner() != null)
