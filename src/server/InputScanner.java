@@ -51,8 +51,9 @@ public class InputScanner extends Thread
 			return;
 		if (input.charAt(0) == 'K')
 		{
+			System.out.println("test");
 			String ownerID = input.substring(2, 5);
-
+			
 			killSheepForOwner(Integer.parseInt(ownerID));
 		}
 	}

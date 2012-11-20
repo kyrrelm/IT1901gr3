@@ -47,15 +47,18 @@ public class ClientUnpacker {
 		}
 
 		if (msg.getMessageName() == CommEnum.MESSAGESREPLY)
-		{
-			// a return of all messages regarding the logged in users.
-			// edit en ListModel som finnes i GUI? er vel det greieste.
-
-			// eksempel: her er det returnert en ArrayList med messages!
-			// GUI.setMessageListModel(params) ??
-
-			
-			ServerData.messages = (ArrayList<ArrayList<Message>>) params;
+		{	
+			ArrayList<ArrayList<Message>> sortedMsg = new ArrayList<ArrayList<Message>>();
+			ArrayList<ArrayList<Message>> tmp = new ArrayList<ArrayList<Message>>();
+			for (ArrayList<Message> p : (ArrayList<ArrayList<Message>>)params) {
+				if (p.get(0).isAlarm()) {
+					sortedMsg.add(p);
+				}else{
+					tmp.add(p);
+				}
+			}
+			sortedMsg.addAll(tmp);
+			ServerData.messages = sortedMsg;
 		}
 
 		if (msg.getMessageName() == CommEnum.FARMSREPLY)
