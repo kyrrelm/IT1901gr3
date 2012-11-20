@@ -1,6 +1,10 @@
 package gui;
 
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import client.Client;
@@ -33,6 +37,7 @@ public class RegisterNewUser extends javax.swing.JFrame {
      */
     public RegisterNewUser() {
         initComponents();
+        setIcon();
     }
 
     /**
@@ -641,4 +646,15 @@ public class RegisterNewUser extends javax.swing.JFrame {
     private javax.swing.JLabel telephoneNumberLabel;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon(){
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(
+					this.getClass().getResource("/res/briller_hatt.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		this.setIconImage(image);
+	}
 }

@@ -225,7 +225,7 @@ public class Hub extends javax.swing.JFrame {
             }
         });
 
-        filtersFilterUpdateJButton.setText("Update");
+        filtersFilterUpdateJButton.setText("Refresh");
         filtersFilterUpdateJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtersFilterUpdateJButtonActionPerformed(evt);
